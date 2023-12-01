@@ -13,9 +13,10 @@
     "build-storybook": "storybook build",
     "test-one": "vitest --run",
     "test": "vitest",
-    "format": "prettier . --write",
-    "check": "npm run lint-fix && npm run build && npm run test-one",
-    "commit": "git add -A && npm run build && npm run test-one && cz"
+    "format": "prettier . --check",
+    "format-fix": "prettier . --write",
+    "check": "npm run format-fix && npm run lint-fix && npm run build && npm run test-one",
+    "commit": "npm run check && git add -A && cz"
   },
   "dependencies": {
     "react": "^18.2.0",
