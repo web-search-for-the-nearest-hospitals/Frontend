@@ -1,8 +1,8 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import './App.css';
 import MainPage from '../pages/MainPage/MainPage';
 import Header from '../common/Header/Header';
 import MapPage from '../pages/MapPage/MapPage';
+import './App.css';
 
 function App() {
   return (
