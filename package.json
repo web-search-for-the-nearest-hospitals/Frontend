@@ -16,7 +16,9 @@
     "format": "prettier . --check",
     "format-fix": "prettier . --write",
     "check": "npm run format-fix && npm run lint-fix && npm run build && npm run test-one",
-    "commit": "npm run check && git add -A && cz"
+    "commit": "npm run check && git add -A && cz",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
   },
   "homepage": "https://web-search-for-the-nearest-hospitals.github.io/Frontend/",
   "dependencies": {
@@ -47,14 +49,14 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.4",
     "eslint-plugin-storybook": "^0.6.15",
+    "gh-pages": "^6.1.0",
     "husky": "^8.0.0",
     "prettier": "3.1.0",
     "sass": "^1.69.5",
     "storybook": "^7.6.2",
     "typescript": "^5.2.2",
     "vite": "^4.5.0",
-    "vitest": "^0.34.6",
-    "gh-pages": "^6.1.0"
+    "vitest": "^0.34.6"
   },
   "lint-staged": {
     "*.{js,jsx}": "npm run lint",
