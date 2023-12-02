@@ -1,0 +1,35 @@
+.header {
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 2em;
+}
+
+.header__title {
+  margin: 0;
+}
+
+.header__link-list {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.header__link {
+  font-size: 24px;
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.2s linear;
+}
+
+.header__link:hover {
+  color: #4ff;
+}
+
+.header__link_active {
+  color: #4ff;
+}
