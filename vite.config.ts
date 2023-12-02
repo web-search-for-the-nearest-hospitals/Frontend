@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  base: '/web-search-for-the-nearest-hospitals/Frontend/',
+  base: '/web-search-for-the-nearest-hospitals/Frontend/dist/',
   plugins: [react()],
   server: {
     host: true,
