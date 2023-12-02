@@ -4,8 +4,9 @@
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "skipLibCheck": true,
+    "skipLibCheck": true, // @TODO: на проде поправить на false
     "types": ["node"],
+    // "baseUrl": "./src",
 
     /* Bundler mode */
     "moduleResolution": "bundler",

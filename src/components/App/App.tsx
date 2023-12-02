@@ -1,32 +1,18 @@
-import { useState } from 'react';
-import reactLogo from '../../assets/icons/react.svg';
-import viteLogo from '/vite.svg';
-// import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
+import MainPage from '../MainPage/MainPage';
+import Header from '../Header/Header';
+import Map from '../MapPage/MapPage';
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank" rel="noreferrer">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-      {/* <Routes>
-        <Route path="/login" element={<ProtectOfRoute Element={Login} />} />
+      <Header />
+      <Routes>
+        <Route index element={<Navigate to={'/main'} />} />
+        <Route path="/main" element={<MainPage />} />
+        <Route path="/map" element={<Map />} />
+        {/* <Route path="/login" element={<ProtectOfRoute Element={Login} />} />
         <Route path="/register" element={<ProtectOfRoute Element={Register} />} />
         <Route path="/change-password" element={<ProtectOfRoute Element={ChangePassword} />} />
         <Route path="/confirm-password" element={<ProtectOfRoute Element={ConfirmPassword} />} />
@@ -38,8 +24,8 @@ function App() {
           <Route path="/candidates" element={<Candidates />} />
           <Route index element={<Navigate to={'/candidates'} />} />
         </Route>
-        <Route path="*" element={<NotFound />} />
-      </Routes> */}
+        <Route path="*" element={<NotFound />} /> */}
+      </Routes>
     </>
   );
 }
