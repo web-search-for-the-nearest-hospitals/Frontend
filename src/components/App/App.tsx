@@ -1,8 +1,8 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import './App.css';
-import MainPage from '../MainPage/MainPage';
-import Header from '../Header/Header';
-import Map from '../MapPage/MapPage';
+import MainPage from '../pages/MainPage/MainPage';
+import Header from '../common/Header/Header';
+import MapPage from '../pages/MapPage/MapPage';
 
 function App() {
   return (
@@ -11,7 +11,7 @@ function App() {
       <Routes>
         <Route index element={<Navigate to={'/main'} />} />
         <Route path="/main" element={<MainPage />} />
-        <Route path="/map" element={<Map />} />
+        <Route path="/map" element={<MapPage />} />
         {/* <Route path="/login" element={<ProtectOfRoute Element={Login} />} />
         <Route path="/register" element={<ProtectOfRoute Element={Register} />} />
         <Route path="/change-password" element={<ProtectOfRoute Element={ChangePassword} />} />
