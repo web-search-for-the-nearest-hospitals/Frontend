@@ -3,6 +3,7 @@ import './App.css';
 import MainPage from '../pages/MainPage/MainPage';
 import Header from '../common/Header/Header';
 import MapPage from '../pages/MapPage/MapPage';
+import CallMedicPage from '../pages/CallMedicPage/CallMedicPage';
 
 function App() {
   return (
@@ -12,22 +13,10 @@ function App() {
         <Route path="/clinic-searcher">
           <Route path="main" element={<MainPage />} />
           <Route path="map" element={<MapPage />} />
+          <Route path="call-medic" element={<CallMedicPage />} />
           <Route index element={<Navigate to={'/clinic-searcher/main'} />} />
         </Route>
-
-        {/* <Route path="/login" element={<ProtectOfRoute Element={Login} />} />
-        <Route path="/register" element={<ProtectOfRoute Element={Register} />} />
-        <Route path="/change-password" element={<ProtectOfRoute Element={ChangePassword} />} />
-        <Route path="/confirm-password" element={<ProtectOfRoute Element={ConfirmPassword} />} />
-        <Route path="/" element={<ProtectOfRoute Element={AddHeader} onlyLoggedIn />}>
-          <Route path="/profile" element={<Profile />} />
-          <Route path="/vacancy" element={<Vacancy />} />
-          <Route path="/create-vacancy" element={<CreateVacancy />} />
-          <Route path="/favorite-candidates" element={<Favorite />} />
-          <Route path="/candidates" element={<Candidates />} />
-          <Route index element={<Navigate to={'/candidates'} />} />
-        </Route>
-        <Route path="*" element={<NotFound />} /> */}
+        {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </>
   );
