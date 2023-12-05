@@ -1,18 +1,12 @@
-// import React, { useState } from 'react';
-// import ReactDOM from 'react-dom';
 import { useState } from 'react';
 import './MapPage.scss';
-
-// @TODO
-// // @ts-expect-error нужно изменить tsconfig под api яндекса
-// const ymaps3Reactify = await ymaps3.import('@yandex/ymaps3-reactify');
-// const reactify = ymaps3Reactify.reactify.bindTo(React, ReactDOM);
-// // @ts-expect-error нужно изменить tsconfig под api яндекса
-// const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } = reactify.module(ymaps3);
+import { useYandexMap } from '../../../helpers/customHooks/useYandexMap';
 
 function MapPage() {
+  const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } = useYandexMap();
   const [latitude, setLatitude] = useState<number | null>(null);
   const [longitude, setLongitude] = useState<number | null>(null);
+
   navigator.geolocation.getCurrentPosition(
     (data) => {
       setLatitude(data.coords.latitude);
@@ -25,26 +19,29 @@ function MapPage() {
     <section className="map-page">
       {latitude && longitude ? (
         <>
-          <div>
-            <h2 className="map-page__title">Яндекс Карта</h2>
-            {/* <YMap location={{ center: [longitude, latitude], zoom: 14 }} mode="vector">
-              <YMapDefaultSchemeLayer />
-              <YMapDefaultFeaturesLayer />
+          {YMap && (
+            <div>
+              <h2 className="map-page__title">Яндекс Карта</h2>
+              <YMap location={{ center: [longitude, latitude], zoom: 14 }} mode="vector">
+                <YMapDefaultSchemeLayer />
+                <YMapDefaultFeaturesLayer />
 
-              <YMapMarker
-                coordinates={[Math.random() / 100 + longitude, Math.random() / 100 + latitude]}
-                draggable={true}
-              >
-                <div className="map-page__mark" />
-                <span className="map-page__mark-text">Цель</span>
-              </YMapMarker>
+                <YMapMarker
+                  coordinates={[Math.random() / 100 + longitude, Math.random() / 100 + latitude]}
+                  draggable={true}
+                >
+                  <div className="map-page__mark" />
+                  <span className="map-page__mark-text">Цель</span>
+                </YMapMarker>
 
-              <YMapMarker coordinates={[longitude, latitude]} draggable={true}>
-                <div className="map-page__mark" />
-                <span className="map-page__mark-text">Вы</span>
-              </YMapMarker>
-            </YMap> */}
-          </div>
+                <YMapMarker coordinates={[longitude, latitude]} draggable={true}>
+                  <div className="map-page__mark" />
+                  <span className="map-page__mark-text">Вы</span>
+                </YMapMarker>
+              </YMap>
+            </div>
+          )}
+
           <div>
             <h2 className="map-page__title">openstreetmap</h2>
             <iframe
