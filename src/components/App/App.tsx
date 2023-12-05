@@ -9,9 +9,12 @@ function App() {
     <>
       <Header />
       <Routes>
-        <Route index element={<Navigate to={'/main'} />} />
-        <Route path="/main" element={<MainPage />} />
-        <Route path="/map" element={<MapPage />} />
+        <Route path="/clinic-searcher">
+          <Route path="main" element={<MainPage />} />
+          <Route path="map" element={<MapPage />} />
+          <Route index element={<Navigate to={'/clinic-searcher/main'} />} />
+        </Route>
+
         {/* <Route path="/login" element={<ProtectOfRoute Element={Login} />} />
         <Route path="/register" element={<ProtectOfRoute Element={Register} />} />
         <Route path="/change-password" element={<ProtectOfRoute Element={ChangePassword} />} />
