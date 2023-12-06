@@ -10,7 +10,7 @@ function Header() {
           className={({ isActive, isPending }) =>
             isPending ? 'pending' : isActive ? 'header__link header__link_active' : 'header__link'
           }
-          to={'/main'}
+          to={'/clinic-searcher/main'}
         >
           Главная
         </NavLink>
@@ -18,7 +18,7 @@ function Header() {
           className={({ isActive, isPending }) =>
             isPending ? 'pending' : isActive ? 'header__link header__link_active' : 'header__link'
           }
-          to={'/map'}
+          to={'/clinic-searcher/map'}
         >
           Карта
         </NavLink>

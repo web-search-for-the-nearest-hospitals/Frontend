@@ -1,17 +1,20 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import './App.css';
 import MainPage from '../pages/MainPage/MainPage';
 import Header from '../common/Header/Header';
 import MapPage from '../pages/MapPage/MapPage';
+import './App.css';
 
 function App() {
   return (
     <>
       <Header />
       <Routes>
-        <Route index element={<Navigate to={'/main'} />} />
-        <Route path="/main" element={<MainPage />} />
-        <Route path="/map" element={<MapPage />} />
+        <Route path="/clinic-searcher">
+          <Route path="main" element={<MainPage />} />
+          <Route path="map" element={<MapPage />} />
+          <Route index element={<Navigate to={'/clinic-searcher/main'} />} />
+        </Route>
+
         {/* <Route path="/login" element={<ProtectOfRoute Element={Login} />} />
         <Route path="/register" element={<ProtectOfRoute Element={Register} />} />
         <Route path="/change-password" element={<ProtectOfRoute Element={ChangePassword} />} />
