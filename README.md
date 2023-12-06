@@ -1,4 +1,4 @@
-# Веб-сервис для поиска ближайших больниц и частных клиник 🚑 Web search for the nearest hospitals
+# ПоисКлиник 🚑 Web search for the nearest hospitals
 
 Description will be here soon.
 
