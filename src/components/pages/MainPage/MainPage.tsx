@@ -10,7 +10,6 @@ function MainPage() {
   // Несмотря на то, что это "2 разные реализации, они ссылаются на один объект-функцию и получают одни и те же данные"
   const { error, isLoading, data } = useGetRandomFactAboutCatQuery(null);
   const [triggerQuery, queryResult, lastPromiseInfo] = useLazyGetRandomFactAboutCatQuery();
-  console.log(queryResult, lastPromiseInfo);
 
   const count = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
@@ -18,6 +17,8 @@ function MainPage() {
 
   useEffect(() => {
     triggerQuery(null);
+    console.log(queryResult, lastPromiseInfo);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [triggerQuery]);
 
   return (

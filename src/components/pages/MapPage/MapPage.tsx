@@ -1,19 +1,11 @@
-import { useState } from 'react';
 import './MapPage.scss';
 import { useYandexMap } from '../../../helpers/customHooks/useYandexMap';
+import { userSelect } from '../../../store/slices/userSlice';
+import { useAppSelector } from '../../../helpers/customHooks/reduxHooks';
 
 function MapPage() {
   const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } = useYandexMap();
-  const [latitude, setLatitude] = useState<number | null>(null);
-  const [longitude, setLongitude] = useState<number | null>(null);
-
-  navigator.geolocation.getCurrentPosition(
-    (data) => {
-      setLatitude(data.coords.latitude);
-      setLongitude(data.coords.longitude);
-    },
-    () => console.error('Не могу получить координаты'),
-  );
+  const { latitude, longitude } = useAppSelector(userSelect).coord;
 
   return (
     <section className="map-page">
