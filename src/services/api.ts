@@ -36,7 +36,7 @@ export const getOrganizationInfo = (org_id: number) => {
 };
 
 // регистрация новой организации, функция принимает объект параметров организации Organization
-export const registerOrganization = (Organization: Organization) => {
+export const registerOrganization = (organization: Organization) => {
   return fetch(`${BASE_URL}/organizations/`, {
     method: 'POST',
     headers: {
@@ -44,12 +44,12 @@ export const registerOrganization = (Organization: Organization) => {
       'Content-Type': 'application/json',
     },
     // credentials: 'include', __ указать порядок авторизации для админов и представителей организации
-    body: JSON.stringify(Organization),
+    body: JSON.stringify(organization),
   }).then((res) => checkRequest(res));
 };
 
 // редактирование профиля организации, функция принимает объект параметров организации Organization
-export const editOrganization = (Organization: Organization) => {
+export const editOrganization = (organization: Organization) => {
   return fetch(`${BASE_URL}/organizations/`, {
     method: 'PATCH',
     headers: {
@@ -57,9 +57,7 @@ export const editOrganization = (Organization: Organization) => {
       'Content-Type': 'application/json',
     },
     // credentials: 'include', __ указать порядок авторизации для админов и представителей организации
-    body: JSON.stringify({
-      Organization,
-    }),
+    body: JSON.stringify(organization),
   }).then((res) => checkRequest(res));
 };
 
