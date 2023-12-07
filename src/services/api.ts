@@ -11,8 +11,6 @@ async function checkRequest(res: Response) {
   });
 }
 
-// уточнить endpoints для всех функций, обязательность полей для организации, временно для всех id определен тип number
-
 // список организаций по имеющимся коррдинатам (latitude, longitude), функция принимает объект coord из двух координат {lat, long}
 export const getOrganizations = (coord: Coord) => {
   return fetch(`${BASE_URL}/organizations/?lat=${coord.lat}&long=${coord.long}`, {
@@ -25,7 +23,7 @@ export const getOrganizations = (coord: Coord) => {
 };
 
 // информация об организации по id
-export const getOrganizationInfo = (org_id: number) => {
+export const getOrganizationInfo = (org_id: string) => {
   return fetch(`${BASE_URL}/organizations/${org_id}`, {
     method: 'GET',
     headers: {
@@ -35,7 +33,7 @@ export const getOrganizationInfo = (org_id: number) => {
   }).then((res) => checkRequest(res));
 };
 
-// регистрация новой организации, функция принимает объект параметров организации Organization
+// регистрация новой организации, функция принимает объект параметров организации organization
 export const registerOrganization = (organization: Organization) => {
   return fetch(`${BASE_URL}/organizations/`, {
     method: 'POST',
@@ -48,9 +46,9 @@ export const registerOrganization = (organization: Organization) => {
   }).then((res) => checkRequest(res));
 };
 
-// редактирование профиля организации, функция принимает объект параметров организации Organization
-export const editOrganization = (organization: Organization) => {
-  return fetch(`${BASE_URL}/organizations/`, {
+// редактирование профиля организации, функция принимает id и объект параметров организации organization
+export const editOrganization = (org_id: string, organization: Organization) => {
+  return fetch(`${BASE_URL}/organizations/${org_id}`, {
     method: 'PATCH',
     headers: {
       Accept: 'application/json',
@@ -62,7 +60,7 @@ export const editOrganization = (organization: Organization) => {
 };
 
 // удаление организации по id
-export const deleteOrganization = (org_id: number) => {
+export const deleteOrganization = (org_id: string) => {
   return fetch(`${BASE_URL}/organizations/${org_id}`, {
     method: 'DELETE',
     // credentials: 'include', __ указать порядок авторизации для админов и представителей организации
