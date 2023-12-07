@@ -3,8 +3,18 @@ import MainPage from '../pages/MainPage/MainPage';
 import Header from '../common/Header/Header';
 import MapPage from '../pages/MapPage/MapPage';
 import './App.css';
+import { useAppDispatch } from '../../helpers/customHooks/reduxHooks';
+import { ICoord, setCoord } from '../../store/slices/userSlice';
+import { useEffect } from 'react';
+import watchUserPosition from '../../helpers/utils/watchUserPosition';
 
 function App() {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    watchUserPosition((data: ICoord) => dispatch(setCoord(data)));
+  }, [dispatch]);
+
   return (
     <>
       <Header />
