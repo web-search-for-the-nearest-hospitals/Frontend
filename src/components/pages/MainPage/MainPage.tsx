@@ -1,18 +1,36 @@
 import reactLogo from '../../../assets/icons/react.svg';
 import viteLogo from '/vite.svg';
-import './MainPage.scss';
 import { useAppDispatch, useAppSelector } from '../../../helpers/customHooks/reduxHooks';
 import { decrement, increment, incrementByAmount, selectCount } from '../../../store/slices/counterSlice';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { useGetRandomFactAboutCatQuery, useLazyGetRandomFactAboutCatQuery } from '../../../services/RTKQuery';
+import './MainPage.scss';
 
 function MainPage() {
+  // Несмотря на то, что это "2 разные реализации, они ссылаются на один объект-функцию и получают одни и те же данные"
+  const { error, isLoading, data } = useGetRandomFactAboutCatQuery(null);
+  const [triggerQuery, queryResult, lastPromiseInfo] = useLazyGetRandomFactAboutCatQuery();
+  console.log(queryResult, lastPromiseInfo);
+
   const count = useAppSelector(selectCount);
   const dispatch = useAppDispatch();
   const refInput = useRef<HTMLInputElement | null>(null);
 
+  useEffect(() => {
+    triggerQuery(null);
+  }, [triggerQuery]);
+
   return (
     <>
       <main className="main">
+        <h3>Случайный факт о котиках</h3>
+        <p style={{ maxWidth: '600px', margin: 'auto' }}>
+          {error ? 'произошла ошибка' : isLoading ? 'загружаем' : data?.fact}
+        </p>
+        <h3>Случайный факт о котиках из lazy функции</h3>
+        <p style={{ maxWidth: '600px', margin: 'auto' }}>
+          {queryResult.error ? 'произошла ошибка' : queryResult.isLoading ? 'загружаем' : queryResult.data?.fact}
+        </p>
         <div>
           <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
             <img src={viteLogo} className="logo" alt="Vite logo" />
