@@ -1,116 +1,86 @@
 const { BASE_URL } = process.env;
-import { Coord, Organization } from '../helpers/interfaces';
+import { ICoord, IOrganization } from '../helpers/interfaces';
 
 async function checkRequest(res: Response) {
   if (res.ok) {
     return res.json();
   }
-  return Promise.reject({
-    status: `Ошибка: ${res.status}`,
-    message: `${(await res.json()).message}`,
-  });
+  return Promise.reject(`Ошибка: ${res.status}`);
 }
 
-// список организаций по имеющимся коррдинатам (latitude, longitude), функция принимает объект coord из двух координат {lat, long}
-export const getOrganizations = (coord: Coord) => {
-  return fetch(`${BASE_URL}/organizations/?lat=${coord.lat}&long=${coord.long}`, {
-    method: 'GET',
+// универсальная функция запроса, на вход получает endpoint, опции и метод, на выходе объект.
+// Желательно внести в Wiki с примерами, в последствие после тестирования названия можно убрать,
+// обращение возможно производить api('/organizations/', coord); - список организаций по имеющимся координатам и др.
+
+export async function api(endpoint: string, options?: object, method: string = 'GET') {
+  let url = `${BASE_URL}${endpoint}`;
+  if (method === 'GET') {
+    if (options) {
+      url +=
+        '?' +
+        Object.entries(options)
+          .map(([key, val]) => `${key}=${val}`)
+          .join('&');
+    }
+    return fetch(url, {
+      method: method,
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    }).then((res) => checkRequest(res));
+  }
+  return fetch(url, {
+    method: method,
     headers: {
       Accept: 'application/json',
       'Content-Type': 'application/json',
     },
+    body: JSON.stringify(options),
   }).then((res) => checkRequest(res));
+}
+
+// список организаций по имеющимся коррдинатам (latitude, longitude), функция принимает объект coord из двух координат {lat, long}
+export const getOrganizations = (coord: ICoord) => {
+  return api('/organizations/', coord);
 };
 
 // информация об организации по id
 export const getOrganizationInfo = (org_id: string) => {
-  return fetch(`${BASE_URL}/organizations/${org_id}`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  }).then((res) => checkRequest(res));
+  return api(`/organizations/${org_id}`);
 };
 
 // регистрация новой организации, функция принимает объект параметров организации organization
-export const registerOrganization = (organization: Organization) => {
-  return fetch(`${BASE_URL}/organizations/`, {
-    method: 'POST',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    // credentials: 'include', __ указать порядок авторизации для админов и представителей организации
-    body: JSON.stringify(organization),
-  }).then((res) => checkRequest(res));
+export const registerOrganization = (organization: IOrganization) => {
+  return api(`/organizations/`, organization, 'POST');
 };
 
 // редактирование профиля организации, функция принимает id и объект параметров организации organization
-export const editOrganization = (org_id: string, organization: Organization) => {
-  return fetch(`${BASE_URL}/organizations/${org_id}`, {
-    method: 'PATCH',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-    // credentials: 'include', __ указать порядок авторизации для админов и представителей организации
-    body: JSON.stringify(organization),
-  }).then((res) => checkRequest(res));
+export const editOrganization = (org_id: string, organization: IOrganization) => {
+  api(`/organizations/${org_id}`, organization, 'PATCH');
 };
 
 // удаление организации по id
 export const deleteOrganization = (org_id: string) => {
-  return fetch(`${BASE_URL}/organizations/${org_id}`, {
-    method: 'DELETE',
-    // credentials: 'include', __ указать порядок авторизации для админов и представителей организации
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  });
+  api(`/organizations/${org_id}`, {}, 'DELETE');
 };
 
 // список врачебных специальностей
 export const getSpecialties = () => {
-  return fetch(`${BASE_URL}/specialties/`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  }).then((res) => checkRequest(res));
+  api(`/specialties/`);
 };
 
 // информация о врачебной специальности по коду
 export const getSpecialtyInfo = (specialty_code: string) => {
-  return fetch(`${BASE_URL}/specialties/${specialty_code}`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  }).then((res) => checkRequest(res));
+  api(`/specialties/${specialty_code}`);
 };
 
 // список городов
 export const getTowns = () => {
-  return fetch(`${BASE_URL}/towns/`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  }).then((res) => checkRequest(res));
+  api(`/towns/`);
 };
 
 // информация о городе по id
 export const getTownInfo = (town_id: number) => {
-  return fetch(`${BASE_URL}/towns/${town_id}`, {
-    method: 'GET',
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-    },
-  }).then((res) => checkRequest(res));
+  api(`/towns/${town_id}`);
 };
