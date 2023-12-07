@@ -6,11 +6,11 @@ name: Env
 on:
   # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-  workflow_dispatch: 
+  workflow_dispatch:
 env:
-      NODE_ENV: ${{ secrets.NODE_ENV }}
-      BASE_URL: ${{ secrets.BASE_URL }}
-      YAMAP_API_KEY: ${{ secrets.YAMAP_API_KEY }}
+  NODE_ENV: ${{ secrets.NODE_ENV }}
+  BASE_URL: ${{ secrets.BASE_URL }}
+  YAMAP_API_KEY: ${{ secrets.YAMAP_API_KEY }}
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
