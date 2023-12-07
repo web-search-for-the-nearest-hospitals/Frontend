@@ -1,10 +1,14 @@
-import { useState } from 'react';
 import reactLogo from '../../../assets/icons/react.svg';
 import viteLogo from '/vite.svg';
 import './MainPage.scss';
+import { useAppDispatch, useAppSelector } from '../../../helpers/customHooks/reduxHooks';
+import { decrement, increment, incrementByAmount, selectCount } from '../../../store/slices/counterSlice';
+import { useRef } from 'react';
 
 function MainPage() {
-  const [count, setCount] = useState(0);
+  const count = useAppSelector(selectCount);
+  const dispatch = useAppDispatch();
+  const refInput = useRef<HTMLInputElement | null>(null);
 
   return (
     <>
@@ -19,7 +23,21 @@ function MainPage() {
         </div>
         <h1>Vite + React</h1>
         <div className="card">
-          <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
+          <div className="card__content">
+            <button className="card__btn" onClick={() => dispatch(increment())}>
+              +
+            </button>
+            <span>count is {count}</span>
+            <button className="card__btn" onClick={() => dispatch(decrement())}>
+              -
+            </button>
+          </div>
+          <div className="card__content">
+            <button className="card__btn" onClick={() => dispatch(incrementByAmount(refInput?.current?.value || '0'))}>
+              Изменить на
+            </button>
+            <input ref={refInput} placeholder="Ваше число"></input>
+          </div>
           <p>
             Edit <code>src/App.tsx</code> and save to test HMR
           </p>
