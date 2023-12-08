@@ -7,6 +7,8 @@ import { useAppDispatch } from '../../helpers/customHooks/reduxHooks';
 import { ICoord, setCoord } from '../../store/slices/userSlice';
 import { useEffect } from 'react';
 import watchUserPosition from '../../helpers/utils/watchUserPosition';
+import SearchClinic from '../common/SearchClinic/SearchClinic';
+import MapComponent from '../common/MapComponent/MapComponent';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -18,12 +20,14 @@ function App() {
   return (
     <>
       <Header />
+      <SearchClinic />
+      <MapComponent />
       <Routes>
-        <Route path="/clinic-searcher">
+        {/* <Route path="/clinic-searcher">
           <Route path="main" element={<MainPage />} />
           <Route path="map" element={<MapPage />} />
           <Route index element={<Navigate to={'/clinic-searcher/main'} />} />
-        </Route>
+        </Route> */}
 
         {/* <Route path="/login" element={<ProtectOfRoute Element={Login} />} />
         <Route path="/register" element={<ProtectOfRoute Element={Register} />} />
