@@ -1,5 +1,5 @@
 import './DropDown.scss';
-import React, { FC, useState } from 'react';
+import { FC, useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';

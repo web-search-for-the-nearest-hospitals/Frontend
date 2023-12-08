@@ -1,10 +1,10 @@
-import './SearchClinic.scss';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import DropDown from '../DropDown/DropDown';
+import DropDown from '../../../ui-kit/DropDown/DropDown';
 import { useState } from 'react';
+import './SearchClinic.scss';
 
 export default function SearchClinic() {
   const [searchClinic, setSearchClinic] = useState('');

@@ -6,12 +6,38 @@
   justify-content: space-between;
   padding: 2em;
 
-  &__logo {
+  // &__logo {
 
+  // }
+
+  // &__title {
+  //   margin: 0;
+  // }
+
+  // &__user {
+
+  // }
+
+  &__link-list {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
   }
 
-  &__user {
+  &__link_active {
+    color: rgb(255, 202, 68);
+  }
 
+  &__link {
+    font-size: 24px;
+    text-decoration: none;
+    color: #000;
+    transition: color 0.2s linear;
+
+    &:hover {
+      color: rgb(255, 202, 68);
+    }
   }
 }
-
