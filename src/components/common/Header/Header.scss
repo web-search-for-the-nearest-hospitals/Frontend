@@ -26,15 +26,15 @@
     gap: 20px;
   }
 
-  &__link_active {
-    color: rgb(255, 202, 68);
-  }
-
   &__link {
     font-size: 24px;
     text-decoration: none;
     color: #000;
     transition: color 0.2s linear;
+
+    &_active {
+      color: rgb(214, 155, 5);
+    }
 
     &:hover {
       color: rgb(255, 202, 68);
