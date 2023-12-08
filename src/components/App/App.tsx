@@ -1,14 +1,14 @@
-import { Route, Routes, Navigate } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import MainPage from '../pages/MainPage/MainPage';
 import Header from '../common/Header/Header';
 import MapPage from '../pages/MapPage/MapPage';
-import './App.css';
 import { useAppDispatch } from '../../helpers/customHooks/reduxHooks';
 import { ICoord, setCoord } from '../../store/slices/userSlice';
 import { useEffect } from 'react';
 import watchUserPosition from '../../helpers/utils/watchUserPosition';
-import SearchClinic from '../common/SearchClinic/SearchClinic';
-import MapComponent from '../common/MapComponent/MapComponent';
+
+import './App.css';
+import ReduxPage from '../pages/ReduxPage/ReduxPage';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -20,14 +20,14 @@ function App() {
   return (
     <>
       <Header />
-      <SearchClinic />
-      <MapComponent />
+
       <Routes>
-        {/* <Route path="/clinic-searcher">
+        <Route path="/clinic-searcher">
           <Route path="main" element={<MainPage />} />
           <Route path="map" element={<MapPage />} />
+          <Route path="redux" element={<ReduxPage />} />
           <Route index element={<Navigate to={'/clinic-searcher/main'} />} />
-        </Route> */}
+        </Route>
 
         {/* <Route path="/login" element={<ProtectOfRoute Element={Login} />} />
         <Route path="/register" element={<ProtectOfRoute Element={Register} />} />
