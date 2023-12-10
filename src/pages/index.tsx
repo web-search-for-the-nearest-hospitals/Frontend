@@ -1,12 +1,12 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
-import MainPage from '~/components/pages/MainPage/MainPage';
-import MapPage from '~/components/pages/MapPage/MapPage';
-import ReduxPage from '~/components/pages/ReduxPage/ReduxPage';
+import MapPage from '~/pages/MapPage/MapPage';
+import ReduxPage from '~/pages/ReduxPage/ReduxPage';
 
-import { useAppDispatch } from '../helpers/customHooks/reduxHooks';
-import { ICoord, setCoord } from '../store/slices/userSlice';
 import { useEffect } from 'react';
-import watchUserPosition from '../helpers/utils/watchUserPosition';
+import { useAppDispatch } from '~/shared/helpers/customHooks/reduxHooks';
+import watchUserPosition from '~/shared/helpers/utils/watchUserPosition';
+import { ICoord, setCoord } from '~/shared/store/slices/userSlice';
+import MainPage from './MainPage/MainPage';
 
 export const Routing = () => {
   const dispatch = useAppDispatch();

@@ -1,10 +1,10 @@
 import React from 'react';
-import switchIcon from '../../../../assets/icons/switch.svg';
-import locationIcon from '../../../../assets/icons/location.svg';
-import DropDown from '../../../ui-kit/DropDown/DropDown';
-import { useYandexMap } from '../../../../helpers/customHooks/useYandexMap';
-import { useAppSelector } from '../../../../helpers/customHooks/reduxHooks';
-import { userSelect } from '../../../../store/slices/userSlice';
+import switchIcon from '~/shared/icons/switch.svg';
+import locationIcon from '~/shared/icons/location.svg';
+import DropDown from '~/shared/ui/DropDown/DropDown';
+import { useYandexMap } from '~/shared/helpers/customHooks/useYandexMap';
+import { useAppSelector } from '~/shared/helpers/customHooks/reduxHooks';
+import { userSelect } from '~/shared/store/slices/userSlice';
 import './MapComponent.scss';
 // import { YMaps, Map, Placemark } from 'react-yandex-maps';
 

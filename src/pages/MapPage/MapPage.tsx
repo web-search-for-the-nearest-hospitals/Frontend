@@ -1,7 +1,7 @@
+import { useYandexMap } from '~/shared/helpers/customHooks/useYandexMap';
+import { useAppSelector } from '~/shared/helpers/customHooks/reduxHooks';
+import { userSelect } from '~/shared/store/slices/userSlice';
 import './MapPage.scss';
-import { useYandexMap } from '../../../helpers/customHooks/useYandexMap';
-import { userSelect } from '../../../store/slices/userSlice';
-import { useAppSelector } from '../../../helpers/customHooks/reduxHooks';
 
 function MapPage() {
   const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } = useYandexMap();

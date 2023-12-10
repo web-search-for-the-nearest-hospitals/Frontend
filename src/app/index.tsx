@@ -1,4 +1,4 @@
-import Header from '~/components/common/Header/Header';
+import Header from '~/widgets/Header/Header';
 import { withProviders } from './providers';
 import { Routing } from '~/pages';
 

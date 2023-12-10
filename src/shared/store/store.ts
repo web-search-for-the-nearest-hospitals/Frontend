@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import counterSlice from './slices/counterSlice'; // обязательно импорт по умолчанию
-import { catApi } from '../services/RTKQuery';
+import { catApi } from '~/shared/api/RTKQuery';
 import { setupListeners } from '@reduxjs/toolkit/query';
 import userSlice from './slices/userSlice';
 

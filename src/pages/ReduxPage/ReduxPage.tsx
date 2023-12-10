@@ -1,9 +1,9 @@
-import reactLogo from '../../../assets/icons/react.svg';
+import reactLogo from '~/shared/icons/react.svg';
 import viteLogo from '/vite.svg';
-import { useAppDispatch, useAppSelector } from '../../../helpers/customHooks/reduxHooks';
-import { decrement, increment, incrementByAmount, selectCount } from '../../../store/slices/counterSlice';
 import { useEffect, useRef } from 'react';
-import { useGetRandomFactAboutCatQuery, useLazyGetRandomFactAboutCatQuery } from '../../../services/RTKQuery';
+import { useGetRandomFactAboutCatQuery, useLazyGetRandomFactAboutCatQuery } from '~/shared/api/RTKQuery';
+import { useAppDispatch, useAppSelector } from '~/shared/helpers/customHooks/reduxHooks';
+import { decrement, increment, incrementByAmount, selectCount } from '~/shared/store/slices/counterSlice';
 import './ReduxPage.scss';
 
 export default function ReduxPage() {
