@@ -1,13 +1,14 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { useEffect } from 'react';
 
-import { useAppDispatch } from '~/shared/helpers/customHooks/reduxHooks';
-import watchUserPosition from '~/shared/helpers/utils/watchUserPosition';
-import { setCoord } from '~/shared/store/slices/userSlice';
-import { ICoord } from '~/shared/types/interfaces';
+import MainPage from './main';
+import ReduxPage from './redux';
+import Header from '~/widgets/header';
 
-import MainPage from './MainPage';
-import ReduxPage from './ReduxPage';
+import { ICoord } from '~/shared/types/interfaces';
+import { setCoord } from '~/shared/config/store/slices/userSlice';
+import { useAppDispatch } from '~/shared/lib/hooks/reduxHooks';
+import watchUserPosition from '~/shared/lib/utils/watchUserPosition';
 
 export const Routing = () => {
   const dispatch = useAppDispatch();
@@ -18,7 +19,7 @@ export const Routing = () => {
 
   return (
     <Routes>
-      <Route path="/clinic-searcher">
+      <Route path="/clinic-searcher" element={<Header />}>
         <Route path="main" element={<MainPage />} />
         <Route path="redux" element={<ReduxPage />} />
         <Route index element={<Navigate to={'/clinic-searcher/main'} />} />

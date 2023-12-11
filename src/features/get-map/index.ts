@@ -1,2 +1,3 @@
-export * from './ui/get-map';
-// export { useYandexMap } from './module/customHooks/useYandexMap';
+import GetMap from './ui';
+
+export default GetMap;

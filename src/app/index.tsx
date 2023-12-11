@@ -1,11 +1,11 @@
-import Header from '~/widgets/Header/ui';
+import './index.css';
+
 import { withProviders } from './providers';
 import { Routing } from '~/pages';
 
 function App() {
   return (
     <>
-      <Header />
       <Routing />
     </>
   );

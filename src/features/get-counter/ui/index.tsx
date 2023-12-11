@@ -1,7 +1,8 @@
+import './index.scss';
 import { useRef } from 'react';
 
-import { useAppDispatch, useAppSelector } from '~/shared/helpers/customHooks/reduxHooks';
-import { decrement, increment, incrementByAmount, selectCount } from '~/shared/store/slices/counterSlice';
+import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
+import { decrement, increment, incrementByAmount, selectCount } from '~/shared/config/store/slices/counterSlice';
 
 export function GetCounter() {
   const count = useAppSelector(selectCount);
