@@ -1,9 +1,10 @@
-import SearchClinic from './SearchClinic/SearchClinic';
-import MapComponent from './MapComponent/MapComponent';
+import SearchClinic from '../../../widgets/SearchClinic/ui';
+import MapComponent from '../../../widgets/MapComponent/ui';
+import { LeftColumn } from './LeftColumn';
 export default function MainPage() {
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
-      <div style={{ minWidth: '30vw' }}>колонка рекламы</div>
+      <LeftColumn />
       <div>
         <SearchClinic />
         <MapComponent />

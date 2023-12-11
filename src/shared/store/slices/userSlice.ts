@@ -1,17 +1,6 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store';
-
-type TCoordPar = null | number;
-
-export interface ICoord {
-  latitude: TCoordPar;
-  longitude: TCoordPar;
-  accuracy?: TCoordPar;
-  altitude?: TCoordPar;
-  altitudeAccuracy?: TCoordPar;
-  heading?: TCoordPar;
-  spees?: TCoordPar;
-}
+import { ICoord } from '~/shared/types/interfaces';
 
 interface IUserSlice {
   coord: ICoord;

@@ -1,4 +1,4 @@
-import { ICoord } from '../../store/slices/userSlice';
+import { ICoord } from '~/shared/types/interfaces';
 
 export default function watchUserPosition(setCoords: (data: ICoord) => void) {
   navigator.geolocation.watchPosition(

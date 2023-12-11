@@ -1,5 +1,5 @@
-const { BASE_URL } = process.env;
-import { ICoord, IOrganization } from '../helpers/interfaces';
+const { BACK_URL } = process.env;
+import { ICoord, IOrganization } from '../types/interfaces';
 
 async function checkRequest(res: Response) {
   if (res.ok) {
@@ -13,7 +13,7 @@ async function checkRequest(res: Response) {
 // обращение возможно производить api('/organizations/', coord); - список организаций по имеющимся координатам и др.
 
 export async function api(endpoint: string, options?: object, method: string = 'GET') {
-  let url = `${BASE_URL}${endpoint}`;
+  let url = `${BACK_URL}${endpoint}`;
   if (method === 'GET') {
     if (options) {
       url +=
