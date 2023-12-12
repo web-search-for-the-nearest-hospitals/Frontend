@@ -1,5 +1,5 @@
 const { BACK_URL } = process.env;
-import { ICoord, IOrganization } from '../types/interfaces';
+import { ICoord, IOrganization } from '../lib/types/interfaces';
 
 async function checkRequest(res: Response) {
   if (res.ok) {

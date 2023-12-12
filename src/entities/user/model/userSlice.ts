@@ -1,6 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
-import { RootState } from '../store';
-import { ICoord } from '~/shared/types/interfaces';
+import { ICoord } from '~/shared/lib/types/interfaces';
 
 interface IUserSlice {
   coord: ICoord;

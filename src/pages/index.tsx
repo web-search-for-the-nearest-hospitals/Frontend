@@ -5,10 +5,10 @@ import MainPage from './main';
 import ReduxPage from './redux';
 import Header from '~/widgets/header';
 
-import { ICoord } from '~/shared/types/interfaces';
-import { setCoord } from '~/shared/config/store/slices/userSlice';
+import { ICoord } from '~/shared/lib/types/interfaces';
 import { useAppDispatch } from '~/shared/lib/hooks/reduxHooks';
 import watchUserPosition from '~/shared/lib/utils/watchUserPosition';
+import { setCoord } from '~/entities/user';
 
 export const Routing = () => {
   const dispatch = useAppDispatch();

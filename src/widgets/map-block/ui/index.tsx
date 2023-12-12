@@ -3,11 +3,11 @@ import React, { useEffect } from 'react';
 
 import { districs } from '../lib/consts';
 import GetMap from '~/features/get-map';
+import { userSelect } from '~/entities/user';
 
 import switchIcon from '~/shared/assets/icons/switch.svg';
 import locationIcon from '~/shared/assets/icons/location.svg';
 import DropDown from '~/shared/ui/DropDown/DropDown';
-import { userSelect } from '~/shared/config/store/slices/userSlice';
 import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 
 export default function MapBlock() {

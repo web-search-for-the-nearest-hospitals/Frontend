@@ -16,6 +16,7 @@ export default function Searcher() {
     console.log(doctor);
   }, [searchClinic, clinic, doctor]);
 
+  // @TODO: переписать без MUI
   return (
     <div className="search-clinic">
       <div>

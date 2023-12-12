@@ -1,4 +1,4 @@
-import { ICoord } from '~/shared/types/interfaces';
+import { ICoord } from '~/shared/lib/types/interfaces';
 
 export default function watchUserPosition(setCoords: (data: ICoord) => void) {
   navigator.geolocation.watchPosition(

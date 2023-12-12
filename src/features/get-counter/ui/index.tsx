@@ -2,7 +2,7 @@ import './index.scss';
 import { useRef } from 'react';
 
 import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
-import { decrement, increment, incrementByAmount, selectCount } from '~/shared/config/store/slices/counterSlice';
+import { decrement, increment, incrementByAmount, selectCount } from '../model/counterSlice';
 
 export function GetCounter() {
   const count = useAppSelector(selectCount);

@@ -20,9 +20,3 @@ export interface IOrganization {
   site: string;
   email: string;
 }
-
-// export interface ISpecialty {
-//   code: string;
-//   name: string;
-//   skill: string;
-// }

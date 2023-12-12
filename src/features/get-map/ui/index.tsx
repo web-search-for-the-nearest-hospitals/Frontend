@@ -1,5 +1,5 @@
 import './index.scss';
-import { ICoord } from '~/shared/types/interfaces';
+import { ICoord } from '~/shared/lib/types/interfaces';
 import { useYandexMap } from '../module/useYandexMap';
 
 export default function GetMap({ latitude, longitude }: ICoord) {
