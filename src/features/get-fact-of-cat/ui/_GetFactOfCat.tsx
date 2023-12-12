@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { useGetRandomFactAboutCatQuery, useLazyGetRandomFactAboutCatQuery } from '../api/rtkQuery';
+import { useGetRandomFactAboutCatQuery, useLazyGetRandomFactAboutCatQuery } from '../api/RTKQuery';
 
 export default function _GetFactOfCat() {
   // Несмотря на то, что это "2 разные реализации, они ссылаются на один объект-функцию и получают одни и те же данные"
