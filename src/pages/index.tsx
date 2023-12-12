@@ -7,7 +7,7 @@ import Header from '~/widgets/header';
 
 import { ICoord } from '~/shared/lib/types/interfaces';
 import { useAppDispatch } from '~/shared/lib/hooks/reduxHooks';
-import watchUserPosition from '~/shared/lib/utils/watchUserPosition';
+import watchUserPosition from '~/entities/user/lib/watchUserPosition';
 import { setCoord } from '~/entities/user';
 
 export const Routing = () => {
