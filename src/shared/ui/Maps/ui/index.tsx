@@ -1,8 +1,8 @@
 import './index.scss';
 import { ICoord } from '~/shared/lib/types/interfaces';
-import { useYandexMap } from '../module/useYandexMap';
+import { useYandexMap } from '../lib/useYandexMap';
 
-export default function GetMap({ latitude, longitude }: ICoord) {
+export default function Maps({ latitude, longitude }: ICoord) {
   const { YMap, YMapDefaultSchemeLayer, YMapDefaultFeaturesLayer, YMapMarker } = useYandexMap();
   const mapState = { center: [longitude, latitude], zoom: 9 };
 

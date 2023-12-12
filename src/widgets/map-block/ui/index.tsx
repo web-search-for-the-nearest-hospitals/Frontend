@@ -2,7 +2,7 @@ import './index.scss';
 import React, { useEffect } from 'react';
 
 import { districs } from '../lib/consts';
-import GetMap from '~/features/get-map';
+import Maps from '~/shared/ui/Maps';
 import { userSelect } from '~/entities/user';
 
 import switchIcon from '~/shared/assets/icons/switch.svg';
@@ -37,7 +37,7 @@ export default function MapBlock() {
         </div>
       </div>
       <div className="map__container">
-        <GetMap longitude={longitude} latitude={latitude} />
+        <Maps longitude={longitude} latitude={latitude} />
       </div>
     </div>
   );

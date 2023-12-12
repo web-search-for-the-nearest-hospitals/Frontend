@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
-import { catApi } from '../api/rtkQuery';
+import { catApi } from '../api/RTKQuery';
 
 export const store = configureStore({
   reducer: {
