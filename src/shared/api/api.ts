@@ -1,4 +1,4 @@
-const { BACK_URL } = process.env;
+const BACK_URL = import.meta.env.VITE_BACK_URL;
 import { ICoord, IOrganization } from '../lib/types/interfaces';
 
 async function checkRequest(res: Response) {
@@ -12,7 +12,7 @@ async function checkRequest(res: Response) {
 // Желательно внести в Wiki с примерами, в последствие после тестирования названия можно убрать,
 // обращение возможно производить api('/organizations/', coord); - список организаций по имеющимся координатам и др.
 
-export async function api(endpoint: string, options?: object, method: string = 'GET') {
+export async function api(endpoint: string, options?: object, method = 'GET') {
   let url = `${BACK_URL}${endpoint}`;
   if (method === 'GET') {
     if (options) {
