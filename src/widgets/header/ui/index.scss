@@ -1,3 +1,6 @@
+@import '~/shared/lib/styles/variables.scss';
+@import '~/shared/lib/styles/mixins.scss';
+
 .header {
   background-color: #fff;
   display: flex;
@@ -40,4 +43,19 @@
       color: rgb(255, 202, 68);
     }
   }
+}
+
+.test {
+  width: 100px;
+  height: 100px;
+  @include border(1px, solid, $active-color-two);
+  @include border-radius(10px);
+  background-image: url('#{$logo-icon}');
+}
+
+.test-button {
+  width: 200px;
+  height: 100px;
+  @include border-radius(30px);
+  @include gradient-background(90deg, $active-color-two 0%, $active 48.5%, $active-color-two 100%);
 }

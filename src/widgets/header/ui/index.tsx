@@ -1,5 +1,4 @@
 import './index.scss';
-
 import { NavLink, Outlet } from 'react-router-dom';
 
 import logo from '~/shared/assets/icons/logo.svg';
@@ -9,6 +8,10 @@ function Header() {
   return (
     <>
       <header className="header">
+        {/*  Пример */}
+        <div className="test"></div>
+        <button className="test-button"></button>
+
         {/* @TODO: нужно заменить img на кнопки или обернуть в ссылку, т.к. это функциональные элементы */}
         <img className="header__logo" src={logo} alt="Логотип" />
         <nav className="header__link-list">
