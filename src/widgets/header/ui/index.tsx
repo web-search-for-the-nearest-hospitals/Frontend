@@ -1,14 +1,21 @@
 import './index.scss';
+import { FC } from 'react';
 
 import { NavLink, Outlet } from 'react-router-dom';
 
-import logo from '~/shared/assets/icons/logo.svg';
-import user from '~/shared/assets/icons/user.svg';
+/* import logo from '~/shared/assets/icons/logo.svg';
+import user from '~/shared/assets/icons/user.svg'; */
+import logo1 from '../../../shared/assets/icons/logo.svg';
+import user from '../../../shared/assets/icons/user.svg';
 
-function Header() {
+interface IHeaderProps {
+  logo?: string;
+  variant?: string;
+}
+const Header: FC<IHeaderProps> = ({ logo = logo1, variant = 'primary' }) => {
   return (
     <>
-      <header className="header">
+      <header className={'header storybook-header--' + variant}>
         {/* @TODO: нужно заменить img на кнопки или обернуть в ссылку, т.к. это функциональные элементы */}
         <img className="header__logo" src={logo} alt="Логотип" />
         <nav className="header__link-list">
@@ -34,6 +41,6 @@ function Header() {
       <Outlet />
     </>
   );
-}
+};
 
 export default Header;

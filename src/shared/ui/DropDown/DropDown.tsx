@@ -9,9 +9,18 @@ interface IDropDownProps {
   values: string[];
   onChangeValue: (event: string) => void;
   label: string;
+  borderRadius?: string;
+  backgroundColor?: string;
+  variant?: string;
 }
 
-const DropDown: FC<IDropDownProps> = ({ values, onChangeValue, label }) => {
+const DropDown: FC<IDropDownProps> = ({
+  values,
+  onChangeValue,
+  label,
+  backgroundColor = '#F0F0F0',
+  variant = 'primary',
+}) => {
   const [age, setValue] = useState('');
 
   const handleChangeValue = (event: SelectChangeEvent) => {
@@ -21,13 +30,13 @@ const DropDown: FC<IDropDownProps> = ({ values, onChangeValue, label }) => {
   };
 
   return (
-    <FormControl sx={{ m: 1, minWidth: 255 }}>
+    <FormControl className={'storybook-dropDown--' + variant} sx={{ m: 1, minWidth: 255 }}>
       <InputLabel id="demo-simple-select-label">{label}</InputLabel>
       <Select
         value={age}
         sx={{
           borderRadius: '15px',
-          backgroundColor: '#F0F0F0',
+          backgroundColor: backgroundColor,
 
           '& .MuiOutlinedInput-notchedOutline': {
             border: 'none',
