@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import CheckBox from '../../../shared/ui/CheckBox/CheckBox';
+import CheckBox from './CheckBox';
 
-const metaCB = {
-  title: 'CheckBox',
+const meta = {
+  title: 'UI/CheckBox',
   component: CheckBox,
   parameters: {
     layout: 'centered',
@@ -11,30 +11,28 @@ const metaCB = {
   tags: ['autodocs'],
   argTypes: {
     color: { control: 'color', description: 'Цвет чекбокса' },
-    label: { description: 'Название чекбокса', defaultValue: 'PrimaryCB' },
+    label: { description: 'Название чекбокса', defaultValue: 'Primary' },
     variant: {
-      description: 'Вариант',
-      defaultValue: 'Primary',
+      description: 'Вариант стилизации',
+      defaultValue: 'primary',
       options: ['primary', 'secondary'],
       control: { type: 'radio' },
     },
   },
 } satisfies Meta<typeof CheckBox>;
 
-export default metaCB;
-type Story = StoryObj<typeof metaCB>;
+export default meta;
+type Story = StoryObj<typeof meta>;
 //----------------------------------------
 
 //----------------------------------------
-export const PrimaryCB: Story = {
+export const Primary: Story = {
   args: {
     color: '#C4BFBF',
     label: 'Круглосуточные клиники',
-    backgroundColor: '#FFF',
-    //backgroundColor: '#C4BFBF',
   },
 };
-export const SecondaryCB: Story = {
+export const Secondary: Story = {
   args: {
     color: '#5254CA',
     label: 'Круглосуточные клиники',

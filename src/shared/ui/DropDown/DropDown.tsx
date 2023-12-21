@@ -1,5 +1,5 @@
 import './DropDown.scss';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -13,14 +13,13 @@ interface IDropDownProps {
   backgroundColor?: string;
   variant?: string;
 }
-
-const DropDown: FC<IDropDownProps> = ({
+const DropDown = ({
   values,
   onChangeValue,
   label,
   backgroundColor = '#F0F0F0',
   variant = 'primary',
-}) => {
+}: IDropDownProps) => {
   const [age, setValue] = useState('');
 
   const handleChangeValue = (event: SelectChangeEvent) => {

@@ -1,5 +1,5 @@
 import './Checkbox.scss';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { SelectChangeEvent } from '@mui/material/Select';
 import Checkbox from '@mui/material/Checkbox';
@@ -9,10 +9,9 @@ interface ICheckBoxProps {
   onChangeValue: (event: string) => void;
   label: string;
   variant?: string;
-  backgroundColor?: string;
 }
 
-const CheckBox: FC<ICheckBoxProps> = ({ color, onChangeValue, label, variant, backgroundColor }) => {
+const CheckBox = ({ color, onChangeValue, label, variant }: ICheckBoxProps) => {
   const [age, setValue] = useState('');
 
   const handleChangeValue = (event: SelectChangeEvent) => {
@@ -23,7 +22,7 @@ const CheckBox: FC<ICheckBoxProps> = ({ color, onChangeValue, label, variant, ba
 
   return (
     <FormControlLabel
-      className={'storybook-checkBox--' + variant}
+      className={'storybook__checkBox_' + variant}
       sx={{
         marginTop: '16px',
       }}
@@ -36,7 +35,6 @@ const CheckBox: FC<ICheckBoxProps> = ({ color, onChangeValue, label, variant, ba
             minWidth: '100px',
             height: '50px',
             borderRadius: '20px',
-            backgroundColor: backgroundColor,
           }}
           onChange={handleChangeValue}
         />
