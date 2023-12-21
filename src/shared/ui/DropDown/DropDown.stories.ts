@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import DropDown from '../../../shared/ui/DropDown/DropDown';
+import DropDown from './DropDown';
 const doctors = ['Терапевт', 'Хирург', 'Стоматолог'];
 
 const meta = {
-  title: 'DropDown',
+  title: 'UI/DropDown',
   component: DropDown,
   parameters: {
     layout: 'centered',

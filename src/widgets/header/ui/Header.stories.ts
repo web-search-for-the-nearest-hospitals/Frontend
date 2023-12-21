@@ -1,11 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { withRouter } from 'storybook-addon-react-router-v6';
-import Header from '../../../widgets/header/ui/index';
-import logo1 from '../../../shared/assets/icons/logo.svg';
-import logo2 from '../../../shared/assets/icons/logo2.svg';
+import Header from './index';
 
 const meta = {
-  title: 'Header',
+  title: 'Widgets/Header',
   component: Header,
   tags: ['autodocs'],
   decorators: [withRouter],
@@ -14,10 +12,12 @@ const meta = {
   },
   argTypes: {
     logo: {
-      options: [logo1, logo2],
+      description: 'Логотип',
+      options: ['logoClinic', 'logoLoupe'],
       control: { type: 'radio' },
     },
     variant: {
+      description: 'Вариант стилизации',
       options: ['primary', 'secondary'],
       control: { type: 'radio' },
     },
@@ -28,11 +28,13 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-  args: {},
+  args: {
+    logo: 'logoClinic',
+  },
 };
 
 export const Secondary: Story = {
   args: {
-    logo: logo2,
+    logo: 'logoLoupe',
   },
 };
