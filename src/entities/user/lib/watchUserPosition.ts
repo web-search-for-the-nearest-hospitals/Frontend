@@ -15,6 +15,15 @@ export default function watchUserPosition(setCoords: (data: ICoord) => void) {
       };
       setCoords(serializedCoords);
     },
-    () => console.error('Не могу получить координаты'),
+    () => {
+      try {
+        alert(
+          'Неудалось получить данные о вашем местоположении. Пожалуйста разрешите в браузере доступ к вашей геолокации и перезагрузите страницу.',
+        );
+        throw new Error('Не удалось получить координаты');
+      } catch (error) {
+        console.log(error);
+      }
+    },
   );
 }
