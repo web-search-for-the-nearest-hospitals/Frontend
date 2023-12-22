@@ -1,5 +1,4 @@
 import './index.scss';
-
 import { NavLink, Outlet } from 'react-router-dom';
 
 import logoClinic from '../../../shared/assets/icons/header-logo_clinic.svg';
