@@ -11,10 +11,16 @@ interface IHeaderProps {
   variant?: string;
 }
 const Header = ({ logo = 'logoClinic', variant = 'primary' }: IHeaderProps) => {
+const Header = ({ logo = 'logoClinic', variant = 'primary' }: IHeaderProps) => {
   return (
     <>
       <header className={'header header_variant_' + variant}>
         {/* @TODO: нужно заменить img на кнопки или обернуть в ссылку, т.к. это функциональные элементы */}
+        <img
+          className="header__logo"
+          src={logo == 'logoLoupe' ? logoLoupe : logo == 'logoClinic' ? logoClinic : logoClinic}
+          alt="Логотип"
+        />
         <img
           className="header__logo"
           src={logo == 'logoLoupe' ? logoLoupe : logo == 'logoClinic' ? logoClinic : logoClinic}
@@ -38,6 +44,7 @@ const Header = ({ logo = 'logoClinic', variant = 'primary' }: IHeaderProps) => {
             Redux
           </NavLink>
         </nav>
+        <img className="header__user" src={userIcon} alt="Иконка пользователя" />
         <img className="header__user" src={userIcon} alt="Иконка пользователя" />
       </header>
       <Outlet />

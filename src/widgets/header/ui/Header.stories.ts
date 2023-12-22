@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import { withRouter } from 'storybook-addon-react-router-v6';
 import Header from './index';
+import Header from './index';
 
 const meta = {
   title: 'Components/Header',
@@ -14,9 +15,12 @@ const meta = {
     logo: {
       description: 'Логотип',
       options: ['logoClinic', 'logoLoupe'],
+      description: 'Логотип',
+      options: ['logoClinic', 'logoLoupe'],
       control: { type: 'radio' },
     },
     variant: {
+      description: 'Вариант стилизации',
       description: 'Вариант стилизации',
       options: ['primary', 'secondary'],
       control: { type: 'radio' },
@@ -31,10 +35,14 @@ export const Primary: Story = {
   args: {
     logo: 'logoClinic',
   },
+  args: {
+    logo: 'logoClinic',
+  },
 };
 
 export const Secondary: Story = {
   args: {
+    logo: 'logoLoupe',
     logo: 'logoLoupe',
   },
 };
