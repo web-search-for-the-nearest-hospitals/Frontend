@@ -1,10 +1,14 @@
-.storybook-dropDown--primary {
-  border-radius: 10px;
-  border: 2px solid #ccd1f5;
-  color: #3b405d;
-}
-.storybook-dropDown--secondary {
-  border-radius: 10px;
-  border: 2px solid #695feb;
-  color: #3b405d;
+.dropdown {
+  &_variant {
+    &_primary {
+      border-radius: 10px;
+      border: 2px solid #ccd1f5;
+      color: #3b405d;
+    }
+    &_secondary {
+      border-radius: 10px;
+      border: 2px solid #695feb;
+      color: #3b405d;
+    }
+  }
 }

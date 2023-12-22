@@ -29,7 +29,7 @@ const DropDown = ({
   };
 
   return (
-    <FormControl className={'storybook-dropDown--' + variant} sx={{ m: 1, minWidth: 255 }}>
+    <FormControl className={'dropdown_variant_' + variant} sx={{ m: 1, minWidth: 255 }}>
       <InputLabel id="demo-simple-select-label">{label}</InputLabel>
       <Select
         value={age}
