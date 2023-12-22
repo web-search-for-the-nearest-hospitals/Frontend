@@ -1,21 +1,16 @@
-// Изображения
-$logo-icon: '~/shared/assets/icons/logo.svg';
-
 // Цвета
-$base-background-color: #fff;
-$card-background-color: #f9f9f9;
-$active: #7b8bff;
-$active-color: #695feb;
+$color-base-background: #fff;
+$color-card-background: #f9f9f9;
+$color-active: #7b8bff;
 $active-button: #695feb;
 $pressed-button: #400bc0;
-$active-color-two: #845ae9;
-$contour-color: #ccd1f5;
-$text: #3b405d;
-$text-color-black: #1d1d1f;
-$not-active-color: #c4bfbf;
-$error-color: #ff699c;
-$warning-color: #ebdd5f;
-$success-color: #5feb97;
+$color-contour: #ccd1f5;
+$text-colort: #3b405d;
+$black-text-colort: #1d1d1f;
+$color-not-active: #c4bfbf;
+$color-error: #ff699c;
+$color-warning: #ebdd5f;
+$color-success: #5feb97;
 
 // Шрифты
 $base-font-family: 'Montserrat';
@@ -25,10 +20,7 @@ $base-margin: 10px;
 $base-padding: 15px;
 
 // Заголовки и текст
-$h1-font-size: 24px;
-$h2-font-size: 20px;
-$h3-font-size: 16px;
-$text-font-size: 14px;
-$bold-font-weight: 600;
-$semibold-font-weight: 500;
-$regular-font-weight: 400;
+$font-size--h1: 24px;
+$font-size--h2: 20px;
+$font-size--h3: 16px;
+$font-size--small: 14px;
