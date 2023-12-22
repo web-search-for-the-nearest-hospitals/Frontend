@@ -1,8 +1,5 @@
 import { toast } from 'react-toastify';
-
-const errorPositionMessage = 'Неудалось получить данные о вашем местоположении.';
-const infoPositionMessage = 'Пожалуйста разрешите браузеру доступ к геолокации.';
-const successPositionMessage = 'Отображены результаты для вашей геолокации.';
+import { errorPositionMessage, infoPositionMessage, successPositionMessage } from './constants';
 
 export const errorPositionToast = () => {
   toast.error(errorPositionMessage, {
