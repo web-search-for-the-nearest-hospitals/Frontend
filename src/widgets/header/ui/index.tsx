@@ -1,5 +1,4 @@
 import './index.scss';
-
 import { NavLink, Outlet } from 'react-router-dom';
 
 import logo from '~/shared/assets/icons/logo.svg';
