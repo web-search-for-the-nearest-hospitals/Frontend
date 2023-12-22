@@ -11,7 +11,6 @@ interface IHeaderProps {
   variant?: string;
 }
 const Header = ({ logo = 'logoClinic', variant = 'primary' }: IHeaderProps) => {
-const Header = ({ logo = 'logoClinic', variant = 'primary' }: IHeaderProps) => {
   return (
     <>
       <header className={'header header_variant_' + variant}>
