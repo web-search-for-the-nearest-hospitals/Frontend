@@ -3,7 +3,7 @@ import { withRouter } from 'storybook-addon-react-router-v6';
 import Header from './index';
 
 const meta = {
-  title: 'Widgets/Header',
+  title: 'Components/Header',
   component: Header,
   tags: ['autodocs'],
   decorators: [withRouter],

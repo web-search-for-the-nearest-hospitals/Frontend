@@ -22,7 +22,7 @@ const CheckBox = ({ color, onChangeValue, label, variant }: ICheckBoxProps) => {
 
   return (
     <FormControlLabel
-      className={'storybook__checkBox_' + variant}
+      className={'checkbox_variant_' + variant}
       sx={{
         marginTop: '16px',
       }}
