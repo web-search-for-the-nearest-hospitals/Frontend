@@ -1,14 +1,13 @@
 .checkbox {
+  padding-right: 40px;
   &_variant {
     &_primary {
-      padding-right: 40px;
       //background-color: #df1f1f;
-      //border: 2px solid #CCD1F5;
+      border: 2px solid #ccd1f5;
     }
     &_secondary {
       border-radius: 2px;
-      border: 2px solid #ccd1f5;
-      padding-right: 40px;
+      border: 2px solid #c4bfbf;
     }
   }
 }

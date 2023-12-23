@@ -22,7 +22,7 @@ const CheckBox = ({ color, onChangeValue, label, variant }: ICheckBoxProps) => {
 
   return (
     <FormControlLabel
-      className={'checkbox_variant_' + variant}
+      className={'checkbox checkbox_variant_' + variant}
       sx={{
         marginTop: '16px',
       }}
