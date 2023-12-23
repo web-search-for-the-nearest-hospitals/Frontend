@@ -20,7 +20,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://web-search-for-the-nearest-hospitals.github.io/Frontend/",
+  "homepage": "https://web-search-for-the-nearest-hospitals.github.io/clinic-searcher/",
   "dependencies": {
     "@emotion/react": "^11.11.1",
     "@emotion/styled": "^11.11.0",
