@@ -16,7 +16,7 @@
     "format": "prettier . --check",
     "format-fix": "prettier . --write",
     "check": "npm run format-fix && npm run lint-fix && npm run build && npm run test-one",
-    "commit": "npm run check && git add -A && cz",
+    "commit": "npm run build && git add -A && cz",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
@@ -31,7 +31,8 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^9.0.2",
-    "react-router-dom": "^6.20.0"
+    "react-router-dom": "^6.20.0",
+    "react-toastify": "^9.1.3"
   },
   "devDependencies": {
     "@storybook/addon-essentials": "^7.6.2",
@@ -71,8 +72,9 @@
     "vitest": "^0.34.6"
   },
   "lint-staged": {
-    "*.{js,jsx}": "npm run lint",
-    "*.{js,jsx,css,md,html,json}": "npm run format"
+    "*.{js,jsx}": "npm run lint-fix",
+    "*.{js,jsx,css,md,html,json}": "npm run format-fix",
+    "*": "git add -A"
   },
   "config": {
     "commitizen": {

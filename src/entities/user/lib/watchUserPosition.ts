@@ -1,4 +1,5 @@
 import { ICoord } from '~/shared/lib/types/interfaces';
+import { errorPositionToast, infoPositionToast, successPositionToast } from './positionNotifications';
 
 export default function watchUserPosition(setCoords: (data: ICoord) => void) {
   navigator.geolocation.watchPosition(
@@ -14,7 +15,11 @@ export default function watchUserPosition(setCoords: (data: ICoord) => void) {
         speed,
       };
       setCoords(serializedCoords);
+      successPositionToast();
     },
-    () => console.error('Не могу получить координаты'),
+    () => {
+      errorPositionToast();
+      infoPositionToast();
+    },
   );
 }

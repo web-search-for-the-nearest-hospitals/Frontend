@@ -1,4 +1,5 @@
 import './index.css';
+import NotificationContainer from '~/widgets/notification-container/ui';
 
 import { withProviders } from './providers';
 import { Routing } from '~/pages';
@@ -7,6 +8,7 @@ function App() {
   return (
     <>
       <Routing />
+      <NotificationContainer />
     </>
   );
 }
