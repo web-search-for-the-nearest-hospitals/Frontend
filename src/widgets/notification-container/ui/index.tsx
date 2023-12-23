@@ -1,7 +1,6 @@
 import './index.scss';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import '../../../shared/lib/Constants.scss';
 
 export default function NotificationContainer() {
   return (

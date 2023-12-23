@@ -1,20 +1,14 @@
-@import '~/shared/lib/styles/variables.scss';
-@import '~/shared/lib/styles/mixins.scss';
+@import '~/shared/lib/styles/variables';
+@import '~/shared/lib/styles/mixins';
 
 .header {
+  @include flex-container($just: space-between);
+
   background-color: #fff;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
   padding: 2em;
 
-  // &__logo {
-
-  // }
-
   // &__title {
-  //   margin: 0;
+  //   margin: 0;margin
   // }
 
   // &__user {
@@ -36,11 +30,11 @@
     transition: color 0.2s linear;
 
     &_active {
-      color: rgb(214, 155, 5);
+      color: rgb(214 155 5);
     }
 
     &:hover {
-      color: rgb(255, 202, 68);
+      color: rgb(255 202 68);
     }
   }
 }

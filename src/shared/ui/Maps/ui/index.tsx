@@ -1,8 +1,10 @@
 import './index.scss';
 import { ICoord } from '~/shared/lib/types/interfaces';
-import { YMaps, Map, Placemark, RouteButton } from '@pbe/react-yandex-maps';
+import { YMaps, Map, Placemark, RouteButton, SearchControl } from '@pbe/react-yandex-maps';
 
 export default function Maps({ latitude, longitude }: ICoord) {
+  console.log(latitude, longitude);
+
   return latitude && longitude && YMaps ? (
     <section className="map">
       <YMaps
@@ -16,17 +18,28 @@ export default function Maps({ latitude, longitude }: ICoord) {
         <Map
           width={'100%'}
           height={'100%'}
-          defaultState={{
+          state={{
             center: [latitude, longitude],
-            zoom: 9,
+            zoom: 12,
             controls: ['zoomControl', 'fullscreenControl'],
           }}
           modules={['control.ZoomControl', 'control.FullscreenControl']}
         >
           <Placemark
             defaultGeometry={[latitude, longitude]}
+            geometry={[latitude, longitude]}
             properties={{
               balloonContentBody: 'За вами выехали.',
+            }}
+          />
+          <SearchControl
+            options={{
+              float: 'right',
+              provider: 'yandex#search',
+              boundedBy: [
+                [latitude - 0.1, longitude - 0.1],
+                [latitude + 0.1, longitude + 0.1],
+              ], // Указывает приоритетный радиус поиска
             }}
           />
           <RouteButton />

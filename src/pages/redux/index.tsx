@@ -9,7 +9,7 @@ import GetFactOfCat from '~/features/get-fact-of-cat';
 export default function ReduxPage() {
   return (
     <>
-      <main className="redux-page">
+      <section className="redux-page">
         <GetFactOfCat />
         <div>
           <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
@@ -22,7 +22,7 @@ export default function ReduxPage() {
         <h1>Vite + React</h1>
         <GetCounter />
         <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-      </main>
+      </section>
     </>
   );
 }

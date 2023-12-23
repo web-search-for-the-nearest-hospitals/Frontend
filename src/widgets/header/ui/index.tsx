@@ -3,6 +3,7 @@ import { NavLink, Outlet } from 'react-router-dom';
 
 import logo from '~/shared/assets/icons/logo.svg';
 import user from '~/shared/assets/icons/user.svg';
+import { Layout } from '~/shared/ui';
 
 function Header() {
   return (
@@ -30,7 +31,9 @@ function Header() {
         </nav>
         <img className="header__user" src={user} alt="Иконка пользователя" />
       </header>
-      <Outlet />
+      <Layout>
+        <Outlet />
+      </Layout>
     </>
   );
 }

@@ -1,0 +1,48 @@
+@mixin flex-container($dir: row, $just: center, $gap: 10px, $align: center, $fw: no-wrap) {
+  display: flex;
+  justify-content: $just;
+  align-items: $align;
+  gap: $gap;
+  flex-flow: $dir $fw; // flex-direction & flex-wrap
+}
+
+@mixin font-h1() {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+@mixin font-h2() {
+  font-size: 20px;
+  font-style: normal;
+  line-height: 140%;
+  font-weight: 600;
+}
+
+@mixin font-h3() {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@mixin font-text() {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@mixin text($fs: 20px, $color: var(--main-tx-color)) {
+  color: $color;
+  font-size: $fs;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 1.15;
+}
+
+.mp-0 {
+  margin: 0;
+  padding: 0;
+}
+
+.un-display {
+  display: none;
+}

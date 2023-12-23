@@ -1,29 +1,36 @@
+@import '~/shared/lib/index';
+
 .map {
   margin: 0 auto;
   width: 90%;
   color: black;
 
   &__location {
-    display: flex;
+    @include flex-container($align: flex-end, $just: flex-start, $gap: 5px);
+
+    margin-bottom: 20px;
 
     &-text {
-      margin-left: 20px;
-      font-size: 24px;
+      @include font-h2;
     }
   }
 
   &__group {
-    display: flex;
-    justify-content: space-between;
+    @include flex-container($just: space-between);
+
+    margin-bottom: 30px;
 
     &-switch {
-      display: flex;
-      align-items: center;
+      @include flex-container;
+
+      &-text {
+        @include font-text;
+      }
     }
   }
 
   &__container {
     width: 100%;
-    height: 40vh;
+    height: 657px;
   }
 }
