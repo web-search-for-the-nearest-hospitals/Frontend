@@ -1,0 +1,13 @@
+@import '../../../shared/lib/styles/variables';
+
+.column {
+  min-width: 350px;
+  background-color: $color-card-background;
+  height: 100%;
+  overflow-y: auto;
+  margin-right: 30px;
+}
+
+.column::-webkit-scrollbar {
+  display: none;
+}

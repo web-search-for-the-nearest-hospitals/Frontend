@@ -1,3 +1,26 @@
+import './index.scss';
+
+import { useState } from 'react';
+
+import ClinicList from '~/widgets/clinic-list';
+import AdvertList from '~/widgets/advert-list';
+
 export const LeftColumn = () => {
-  return <div style={{ minWidth: '30vw' }}>колонка рекламы</div>;
+  // временные стейт и кнопка для проверки верстки
+  const [isSearch, setSearch] = useState(true);
+
+  return (
+    <>
+      <div className="column">
+        <button
+          onClick={() => {
+            setSearch(!isSearch);
+          }}
+        >
+          change
+        </button>
+        {isSearch ? <ClinicList /> : <AdvertList />}
+      </div>
+    </>
+  );
 };

@@ -1,1 +1,3 @@
-export { AdCard } from './ui';
+import AdvertCard from './ui';
+
+export { AdvertCard };

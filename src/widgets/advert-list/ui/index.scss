@@ -1,0 +1,27 @@
+@import '../../../shared/lib/styles/variables.scss';
+
+.advert-list {
+  padding-inline: 30px;
+  max-height: 930px;
+}
+
+.advert-list :first-child {
+  background-color: $first-advert-bg;
+  background-image: url(../../../shared/assets/images/advert-1.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.advert-list :nth-child(2n) {
+  background-color: $second-advert-bg;
+  background-image: url(../../../shared/assets/images/advert-2.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.advert-list :last-child {
+  background-color: $third-advert-bg;
+  background-image: url(../../../shared/assets/images/advert-1.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
