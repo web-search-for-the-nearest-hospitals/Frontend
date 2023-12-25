@@ -29,12 +29,12 @@ const DropDown = ({
   };
 
   return (
-    <FormControl className={'dropdown_variant_' + variant} sx={{ m: 1, minWidth: 255 }}>
+    <FormControl className={'dropdown dropdown_variant_' + variant} sx={{ m: 1, minWidth: 255 }}>
       <InputLabel id="demo-simple-select-label">{label}</InputLabel>
       <Select
         value={age}
         sx={{
-          borderRadius: '15px',
+          borderRadius: '10px',
           backgroundColor: backgroundColor,
 
           '& .MuiOutlinedInput-notchedOutline': {
