@@ -1,0 +1,14 @@
+.dropdown {
+  border-radius: 10px;
+  //padding: 11px 20.75px 11px 20px;
+  color: #3b405d;
+  font-size: 16px;
+  &_variant {
+    &_primary {
+      border: 2px solid #ccd1f5;
+    }
+    &_secondary {
+      border: 2px solid #695feb;
+    }
+  }
+}
