@@ -1,0 +1,86 @@
+@import '~/shared/lib/styles/variables';
+
+.clinic-card {
+  width: 269px;
+  border-radius: 10px;
+  background-color: $color-base-background;
+  margin-block: 30px;
+  padding: 30px 1px 30px 20px;
+  text-align: left;
+  color: $text-color;
+
+  .clinic-card__name {
+    margin: 0;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 140%;
+  }
+
+  .clinic-card__timetable {
+    display: flex;
+    padding: 21px 0 32px;
+    font-size: $font-size--small;
+    font-style: normal;
+    line-height: normal;
+    gap: 11.358px;
+
+    &-title {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    &-periods {
+      width: min-content;
+      font-weight: 400;
+
+      .clinic-card__timetable-period {
+        display: inline;
+        margin: 0;
+      }
+
+      .clinic-card__timetable-period:last-child {
+        color: $active-button;
+      }
+    }
+  }
+
+  .clinic-card__phone {
+    display: flex;
+    font-size: $font-size--small;
+    gap: 11.358px;
+
+    &-title {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    &-number {
+      margin: 0;
+      font-weight: 400;
+    }
+  }
+
+  .clinic-card__address {
+    padding: 10px 0 32px;
+    display: flex;
+    gap: 11.358px;
+    font-size: $font-size--small;
+
+    &-title {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    &-value {
+      margin: 0;
+      font-weight: 400;
+    }
+  }
+
+  .clinic-card__price {
+    margin: 0;
+    color: $active-button;
+    font-size: $font-size--small;
+    font-weight: 500;
+  }
+}
