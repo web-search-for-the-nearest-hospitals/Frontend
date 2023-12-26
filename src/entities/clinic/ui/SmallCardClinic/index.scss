@@ -1,24 +1,22 @@
-@import '../../../../shared/lib/styles/variables';
+@import '~/shared/lib/styles/variables';
 
-.card-clinic {
+.clinic-card {
   width: 269px;
   border-radius: 10px;
   background-color: $color-base-background;
   margin-block: 30px;
   padding: 30px 1px 30px 20px;
   text-align: left;
-  font-family: $base-font-family;
+  color: $text-color;
 
-  color: $text-colort;
-
-  .clinic__name {
+  .clinic-card__name {
     margin: 0;
     font-style: normal;
     font-weight: 600;
     line-height: 140%;
   }
 
-  .schedule__container {
+  .clinic-card__timetable {
     display: flex;
     padding: 21px 0 32px;
     font-size: $font-size--small;
@@ -26,60 +24,60 @@
     line-height: normal;
     gap: 11.358px;
 
-    .schedule__title {
+    &-title {
       margin: 0;
       font-weight: 500;
     }
 
-    .schedule__types {
+    &-periods {
       width: min-content;
       font-weight: 400;
 
-      .schedule__type {
+      .clinic-card__timetable-period {
         display: inline;
         margin: 0;
       }
 
-      .schedule__type:last-child {
+      .clinic-card__timetable-period:last-child {
         color: $active-button;
       }
     }
   }
 
-  .phone__container {
+  .clinic-card__phone {
     display: flex;
     font-size: $font-size--small;
     gap: 11.358px;
 
-    .phone__title {
+    &-title {
       margin: 0;
       font-weight: 500;
     }
 
-    .phone__number {
+    &-number {
       margin: 0;
       font-weight: 400;
     }
   }
 
-  .address__container {
+  .clinic-card__address {
     padding: 10px 0 32px;
     display: flex;
     gap: 11.358px;
     font-size: $font-size--small;
 
-    .address__title {
+    &-title {
       margin: 0;
       font-weight: 500;
     }
 
-    .address__value {
+    &-value {
       margin: 0;
       font-weight: 400;
     }
   }
 
-  .price__container {
+  .clinic-card__price {
     margin: 0;
     color: $active-button;
     font-size: $font-size--small;

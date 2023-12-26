@@ -5,7 +5,7 @@ import { useState } from 'react';
 import ClinicList from '~/widgets/clinic-list';
 import AdvertList from '~/widgets/advert-list';
 
-export const LeftColumn = () => {
+export const CardList = () => {
   // временные стейт и кнопка для проверки верстки
   const [isSearch, setSearch] = useState(true);
 
