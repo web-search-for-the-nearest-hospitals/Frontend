@@ -1,5 +1,5 @@
-import { TextField } from '@mui/material';
-import SbtBtn from '~/shared/ui/SbtBtn/SbtBtn';
+import { Button, TextField } from '@mui/material';
+
 interface IFirstLine {
   onCh: (event: React.ChangeEvent<HTMLInputElement>) => void;
   val: string;
@@ -22,7 +22,18 @@ export default function FirstLine({ val, onCh }: IFirstLine) {
           },
         }}
       />
-      <SbtBtn />
+      <Button
+        variant="contained"
+        sx={{
+          backgroundColor: '#C4BFBF',
+          marginLeft: '30px',
+          width: '100px',
+          height: '50px',
+          borderRadius: '20px',
+        }}
+      >
+        Найти
+      </Button>
     </>
   );
 }

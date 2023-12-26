@@ -1,5 +1,5 @@
 import './DropDown.scss';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
@@ -9,17 +9,9 @@ interface IDropDownProps {
   values: string[];
   onChangeValue: (event: string) => void;
   label: string;
-  borderRadius?: string;
-  backgroundColor?: string;
-  variant?: string;
 }
-const DropDown = ({
-  values,
-  onChangeValue,
-  label,
-  backgroundColor = '#F0F0F0',
-  variant = 'primary',
-}: IDropDownProps) => {
+
+const DropDown: FC<IDropDownProps> = ({ values, onChangeValue, label }) => {
   const [age, setValue] = useState('');
 
   const handleChangeValue = (event: SelectChangeEvent) => {
@@ -29,13 +21,13 @@ const DropDown = ({
   };
 
   return (
-    <FormControl className={'dropdown dropdown_variant_' + variant} sx={{ m: 1, minWidth: 255 }}>
+    <FormControl sx={{ m: 1, minWidth: 255 }}>
       <InputLabel id="demo-simple-select-label">{label}</InputLabel>
       <Select
         value={age}
         sx={{
-          borderRadius: '10px',
-          backgroundColor: backgroundColor,
+          borderRadius: '15px',
+          backgroundColor: '#F0F0F0',
 
           '& .MuiOutlinedInput-notchedOutline': {
             border: 'none',
