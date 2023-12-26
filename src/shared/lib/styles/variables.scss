@@ -5,18 +5,14 @@ $color-active: #7b8bff;
 $active-button: #695feb;
 $pressed-button: #400bc0;
 $color-contour: #ccd1f5;
-$text-colort: #3b405d;
-$black-text-colort: #1d1d1f;
+$text-color: #3b405d;
+$black-text-color: #1d1d1f;
 $color-not-active: #c4bfbf;
 $color-error: #ff699c;
 $color-warning: #ebdd5f;
 $color-success: #5feb97;
+$color-other: #ffc15e;
 
-// Шрифты
-$base-font-family: 'Montserrat';
-
-// Заголовки и текст
-$font-size--h1: 24px;
-$font-size--h2: 20px;
-$font-size--h3: 16px;
-$font-size--small: 14px;
+// ui constants
+$toggle-button-size: 16px;
+$max-width: 1110px;

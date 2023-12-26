@@ -1,0 +1,25 @@
+@font-face {
+  font-family: 'Montserrat Subrayada';
+  src: url('MontserratSubrayada-Regular.eot');
+  src:
+    local('MontserratSubrayada-Regular'),
+    url('MontserratSubrayada-Regular.eot?#iefix') format('embedded-opentype'),
+    url('MontserratSubrayada-Regular.woff2') format('woff2'),
+    url('MontserratSubrayada-Regular.woff') format('woff'),
+    url('MontserratSubrayada-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Montserrat Subrayada';
+  src: url('MontserratSubrayada-Bold.eot');
+  src:
+    local('MontserratSubrayada-Bold'),
+    url('MontserratSubrayada-Bold.eot?#iefix') format('embedded-opentype'),
+    url('MontserratSubrayada-Bold.woff2') format('woff2'),
+    url('MontserratSubrayada-Bold.woff') format('woff'),
+    url('MontserratSubrayada-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}

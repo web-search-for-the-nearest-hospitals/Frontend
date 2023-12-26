@@ -1,0 +1,7 @@
+@mixin flex-container($dir: row, $just: center, $gap: 10px, $align: center, $fw: nowrap) {
+  display: flex;
+  justify-content: $just;
+  align-items: $align;
+  gap: $gap;
+  flex-flow: $dir $fw; // flex-direction & flex-wrap
+}
