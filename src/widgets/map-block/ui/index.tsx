@@ -1,43 +1,52 @@
 import './index.scss';
-import React, { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import { districs } from '../lib/consts';
-import Maps from '~/shared/ui/Maps';
-import { userSelect } from '~/entities/user';
+import { districtCoord, districts } from '../lib/consts';
+import { setCoord, userSelect } from '~/entities/user';
 
-import switchIcon from '~/shared/assets/icons/switch.svg';
-import locationIcon from '~/shared/assets/icons/location.svg';
-import DropDown from '~/shared/ui/DropDown/DropDown';
-import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
+import { Maps, ToggleButton, DropDownInput } from '~/shared/ui';
+import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
+import { LocationIcon } from '~/shared/assets';
+import watchUserPosition from '~/entities/user/lib/watchUserPosition';
+import { ICoord } from '~/shared/lib/types/interfaces';
 
 export default function MapBlock() {
-  const { latitude, longitude } = useAppSelector(userSelect).coord;
-  const [district, setDistrict] = React.useState('');
-
-  const handleChangeDistrict = (data: string) => {
-    setDistrict(data);
-  };
+  const dispatch = useAppDispatch();
+  const coord = useAppSelector(userSelect);
+  const [stateCoord, setStateCoord] = useState<ICoord>(coord);
+  const [district, setDistrict] = useState(districts[0]!);
+  const [geo, setGeo] = useState(false);
 
   useEffect(() => {
-    console.log(district);
-  }, [district]);
+    if (geo) {
+      watchUserPosition((data: ICoord) => dispatch(setCoord(data)));
+    }
+  }, [geo, dispatch]);
 
+  useEffect(() => {
+    if (geo && coord.latitude && coord.longitude) {
+      setStateCoord(coord);
+    } else if (district) {
+      setStateCoord(districtCoord[district]!);
+    }
+  }, [coord, district, geo]);
   return (
     <div className="map">
       <div className="map__location">
-        <img className="map__location-icon" src={locationIcon} alt="Иконка локации" />
-        <p className="map__location-text">Город такой-то</p>
+        <LocationIcon />
+        <p className="map__location-text">Калуга</p>
       </div>
 
       <div className="map__group">
-        <DropDown values={districs} onChangeValue={handleChangeDistrict} label={'Районы'} />
+        <DropDownInput values={districts} state={district} setState={setDistrict} />
         <div className="map__group-switch">
-          <img src={switchIcon} alt="" />
-          <p>Геолокация</p>
+          <ToggleButton setState={setGeo} state={geo} />
+          <p className="map__group-switch-text">Геолокация</p>
         </div>
       </div>
+
       <div className="map__container">
-        <Maps longitude={longitude} latitude={latitude} />
+        <Maps longitude={stateCoord?.longitude} latitude={stateCoord?.latitude} />
       </div>
     </div>
   );
