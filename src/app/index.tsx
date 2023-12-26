@@ -1,4 +1,4 @@
-import './index.css';
+import './index.scss';
 import NotificationContainer from '~/widgets/notification-container/ui';
 import '../shared/lib/Constants.scss';
 

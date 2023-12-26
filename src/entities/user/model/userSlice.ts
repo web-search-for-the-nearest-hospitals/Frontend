@@ -1,20 +1,17 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 import { ICoord } from '~/shared/lib/types/interfaces';
 
-interface IUserSlice {
-  coord: ICoord;
-}
-
 const initialState = {
-  coord: { latitude: null, longitude: null },
-} as IUserSlice;
+  latitude: null,
+  longitude: null,
+} as ICoord;
 
 export const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
-    setCoord: (state, action: PayloadAction<ICoord>) => {
-      state.coord = { ...action.payload };
+    setCoord: (_, action: PayloadAction<ICoord>) => {
+      return action.payload;
     },
   },
 });
