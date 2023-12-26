@@ -1,0 +1,60 @@
+@import '~/shared/lib/index';
+
+$toggle-button-size: 16px; // Замените на ваше значение размера
+
+$width: $toggle-button-size * 1.875;
+$height: $toggle-button-size;
+$offset: 1px;
+$first-color: #fff;
+$second-color: #695feb;
+$duration:
+  0.3s cubic-bezier(0.47, 1.64, 0.41, 0.8),
+  background-color 0.2s linear;
+
+.toggle-button {
+  cursor: pointer;
+}
+
+.toggle-button__container::before {
+  content: '';
+  box-sizing: border-box;
+  width: ($height - 2 * $offset);
+  height: ($height - 2 * $offset);
+  position: absolute;
+  top: $offset;
+  left: $offset;
+  background-color: $second-color;
+  border-radius: $width;
+  transition: $duration;
+}
+
+.toggle-button:hover .toggle-button__container::before {
+  transform: scale(0.9);
+}
+
+.toggle-button__input {
+  display: none;
+}
+
+.toggle-button__container {
+  border: 1px solid $second-color;
+  width: $width;
+  height: $height;
+  background-color: $first-color;
+  border-radius: $width;
+  position: relative;
+  transition: $duration;
+}
+
+.toggle-button__input:checked ~ .toggle-button__container {
+  background-color: $second-color;
+}
+
+.toggle-button__input:checked ~ .toggle-button__container::before {
+  background-color: $first-color;
+  left: calc($width - $height + $offset);
+}
+
+.toggle-button__input:hover:checked ~ .toggle-button__container::before {
+  width: calc($height - 2 * $offset);
+}

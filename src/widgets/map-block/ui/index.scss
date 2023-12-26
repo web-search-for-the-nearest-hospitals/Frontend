@@ -1,9 +1,7 @@
 @import '~/shared/lib/index';
 
 .map {
-  margin: 0 auto;
-  width: 90%;
-  color: black;
+  max-width: 730px;
 
   &__location {
     @include flex-container($align: flex-end, $just: flex-start, $gap: 5px);
@@ -24,13 +22,17 @@
       @include flex-container;
 
       &-text {
-        @include font-text;
+        @include font-usual;
       }
     }
   }
 
   &__container {
-    width: 100%;
     height: 657px;
+
+    @media screen and (width < 1200px) {
+      // TODO: не реагирует на проценты
+      width: 60vw;
+    }
   }
 }

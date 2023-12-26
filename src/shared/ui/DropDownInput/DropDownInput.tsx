@@ -1,4 +1,4 @@
-import './DropDownInput.scss';
+import styles from './DropDownInput.module.scss';
 
 interface IDropDownInput {
   values: readonly string[];
@@ -8,9 +8,9 @@ interface IDropDownInput {
 
 export default function DropDownInput({ values, state, setState }: IDropDownInput) {
   return (
-    <select value={state} onChange={(e) => setState(e.target.value)} className="drop-down-input">
+    <select value={state} onChange={(e) => setState(e.target.value)} className={styles['drop-down-input']}>
       {values.map((el, i) => (
-        <option key={`${i}_${el}`} className="drop-down-input__option">
+        <option key={`${i}_${el}`} className={styles['drop-down-input__option']}>
           {el}
         </option>
       ))}

@@ -1,4 +1,4 @@
-import './Layout.scss';
+import styles from './Layout.module.scss';
 import { ReactNode } from 'react';
 
 interface ILayout {
@@ -6,5 +6,5 @@ interface ILayout {
 }
 
 export default function Layout({ children }: ILayout) {
-  return <main className="main">{children}</main>;
+  return <main className={styles['main']}>{children}</main>;
 }

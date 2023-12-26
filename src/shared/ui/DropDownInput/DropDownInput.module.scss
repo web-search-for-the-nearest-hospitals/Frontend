@@ -1,0 +1,37 @@
+@import '~/shared/lib/index';
+
+.drop-down-input {
+  @include font-usual;
+
+  padding: 11px 20px;
+  min-width: 214px;
+  border-radius: 10px;
+  border: 2px solid $color-contour;
+  box-sizing: content-box;
+  cursor: pointer;
+
+  font: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+  appearance: none;
+
+  &:focus-visible {
+    border-color: $active-button;
+    outline: none;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px $color-contour;
+  }
+
+  &:not([multiple]) {
+    background-repeat: no-repeat;
+    background-position: calc(100% - 20px);
+    background-size: 11.25px 9px;
+    background-image: url('~/shared/assets/icons/input-arrow.svg');
+  }
+
+  &::-ms-expand {
+    display: none;
+  }
+}

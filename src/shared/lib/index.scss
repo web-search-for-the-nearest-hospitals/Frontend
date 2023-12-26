@@ -1,3 +1,9 @@
-@import './Constants'; // а надо ли?
-@import './styles/mixins';
+@import './styles/my-reset';
+@import './styles/normalize';
 @import './styles/variables';
+
+// пытался подключить одним файлом - получаю ошибку импорта
+@import '../assets/fonts/Montserrat/stylesheet.css';
+@import '../assets/fonts/MontserratSubrayada/stylesheet.css';
+@import './styles/mixins';
+@import './styles/mixins-font';

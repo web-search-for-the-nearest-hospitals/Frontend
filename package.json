@@ -1,7 +1,7 @@
 {
   "name": "frontend",
   "private": true,
-  "version": "0.1.9",
+  "version": "0.6.9",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -20,11 +20,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://web-search-for-the-nearest-hospitals.github.io/clinic-searcher/",
+  "homepage": "https://web-search-for-the-nearest-hospitals.github.io/Frontend/",
   "dependencies": {
-    "@emotion/react": "^11.11.1",
-    "@emotion/styled": "^11.11.0",
-    "@mui/material": "^5.14.20",
     "@pbe/react-yandex-maps": "^1.2.5",
     "@reduxjs/toolkit": "^2.0.1",
     "compose-function": "^3.0.3",
