@@ -5,3 +5,9 @@
   padding: 0 30px;
   max-width: $max-width;
 }
+
+@media screen and (max-width: 1027px) {
+  .main {
+    padding-inline: 15px;
+  }
+}

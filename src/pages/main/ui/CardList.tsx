@@ -11,7 +11,7 @@ export const CardList = () => {
 
   return (
     <>
-      <div className="column">
+      <div className="card-list">
         <button
           onClick={() => {
             setSearch(!isSearch);

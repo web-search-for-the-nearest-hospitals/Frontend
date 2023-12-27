@@ -1,11 +1,11 @@
 @import '~/shared/lib/styles/variables';
 
 .clinic-card {
-  width: 269px;
+  width: 270px;
   border-radius: 10px;
   background-color: $color-base-background;
   margin-block: 30px;
-  padding: 30px 1px 30px 20px;
+  padding: 30px 10px;
   text-align: left;
   color: $text-color;
 
@@ -82,5 +82,15 @@
     color: $active-button;
     font-size: $font-size--small;
     font-weight: 500;
+  }
+}
+
+@media screen and (max-width: 1027px) {
+  .clinic-card {
+    background-color: $color-card-background;
+    border: 1px solid #a3a3a3;
+    width: 258px;
+    padding: 30px 15px;
+    margin-block: 15px;
   }
 }
