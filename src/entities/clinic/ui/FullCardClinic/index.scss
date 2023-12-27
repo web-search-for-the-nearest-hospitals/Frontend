@@ -1,0 +1,143 @@
+@import '~/shared/lib/styles/variables';
+@import '~/shared/lib/styles/mixins-font';
+
+.clinic-popup {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: rgba(196, 191, 191, 0.4);
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s linear, opacity 0.2s linear;
+
+  .clinic-popup__container {
+    min-width: 908px;
+    padding: 80px 80px 96px;
+    display: grid;
+    grid-template-columns: 414px 1fr;
+    gap: 0 141px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+  }
+
+  .clinic-popup__name {
+    grid-column: 1;
+    margin: 0;
+    box-sizing: border-box;
+    @include font-h1;
+    line-height: 140%;
+  }
+
+  .clinic-popup__about {
+    margin-top: 20px;
+    grid-column: 1;
+    box-sizing: border-box;
+  }
+
+  .clinic-popup__timetable {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 20px;
+    display: flex;
+    font-size: $font-size--small;
+    font-style: normal;
+    line-height: normal;
+    gap: 11.358px;
+
+    &-title {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    &-periods {
+      width: min-content;
+      font-weight: 400;
+
+      .clinic-popup__timetable-period {
+        display: inline;
+        margin: 0;
+      }
+
+      .clinic-popup__timetable-period:last-child {
+        color: $active-button;
+      }
+    }
+  }
+
+  .clinic-popup__phone {
+    grid-column: 1;
+    margin-top: 60px;
+    display: flex;
+    font-size: $font-size--small;
+    gap: 11.358px;
+
+    &-title {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    &-number {
+      margin: 0;
+      font-weight: 400;
+    }
+  }
+
+  .clinic-popup__site {
+    grid-column: 1;
+    margin-top: 40px;
+    display: flex;
+    font-size: $font-size--small;
+    color: #3B405D;
+    gap: 11.358px;
+
+    &-title {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    &-text {
+      margin: 0;
+      font-weight: 400;
+    }
+  }
+
+  .clinic-popup__address {
+    grid-column: 2;
+    grid-row: 2;
+    margin-top: 80px;
+    display: flex;
+    gap: 11.358px;
+    font-size: $font-size--small;
+
+    &-title {
+      margin: 0;
+      font-weight: 500;
+    }
+
+    &-value {
+      margin: 0;
+      font-weight: 400;
+    }
+  }
+
+  .clinic-popup__button {
+    width: 350px;
+    height: 42px;
+    padding: 10px 20px;
+    grid-column: 2;
+    text-align: center;
+    border-radius: 10px;
+    color: #FFFFFF;
+    background: linear-gradient(90deg in oklab, #4F73E7, #626AE8, #8B56E9);
+  }
+}
+
+.clinic-popup_opened {
+    visibility: visible;
+    opacity: 1;
+}
