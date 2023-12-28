@@ -14,3 +14,13 @@
     max-width: 680px;
   }
 }
+
+@media screen and (max-width: 767px) {
+  .main-page {
+    max-width: 290px;
+  }
+
+  .main-page__search-block {
+    max-width: 290px;
+  }
+}

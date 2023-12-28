@@ -10,7 +10,7 @@ export default function MainPage() {
   return (
     <div className="main-page">
       <CardList />
-      <div>
+      <div className="main-page__search-block">
         <Searcher />
         <MapBlock />
       </div>

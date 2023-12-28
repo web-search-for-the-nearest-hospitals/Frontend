@@ -14,7 +14,7 @@
 
 @media screen and (max-width: 1027px) {
   .card-list {
-    min-width: 290px;
+    width: 290px;
     display: flex;
     flex-direction: column;
     background-color: $color-base-background;
