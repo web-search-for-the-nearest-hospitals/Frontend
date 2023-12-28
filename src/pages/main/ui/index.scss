@@ -1,0 +1,14 @@
+@import '../../../shared/lib/styles/variables';
+
+.column {
+  min-width: 350px;
+  background-color: $color-card-background;
+  font-family: $base-font-family;
+  height: 100%;
+  overflow-y: auto;
+  margin-right: 30px;
+}
+
+.column::-webkit-scrollbar {
+  display: none;
+}

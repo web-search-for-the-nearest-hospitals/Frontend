@@ -1,0 +1,27 @@
+@import '~/shared/lib/styles/variables.scss';
+
+.advert-list {
+  padding-inline: 30px;
+  max-height: 930px;
+}
+
+.advert-list :first-child {
+  background-color: #009ab1;
+  background-image: url(../../../shared/assets/images/advert-1.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.advert-list :nth-child(2n) {
+  background-color: #4f93cf;
+  background-image: url(../../../shared/assets/images/advert-2.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.advert-list :last-child {
+  background-color: #2250c0;
+  background-image: url(../../../shared/assets/images/advert-1.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+}
