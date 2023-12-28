@@ -1,6 +1,6 @@
 import './index.scss';
 
-export function SmallCardClinic() {
+export function ClinicCard() {
   return (
     <div className="clinic-card">
       <h3 className="clinic-card__name">

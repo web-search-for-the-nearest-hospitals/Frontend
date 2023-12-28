@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { AdvertCard } from '~/entities/advert';
+import { AdvertCard } from '../../AdvertCard';
 
 export default function AdvertList() {
   return (

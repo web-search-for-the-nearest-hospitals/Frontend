@@ -1,0 +1,23 @@
+@import '../../../shared/lib/styles/variables';
+
+.card-list {
+  width: 350px;
+  background-color: $color-card-background;
+  font-family: $base-font-family;
+  height: 100%;
+  overflow-y: auto;
+}
+
+.card-list::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (max-width: 1027px) {
+  .card-list {
+    min-width: 290px;
+    display: flex;
+    flex-direction: column;
+    background-color: $color-base-background;
+    order: 1;
+  }
+}

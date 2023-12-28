@@ -2,8 +2,8 @@ import './index.scss';
 
 import { useState } from 'react';
 
-import ClinicList from '~/widgets/clinic-list';
-import AdvertList from '~/widgets/advert-list';
+import { AdvertList } from '~/entities/advert';
+import { ClinicList } from '~/entities/clinic';
 
 export const CardList = () => {
   // временные стейт и кнопка для проверки верстки

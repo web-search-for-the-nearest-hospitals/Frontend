@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { CardList } from './ui/CardList';
+import { CardList } from '~/widgets/card-list/ui';
 
 import Searcher from '~/widgets/searcher-block';
 

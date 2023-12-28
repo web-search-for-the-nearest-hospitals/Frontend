@@ -1,4 +1,3 @@
-import { FullCardClinic } from './ui/FullCardClinic';
-import { SmallCardClinic } from './ui/SmallCardClinic';
+import ClinicList from './ui/clinic-list';
 
-export { FullCardClinic, SmallCardClinic };
+export { ClinicList };
