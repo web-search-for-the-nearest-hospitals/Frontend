@@ -2,6 +2,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 
 import { MainPage } from './main';
 import Header from '~/widgets/header';
+import AppointmentPage from './appointment';
 
 export const Routing = () => {
   return (
@@ -10,6 +11,7 @@ export const Routing = () => {
         <Route path="main" element={<MainPage />} />
       </Route>
       <Route path="*" element={<Navigate to={'/clinic-searcher/main'} />} />
+      <Route path="/clinic-searcher/appointment" element={<AppointmentPage />} />
     </Routes>
   );
 };

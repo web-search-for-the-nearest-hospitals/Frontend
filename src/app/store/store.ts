@@ -1,8 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import userSlice from '../../entities/user/model/userSlice';
+import userReducer from '../../entities/user/model/userSlice';
+import appointmentReducer from '~/entities/appointment/model/appointmentSlice';
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
-    user: userSlice,
+    user: userReducer,
+    appointment: appointmentReducer,
   },
 });
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
+
+export default store;

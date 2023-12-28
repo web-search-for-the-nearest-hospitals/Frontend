@@ -18,8 +18,12 @@ export default function Searcher() {
         <Button value={specialty} type="submit" size="s" title="Найти" />
       </div>
       <div className="search-clinic__group">
-        <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />
-        <Checkbox state={isGovernment} setState={setIsGovernment} title="Государственные" />
+        <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay}>
+          Круглосуточные
+        </Checkbox>
+        <Checkbox state={isGovernment} setState={setIsGovernment}>
+          Государственные
+        </Checkbox>
       </div>
     </div>
   );

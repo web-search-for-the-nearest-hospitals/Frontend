@@ -1,0 +1,61 @@
+@import '~/shared/lib/index';
+
+.form-appointment {
+  width: 350px;
+  background-color: #fff;
+  padding: 54px 40px 25px;
+  border-radius: 10px;
+  margin: 0 auto;
+
+  &__wrapper {
+    margin-bottom: 20px;
+  }
+
+  &__wrapper {
+    margin-bottom: 20px;
+
+    &.error {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__label {
+    display: block;
+    @include font-small;
+    color: $text-color;
+  }
+
+  &__select {
+    margin-top: 10px;
+    min-width: 100%;
+  }
+
+  &__option {
+    margin-left: 20px;
+    @include font-small;
+    color: $color-base-background;
+  }
+
+  &__input-date {
+    background-image: none!important;
+  }
+
+  &__error {
+    @include font-text-error;
+    color: $color-error;
+    margin-top: 10px;
+  }
+
+  &__button {
+    @include font-small;
+    color: $color-base-background;
+    width: 352px;
+    height: 42px;
+    display: flex;
+    margin-top: 40px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background: var(--Linear, linear-gradient(90deg, #4f73e7 0%, #626ae8 48.85%, #8b56e9 100%));
+  }
+}

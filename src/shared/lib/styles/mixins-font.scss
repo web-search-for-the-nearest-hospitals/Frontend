@@ -25,6 +25,13 @@
 @mixin font-small {
   font-size: 14px;
   font-weight: 400;
+  line-height: 22px;
+}
+
+@mixin font-text-error {
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
 }
 
 @mixin font-small-select {

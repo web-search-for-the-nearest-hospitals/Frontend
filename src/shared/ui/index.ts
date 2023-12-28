@@ -5,5 +5,6 @@ import DropDownInput from './DropDownInput/DropDownInput';
 import DropDownMenu from './DropDownMenu/DropDownMenu';
 import Layout from './Layout/Layout';
 import Maps from './Maps';
+import Input from './Input/input';
 
-export { Button, ToggleButton, Checkbox, Layout, Maps, DropDownInput, DropDownMenu };
+export { Button, ToggleButton, Checkbox, Layout, Maps, DropDownInput, DropDownMenu, Input };

@@ -1,0 +1,31 @@
+@import '~/shared/lib/index';
+
+.appointment-page {
+  background: #F9F9F9;
+  width: 800px;
+  margin: 0 auto;
+  padding: 20px 185px 87px;
+
+  &__heading {
+    @include font-h1;
+    color: $text-color;
+    display: flex;
+    justify-content: center;
+    margin: 0 0 40px;
+    line-height: 140%;
+  }
+
+  &__checkbox {
+    margin: 20px 0 0;
+    display: flex;
+    justify-content: center;
+
+  }
+
+  &__checkbox-label {
+    @include font-text-error;
+    width: 395px;
+    color: $color-not-active;
+    margin-left: 20px;
+  }
+}
