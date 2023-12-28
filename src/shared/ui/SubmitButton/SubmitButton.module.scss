@@ -1,0 +1,56 @@
+@import '~/shared/lib/index';
+
+$submit-button-size: 42px; // Замените на ваше значение размера
+
+$width: $submit-button-size * 3.81;
+$height: $submit-button-size;
+$offset: 1px;
+
+$submit-button-color: linear-gradient(90deg, #4F73E7 0%, #626AE8 48.85%, #8B56E9 100%);
+$color-active: #7b8bff;
+$active-button: #695feb;
+$pressed-button: #400bc0;
+$color-contour: #ccd1f5;
+$text-color: #3b405d;
+$black-text-color: #1d1d1f;
+$color-not-active: #c4bfbf;
+$color-error: #ff699c;
+$color-warning: #ebdd5f;
+$color-success: #5feb97;
+$color-other: #ffc15e;
+
+$duration:
+  0.3s cubic-bezier(0.47, 1.64, 0.41, 0.8),
+  background-color 0.2s linear;
+
+.submit-button {
+  @include font-h3;
+  color: #fff;
+  cursor: pointer;
+  background: $submit-button-color;
+  width: $width;
+  height: $height;
+  border-radius: 10px;
+  position: relative;
+  //transition: $duration;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+.submit-button:hover {
+  background-color: $active-button;
+  //transform: scale(0.9);
+}
+
+.submit-button:active  {
+  background-color: $pressed-button
+}
+.submit-button:disabled  {
+  background-color: $color-not-active
+}
+
+.toggle-button__input:hover:checked {
+  width: calc($height - 2 * $offset);
+}

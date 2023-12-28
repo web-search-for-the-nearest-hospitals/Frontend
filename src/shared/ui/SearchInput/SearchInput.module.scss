@@ -1,0 +1,37 @@
+@import '~/shared/lib/index';
+
+.search-input {
+  @include font-usual;
+
+  padding: 11px 20px;
+  min-width: calc(100% - 234px);
+  border-radius: 10px;
+  border: 2px solid $color-contour;
+  box-sizing: content-box;
+  color: $color-not-active;
+
+  font: inherit;
+  letter-spacing: inherit;
+  word-spacing: inherit;
+  appearance: none;
+
+  &:hover {
+    box-shadow: 0 0 10px $color-contour;
+    appearance: none;
+  }
+
+  &:not([multiple]) {
+    background-repeat: no-repeat;
+    background-position: calc(100% - 20px);
+    background-size: 11.25px 9px;
+    background-image: url('~/shared/assets/icons/input-arrow.svg');
+  }
+
+  &::-ms-expand {
+    display: none;
+
+  }
+  &__option-container{
+min-width: 100%;
+  }
+}
