@@ -2,12 +2,10 @@
 
 .main {
   margin: 0 auto;
-  padding: 0 30px;
+  padding: 0;
   max-width: $max-width;
-}
 
-@media screen and (max-width: 1027px) {
-  .main {
+  @media screen and (max-width: 1140px) {
     padding-inline: 15px;
   }
 }

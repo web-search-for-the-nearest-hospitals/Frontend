@@ -1,3 +1,3 @@
-import AdvertList from './ui/advert-list';
+import AdvertList from './ui/AdvertList/AdvertList';
 
 export { AdvertList };

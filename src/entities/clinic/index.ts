@@ -1,3 +1,3 @@
-import ClinicList from './ui/clinic-list';
+import ClinicList from './ui/ClinicList/ClinicList';
 
 export { ClinicList };
