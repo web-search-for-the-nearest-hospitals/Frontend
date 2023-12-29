@@ -1,19 +1,23 @@
 @import '~/shared/lib/index';
 
-.search-input {
-  @include font-usual;
+.drop-down-menu {
+  @include font-h3;
 
   padding: 11px 20px;
   min-width: calc(100% - 234px);
   border-radius: 10px;
   border: 2px solid $color-contour;
   box-sizing: content-box;
-  color: $color-not-active;
+  color: $text-color;
 
   font: inherit;
   letter-spacing: inherit;
   word-spacing: inherit;
   appearance: none;
+
+  &::placeholder {
+    color: $color-not-active;
+  }
 
   &:hover {
     box-shadow: 0 0 10px $color-contour;
@@ -31,7 +35,13 @@
     display: none;
 
   }
-  &__option-container{
-min-width: 100%;
+
+  &__option-container {
+    min-width: 100%;
+  }
+
+  &::-webkit-calendar-picker-indicator {
+    opacity: 0;
+    display: none !important;
   }
 }

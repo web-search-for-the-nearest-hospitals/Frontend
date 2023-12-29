@@ -5,15 +5,13 @@
   max-width: 730px;
 
   &__container{
-display: flex;
-justify-content: space-between;
-align-items: center;
-//border:1px solid red;
-margin-bottom: 31px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 31px;
   }
   &__group{
     display: flex;
-    //border:1px solid blueviolet;
     max-width: calc(100% - 196px);
     justify-content: space-between;
     margin-bottom: 60px;

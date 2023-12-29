@@ -1,0 +1,35 @@
+@import '~/shared/lib/index';
+
+.submit-button {
+  @include font-h3;
+
+  color: #ffff;
+  background: $gradient;
+  height: 42px;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &_size_s {
+    min-width: 160px;
+  }
+
+  &_size_l {
+    min-width: 350px;
+  }
+
+  &:hover {
+    background: $active-button;
+  }
+
+  &:active  {
+    background: $pressed-button
+  }
+
+  &:disabled  {
+    cursor: default;
+    background: $color-not-active
+  }
+}

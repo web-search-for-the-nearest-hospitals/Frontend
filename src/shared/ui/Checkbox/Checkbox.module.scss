@@ -1,35 +1,26 @@
 @import '~/shared/lib/index';
 
-$checkbox-size: 20px; // Замените на ваше значение размера
+$checkbox-size: 20px;
 
 $width: $checkbox-size;
 $height: $checkbox-size;
-$offset: 1px;
-$first-color: #fff;
-$second-color: #695feb;
-$active-button: #695feb;
-$text-color: #3b405d;
-$duration:
-  0.3s cubic-bezier(0.47, 1.64, 0.41, 0.8),
-  background-color 0.2s linear;
 
 .checkbox {
   @include font-usual;
 
-  cursor: pointer;
   color: $text-color;
   display: flex;
   align-items: center;
 }
-
 
 .checkbox__input {
   margin-right: 10px;
   margin-left: 10px;
   width: $width;
   height: $height;
+  cursor: pointer;
   &:checked {
-    background-color:#fff;
+    background-color: $color-base-background;
     color: $active-button;
   }
 }
