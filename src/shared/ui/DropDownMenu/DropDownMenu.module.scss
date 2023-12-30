@@ -36,12 +36,7 @@
 
   }
 
-  &__option-container {
-    min-width: 100%;
-  }
-
   &::-webkit-calendar-picker-indicator {
     opacity: 0;
-    display: none !important;
   }
 }

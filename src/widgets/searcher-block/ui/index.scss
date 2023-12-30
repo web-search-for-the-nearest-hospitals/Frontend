@@ -5,15 +5,16 @@
   max-width: 730px;
 
   &__container{
+
     display: flex;
-    justify-content: space-between;
+    @include flex-container($just: space-between, $gap: 0);
     align-items: center;
     margin-bottom: 31px;
   }
   &__group{
     display: flex;
     max-width: calc(100% - 196px);
-    justify-content: space-between;
+    @include flex-container($just: space-between, $gap: 0);
     margin-bottom: 60px;
   }
 }
