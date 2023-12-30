@@ -1,0 +1,26 @@
+@import '~/shared/lib/index';
+
+$checkbox-size: 20px;
+
+$width: $checkbox-size;
+$height: $checkbox-size;
+
+.checkbox {
+  @include font-usual;
+
+  color: $text-color;
+  display: flex;
+  align-items: center;
+}
+
+.checkbox__input {
+  margin-right: 10px;
+  margin-left: 10px;
+  width: $width;
+  height: $height;
+  cursor: pointer;
+  &:checked {
+    background-color: $color-base-background;
+    color: $active-button;
+  }
+}
