@@ -1,21 +1,7 @@
 @import '~/shared/lib/styles/variables';
 @import '~/shared/lib/styles/mixins-font';
 
-.clinic-popup {
-    display: flex;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    right: 0;
-    background-color: rgba(196, 191, 191, 0.4);
-    visibility: hidden;
-    opacity: 0;
-    transition: visibility 0.2s linear, opacity 0.2s linear;
-
-  .clinic-popup__container {
+  .clinic-popup {
     min-width: 908px;
     padding: 80px 80px 96px;
     display: grid;
@@ -135,9 +121,3 @@
     color: #FFFFFF;
     background: linear-gradient(90deg in oklab, #4F73E7, #626AE8, #8B56E9);
   }
-}
-
-.clinic-popup_opened {
-    visibility: visible;
-    opacity: 1;
-}

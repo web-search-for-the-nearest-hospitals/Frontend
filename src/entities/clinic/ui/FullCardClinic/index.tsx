@@ -1,9 +1,10 @@
 import './index.scss';
+import { Popup } from '~/shared/ui/index';
 
 export function FullCardClinic() {
   return (
-    <div className="clinic-popup clinic-popup_opened">
-      <div className="clinic-popup__container">
+    <Popup>
+      <div className="clinic-popup">
         <h3 className="clinic-popup__name">
           Частное учреждение здравоохранения больница РЖД-Медицина имени К. Э. Циолковского
         </h3>
@@ -40,6 +41,6 @@ export function FullCardClinic() {
         {/* <p className="clinic-popup__price">Прием от 1000₽</p> */}
         <button className="clinic-popup__button">Записаться</button>
       </div>
-    </div>
+    </Popup>
   );
 }
