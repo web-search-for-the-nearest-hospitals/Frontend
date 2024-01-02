@@ -1,8 +1,7 @@
-import { DropDownInput } from '~/shared/ui';
+import { DropDownInput, Input } from '~/shared/ui';
 import styles from './index.module.scss';
 import { useDispatch } from 'react-redux';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import Input from '~/shared/ui/Input/input';
 import Button from '~/shared/ui/Button/Button';
 import { setFormData } from '~/entities/appointment/model/appointmentSlice';
 
