@@ -5,9 +5,9 @@
 
 @mixin font-h2() {
   font-size: 20px;
+  font-weight: 600;
   font-style: normal;
   line-height: 140%;
-  font-weight: 600;
 }
 
 @mixin font-h3() {
@@ -17,9 +17,9 @@
 
 @mixin font-usual() {
   font-size: 16px;
-  font-style: normal;
   font-weight: 400;
-  line-height: normal;
+  font-style: normal;
+  line-height: 103%;
 }
 
 @mixin font-small {
