@@ -1,6 +1,6 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
 
-import MainPage from './main';
+import { MainPage } from './main';
 import Header from '~/widgets/header';
 
 export const Routing = () => {

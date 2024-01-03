@@ -1,0 +1,21 @@
+.advert-card {
+  width: 290px;
+  min-height: 400px;
+  border-radius: 10px;
+  margin-block: 30px;
+  background-color: #009ab1;
+  position: relative;
+
+  @media screen and (max-width: 1140px) {
+    margin-block: 15px;
+    min-height: 372px;
+  }
+
+  &__image {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%);
+  }
+}

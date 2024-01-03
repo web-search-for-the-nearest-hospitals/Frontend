@@ -1,5 +1,5 @@
 import './index.scss';
-import { Popup } from '~/shared/ui/index';
+import { Popup, Button } from '~/shared/ui/index';
 
 export function FullCardClinic() {
   return (
@@ -15,8 +15,8 @@ export function FullCardClinic() {
         <div className="clinic-popup__timetable">
           <p className="clinic-popup__timetable-title">График работы:</p>
           <div className="clinic-popup__timetable-periods">
-            <p className="clinic-popup__timetable-period">ежедневно, </p>
-            <p className="clinic-popup__timetable-period">круглосуточно</p>
+            <p className="clinic-popup__timetable-period">Пн-Пт: 8:00–17:00</p>
+            <p className="clinic-popup__timetable-period">Сб-Вс: Выходной</p>
           </div>
         </div>
         <div className="clinic-popup__phone">
@@ -38,8 +38,7 @@ export function FullCardClinic() {
           <p className="clinic-popup__address-title">Адрес:</p>
           <p className="clinic-popup__address-value">ул. Болотникова, 1Б</p>
         </div>
-        {/* <p className="clinic-popup__price">Прием от 1000₽</p> */}
-        <button className="clinic-popup__button">Записаться</button>
+        <Button title="Записаться" size="l" type="submit" />
       </div>
     </Popup>
   );
