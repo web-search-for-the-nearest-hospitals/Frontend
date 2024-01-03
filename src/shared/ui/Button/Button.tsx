@@ -5,7 +5,7 @@ import styles from './Button.module.scss';
 interface IButton {
   onClick?: () => void;
   title: string;
-  value: string;
+  value?: string;
   type: 'submit' | 'button';
   size: 's' | 'l';
   disabled?: boolean;

@@ -1,13 +1,12 @@
 import './index.scss';
-import { Popup, Button } from '~/shared/ui/index';
+import { Popup, Button, CloseButton } from '~/shared/ui/index';
 
 export function FullCardClinic() {
   return (
     <Popup>
       <div className="clinic-popup">
-        <h3 className="clinic-popup__name">
-          Частное учреждение здравоохранения больница РЖД-Медицина имени К. Э. Циолковского
-        </h3>
+        <CloseButton type="button" />
+        <h3 className="clinic-popup__name">ГБУЗКО Калужская областная клиническая больница</h3>
         <p className="clinic-popup__about">
           Наша клиника предлагает высококачественные, индивидуальные и безопасные медицинские услуги с использованием
           передовых технологий. Мы стремимся к высокому уровню профессионализма и заботы о каждом пациенте.
@@ -36,7 +35,7 @@ export function FullCardClinic() {
         </div>
         <div className="clinic-popup__address">
           <p className="clinic-popup__address-title">Адрес:</p>
-          <p className="clinic-popup__address-value">ул. Болотникова, 1Б</p>
+          <p className="clinic-popup__address-value">ул. Вишневского, 1, корп. 7, микрорайон Анненки, Калуга</p>
         </div>
         <Button title="Записаться" size="l" type="submit" />
       </div>

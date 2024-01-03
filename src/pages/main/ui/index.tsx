@@ -3,7 +3,7 @@ import './index.scss';
 import Searcher from '~/widgets/searcher-block';
 
 import MapBlock from '~/widgets/map-block';
-import { ClinicList } from '~/entities/clinic';
+import { ClinicList, FullCardClinic } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
 import { useState } from 'react';
 
@@ -27,6 +27,7 @@ export default function MainPage() {
         <Searcher />
         <MapBlock />
       </div>
+      <FullCardClinic />
     </div>
   );
 }
