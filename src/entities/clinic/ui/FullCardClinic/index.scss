@@ -28,24 +28,20 @@
     grid-row: 2;
     margin-top: 20px;
     display: flex;
-    @include font-small;
-    font-style: normal;
-    line-height: normal;
+    @include font-usual;
     gap: 11.358px;
 
     &-title {
       margin: 0;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     &-periods {
       width: min-content;
-      font-weight: 400;
+    }
 
-      .clinic-popup__timetable-period {
-        display: inline;
-        margin: 0;
-      }
+    &-period {
+      width: max-content;
     }
   }
 
@@ -53,17 +49,16 @@
     grid-column: 1;
     margin-top: 60px;
     display: flex;
-    @include font-small;
+    @include font-usual;
     gap: 11.358px;
 
     &-title {
       margin: 0;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     &-number {
       margin: 0;
-      font-weight: 400;
     }
   }
 
@@ -71,13 +66,13 @@
     grid-column: 1;
     margin-top: 40px;
     display: flex;
-    @include font-small;
+    @include font-usual;
     color: #3b405d;
     gap: 11.358px;
 
     &-title {
       margin: 0;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     &-text {
@@ -92,16 +87,15 @@
     margin-top: 80px;
     display: flex;
     gap: 11.358px;
-    @include font-small;
+    @include font-usual;
 
     &-title {
       margin: 0;
-      font-weight: 500;
+      font-weight: 600;
     }
 
     &-value {
       margin: 0;
-      font-weight: 400;
     }
   }
 }

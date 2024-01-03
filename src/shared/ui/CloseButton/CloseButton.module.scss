@@ -3,7 +3,7 @@
   min-height: 25px;
   margin: 0;
   position: absolute;
-  right: 180px;
+  right: 130px;
   top: 480px;
   background-image: url(../../assets/icons/button-close.svg);
   background-position: center;
@@ -19,13 +19,6 @@
     min-width: 20px;
     min-height: 20px;
     background-size: 20px;
-    right: -25px;
-    top: -20px;
-  }
-
-  @media screen and (max-width: 530px) {
-    right: 0;
-    top: -30px;
   }
 }
 
