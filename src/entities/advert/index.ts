@@ -1,3 +1,3 @@
-import AdvertCard from './ui';
+import AdvertList from './ui/AdvertList/AdvertList';
 
-export { AdvertCard };
+export { AdvertList };

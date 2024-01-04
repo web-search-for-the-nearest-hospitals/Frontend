@@ -1,0 +1,15 @@
+.advert-list {
+  display: flex;
+  flex-direction: column;
+  padding-inline: 30px;
+  max-height: 930px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (max-width: 1140px) {
+    overflow-y: auto;
+    padding: 0;
+  }
+}
