@@ -1,4 +1,4 @@
-import './index.scss';
+import './FullCardClinic.scss';
 import { Popup, Button, CloseButton } from '~/shared/ui/index';
 
 export function FullCardClinic() {
