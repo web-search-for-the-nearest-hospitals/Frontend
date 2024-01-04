@@ -13,10 +13,7 @@ export function FullCardClinic() {
         </p>
         <div className="clinic-popup__timetable">
           <p className="clinic-popup__timetable-title">График работы:</p>
-          <div className="clinic-popup__timetable-periods">
-            <p className="clinic-popup__timetable-period">Пн-Пт: 8:00–17:00</p>
-            <p className="clinic-popup__timetable-period">Сб-Вс: Выходной</p>
-          </div>
+          <p className="clinic-popup__timetable-period">Пн-Пт: 8:00–17:00 Сб-Вс: Выходной</p>
         </div>
         <div className="clinic-popup__phone">
           <p className="clinic-popup__phone-title">Телефон: </p>
@@ -34,8 +31,10 @@ export function FullCardClinic() {
           </a>
         </div>
         <div className="clinic-popup__address">
-          <p className="clinic-popup__address-title">Адрес:</p>
-          <p className="clinic-popup__address-value">ул. Вишневского, 1, корп. 7, микрорайон Анненки, Калуга</p>
+          <p className="clinic-popup__address-text">
+            <p className="clinic-popup__address-title">Адрес:</p> ул. Вишневского, 1, корп. 7, микрорайон Анненки,
+            Калуга
+          </p>
         </div>
         <Button title="Записаться" size="l" type="submit" />
       </div>

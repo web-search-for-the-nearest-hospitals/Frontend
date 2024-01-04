@@ -3,8 +3,8 @@
   min-height: 25px;
   margin: 0;
   position: absolute;
-  right: 130px;
-  top: 480px;
+  right: 15px;
+  top: 15px;
   background-image: url(../../assets/icons/button-close.svg);
   background-position: center;
   background-repeat: no-repeat;
@@ -13,12 +13,6 @@
   &:hover {
     opacity: 0.6;
     transition: opacity 0.2s ease-in-out;
-  }
-
-  @media screen and (max-width: 769px) {
-    min-width: 20px;
-    min-height: 20px;
-    background-size: 20px;
   }
 }
 
