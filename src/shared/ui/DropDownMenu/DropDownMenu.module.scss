@@ -24,6 +24,14 @@
     appearance: none;
   }
 
+  &:focus {
+    border-color: #000;
+  }
+
+  &:focus-visible {
+    border-color: #000;
+  }
+
   &:not([multiple]) {
     background-repeat: no-repeat;
     background-position: calc(100% - 20px);

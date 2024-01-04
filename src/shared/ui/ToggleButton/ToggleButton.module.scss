@@ -7,12 +7,12 @@ $height: $toggle-button-size;
 $offset: 1px;
 $first-color: #fff;
 $second-color: #695feb;
-$duration:
-  0.3s cubic-bezier(0.47, 1.64, 0.41, 0.8),
+$duration: 0.3s cubic-bezier(0.47, 1.64, 0.41, 0.8),
   background-color 0.2s linear;
 
 .toggle-button {
   cursor: pointer;
+  border-radius: $width;
 }
 
 .toggle-button__container::before {

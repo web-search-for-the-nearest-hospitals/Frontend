@@ -1,7 +1,6 @@
 @import '~/shared/lib/index';
 
 $checkbox-size: 20px;
-
 $width: $checkbox-size;
 $height: $checkbox-size;
 
@@ -19,8 +18,13 @@ $height: $checkbox-size;
   width: $width;
   height: $height;
   cursor: pointer;
+
   &:checked {
     background-color: $color-base-background;
     color: $active-button;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #000;
   }
 }
