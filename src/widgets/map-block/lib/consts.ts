@@ -1,6 +1,4 @@
 // @TODO заменить на данные с бэка
-export const districts = ['Центр города', 'Московский', 'Октябрьский', 'Ленинский'];
-
 export const districtCoord: { [k: string]: { latitude: number; longitude: number } } = {
   'Центр города': { latitude: 54.513678, longitude: 36.261341 },
   Московский: { latitude: 54.559245, longitude: 36.243851 },

@@ -41,4 +41,9 @@
       aspect-ratio: 1 / 1;
     }
   }
+
+  &__input-container{
+    max-width: 255px;
+    width: 100%;
+  }
 }

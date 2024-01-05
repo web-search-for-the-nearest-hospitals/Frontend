@@ -11,10 +11,19 @@ export default function Checkbox({ state, setState, title }: ICheckbox) {
     setState(!state);
   }
 
+  function onKey(e: React.KeyboardEvent<HTMLElement>) {
+    if (e.key === 'Enter') {
+      changeCheckbox();
+    }
+  }
+
   return (
     <label className={styles['checkbox']}>
-      <input className={styles['checkbox__input']} type="checkbox" checked={state} onChange={changeCheckbox} />
-      {title}
+      <div className={styles['checkbox__container']}>
+        <input className={styles['checkbox__input']} type="checkbox" checked={state} onChange={changeCheckbox} />
+        <div className={styles['checkbox__visible']} onKeyDown={onKey} tabIndex={0} />
+      </div>
+      <label className={styles['checkbox__title']}>{title}</label>
     </label>
   );
 }

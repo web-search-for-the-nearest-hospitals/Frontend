@@ -17,9 +17,9 @@ export default function ToggleButton({ state, setState }: IToggleButton) {
   }
 
   return (
-    <label className={styles['toggle-button']} role="input" onKeyDown={onKey} tabIndex={0}>
+    <label className={styles['toggle-button']} role="switch" aria-label={state ? 'Выключено' : 'Включено'}>
       <input className={styles['toggle-button__input']} type="checkbox" checked={state} onChange={changeToggleButton} />
-      <div className={styles['toggle-button__container']} />
+      <div className={styles['toggle-button__container']} onKeyDown={onKey} tabIndex={0} />
     </label>
   );
 }

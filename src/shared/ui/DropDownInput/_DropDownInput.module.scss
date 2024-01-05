@@ -2,17 +2,18 @@
 
 .drop-down-input{
   position: relative;
+  width: 100%;
+  min-width: 214px;
 
   &__value {
     @include font-usual;
     position: relative;
 
     padding: 11px 20px;
-    min-width: 214px;
 
     border-radius: 10px;
     border: 2px solid $color-contour;
-    box-sizing: content-box;
+    box-sizing: border-box;
     cursor: pointer;
 
     transition: border-color .2s ease-in-out;
@@ -26,7 +27,7 @@
       width: 11.25px;
       height: 9px;
       background-size: 11.25px 9px;
-      background-image: url('~/shared/assets/icons/input-arrow.svg');
+      background-image: url('./_input-arrow.svg');
 
       position: absolute;
       right: 20px;
@@ -36,6 +37,14 @@
       transition: all 0.2s ease-in-out;
     }
 
+    &:focus{
+      border-color: $active-button;
+    }
+
+    &:focus-visible{
+      outline: none;
+    }
+
     &_open{
       border-color: $active-button;
 
@@ -43,12 +52,21 @@
         transform: rotate(180deg) translateY(50%);
       }
     }
+
+    &_placeholder{
+      color: $color-not-active;
+    }
   }
 
   &__list{
-    display: none;
+    opacity: 0;
+    visibility: hidden;
+
     margin-top: 10px;
     padding: 16px 0;
+    max-height: 300px;
+
+    overflow-y: auto;
 
     position: absolute;
     right: 0;
@@ -56,38 +74,33 @@
     z-index: 2;
 
     background-color: $color-base-background;
+    transition: opacity .2s ease-in, visibility .2s ease-in;
 
     &_opened{
-      @include flex-container($dir: column, $align: left, $gap: 0);
+      visibility: visible;
+      opacity: 1;
+      transition: opacity .2s ease-in;
     }
   }
 
   &__option{
-    @include font-small;
     position: relative;
 
     padding: 6px 20px;
     cursor: pointer;
+    transition: opacity 0.2s ease-in;
 
     &:hover{
       opacity: 0.8;
     }
 
     &:focus{
-      outline: 1px solid #000;
-    }
-
-    &:focus-visible {
-      outline: 1px solid #000;
-    }
-
-    &_selected{
       &::after{
         content: '';
         width: 11.25px;
         height: 9px;
         background-size: 11.25px 9px;
-        background-image: url('~/shared/assets/icons/input-arrow.svg');
+        background-image: url('./_input-arrow.svg');
 
         position: absolute;
         right: 20px;
@@ -95,5 +108,23 @@
         transform: translateY(-50%) rotate(90deg);
       }
     }
+
+    &:focus-visible {
+      outline: 1px solid #000;
+    }
+
+    &_selected{
+      background-color: $color-contour;
+    }
+  }
+
+  &__option-text{
+    @include font-small;
+    display: block;
+    width: 100%;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 }
