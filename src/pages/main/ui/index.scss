@@ -6,9 +6,9 @@
   width: 1110px;
   margin: 0 auto;
   padding-bottom: 30px;
-  height: 933px;
+  height: 876px;
 
-  @media screen and (max-width: 1140px) {
+  @media screen and (width <= 1140px) {
     flex-direction: column;
     gap: 40px;
     align-items: center;
@@ -31,7 +31,7 @@
   &__search-block {
     width: 730px;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (width <= 767px) {
       max-width: 100%;
     }
   }
@@ -46,7 +46,7 @@
       display: none;
     }
 
-    @media screen and (max-width: 1140px) {
+    @media screen and (width <= 1140px) {
       overflow-y: visible;
       width: 290px;
       display: flex;
