@@ -4,9 +4,9 @@ import { ReactNode } from 'react';
 
 interface IPopup {
   children: ReactNode;
-  opened: 'opened';
+  isOpen: boolean;
 }
 
-export default function Popup({ children, opened = 'opened' }: IPopup) {
-  return <div className={cn(styles['popup'], styles[`popup_${opened}`])}>{children}</div>;
+export default function Popup({ children, isOpen }: IPopup) {
+  return <div className={cn(styles['popup'], isOpen ? styles['popup_opened'] : false)}>{children}</div>;
 }

@@ -1,11 +1,15 @@
 import './FullCardClinic.scss';
 import { Popup, Button, CloseButton } from '~/shared/ui/index';
 
+import { useState } from 'react';
+
 export function FullCardClinic() {
+  const [isOpenPopup, setIsOpenPopup] = useState(false);
+
   return (
-    <Popup>
+    <Popup isOpen={isOpenPopup}>
       <div className="clinic-popup">
-        <CloseButton type="button" />
+        <CloseButton type="button" onClick={() => setIsOpenPopup(false)} />
         <h3 className="clinic-popup__name">ГБУЗКО Калужская областная клиническая больница</h3>
         <p className="clinic-popup__about">
           Наша клиника предлагает высококачественные, индивидуальные и безопасные медицинские услуги с использованием
@@ -31,10 +35,10 @@ export function FullCardClinic() {
           </a>
         </div>
         <div className="clinic-popup__address">
-          <p className="clinic-popup__address-text">
-            <p className="clinic-popup__address-title">Адрес:</p> ул. Вишневского, 1, корп. 7, микрорайон Анненки,
-            Калуга
-          </p>
+          <div className="clinic-popup__address-text">
+            <p className="clinic-popup__address-title">Адрес:</p>
+            <p> ул. Вишневского, 1, корп. 7, микрорайон Анненки, Калуга</p>
+          </div>
         </div>
         <Button title="Записаться" size="l" type="submit" />
       </div>

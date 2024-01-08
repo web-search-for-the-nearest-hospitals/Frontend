@@ -10,6 +10,10 @@
   border-radius: 10px;
   position: relative;
 
+  @media screen and (width <= 1080px) {
+    grid-template-columns: 414px
+  }
+
   &__name {
     grid-column: 1;
     @include font-h1;
@@ -37,6 +41,11 @@
     &-period {
       max-width: 160px;
       line-height: 19.5px;
+    }
+
+    @media screen and (width <= 1080px) {
+      grid-column: 1;
+      grid-row: 5;
     }
   }
 
@@ -83,6 +92,12 @@
       display: flex;
       gap: 0 5px;
       line-height: 19.5px;
+    }
+
+    @media screen and (width <= 1080px) {
+      grid-column: 1;
+      grid-row: 5;
+      margin-bottom: 36px;
     }
   }
 }
