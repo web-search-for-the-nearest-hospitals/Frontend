@@ -62,7 +62,7 @@ export default function DropDownInput({
         ref={listRef}
       >
         {visibleList.length ? (
-          [...visibleList, ...visibleList, ...visibleList].map((el, i) => (
+          visibleList.map((el, i) => (
             <li
               key={`${i}_${el}`}
               className={cn(
