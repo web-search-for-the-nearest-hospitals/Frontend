@@ -7,7 +7,7 @@ const specialties = ['Терапевт', 'Офтальмолог', 'Хирург
 // @TODO: заменить на данные с бэка
 
 export default function Searcher() {
-  const [specialty, setSpeciality] = useState(specialties[0]!);
+  const [specialty, setSpeciality] = useState<string | null>(null);
   const [isWorkAllDay, setIsWorkAllDay] = useState(false);
   const [isGovernment, setIsGovernment] = useState(false);
 

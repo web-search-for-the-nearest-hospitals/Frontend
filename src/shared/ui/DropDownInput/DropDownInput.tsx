@@ -2,6 +2,7 @@ import styles from './_DropDownInput.module.scss';
 import cn from 'classnames';
 import useDropDownInput from './_useDropDownInput';
 import { LegacyRef } from 'react';
+
 interface IDropDownInput {
   values: readonly string[];
   state: string | null;
@@ -9,6 +10,7 @@ interface IDropDownInput {
   placeholder?: string;
   contentEditable?: boolean;
   ref?: LegacyRef<HTMLInputElement> | undefined | null;
+
 }
 
 export default function DropDownInput({

@@ -19,6 +19,8 @@ export default function useDropDownInput({ values, styles, setState, contentEdit
 
   const findClosest = (e: React.FocusEvent) => e.relatedTarget?.closest(`.${styles['drop-down-input__list']}`);
   const checkKey = (el: Element | null) => el?.getAttribute('data-key') !== listRef.current?.getAttribute('data-key');
+  const handleFocus = () => setIsFocused(true);
+
 
   const toFocusOption = useCallback(
     () => (listRef.current?.children[focusIndex] as HTMLElement)?.focus(),
@@ -50,8 +52,6 @@ export default function useDropDownInput({ values, styles, setState, contentEdit
       setIsFocused(false);
     }
   };
-
-  const handleFocus = () => setIsFocused(true);
 
   const onKeyInput = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key === 'Enter') {

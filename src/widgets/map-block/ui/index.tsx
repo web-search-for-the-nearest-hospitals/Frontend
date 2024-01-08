@@ -1,7 +1,7 @@
 import './index.scss';
 import { useEffect, useState } from 'react';
 
-import { districtCoord, districts } from '../lib/consts';
+import { districtCoord } from '../lib/consts';
 import { setCoord, userSelect } from '~/entities/user';
 
 import { Maps, ToggleButton, DropDownInput } from '~/shared/ui';
@@ -14,7 +14,7 @@ export default function MapBlock() {
   const dispatch = useAppDispatch();
   const coord = useAppSelector(userSelect);
   const [stateCoord, setStateCoord] = useState<ICoord>(coord);
-  const [district, setDistrict] = useState(districts[0]!);
+  const [district, setDistrict] = useState(Object.keys(districtCoord)[0]!);
   const [geo, setGeo] = useState(false);
 
   useEffect(() => {
@@ -38,7 +38,9 @@ export default function MapBlock() {
       </div>
 
       <div className="map__group">
-        <DropDownInput values={districts} state={district} setState={setDistrict} />
+        <div className="map__input-container">
+          <DropDownInput values={Object.keys(districtCoord)} state={district} setState={setDistrict} />
+        </div>
         <div className="map__group-switch">
           <ToggleButton setState={setGeo} state={geo} />
           <p className="map__group-switch-text">Геолокация</p>
