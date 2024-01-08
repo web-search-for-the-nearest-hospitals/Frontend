@@ -45,6 +45,6 @@ export default function Maps({ latitude, longitude }: ICoord) {
       </YMaps>
     </section>
   ) : (
-    <div>Загружаю карту...</div>
+    <div>Жду координаты или уже пытаюсь загрузить</div>
   );
 }

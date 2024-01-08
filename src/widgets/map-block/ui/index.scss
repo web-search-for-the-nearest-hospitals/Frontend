@@ -18,7 +18,7 @@
 
     margin-bottom: 30px;
 
-    @media screen and (max-width: 767px) {
+    @media screen and (width <= 767px) {
       display: flex;
       flex-direction: column;
     }
@@ -33,12 +33,17 @@
   }
 
   &__container {
-    height: 657px;
+    min-height: 280px;
+    height: 600px;
 
     @media screen and (width < 1140px) {
-      // TODO: не реагирует на проценты
-      // width: 60vw;
-      width: 100%;
+      height: auto;
+      aspect-ratio: 1 / 1;
     }
+  }
+
+  &__input-container{
+    max-width: 255px;
+    width: 100%;
   }
 }
