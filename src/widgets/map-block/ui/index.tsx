@@ -9,6 +9,8 @@ import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 import { LocationIcon } from '~/shared/assets';
 import watchUserPosition from '~/entities/user/lib/watchUserPosition';
 import { ICoord } from '~/shared/lib/types/interfaces';
+import { useGetTownsQuery } from '~/shared/api/rtkqueryApi';
+import { createToast } from '~/shared/lib';
 
 export default function MapBlock() {
   const dispatch = useAppDispatch();
@@ -16,6 +18,7 @@ export default function MapBlock() {
   const [stateCoord, setStateCoord] = useState<ICoord>(coord);
   const [district, setDistrict] = useState(Object.keys(districtCoord)[0]!);
   const [geo, setGeo] = useState(false);
+  const { data, isLoading, isError } = useGetTownsQuery(null);
 
   useEffect(() => {
     if (geo) {
@@ -24,12 +27,25 @@ export default function MapBlock() {
   }, [geo, dispatch]);
 
   useEffect(() => {
+    if (isError) {
+      createToast('error', 'Не удалось получить данные городов');
+    } else if (data) {
+      console.log(data);
+    }
+  }, [isError, data]);
+
+  useEffect(() => {
     if (geo && coord.latitude && coord.longitude) {
       setStateCoord(coord);
     } else if (district) {
       setStateCoord(districtCoord[district]!);
     }
   }, [coord, district, geo]);
+
+  if (isLoading) {
+    return <p className="search-clinic">Загружаю данные городов</p>;
+  }
+
   return (
     <div className="map">
       <div className="map__location">

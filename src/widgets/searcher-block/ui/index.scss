@@ -3,6 +3,7 @@
 .search-clinic {
   width: 100%;
   max-width: 730px;
+  margin-bottom: 60px;
 
   &__container{
     display: flex;
@@ -17,6 +18,5 @@
     max-width: calc(100% - 196px);
 
     @include flex-container($just: space-between, $gap: 0);
-    margin-bottom: 60px;
   }
 }
