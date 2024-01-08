@@ -1,44 +1,37 @@
 import './FullCardClinic.scss';
 import { Popup, Button, CloseButton } from '~/shared/ui/index';
+import { clinic } from '~/shared/api/constants';
 
 import { useState } from 'react';
 
 export function FullCardClinic() {
-  const [isOpenPopup, setIsOpenPopup] = useState(false);
-
+  const [isOpenPopup, setIsOpenPopup] = useState(true);
+  // @TODO на экране меньше 625px должно превращаться в отдельную страницу
   return (
     <Popup isOpen={isOpenPopup}>
       <div className="clinic-popup">
         <CloseButton type="button" onClick={() => setIsOpenPopup(false)} />
-        <h3 className="clinic-popup__name">ГБУЗКО Калужская областная клиническая больница</h3>
-        <p className="clinic-popup__about">
-          Наша клиника предлагает высококачественные, индивидуальные и безопасные медицинские услуги с использованием
-          передовых технологий. Мы стремимся к высокому уровню профессионализма и заботы о каждом пациенте.
-        </p>
+        <h3 className="clinic-popup__name">{clinic.name}</h3>
+        <p className="clinic-popup__about">{clinic.about}</p>
         <div className="clinic-popup__timetable">
           <p className="clinic-popup__timetable-title">График работы:</p>
-          <p className="clinic-popup__timetable-period">Пн-Пт: 8:00–17:00 Сб-Вс: Выходной</p>
+          <p className="clinic-popup__timetable-period">{clinic.timetable}</p>
+        </div>
+        <div className="clinic-popup__address">
+          <p className="clinic-popup__address-text">
+            <span className="clinic-popup__address-title">Адрес:</span>
+            {clinic.address}
+          </p>
         </div>
         <div className="clinic-popup__phone">
           <p className="clinic-popup__phone-title">Телефон: </p>
-          <p className="clinic-popup__phone-number">+7 (4842) 73-84-13</p>
+          <p className="clinic-popup__phone-number">{clinic.phone}</p>
         </div>
         <div className="clinic-popup__site">
           <p className="clinic-popup__site-title">Сайт: </p>
-          <a
-            className="clinic-popup__site-link"
-            href="https://www.vitalmedclinic.ru"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            https://www.vitalmedclinic.ru
+          <a className="clinic-popup__site-link" href={clinic.site} target="_blank" rel="noopener noreferrer">
+            {clinic.site}
           </a>
-        </div>
-        <div className="clinic-popup__address">
-          <div className="clinic-popup__address-text">
-            <p className="clinic-popup__address-title">Адрес:</p>
-            <p> ул. Вишневского, 1, корп. 7, микрорайон Анненки, Калуга</p>
-          </div>
         </div>
         <Button title="Записаться" size="l" type="submit" />
       </div>
