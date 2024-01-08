@@ -4,7 +4,7 @@ import { ReactNode } from 'react';
 
 interface IPopup {
   children: ReactNode;
-  opened?: 'opened';
+  opened: 'opened';
 }
 
 export default function Popup({ children, opened = 'opened' }: IPopup) {

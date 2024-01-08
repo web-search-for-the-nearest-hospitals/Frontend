@@ -8,4 +8,4 @@ import Layout from './Layout/Layout';
 import Popup from './Popup/Popup';
 import Maps from './Maps';
 
-export { Button, ToggleButton, CloseButton, Checkbox, Layout, Maps, DropDownInput, DropDownMenu, Popup };
+export { Button, ToggleButton, Checkbox, Layout, Maps, DropDownInput, DropDownMenu, Popup, CloseButton };
