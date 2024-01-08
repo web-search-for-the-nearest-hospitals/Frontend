@@ -32,7 +32,6 @@ export default function useDropDownInput({ values, styles, setState, contentEdit
     if (visibleList[i]) {
       setState(visibleList[i]!);
     } else {
-      console.log(visibleList);
       createToast('error', 'Невозможно обработать клик');
     }
   };
