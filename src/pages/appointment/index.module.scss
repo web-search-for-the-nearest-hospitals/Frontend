@@ -1,9 +1,10 @@
 @import '~/shared/lib/index';
 
 .appointment-page {
-  background: #F9F9F9;
-  width: 800px;
-  margin: 0 auto;
+  background: $color-card-background;
+  border-radius: 10px;
+  max-width: 800px;
+  margin: 12px auto 110px;
   padding: 20px 185px 87px;
 
   &__heading {

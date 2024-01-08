@@ -1,20 +1,20 @@
 @import '~/shared/lib/index';
 
 .form-appointment {
-  width: 350px;
-  background-color: #fff;
+  max-width: 350px;
+  background-color: $color-base-background;
   padding: 54px 40px 25px;
   border-radius: 10px;
   margin: 0 auto;
 
   &__wrapper {
     margin-bottom: 20px;
-  }
 
-  &__wrapper {
-    margin-bottom: 20px;
+    &:last-of-type {
+      margin-bottom: 40px;
+    }
 
-    &.error {
+    &_error {
       margin-bottom: 10px;
     }
   }
@@ -23,17 +23,7 @@
     display: block;
     @include font-small;
     color: $text-color;
-  }
-
-  &__select {
-    margin-top: 10px;
-    min-width: 100%;
-  }
-
-  &__option {
-    margin-left: 20px;
-    @include font-small;
-    color: $color-base-background;
+    margin-bottom: 10px;
   }
 
   &__input-date {
@@ -44,18 +34,5 @@
     @include font-text-error;
     color: $color-error;
     margin-top: 10px;
-  }
-
-  &__button {
-    @include font-small;
-    color: $color-base-background;
-    width: 352px;
-    height: 42px;
-    display: flex;
-    margin-top: 40px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 10px;
-    background: var(--Linear, linear-gradient(90deg, #4f73e7 0%, #626ae8 48.85%, #8b56e9 100%));
   }
 }

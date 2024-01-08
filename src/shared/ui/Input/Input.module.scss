@@ -3,8 +3,8 @@
 .input {
   @include font-usual;
   box-sizing: border-box;
-  margin-top: 10px;
-  min-width: 350px;
+  max-width: 350px;
+  width: 100%;
   height: 41px;
   border-radius: 10px;
   border: 2px solid $color-contour;

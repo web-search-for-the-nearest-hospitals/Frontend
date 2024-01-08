@@ -2,17 +2,16 @@ import styles from './index.module.scss';
 import { useState } from 'react';
 import { Checkbox } from '~/shared/ui';
 import FormAppointment from '~/widgets/form-appointment';
-import { useSelector } from 'react-redux';
-import { RootState } from '~/app/store/store';
+// import { useSelector } from 'react-redux';
+// import { RootState } from '~/app/store/store';
 
 export default function AppointmentPage() {
   const [approval, setApproval] = useState(false);
 
-  const formData = useSelector((state: RootState) => state.appointment.formData);
-  console.log(formData);
+  //const formData = useSelector((state: RootState) => state.appointment.formData);
 
   const changeConsent = () => {
-    setApproval(!approval);
+    setApproval((prevVal) => !prevVal);
   };
 
   return (

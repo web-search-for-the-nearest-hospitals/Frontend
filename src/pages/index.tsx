@@ -9,9 +9,9 @@ export const Routing = () => {
     <Routes>
       <Route path="/clinic-searcher" element={<Header />}>
         <Route path="main" element={<MainPage />} />
+        <Route path="appointment" element={<AppointmentPage />} />
       </Route>
       <Route path="*" element={<Navigate to={'/clinic-searcher/main'} />} />
-      <Route path="/clinic-searcher/appointment" element={<AppointmentPage />} />
     </Routes>
   );
 };

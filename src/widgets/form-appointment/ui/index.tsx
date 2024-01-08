@@ -4,8 +4,9 @@ import { useDispatch } from 'react-redux';
 import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 import Button from '~/shared/ui/Button/Button';
 import { setFormData } from '~/entities/appointment/model/appointmentSlice';
+import { useState } from 'react';
 
-interface FormData {
+interface IFormData {
   name: string;
   phoneNumber: string;
   email: string;
@@ -17,19 +18,32 @@ export default function FormAppointment() {
   const {
     handleSubmit,
     control,
-    formState: { errors },
-  } = useForm<FormData>({
+    setValue,
+    formState: { errors, isValid },
+  } = useForm<IFormData>({
+    mode: 'onBlur',
     defaultValues: {
-      doctorSpecialty: 'терапевт',
+      doctorSpecialty: '',
     },
   });
 
   const doctors = ['терапевт', 'хирург', 'стоматолог'];
+  const [doctorSpecialty, setDoctorSpecialty] = useState(doctors[0]!);
 
   const dispatch = useDispatch();
 
-  const onSubmit: SubmitHandler<FormData> = (data) => {
+  const onSubmit: SubmitHandler<IFormData> = (data) => {
+    dispatch(setFormData(data));
     console.log(data);
+  };
+
+  const handleDoctorChange = (value: string) => {
+    setDoctorSpecialty(value);
+  };
+
+  const handleSelectChange = (value: string) => {
+    handleDoctorChange(value);
+    setValue('doctorSpecialty', value);
   };
 
   return (
@@ -43,23 +57,21 @@ export default function FormAppointment() {
           control={control}
           render={({ field }) => (
             <DropDownInput
+              state={doctorSpecialty}
               {...field}
+              ref={null}
               values={doctors}
-              id="doctorSpecialty"
-              className={styles['form-appointment__select']}
-              onChange={(e) => {
-                dispatch(setFormData({ doctorSpecialty: e.target.value }));
-                field.onChange(e);
-              }}
+              setState={handleSelectChange}
             />
           )}
         />
-        {errors.doctorSpecialty && (
-          <p className={styles['form-appointment__error']}>{errors.doctorSpecialty.message}</p>
-        )}
       </div>
 
-      <div className={styles['form-appointment__wrapper']}>
+      <div
+        className={`${styles['form-appointment__wrapper']} ${
+          errors.appointmentDate ? styles['form-appointment__wrapper_error'] : ''
+        }`}
+      >
         <label htmlFor="appointmentDate" className={styles['form-appointment__label']}>
           Дата записи
         </label>
@@ -70,14 +82,11 @@ export default function FormAppointment() {
           render={({ field }) => (
             <Input
               {...field}
+              ref={null}
               id="appointmentDate"
               className={`${errors.appointmentDate ? styles['form-appointment__input-date'] : ''}`}
               type="date"
               error={errors.appointmentDate}
-              onChange={(e) => {
-                dispatch(setFormData({ appointmentDate: e.target.value }));
-                field.onChange(e);
-              }}
             />
           )}
         />
@@ -86,32 +95,36 @@ export default function FormAppointment() {
         )}
       </div>
 
-      <div className={styles['form-appointment__wrapper']}>
+      <div
+        className={`${styles['form-appointment__wrapper']} ${
+          errors.name ? styles['form-appointment__wrapper_error'] : ''
+        }`}
+      >
         <label htmlFor="name" className={styles['form-appointment__label']}>
           ФИО
         </label>
         <Controller
           name="name"
           control={control}
-          rules={{ required: 'Обязательное поле' }}
+          rules={{
+            required: 'Обязательное поле',
+            minLength: {
+              value: 5,
+              message: 'Введите не менее 5 символов',
+            },
+          }}
           render={({ field }) => (
-            <Input
-              {...field}
-              id="name"
-              type="text"
-              error={errors.name}
-              placeholder="Иванов Иван Иванович"
-              onChange={(e) => {
-                dispatch(setFormData({ name: e.target.value }));
-                field.onChange(e);
-              }}
-            />
+            <Input {...field} id="name" type="text" error={errors.name} ref={null} placeholder="Иванов Иван Иванович" />
           )}
         />
         {errors.name && <p className={styles['form-appointment__error']}>{errors.name.message}</p>}
       </div>
 
-      <div className={styles['form-appointment__wrapper']}>
+      <div
+        className={`${styles['form-appointment__wrapper']} ${
+          errors.phoneNumber ? styles['form-appointment__wrapper_error'] : ''
+        }`}
+      >
         <label htmlFor="phoneNumber" className={styles['form-appointment__label']}>
           Номер телефона
         </label>
@@ -128,21 +141,22 @@ export default function FormAppointment() {
           render={({ field }) => (
             <Input
               {...field}
+              ref={null}
               id="phoneNumber"
               type="tel"
               error={errors.phoneNumber}
               placeholder="+7 (900) 000 00 00"
-              onChange={(e) => {
-                dispatch(setFormData({ phoneNumber: e.target.value }));
-                field.onChange(e);
-              }}
             />
           )}
         />
         {errors.phoneNumber && <p className={styles['form-appointment__error']}>{errors.phoneNumber.message}</p>}
       </div>
 
-      <div className={styles['form-appointment__wrapper']}>
+      <div
+        className={`${styles['form-appointment__wrapper']} ${
+          errors.email ? styles['form-appointment__wrapper_error'] : ''
+        }`}
+      >
         <label htmlFor="email" className={styles['form-appointment__label']}>
           Почта
         </label>
@@ -152,27 +166,17 @@ export default function FormAppointment() {
           rules={{
             required: 'Обязательное поле',
             pattern: {
-              value: /^\S+@\S+$/i,
+              value: /^(?!.*(__|-{2}))[A-Z0-9._%+-]+\S@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
               message: 'Введите корректный адрес электронной почты',
             },
           }}
           render={({ field }) => (
-            <Input
-              {...field}
-              id="email"
-              type="email"
-              error={errors.email}
-              placeholder="poisk.kl@mail.ru"
-              onChange={(e) => {
-                dispatch(setFormData({ email: e.target.value }));
-                field.onChange(e);
-              }}
-            />
+            <Input {...field} ref={null} id="email" type="email" error={errors.email} placeholder="poisk.kl@mail.ru" />
           )}
         />
         {errors.email && <p className={styles['form-appointment__error']}>{errors.email.message}</p>}
       </div>
-      <Button size="l" title="Записаться" value={''} type={'submit'} />
+      <Button size="l" title="Записаться" type={'submit'} disabled={!isValid} />
     </form>
   );
 }

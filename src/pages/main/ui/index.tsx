@@ -36,7 +36,7 @@ export default function MainPage() {
           <MapBlock />
         </div>
       </div>
-      <Button type="button" size="l" value="" title="Переход на форму записи к врачу" onClick={redirectToAppointment} />
+      <Button type="button" size="l" title="Переход на форму записи к врачу" onClick={redirectToAppointment} />
     </>
   );
 }
