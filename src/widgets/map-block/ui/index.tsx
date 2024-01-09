@@ -64,7 +64,7 @@ export default function MapBlock({ clinicData }: IMapBlock) {
 
       <div className="map__group">
         <div className="map__input-container">
-          <DropDownInput values={data[townIndex]!.districts} state={district} setState={setDistrict} />
+          <DropDownInput values={data[townIndex]?.districts || []} state={district} setState={setDistrict} />
         </div>
         <div className="map__group-switch">
           <ToggleButton setState={setGeo} state={geo} />
