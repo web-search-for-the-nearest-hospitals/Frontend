@@ -1,10 +1,10 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IGetOrganizations, IOrganization, ISpecialty, ITown } from '../lib/types/interfaces';
+import { IClinicListData, IGetOrganizations, ISpecialty, ITown } from '../lib/types/interfaces';
 
 export const rtkqueryApi = createApi({
   reducerPath: 'rtkqueryApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: '/api/',
+    baseUrl: 'http://45.86.181.61/api/',
   }),
   endpoints: (builder) => ({
     getSpecialties: builder.query<ISpecialty[], null>({
@@ -13,7 +13,7 @@ export const rtkqueryApi = createApi({
     getTowns: builder.query<ITown[], null>({
       query: () => 'towns/',
     }),
-    getOrganizations: builder.query<IOrganization[], IGetOrganizations>({
+    getOrganizations: builder.query<IClinicListData, IGetOrganizations>({
       query: () => 'organizations/',
     }),
   }),

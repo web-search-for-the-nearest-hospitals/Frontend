@@ -34,6 +34,13 @@ export interface IOrganization extends ICoordinates {
   business_hours: IBusinessHours[];
 }
 
+export interface IClinicListData {
+  count: number;
+  next: string;
+  previous: string;
+  results: IOrganization[];
+}
+
 export interface ISpecialty {
   code: string;
   name: string;

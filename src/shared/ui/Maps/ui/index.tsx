@@ -1,8 +1,12 @@
 import styles from './index.module.scss';
-import { ICoord } from '~/shared/lib/types/interfaces';
+import { IClinicListData, ICoord } from '~/shared/lib/types/interfaces';
 import { YMaps, Map, Placemark, RouteButton, SearchControl } from '@pbe/react-yandex-maps';
 
-export default function Maps({ latitude, longitude }: ICoord) {
+interface IMaps extends ICoord {
+  clinicData: IClinicListData | undefined;
+}
+
+export default function Maps({ latitude, longitude, clinicData }: IMaps) {
   return latitude && longitude && Map ? (
     <section className={styles['map']}>
       <YMaps
@@ -27,9 +31,21 @@ export default function Maps({ latitude, longitude }: ICoord) {
             defaultGeometry={[latitude, longitude]}
             geometry={[latitude, longitude]}
             properties={{
-              balloonContentBody: 'За вами выехали.',
+              balloonContentBody: 'Центр мироздания. Возможно это вы.',
             }}
           />
+
+          {clinicData?.results.map((el) => (
+            <Placemark
+              key={`${el.latitude}${el.longitude}`}
+              defaultGeometry={[el.latitude, el.longitude]}
+              geometry={[el.latitude, el.longitude]}
+              properties={{
+                balloonContentBody: `${el.short_name} &middot; ${el.factual_address} &middot; ${el.about}`,
+              }}
+            />
+          ))}
+
           <SearchControl
             options={{
               float: 'right',
