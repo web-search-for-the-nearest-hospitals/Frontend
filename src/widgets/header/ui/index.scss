@@ -18,4 +18,14 @@
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
+  &__location {
+    @include flex-container($align: flex-end, $just: flex-start, $gap: 5px);
+    display: none;
+    @media screen and (width <=500px){
+display: flex;
+    }
+    &-text {
+      @include font-small-select;
+    }
+  }
 }

@@ -58,7 +58,7 @@ export default function MapBlock({ clinicData }: IMapBlock) {
   return (
     <div className="map">
       <div className="map__location">
-        <LocationIcon />
+        <LocationIcon size={30} />
         <p className="map__location-text">{town}</p>
       </div>
 
