@@ -41,7 +41,7 @@ export default function Maps({ latitude, longitude, clinicData }: IMaps) {
               defaultGeometry={[el.latitude, el.longitude]}
               geometry={[el.latitude, el.longitude]}
               properties={{
-                balloonContentBody: `${el.short_name} &middot; ${el.factual_address} &middot; ${el.about}`,
+                balloonContentBody: `${el.short_name} &middot; ${el.factual_address} &middot; ${el.about} &middot; ${el.phone}`,
               }}
             />
           ))}

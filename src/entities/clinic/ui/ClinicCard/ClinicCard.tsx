@@ -8,7 +8,7 @@ interface IClinicCard {
 // TODO: написать парсер для business_hours в формат макета - поле с графиком работы
 export function ClinicCard({ clinic }: IClinicCard) {
   return (
-    <div className="clinic-card">
+    <div className="clinic-card" onClick={() => alert('Представьте, что я Попап! Большой и информативный!')}>
       <h3 className="clinic-card__name">{clinic.short_name}</h3>
       <div className="clinic-card__timetable">
         <p className="clinic-card__timetable-title">График работы:</p>
