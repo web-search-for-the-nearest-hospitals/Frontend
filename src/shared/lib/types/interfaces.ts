@@ -10,13 +10,54 @@ export interface ICoord {
   spees?: TCoordPar;
 }
 
-export interface IOrganization {
-  full_name: string;
+interface ICoordinates {
+  latitude: number;
+  longitude: number;
+}
+
+interface IBusinessHours {
+  day: number;
+  from_hour: string;
+  to_hour: string;
+}
+
+export interface IOrganization extends ICoordinates {
+  relative_addr: string;
   short_name: string;
-  inn: number;
   factual_address: string;
-  region_code: number;
-  coord: ICoord;
   site: string;
-  email: string;
+  about: string | null;
+  phone: string;
+  town: string;
+  district: string;
+  is_full_time: boolean;
+  business_hours: IBusinessHours[];
+}
+
+export interface IClinicListData {
+  count: number;
+  next: string;
+  previous: string;
+  results: IOrganization[];
+}
+
+export interface ISpecialty {
+  code: string;
+  name: string;
+  skill: string;
+}
+
+export interface ITown extends ICoordinates {
+  name: string;
+  districts: string[];
+}
+
+export interface IGetOrganizations extends Partial<ICoordinates> {
+  specialty?: string;
+  town?: string;
+  district?: string;
+  is_gov?: string;
+  is_full_time?: string;
+  search?: string; // сокращенное наим. организации
+  page?: number; // пагинация?
 }

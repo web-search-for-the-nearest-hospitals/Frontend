@@ -3,20 +3,22 @@
 .search-clinic {
   width: 100%;
   max-width: 730px;
+  margin-bottom: 60px;
 
   &__container{
-    display: flex;
-
     @include flex-container($just: space-between, $gap: 30px);
-    align-items: center;
     margin-bottom: 31px;
+
+    @media screen and (width <= 500px) {
+      flex-wrap: wrap;
+    }
   }
 
   &__group{
-    display: flex;
-    max-width: calc(100% - 196px);
+    @include flex-container($just: flex-start, $gap: 118px, $fw: wrap);
 
-    @include flex-container($just: space-between, $gap: 0);
-    margin-bottom: 60px;
+    @media screen and (width <= 500px) {
+      gap: 21px;
+    }
   }
 }

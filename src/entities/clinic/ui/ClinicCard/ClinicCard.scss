@@ -5,33 +5,38 @@
   width: 260px;
   border-radius: 10px;
   background-color: $color-base-background;
-  margin-block: 30px;
+  margin-block: 15px;
   padding: 30px 10px 30px 20px;
   text-align: left;
   color: $text-color;
 
-  @media screen and (max-width: 1140px) {
+  cursor: pointer;
+
+  @media screen and (width <= 1140px) {
     background-color: $color-card-background;
     border: 1px solid #a3a3a3;
     width: 258px;
     padding: 30px 15px;
-    margin-block: 15px;
+    margin-block: 7.5px;
   }
 
   &__name {
     margin: 0;
+
     @include font-h3;
   }
 
   &__timetable {
     display: flex;
-    padding: 32px 0 32px;
+    padding: 32px 0;
     gap: 11.358px;
+
     @include font-small;
 
     &-title {
       width: max-content;
       margin: 0;
+
       @include font-small-select;
     }
 
@@ -45,10 +50,12 @@
   &__phone {
     display: flex;
     gap: 11.358px;
+
     @include font-small;
 
     &-title {
       margin: 0;
+
       @include font-small-select;
     }
 
@@ -61,10 +68,12 @@
     display: flex;
     padding: 32px 0 0;
     gap: 11.358px;
+
     @include font-small;
 
     &-title {
       margin: 0;
+
       @include font-small-select;
     }
 
