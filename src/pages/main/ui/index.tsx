@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 import Searcher from '~/widgets/searcher-block';
 import MapBlock from '~/widgets/map-block';
-import { ClinicList } from '~/entities/clinic';
+import { ClinicList, FullCardClinic } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
 import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
@@ -37,6 +37,7 @@ export default function MainPage() {
         <Searcher setSearch={setSearch} />
         <MapBlock clinicData={data} />
       </div>
+      <FullCardClinic />
     </div>
   );
 }

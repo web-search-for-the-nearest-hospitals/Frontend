@@ -1,0 +1,109 @@
+@import '~/shared/lib/index';
+
+.clinic-popup {
+  padding: 80px 80px 99px;
+  display: grid;
+  grid-template-columns: 414px 350px;
+  gap: 0 141px;
+  background-color: $color-base-background;
+  border-radius: 10px;
+  position: relative;
+  align-items: flex-end;
+
+  @media screen and (width <= 1100px) {
+    grid-template-columns: 414px
+  }
+
+  &__name {
+    grid-column: 1;
+    @include font-h1;
+    line-height: 29.26px;
+  }
+
+  &__about {
+    grid-column: 1;
+    margin-top: 20px;
+    @include font-usual;
+    line-height: 19.5px;
+  }
+
+  &__timetable {
+    grid-column: 2;
+    margin-top: 24px;
+    display: flex;
+    gap: 0 5px;
+    align-self: flex-start;
+    @include font-usual;
+
+    &-title {
+      @include font-h3;
+    }
+
+    &-period {
+      max-width: 160px;
+      line-height: 19.5px;
+    }
+
+    @media screen and (width <= 1100px) {
+      grid-column: 1;
+      grid-row: 5;
+    }
+  }
+
+  &__phone {
+    grid-column: 1;
+    grid-row: 3;
+    margin-top: 60px;
+    display: flex;
+    gap: 0 5px;
+    align-self: flex-start;
+    @include font-usual;
+
+
+    &-title {
+      @include font-h3;
+    }
+  }
+
+  &__site {
+    grid-column: 1;
+    margin-top: 40px;
+    display: flex;
+    gap: 0 5px;
+    align-self: flex-start;
+    @include font-usual;
+
+    &-title {
+      @include font-h3;
+    }
+
+    &-link {
+      color: $active-button;
+    }
+
+    @media screen and (width <= 1100px) {
+      grid-column: 1;
+    }
+  }
+
+  &__address {
+    grid-column: 2;
+    align-self: flex-start;
+    @include font-usual;
+
+    &-title {
+      margin-right: 5px;
+      @include font-h3;
+    }
+
+    &-text {
+      line-height: 19.5px;
+    }
+
+    @media screen and (width <= 1100px) {
+      margin: 20px 0 36px;
+      grid-column: 1;
+      grid-row: 6;
+    }
+  }
+}
