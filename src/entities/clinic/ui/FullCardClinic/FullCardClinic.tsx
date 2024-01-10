@@ -2,10 +2,12 @@ import './FullCardClinic.scss';
 import { Popup, Button, CloseButton } from '~/shared/ui/index';
 import { clinic } from '~/shared/api/constants';
 
-import { useState } from 'react';
+interface IFullCardClinic {
+  isOpenPopup: boolean;
+  setIsOpenPopup: (newVal: boolean) => void;
+}
 
-export function FullCardClinic() {
-  const [isOpenPopup, setIsOpenPopup] = useState(true);
+export function FullCardClinic({ isOpenPopup, setIsOpenPopup }: IFullCardClinic) {
   // @TODO на экране меньше 625px должно превращаться в отдельную страницу
   return (
     <Popup isOpen={isOpenPopup}>

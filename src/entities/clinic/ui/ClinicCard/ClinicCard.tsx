@@ -3,12 +3,13 @@ import { IOrganization } from '~/shared/lib/types/interfaces';
 
 interface IClinicCard {
   clinic: IOrganization;
+  setIsOpenPopup: (newVal: boolean) => void;
 }
 
 // TODO: написать парсер для business_hours в формат макета - поле с графиком работы
-export function ClinicCard({ clinic }: IClinicCard) {
+export function ClinicCard({ clinic, setIsOpenPopup }: IClinicCard) {
   return (
-    <div className="clinic-card" onClick={() => alert('Представьте, что я Попап! Большой и информативный!')}>
+    <div className="clinic-card" onClick={() => setIsOpenPopup(true)}>
       <h3 className="clinic-card__name">{clinic.short_name}</h3>
       <div className="clinic-card__timetable">
         <p className="clinic-card__timetable-title">График работы:</p>
