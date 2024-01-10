@@ -11,10 +11,6 @@
   }
 
   @media screen and (width <= 1140px) {
-    // @TODO пока не удаляю, но возможно они больше не нужны, т.к. по макету рекламы на мобилке нет
-    // overflow-y: auto;
-    // padding: 0;
-
     display: none;
   }
 }
