@@ -14,5 +14,13 @@
   &:hover {
     opacity: 0.6;
   }
+
+  @media screen and (width <= 625px) {
+    min-width: 11px;
+    min-height: 11px;
+    background-size: 11px;
+    right: 14px;
+    top: 14px;
+  }
 }
 

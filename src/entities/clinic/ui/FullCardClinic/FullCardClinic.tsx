@@ -6,7 +6,7 @@ import { useState } from 'react';
 
 export function FullCardClinic() {
   const [isOpenPopup, setIsOpenPopup] = useState(true);
-  // @TODO на экране меньше 625px должно превращаться в отдельную страницу
+
   return (
     <Popup isOpen={isOpenPopup}>
       <div className="clinic-popup">
@@ -33,7 +33,7 @@ export function FullCardClinic() {
             {clinic.site}
           </a>
         </div>
-        <Button title="Записаться" size="l" type="submit" />
+        <Button title="Записаться" size="m" type="submit" />
       </div>
     </Popup>
   );

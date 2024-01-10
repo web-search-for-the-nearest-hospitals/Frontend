@@ -11,13 +11,25 @@
   align-items: flex-end;
 
   @media screen and (width <= 1100px) {
-    grid-template-columns: 414px
+    grid-template-columns: 414px;
+  }
+
+  @media screen and (width <= 625px) {
+    grid-template-columns: 255px;
+    background-color: $color-card-background;
+    margin: 15px;
+    padding: 30px 20px;
   }
 
   &__name {
     grid-column: 1;
     @include font-h1;
     line-height: 29.26px;
+
+    @media screen and (width <= 625px) {
+      @include font-h3;
+      line-height: 19.5px;
+    }
   }
 
   &__about {
@@ -25,6 +37,11 @@
     margin-top: 20px;
     @include font-usual;
     line-height: 19.5px;
+
+    @media screen and (width <= 625px) {
+      @include font-small;
+      line-height: 17.07px;
+    }
   }
 
   &__timetable {
@@ -35,18 +52,32 @@
     align-self: flex-start;
     @include font-usual;
 
+    @media screen and (width <= 1100px) {
+      grid-column: 1;
+      grid-row: 5;
+      gap: 0 3px;
+    }
+
+    @media screen and (width <= 625px) {
+      margin-top: 20px;
+      @include font-small;
+    }
+
     &-title {
       @include font-h3;
+
+      @media screen and (width <= 625px) {
+        font-size: 14px;
+      }
     }
 
     &-period {
       max-width: 160px;
       line-height: 19.5px;
-    }
 
-    @media screen and (width <= 1100px) {
-      grid-column: 1;
-      grid-row: 5;
+      @media screen and (width <= 625px) {
+        max-width: 134px;
+      }
     }
   }
 
@@ -59,9 +90,17 @@
     align-self: flex-start;
     @include font-usual;
 
+    @media screen and (width <= 625px) {
+      margin-top: 30px;
+      @include font-small;
+    }
 
     &-title {
       @include font-h3;
+
+      @media screen and (width <= 625px) {
+        font-size: 14px;
+      }
     }
   }
 
@@ -73,16 +112,25 @@
     align-self: flex-start;
     @include font-usual;
 
+    @media screen and (width <= 1100px) {
+      grid-column: 1;
+    }
+
+    @media screen and (width <= 625px) {
+      margin-top: 20px;
+      @include font-small;
+    }
+
     &-title {
       @include font-h3;
+
+      @media screen and (width <= 625px) {
+        font-size: 14px;
+      }
     }
 
     &-link {
       color: $active-button;
-    }
-
-    @media screen and (width <= 1100px) {
-      grid-column: 1;
     }
   }
 
@@ -91,19 +139,28 @@
     align-self: flex-start;
     @include font-usual;
 
-    &-title {
-      margin-right: 5px;
-      @include font-h3;
-    }
-
-    &-text {
-      line-height: 19.5px;
-    }
-
     @media screen and (width <= 1100px) {
       margin: 20px 0 36px;
       grid-column: 1;
       grid-row: 6;
+    }
+
+    @media screen and (width <= 625px) {
+      @include font-small;
+    }
+
+    &-title {
+      margin-right: 5px;
+      @include font-h3;
+
+      @media screen and (width <= 625px) {
+        font-size: 14px;
+        margin-right: 3px;
+      }
+    }
+
+    &-text {
+      line-height: 19.5px;
     }
   }
 }

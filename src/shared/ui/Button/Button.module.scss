@@ -16,8 +16,20 @@
     min-width: 160px;
   }
 
+  &_size_m {
+    min-width: 350px;
+
+    @media screen and (width <= 625px) {
+      min-width: 251px;
+    }
+  }
+
   &_size_l {
     min-width: 350px;
+
+    @media screen and (width <= 625px) {
+      min-width: 290px;
+    }
   }
 
   &:hover {
