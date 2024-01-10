@@ -21,6 +21,7 @@ export default function useDropDownInput({ values, styles, setState, contentEdit
   const checkKey = (el: Element | null) => el?.getAttribute('data-key') !== listRef.current?.getAttribute('data-key');
   const handleFocus = () => setIsFocused(true);
 
+
   const toFocusOption = useCallback(
     () => (listRef.current?.children[focusIndex] as HTMLElement)?.focus(),
     [focusIndex, listRef],

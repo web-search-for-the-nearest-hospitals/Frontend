@@ -38,8 +38,12 @@ export default function Searcher({ setSearch }: ISearcher) {
         <Button type="submit" size="s" title="Найти" onClick={() => setSearch(true)} />
       </div>
       <div className="search-clinic__group">
-        <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />
-        <Checkbox state={isGovernment} setState={setIsGovernment} title="Государственные" />
+        <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay}>
+          Круглосуточные
+        </Checkbox>
+        <Checkbox state={isGovernment} setState={setIsGovernment}>
+          Государственные
+        </Checkbox>
       </div>
     </div>
   );

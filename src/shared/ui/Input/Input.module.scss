@@ -1,0 +1,34 @@
+@import '~/shared/lib/index';
+
+.input {
+  @include font-usual;
+  box-sizing: border-box;
+  max-width: 350px;
+  width: 100%;
+  height: 41px;
+  border-radius: 10px;
+  border: 2px solid $color-contour;
+  padding-left: 20px;
+  padding-right: 20px;
+
+  &:focus-visible {
+    border-color: $active-button;
+    outline: none;
+  }
+
+  &:hover {
+    box-shadow: 0 0 10px $color-contour;
+  }
+
+  &::placeholder {
+    color: $color-not-active;
+  }
+
+  &.error {
+    border: 2px solid $color-error;
+    background-repeat: no-repeat;
+    background-position: calc(100% - 20px);
+    background-size: 13.8px 13.8px;
+    background-image: url('~/shared/assets/icons/warning.svg');
+  }
+}

@@ -9,11 +9,18 @@ import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
 import { createToast } from '~/shared/lib';
 
+import { useNavigate } from 'react-router-dom';
+
 export default function MainPage() {
   const [isSearch, setSearch] = useState(false);
   const [triggerQuery, queryResult] = useLazyGetOrganizationsQuery();
   const { data, isLoading, isError } = queryResult;
   const [isOpenPopup, setIsOpenPopup] = useState(false);
+  const navigate = useNavigate();
+
+  const redirectToAppointment = () => {
+    navigate('/clinic-searcher/appointment');
+  };
 
   useEffect(() => {
     if (isSearch) {
@@ -28,17 +35,23 @@ export default function MainPage() {
   }, [isError]);
 
   return (
-    <div className="main-page">
-      <div className="main-page__card-list">
-        {isSearch && !isLoading && data ? <ClinicList data={data} setIsOpenPopup={setIsOpenPopup} /> : null}
-        {!isSearch ? <AdvertList /> : null}
-        {isSearch && isLoading && !data ? <div>Данные загружаются</div> : null}
+    <>
+      <div className="main-page">
+        <div className="main-page__card-list">
+          {isSearch && !isLoading && data ? <ClinicList data={data} setIsOpenPopup={setIsOpenPopup} /> : null}
+          {!isSearch ? <AdvertList /> : null}
+          {isSearch && isLoading && !data ? <div>Данные загружаются</div> : null}
+        </div>
+        <div className="main-page__search-block">
+          <Searcher setSearch={setSearch} />
+          <MapBlock clinicData={data} />
+        </div>
+        <FullCardClinic
+          isOpenPopup={isOpenPopup}
+          setIsOpenPopup={setIsOpenPopup}
+          onClickButton={redirectToAppointment}
+        />
       </div>
-      <div className="main-page__search-block">
-        <Searcher setSearch={setSearch} />
-        <MapBlock clinicData={data} />
-      </div>
-      <FullCardClinic isOpenPopup={isOpenPopup} setIsOpenPopup={setIsOpenPopup} />
-    </div>
+    </>
   );
 }

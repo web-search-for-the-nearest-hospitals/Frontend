@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { rtkqueryApi } from '~/shared/api/rtkqueryApi';
-import userSlice from '../../entities/user/model/userSlice';
+import userReducer from '../../entities/user/model/userSlice';
+import appointmentReducer from '~/entities/appointment/model/appointmentSlice';
 
 export const store = configureStore({
   reducer: {
     [rtkqueryApi.reducerPath]: rtkqueryApi.reducer,
-    user: userSlice,
+    user: userReducer,
+    appointment: appointmentReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rtkqueryApi.middleware),
 });

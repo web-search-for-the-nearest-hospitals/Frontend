@@ -5,9 +5,10 @@ import { clinic } from '~/shared/api/constants';
 interface IFullCardClinic {
   isOpenPopup: boolean;
   setIsOpenPopup: (newVal: boolean) => void;
+  onClickButton: () => void;
 }
 
-export function FullCardClinic({ isOpenPopup, setIsOpenPopup }: IFullCardClinic) {
+export function FullCardClinic({ isOpenPopup, setIsOpenPopup, onClickButton }: IFullCardClinic) {
   // @TODO на экране меньше 625px должно превращаться в отдельную страницу
   return (
     <Popup isOpen={isOpenPopup}>
@@ -35,7 +36,7 @@ export function FullCardClinic({ isOpenPopup, setIsOpenPopup }: IFullCardClinic)
             {clinic.site}
           </a>
         </div>
-        <Button title="Записаться" size="l" type="submit" />
+        <Button title="Записаться" size="l" type="submit" onClick={onClickButton} />
       </div>
     </Popup>
   );

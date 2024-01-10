@@ -1,12 +1,16 @@
 import styles from './_DropDownInput.module.scss';
 import cn from 'classnames';
 import useDropDownInput from './_useDropDownInput';
+import { LegacyRef } from 'react';
+
 interface IDropDownInput {
   values: readonly string[];
   state: string | null;
   setState: ((newVal: string | null) => void) | ((newVal: string) => void);
   placeholder?: string;
   contentEditable?: boolean;
+  ref?: LegacyRef<HTMLInputElement> | undefined | null;
+
 }
 
 export default function DropDownInput({
@@ -15,6 +19,7 @@ export default function DropDownInput({
   setState,
   placeholder = 'Выберите значение',
   contentEditable = false,
+  ref,
 }: IDropDownInput) {
   const {
     handleOptionClick,
@@ -37,7 +42,7 @@ export default function DropDownInput({
   });
 
   return (
-    <div className={styles['drop-down-input']}>
+    <div className={styles['drop-down-input']} ref={ref}>
       <div
         className={cn(
           styles['drop-down-input__value'],

@@ -1,0 +1,39 @@
+@import '~/shared/lib/index';
+
+.form-appointment {
+  max-width: 350px;
+  background-color: $color-base-background;
+  padding: 54px 40px 25px;
+  border-radius: 10px;
+  margin: 0 auto;
+
+  &__wrapper {
+    margin-bottom: 20px;
+
+    &:last-of-type {
+      margin-bottom: 40px;
+    }
+
+    &_error {
+      margin-bottom: 10px;
+    }
+  }
+
+  &__label {
+    display: block;
+
+    @include font-small;
+    color: $text-color;
+    margin-bottom: 10px;
+  }
+
+  &__input-date {
+    background-image: none!important;
+  }
+
+  &__error {
+    @include font-text-error;
+    color: $color-error;
+    margin-top: 10px;
+  }
+}
