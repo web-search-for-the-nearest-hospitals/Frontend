@@ -1,31 +1,41 @@
 import './index.scss';
+import { useState, useEffect } from 'react';
 
 import Searcher from '~/widgets/searcher-block';
-
 import MapBlock from '~/widgets/map-block';
 import { ClinicList, FullCardClinic } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
-import { useState } from 'react';
+import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
+import { IGetOrganizations } from '~/shared/lib/types/interfaces';
+import { createToast } from '~/shared/lib';
 
 export default function MainPage() {
-  const [isSearch, setSearch] = useState(true);
+  const [isSearch, setSearch] = useState(false);
+  const [triggerQuery, queryResult] = useLazyGetOrganizationsQuery();
+  const { data, isLoading, isError } = queryResult;
+
+  useEffect(() => {
+    if (isSearch) {
+      triggerQuery(null as unknown as IGetOrganizations);
+    }
+  }, [triggerQuery, isSearch]);
+
+  useEffect(() => {
+    if (isError) {
+      createToast('error', 'Не удалось получить список поликлиник');
+    }
+  }, [isError]);
 
   return (
     <div className="main-page">
       <div className="main-page__card-list">
-        <button
-          className="main-page__btn"
-          onClick={() => {
-            setSearch(!isSearch);
-          }}
-        >
-          {isSearch ? 'Показать рекламу' : 'Показать клиники'}
-        </button>
-        {isSearch ? <ClinicList /> : <AdvertList />}
+        {isSearch && !isLoading && data ? <ClinicList isLoading={isLoading} data={data} /> : null}
+        {!isSearch ? <AdvertList /> : null}
+        {isSearch && isLoading && !data ? <div>Данные загружаются</div> : null}
       </div>
       <div className="main-page__search-block">
-        <Searcher />
-        <MapBlock />
+        <Searcher setSearch={setSearch} />
+        <MapBlock clinicData={data} />
       </div>
       <FullCardClinic />
     </div>
