@@ -4,13 +4,17 @@ import { clinic } from '~/shared/api/constants';
 
 import { useState } from 'react';
 
-export function FullCardClinic() {
-  const [isOpenPopup, setIsOpenPopup] = useState(true);
+interface IFullCard {
+  isOpenPopup: boolean;
+}
+
+export function FullCardClinic({ isOpenPopup }: IFullCard) {
+  const [isClose, setIsClose] = useState(false);
 
   return (
-    <Popup isOpen={isOpenPopup}>
+    <Popup isOpen={isOpenPopup} isClose={isClose}>
       <div className="clinic-popup">
-        <CloseButton type="button" onClick={() => setIsOpenPopup(false)} />
+        <CloseButton type="button" onClick={() => setIsClose(true)} />
         <h3 className="clinic-popup__name">{clinic.name}</h3>
         <p className="clinic-popup__about">{clinic.about}</p>
         <div className="clinic-popup__timetable">

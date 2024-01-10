@@ -13,6 +13,7 @@ export default function MainPage() {
   const [isSearch, setSearch] = useState(false);
   const [triggerQuery, queryResult] = useLazyGetOrganizationsQuery();
   const { data, isLoading, isError } = queryResult;
+  const [isOpen, setIsOpen] = useState(false);
 
   useEffect(() => {
     if (isSearch) {
@@ -29,7 +30,9 @@ export default function MainPage() {
   return (
     <div className="main-page">
       <div className="main-page__card-list">
-        {isSearch && !isLoading && data ? <ClinicList isLoading={isLoading} data={data} /> : null}
+        {isSearch && !isLoading && data ? (
+          <ClinicList isLoading={isLoading} data={data} isOpenCard={setIsOpen} />
+        ) : null}
         {!isSearch ? <AdvertList /> : null}
         {isSearch && isLoading && !data ? <div>Данные загружаются</div> : null}
       </div>
@@ -37,7 +40,7 @@ export default function MainPage() {
         <Searcher setSearch={setSearch} />
         <MapBlock clinicData={data} />
       </div>
-      <FullCardClinic />
+      <FullCardClinic isOpenPopup={isOpen} />
     </div>
   );
 }
