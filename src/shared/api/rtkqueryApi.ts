@@ -4,7 +4,7 @@ import { IClinicListData, IGetOrganizations, ISpecialty, ITown, ITowns } from '.
 export const rtkqueryApi = createApi({
   reducerPath: 'rtkqueryApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://45.86.181.61/api/',
+    baseUrl: 'https://45.86.181.61/api/',
   }),
   endpoints: (builder) => ({
     getSpecialties: builder.query<ISpecialty[], null>({

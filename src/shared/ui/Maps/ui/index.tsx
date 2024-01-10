@@ -11,7 +11,7 @@ export default function Maps({ latitude, longitude, clinicData }: IMaps) {
     <section className={styles['map']}>
       <YMaps
         query={{
-          apikey: import.meta.env.VITE_YAMAP_API_KEY,
+          apikey: '49396872-6e0d-42af-9be5-91bf4d8b7493',
           lang: 'ru_RU',
           ns: 'use-load-option',
           load: 'Map,Placemark,control.ZoomControl,control.FullscreenControl,geoObject.addon.balloon',

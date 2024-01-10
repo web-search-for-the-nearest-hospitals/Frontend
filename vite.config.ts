@@ -4,6 +4,7 @@ import { resolve } from 'path';
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: '/Frontend/',
   plugins: [react()],
   server: {
     host: true,
