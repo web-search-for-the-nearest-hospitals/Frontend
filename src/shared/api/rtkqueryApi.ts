@@ -1,5 +1,5 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IClinicListData, IGetOrganizations, ISpecialty, ITown } from '../lib/types/interfaces';
+import { IClinicListData, IGetOrganizations, ISpecialty, ITown, ITowns } from '../lib/types/interfaces';
 
 export const rtkqueryApi = createApi({
   reducerPath: 'rtkqueryApi',
@@ -10,8 +10,11 @@ export const rtkqueryApi = createApi({
     getSpecialties: builder.query<ISpecialty[], null>({
       query: () => 'specialties/',
     }),
-    getTowns: builder.query<ITown[], null>({
+    getTowns: builder.query<ITowns[], null>({
       query: () => 'towns/',
+    }),
+    getTownsDataById: builder.query<ITown, string>({
+      query: (i) => `towns/${i}`,
     }),
     getOrganizations: builder.query<IClinicListData, IGetOrganizations>({
       query: () => 'organizations/',
@@ -19,4 +22,5 @@ export const rtkqueryApi = createApi({
   }),
 });
 
-export const { useGetSpecialtiesQuery, useGetTownsQuery, useLazyGetOrganizationsQuery } = rtkqueryApi;
+export const { useGetSpecialtiesQuery, useGetTownsQuery, useLazyGetOrganizationsQuery, useLazyGetTownsDataByIdQuery } =
+  rtkqueryApi;

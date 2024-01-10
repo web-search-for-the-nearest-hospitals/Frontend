@@ -47,9 +47,18 @@ export interface ISpecialty {
   skill: string;
 }
 
+export interface ITowns {
+  name: string;
+  relative_addr: string;
+}
+
 export interface ITown extends ICoordinates {
   name: string;
-  districts: string[];
+  districts: IDistrict[];
+}
+
+export interface IDistrict extends ICoordinates {
+  name: string;
 }
 
 export interface IGetOrganizations extends Partial<ICoordinates> {
