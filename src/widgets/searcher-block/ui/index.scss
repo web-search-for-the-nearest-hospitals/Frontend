@@ -4,17 +4,22 @@
   width: 100%;
   max-width: 730px;
   margin-bottom: 60px;
-
-  &__container{
+  
+  @media screen and (width <= 500px) {
+    margin-bottom: 30px;
+  }
+  &__container {
     @include flex-container($just: space-between, $gap: 30px);
     margin-bottom: 31px;
 
     @media screen and (width <= 500px) {
       flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
     }
   }
 
-  &__group{
+  &__group {
     @include flex-container($just: flex-start, $gap: 118px, $fw: wrap);
 
     @media screen and (width <= 500px) {
