@@ -2,83 +2,60 @@
 @import '~/shared/lib/styles/mixins-font';
 
 .clinic-card {
-  width: 260px;
+  width: 100%;
+  max-width: 263px;
   border-radius: 10px;
   background-color: $color-base-background;
   margin-block: 15px;
-  padding: 30px 10px 30px 20px;
+  padding: 30px 6px 30px 21px;
   text-align: left;
   color: $text-color;
-
   cursor: pointer;
-
-  @media screen and (width <= 1140px) {
-    background-color: $color-card-background;
-    border: 1px solid #a3a3a3;
-    width: 258px;
-    padding: 30px 15px;
-    margin-block: 7.5px;
-  }
 
   &__name {
     margin: 0;
-
     @include font-h3;
+    line-height: 140%;
+  }
+
+  @media screen and (width <= 1140px) {
+    background-color: $color-card-background;
+    max-width: 260px;
+    padding: 30px 15px;
+    margin-block: 7.5px;
   }
 
   &__timetable {
     display: flex;
     padding: 32px 0;
-    gap: 11.358px;
-
+    gap: 8px;
     @include font-small;
 
     &-title {
-      width: max-content;
-      margin: 0;
-
+      min-width: 120px;
       @include font-small-select;
     }
 
     &-period {
-      width: 130px;
-      margin: 0;
+      min-width: 140px;
       color: $active-button;
     }
   }
 
   &__phone {
     display: flex;
-    gap: 11.358px;
-
-    @include font-small;
-
-    &-title {
-      margin: 0;
-
-      @include font-small-select;
-    }
-
-    &-number {
-      margin: 0;
-    }
+    gap: 8px;
+    @include font-small-select;
   }
 
   &__address {
     display: flex;
     padding: 32px 0 0;
-    gap: 11.358px;
-
+    gap: 8px;
     @include font-small;
 
     &-title {
-      margin: 0;
-
       @include font-small-select;
-    }
-
-    &-value {
-      margin: 0;
     }
   }
 }
