@@ -1,13 +1,22 @@
 import './index.scss';
-import { Outlet } from 'react-router-dom';
+import { useState } from 'react';
+import { Outlet, NavLink } from 'react-router-dom';
 import { Layout } from '~/shared/ui';
+import { LocationIcon } from '~/shared/assets';
 
 function Header() {
+  const [town] = useState('Калуга');
   return (
     <>
       <Layout>
         <header className="header">
-          <p className="header__logo">поиск клиник</p>
+          <NavLink to="/">
+            <p className="header__logo">поиск клиник</p>
+          </NavLink>
+          <div className="header__location">
+            <LocationIcon size={20} />
+            <p className="header__location-text">{town}</p>
+          </div>
         </header>
         <Outlet />
       </Layout>
