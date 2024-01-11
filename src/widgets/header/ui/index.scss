@@ -17,12 +17,17 @@
     background: linear-gradient(90deg, #4f73e7 0%, #626ae8 48.85%, #8b56e9 100%);
     background-clip: text;
     -webkit-text-fill-color: transparent;
+    
+    @media screen and (width <=500px) {
+      font-size: 16px;
+    }
   }
   &__location {
     @include flex-container($align: flex-end, $just: flex-start, $gap: 5px);
     display: none;
-    @media screen and (width <=500px){
-display: flex;
+
+    @media screen and (width <=500px) {
+      display: flex;
     }
     &-text {
       @include font-small-select;

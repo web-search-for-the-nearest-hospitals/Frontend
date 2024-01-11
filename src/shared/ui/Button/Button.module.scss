@@ -11,9 +11,9 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 160px;
 
   &_size_s {
-    min-width: 160px;
     @media screen and (width <= 500px) {
       min-width: 100%;
     }
@@ -27,16 +27,16 @@
     background: $active-button;
   }
 
-  &:active  {
-    background: $pressed-button
+  &:active {
+    background: $pressed-button;
   }
 
   &:focus-visible {
     outline: 2px solid #000;
   }
 
-  &:disabled  {
+  &:disabled {
     cursor: default;
-    background: $color-not-active
+    background: $color-not-active;
   }
 }
