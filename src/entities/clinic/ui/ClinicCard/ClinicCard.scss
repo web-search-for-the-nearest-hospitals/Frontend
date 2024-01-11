@@ -2,7 +2,8 @@
 @import '~/shared/lib/styles/mixins-font';
 
 .clinic-card {
-  width: 263px;
+  width: 100%;
+  max-width: 263px;
   border-radius: 10px;
   background-color: $color-base-background;
   margin-block: 15px;
@@ -19,7 +20,7 @@
 
   @media screen and (width <= 1140px) {
     background-color: $color-card-background;
-    width: 260px;
+    max-width: 260px;
     padding: 30px 15px;
     margin-block: 7.5px;
   }
