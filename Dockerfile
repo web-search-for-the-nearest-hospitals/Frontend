@@ -1,7 +1,6 @@
-FROM node:18
+FROM node:lts-bookworm-slim as build
 WORKDIR /app
 COPY package*.json .
 RUN npm i
 COPY . .
 RUN npm run build
-CMD [ "cp", "-r", "dist", "result_build" ]

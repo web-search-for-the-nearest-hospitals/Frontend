@@ -19,7 +19,7 @@ export default function MapBlock({ clinicData }: IMapBlock) {
   const dispatch = useAppDispatch();
   const coord = useAppSelector(userSelect);
   const [stateCoord, setStateCoord] = useState<ICoord>(coord);
-  const [district, setDistrict] = useState('Не выбрано');
+  const [district, setDistrict] = useState('Районы');
   const [geo, setGeo] = useState(false);
   const [town] = useState('Калуга');
   const [townIndex, setTownIndex] = useState<null | number>(null);
@@ -73,7 +73,7 @@ export default function MapBlock({ clinicData }: IMapBlock) {
   return (
     <div className="map">
       <div className="map__location">
-        <LocationIcon />
+        <LocationIcon size={30} />
         <p className="map__location-text">{town}</p>
       </div>
 
