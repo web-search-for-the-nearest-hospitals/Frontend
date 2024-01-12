@@ -1,0 +1,34 @@
+@import '~/shared/lib/index';
+
+.tooltip {
+  display: flex;
+  padding: 80px 45px 54px;
+  background-color: $color-base-background;
+  border-radius: 10px;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+
+  @media screen and (width <= 625px) {
+    background-color: $color-card-background;
+    margin: 15px;
+    padding: 40px 20px  54px;
+  }
+
+  &__text {
+    max-width: 509px;
+    min-height: 64px;
+    margin-bottom: 40px;
+    @include font-usual;
+    line-height: 19.5px;
+    text-align: center;
+
+
+    @media screen and (width <= 625px) {
+      @include font-small;
+      line-height: 17.07px;
+      margin-bottom: 24px;
+    }
+  }
+
+}
