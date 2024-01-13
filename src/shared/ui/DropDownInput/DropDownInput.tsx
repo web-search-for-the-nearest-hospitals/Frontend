@@ -6,7 +6,7 @@ interface IDropDownInput {
   state: string | null;
   setState: ((newVal: string | null) => void) | ((newVal: string) => void);
   placeholder?: string;
-  contentEditable?: boolean;
+  isContentEditable?: boolean;
 }
 
 export default function DropDownInput({
@@ -14,7 +14,7 @@ export default function DropDownInput({
   state,
   setState,
   placeholder = 'Выберите значение',
-  contentEditable = false,
+  isContentEditable = false,
 }: IDropDownInput) {
   const {
     handleOptionClick,
@@ -33,7 +33,7 @@ export default function DropDownInput({
     values,
     styles,
     setState,
-    contentEditable,
+    isContentEditable,
   });
 
   return (
@@ -47,8 +47,8 @@ export default function DropDownInput({
         onKeyDown={onKeyInput}
         tabIndex={0}
         role="input"
-        contentEditable={contentEditable}
-        suppressContentEditableWarning={contentEditable}
+        contentEditable={isContentEditable}
+        suppressContentEditableWarning={isContentEditable}
         onInput={onChangeInput}
         onFocus={handleFocus}
         onBlur={handleBlur}

@@ -33,7 +33,7 @@ export default function Searcher({ setSearch }: ISearcher) {
           placeholder="Врач, специальность"
           state={specialty}
           setState={setSpeciality}
-          contentEditable
+          isContentEditable
         />
         <Button type="submit" size="s" title="Найти" onClick={() => setSearch(true)} />
       </div>
