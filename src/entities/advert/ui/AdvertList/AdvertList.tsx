@@ -10,6 +10,7 @@ export default function AdvertList() {
       {adverts.map((advert) => (
         <AdvertCard key={advert.id} advert={advert} />
       ))}
+      <span className="advert-list__margin-bottom"></span>
     </div>
   );
 }

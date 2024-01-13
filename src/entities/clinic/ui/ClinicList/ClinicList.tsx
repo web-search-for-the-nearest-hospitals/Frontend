@@ -13,6 +13,7 @@ export default function ClinicList({ data }: IClinicList) {
       {data.results.map((clinic) => (
         <ClinicCard key={`${clinic.latitude}${clinic.longitude}`} clinic={clinic} />
       ))}
+      <span className="clinic-list__margin-bottom"></span>
     </div>
   );
 }
