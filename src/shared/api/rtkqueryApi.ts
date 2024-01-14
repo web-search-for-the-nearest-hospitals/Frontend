@@ -20,6 +20,7 @@ export const rtkqueryApi = createApi({
       query: (filters: Record<string, string>) =>
         'organizations/?' +
         Object.keys(filters)
+          .filter((key) => filters[key])
           .map((key) => `${key}=${filters[key]}`)
           .join('&'),
     }),

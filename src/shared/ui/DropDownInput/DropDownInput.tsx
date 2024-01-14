@@ -1,6 +1,7 @@
 import styles from './_DropDownInput.module.scss';
 import cn from 'classnames';
 import useDropDownInput from './_useDropDownInput';
+import { useRef } from 'react';
 interface IDropDownInput {
   values: readonly string[];
   state: string | null;
@@ -16,24 +17,18 @@ export default function DropDownInput({
   placeholder = 'Выберите значение',
   isContentEditable = false,
 }: IDropDownInput) {
+  const listKey = useRef(Math.random().toString());
+  const listRef = useRef<HTMLUListElement | null>(null);
+  const inputRef = useRef<HTMLDivElement | null>(null);
+
   const {
-    handleOptionClick,
-    onChangeInput,
-    onKeyInput,
-    onKeyOption,
-    handleBlur,
-    handleFocus,
-    listKey,
-    isFocused,
-    isOpen,
-    inputRef,
-    listRef,
-    visibleList,
+    // eslint-disable-next-line prettier/prettier
+    handleOptionClick, onChangeInput, onKeyInput, onKeyOption, handleBlur, handleFocus,
+    // eslint-disable-next-line prettier/prettier
+    isFocused, isOpen, visibleList
   } = useDropDownInput({
-    values,
-    styles,
-    setState,
-    isContentEditable,
+    // eslint-disable-next-line prettier/prettier
+    values, styles, setState, isContentEditable, listRef, inputRef,
   });
 
   return (

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { createToast } from '~/shared/lib';
 
 interface IUseDropDownInputProps {
@@ -6,21 +6,22 @@ interface IUseDropDownInputProps {
   styles: Record<string, string>;
   setState: ((newVal: string | null) => void) | ((newVal: string) => void);
   isContentEditable: boolean | undefined;
+  listRef: React.MutableRefObject<HTMLUListElement | null>;
+  inputRef: React.MutableRefObject<HTMLDivElement | null>;
 }
 
-export default function useDropDownInput({ values, styles, setState, isContentEditable }: IUseDropDownInputProps) {
+export default function useDropDownInput({
+  // eslint-disable-next-line prettier/prettier
+  values, styles, setState, isContentEditable, listRef, inputRef,
+}: IUseDropDownInputProps) {
   const [isFocused, setIsFocused] = useState(false);
   const [visibleList, setVisibleList] = useState(values);
   const [isOpen, setIsOpen] = useState(false);
   const [focusIndex, setFocusIndex] = useState(0);
-  const listRef = useRef<HTMLUListElement | null>(null);
-  const inputRef = useRef<HTMLDivElement | null>(null);
-  const listKey = useRef(Math.random().toString());
 
   const findClosest = (e: React.FocusEvent) => e.relatedTarget?.closest(`.${styles['drop-down-input__list']}`);
   const checkKey = (el: Element | null) => el?.getAttribute('data-key') !== listRef.current?.getAttribute('data-key');
   const handleFocus = () => setIsFocused(true);
-
   const toFocusOption = useCallback(
     () => (listRef.current?.children[focusIndex] as HTMLElement)?.focus(),
     [focusIndex, listRef],
@@ -113,17 +114,9 @@ export default function useDropDownInput({ values, styles, setState, isContentEd
   }, [toFocusOption]);
 
   return {
-    handleOptionClick,
-    onChangeInput,
-    onKeyInput,
-    onKeyOption,
-    handleBlur,
-    handleFocus,
-    listKey,
-    isFocused,
-    isOpen,
-    inputRef,
-    listRef,
-    visibleList,
+    // eslint-disable-next-line prettier/prettier
+    handleOptionClick, onChangeInput, onKeyInput, onKeyOption, handleBlur, handleFocus,
+    // eslint-disable-next-line prettier/prettier
+    isFocused, isOpen, visibleList,
   };
 }

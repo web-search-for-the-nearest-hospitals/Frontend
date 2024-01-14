@@ -1,9 +1,9 @@
 import './index.scss';
 import { useEffect, useState } from 'react';
+
 import { useGetSpecialtiesQuery } from '~/shared/api/rtkqueryApi';
 import { createToast } from '~/shared/lib';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
-
 import { Button, Checkbox, DropDownInput } from '~/shared/ui/index';
 
 interface ISearcher {
@@ -15,6 +15,8 @@ export default function Searcher({ onClick }: ISearcher) {
   const [isWorkAllDay, setIsWorkAllDay] = useState(false);
   const [isGovernment, setIsGovernment] = useState(false);
   const { data, isLoading, isError } = useGetSpecialtiesQuery(null);
+
+  const getCodeOfSpecialty = (name: string) => data!.find((el) => el.skill === name)!.code;
 
   useEffect(() => {
     if (isError) {
@@ -40,7 +42,13 @@ export default function Searcher({ onClick }: ISearcher) {
           type="submit"
           size="s"
           title="Найти"
-          onClick={() => onClick({ specialty: specialty || '', is_gov: isGovernment, is_full_time: isWorkAllDay })}
+          onClick={() =>
+            onClick({
+              specialty: specialty ? getCodeOfSpecialty(specialty) : '',
+              is_gov: isGovernment,
+              is_full_time: isWorkAllDay,
+            })
+          }
         />
       </div>
       <div className="search-clinic__group">
