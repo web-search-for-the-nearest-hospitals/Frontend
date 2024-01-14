@@ -1,24 +1,17 @@
 import './index.scss';
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import Searcher from '~/widgets/searcher-block';
 import MapBlock from '~/widgets/map-block';
 import { ClinicList } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
 import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
-import { IGetOrganizations } from '~/shared/lib/types/interfaces';
 import { createToast } from '~/shared/lib';
 
+// @TODO: вынести на обсуждение все эти кейсы: как показывать, что модуль загружается, как показывать, что данных нет
 export default function MainPage() {
-  const [isSearch, setSearch] = useState(false);
   const [triggerQuery, queryResult] = useLazyGetOrganizationsQuery();
   const { data, isLoading, isError } = queryResult;
-
-  useEffect(() => {
-    if (isSearch) {
-      triggerQuery(null as unknown as IGetOrganizations);
-    }
-  }, [triggerQuery, isSearch]);
 
   useEffect(() => {
     if (isError) {
@@ -29,12 +22,12 @@ export default function MainPage() {
   return (
     <div className="main-page">
       <div className="main-page__card-list">
-        {isSearch && !isLoading && data ? <ClinicList isLoading={isLoading} data={data} /> : null}
-        {!isSearch ? <AdvertList /> : null}
-        {isSearch && isLoading && !data ? <div>Данные загружаются</div> : null}
+        {!isLoading && data && data.results.length === 0 ? <div>Ничего не найдено</div> : null}
+        {!data ? <AdvertList /> : <ClinicList isLoading={isLoading} data={data} />}
+        {isLoading ? <div>Данные загружаются</div> : null}
       </div>
       <div className="main-page__search-block">
-        <Searcher setSearch={setSearch} />
+        <Searcher onClick={triggerQuery} />
         <MapBlock clinicData={data} />
       </div>
     </div>

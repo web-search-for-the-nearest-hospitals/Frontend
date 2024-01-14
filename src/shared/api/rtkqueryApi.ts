@@ -17,7 +17,11 @@ export const rtkqueryApi = createApi({
       query: (i) => `towns/${i}`,
     }),
     getOrganizations: builder.query<IClinicListData, IGetOrganizations>({
-      query: () => 'organizations/',
+      query: (filters: Record<string, string>) =>
+        'organizations/?' +
+        Object.keys(filters)
+          .map((key) => `${key}=${filters[key]}`)
+          .join('&'),
     }),
   }),
 });
