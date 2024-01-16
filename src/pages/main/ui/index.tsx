@@ -5,6 +5,7 @@ import Searcher from '~/widgets/searcher-block';
 import MapBlock from '~/widgets/map-block';
 import { ClinicList, FullCardClinic } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
+import { Popup } from '~/shared/ui/index';
 import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
 import { createToast } from '~/shared/lib';
@@ -40,7 +41,9 @@ export default function MainPage() {
         <Searcher setSearch={setSearch} />
         <MapBlock clinicData={data} />
       </div>
-      <FullCardClinic isOpenPopup={isOpen} />
+      <Popup isOpen={isOpen}>
+        <FullCardClinic isClose={() => setIsOpen(false)} />
+      </Popup>
     </div>
   );
 }
