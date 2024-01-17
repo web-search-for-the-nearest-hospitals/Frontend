@@ -2,13 +2,18 @@ import styles from './index.module.scss';
 import { IClinicListData, ICoord, IOrganization } from '~/shared/lib/types/interfaces';
 import { YMaps, Map, Placemark, RouteButton, SearchControl } from '@pbe/react-yandex-maps';
 
-interface IMaps extends ICoord {
+interface IMaps {
+  userCoord: ICoord;
+  focusCoord: ICoord;
   clinicData: IClinicListData | undefined;
   handleCardClick: (data: IOrganization) => void;
 }
 
-export default function Maps({ latitude, longitude, clinicData, handleCardClick }: IMaps) {
-  return latitude && longitude && Map ? (
+export default function Maps({ userCoord, focusCoord, clinicData, handleCardClick }: IMaps) {
+  const { latitude, longitude } = userCoord;
+  const { latitude: focuse_lat, longitude: focus_long } = focusCoord;
+
+  return latitude && focuse_lat && focus_long && longitude && Map ? (
     <section className={styles['map']}>
       <YMaps
         query={{
@@ -22,7 +27,7 @@ export default function Maps({ latitude, longitude, clinicData, handleCardClick 
           width={'100%'}
           height={'100%'}
           state={{
-            center: [latitude, longitude],
+            center: [focuse_lat, focus_long],
             zoom: 12,
             controls: ['zoomControl', 'fullscreenControl'],
           }}

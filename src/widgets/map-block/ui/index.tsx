@@ -1,108 +1,52 @@
 import './index.scss';
-import { useEffect, useState } from 'react';
-import { setCoord, userSelect } from '~/entities/user';
+
+import { useState } from 'react';
+import useMapBlock from '../lib/useMapBlock';
+
 import { Maps, ToggleButton, DropDownInput } from '~/shared/ui';
-import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 import { LocationIcon } from '~/shared/assets';
-import watchUserPosition from '~/entities/user/lib/watchUserPosition';
-import { IClinicListData, ICoord, IOrganization } from '~/shared/lib/types/interfaces';
-import { useGetTownsQuery, useLazyGetTownsDataByIdQuery } from '~/shared/api/rtkqueryApi';
-import { createToast } from '~/shared/lib';
+import { IClinicListData, IOrganization } from '~/shared/lib/types/interfaces';
 
 interface IMapBlock {
   clinicData: IClinicListData | undefined;
   handleCardClick: (data: IOrganization) => void;
 }
 
-// @TODO переписать логику под ожидаемую: смещение фокуса, метка геолокации. Возможно вынести её в кастомный хук
+// @TODO Возможно вынести крючки в кастомный хук
 export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
-  const dispatch = useAppDispatch();
-  const coord = useAppSelector(userSelect);
-  const [stateCoord, setStateCoord] = useState<ICoord>(coord);
   const [district, setDistrict] = useState('Районы');
-  const [geo, setGeo] = useState(false);
-  const [town] = useState('Калуга');
-  const [townIndex, setTownIndex] = useState<null | number>(null);
-  const { data, isLoading, isError } = useGetTownsQuery(null);
-  const [triggerQuery, queryResult] = useLazyGetTownsDataByIdQuery();
-  const { data: townData, isLoading: townIsLoading, isError: townIsError } = queryResult;
+  const [isSearchUser, setIsSearchUser] = useState(false);
+  const [townName] = useState('Калуга');
 
-  // крючок получения геолоки пользователя
-  useEffect(() => {
-    if (geo) {
-      watchUserPosition((data: ICoord) => dispatch(setCoord(data)));
-    }
-  }, [geo, dispatch]);
+  const { userCoord, focusCoord, returnText, townData } = useMapBlock({ district, isSearchUser, townName });
 
-  // крючок обработки ошибки списка городов
-  useEffect(() => {
-    if (isError || townIsError) {
-      createToast('error', 'Не удалось получить данные городов');
-    }
-  }, [isError, townIsError]);
-
-  //  крючок выбора города
-  useEffect(() => {
-    if (data) {
-      setTownIndex(data.findIndex((el) => el.name === town));
-    }
-  }, [data, setTownIndex, town]);
-
-  // крючок отображения фокуса и местоположения
-  useEffect(() => {
-    if (geo && coord.latitude && coord.longitude) {
-      setStateCoord(coord);
-    } else if (district && townData) {
-      const { latitude, longitude } = townData?.districts.find((el) => el.name === district) || townData;
-      setStateCoord({ latitude, longitude });
-    }
-  }, [coord, district, geo, townData]);
-
-  // крючок запроса за данными конкретного города
-  useEffect(() => {
-    if (townIndex !== null && data) {
-      const ar = data[townIndex]?.relative_addr.match(/\d+/) || [];
-      const arg = ar[0] || `${townIndex + 1}`;
-      triggerQuery(arg);
-    }
-  }, [data, townIndex, triggerQuery]);
-
-  if (isLoading || !data || townIsLoading || !townData) {
-    return <p className="search-clinic">Загружаю данные городов</p>;
-  }
-
-  if (townIndex === null) {
-    return <p className="search-clinic">Нет данных</p>;
+  if (returnText || !townData) {
+    return <p className="search-clinic">{returnText || 'Что-то загружается'}</p>;
   }
 
   return (
     <div className="map">
       <div className="map__location">
         <LocationIcon />
-        <p className="map__location-text">{town}</p>
+        <p className="map__location-text">{townName}</p>
       </div>
 
       <div className="map__group">
         <div className="map__input-container">
           <DropDownInput
-            values={townData.districts.map((el) => el.name) || []}
+            values={townData!.districts.map((el) => el.name) || []}
             state={district}
             setState={setDistrict}
           />
         </div>
         <div className="map__group-switch">
-          <ToggleButton setState={setGeo} state={geo} />
+          <ToggleButton setState={setIsSearchUser} state={isSearchUser} />
           <p className="map__group-switch-text">Геолокация</p>
         </div>
       </div>
 
       <div className="map__container">
-        <Maps
-          longitude={stateCoord?.longitude}
-          latitude={stateCoord?.latitude}
-          clinicData={clinicData}
-          handleCardClick={handleCardClick}
-        />
+        <Maps userCoord={userCoord} focusCoord={focusCoord} clinicData={clinicData} handleCardClick={handleCardClick} />
       </div>
     </div>
   );
