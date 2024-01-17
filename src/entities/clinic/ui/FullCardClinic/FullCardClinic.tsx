@@ -9,7 +9,7 @@ interface IFullCard {
 export function FullCardClinic({ isClose }: IFullCard) {
   return (
     <div className="clinic-popup">
-      <CloseButton type="button" onClick={isClose} />
+      <CloseButton type="button" onClick={isClose} size={'m'} />
       <h3 className="clinic-popup__name">{clinic.name}</h3>
       <p className="clinic-popup__about">{clinic.about}</p>
       <div className="clinic-popup__timetable">

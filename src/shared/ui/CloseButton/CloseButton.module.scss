@@ -1,26 +1,42 @@
 .close-button {
-  min-width: 25px;
-  min-height: 25px;
   margin: 0;
   position: absolute;
-  right: 30px;
-  top: 30px;
   background-image: url(../../assets/icons/button-close.svg);
   background-position: center;
   background-repeat: no-repeat;
-  background-size: 25px;
   transition: opacity 0.2s ease-in-out;
 
+  &_size_s {
+    min-width: 20px;
+    min-height: 20px;
+    background-size: 20px;
+    right: 31px;
+    top: 20px;
+
+    @media screen and (width <= 625px) {
+      min-width: 14px;
+      min-height: 14px;
+      background-size: 14px;
+      right: 8px;
+      top: 11px;
+    }
+  }
+  &_size_m {
+    min-width: 27px;
+    min-height: 27px;
+    background-size: 27px;
+    right: 30px;
+    top: 30px;
+
+    @media screen and (width <= 625px) {
+      min-width: 11px;
+      min-height: 11px;
+      background-size: 11px;
+      right: 14px;
+      top: 14px;
+    }
+  }
   &:hover {
     opacity: 0.6;
   }
-
-  @media screen and (width <= 625px) {
-    min-width: 11px;
-    min-height: 11px;
-    background-size: 11px;
-    right: 14px;
-    top: 14px;
-  }
 }
-

@@ -2,7 +2,7 @@
 
 .tooltip {
   display: flex;
-  padding: 80px 45px 54px;
+  padding: 80px 45px 49px;
   background-color: $color-base-background;
   border-radius: 10px;
   position: relative;
@@ -12,17 +12,16 @@
   @media screen and (width <= 625px) {
     background-color: $color-card-background;
     margin: 15px;
-    padding: 40px 20px  54px;
+    padding: 40px 20px 49px;
   }
 
   &__text {
     max-width: 509px;
     min-height: 64px;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     @include font-usual;
     line-height: 19.5px;
     text-align: center;
-
 
     @media screen and (width <= 625px) {
       @include font-small;
@@ -30,5 +29,4 @@
       margin-bottom: 24px;
     }
   }
-
 }

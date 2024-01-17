@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 
 import Searcher from '~/widgets/searcher-block';
 import MapBlock from '~/widgets/map-block';
-import { Tooltip } from '~/widgets/form';
+import { Tooltip } from '~/widgets/form/ui';
 import { ClinicList, FullCardClinic } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
 import { Popup } from '~/shared/ui/index';
@@ -16,7 +16,7 @@ export default function MainPage() {
   const [triggerQuery, queryResult] = useLazyGetOrganizationsQuery();
   const { data, isLoading, isError } = queryResult;
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpenTooltip, setIsOpenTooltip] = useState(true);
 
   useEffect(() => {
     if (isSearch) {
@@ -45,6 +45,9 @@ export default function MainPage() {
       </div>
       <Popup isOpen={isOpen}>
         <FullCardClinic isClose={() => setIsOpen(false)} />
+      </Popup>
+      <Popup isOpen={isOpenTooltip}>
+        <Tooltip isClose={() => setIsOpenTooltip(false)} />
       </Popup>
     </div>
   );
