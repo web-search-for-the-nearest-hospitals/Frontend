@@ -1,12 +1,13 @@
 import styles from './index.module.scss';
-import { IClinicListData, ICoord } from '~/shared/lib/types/interfaces';
+import { IClinicListData, ICoord, IOrganization } from '~/shared/lib/types/interfaces';
 import { YMaps, Map, Placemark, RouteButton, SearchControl } from '@pbe/react-yandex-maps';
 
 interface IMaps extends ICoord {
   clinicData: IClinicListData | undefined;
+  handleCardClick: (data: IOrganization) => void;
 }
 
-export default function Maps({ latitude, longitude, clinicData }: IMaps) {
+export default function Maps({ latitude, longitude, clinicData, handleCardClick }: IMaps) {
   return latitude && longitude && Map ? (
     <section className={styles['map']}>
       <YMaps
@@ -33,6 +34,10 @@ export default function Maps({ latitude, longitude, clinicData }: IMaps) {
             properties={{
               balloonContentBody: 'Центр мироздания. Возможно это вы.',
             }}
+            options={{
+              iconLayout: 'default#image',
+              iconImageHref: '/src/shared/assets/icons/location.svg',
+            }}
           />
 
           {clinicData?.results.map((el) => (
@@ -40,9 +45,7 @@ export default function Maps({ latitude, longitude, clinicData }: IMaps) {
               key={`${el.latitude}${el.longitude}`}
               defaultGeometry={[el.latitude, el.longitude]}
               geometry={[el.latitude, el.longitude]}
-              properties={{
-                balloonContentBody: `${el.short_name} &middot; ${el.factual_address} &middot; ${el.about} &middot; ${el.phone}`,
-              }}
+              onClick={() => handleCardClick(el)}
             />
           ))}
 

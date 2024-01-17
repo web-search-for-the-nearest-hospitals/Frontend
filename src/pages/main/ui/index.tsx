@@ -37,7 +37,7 @@ export default function MainPage() {
       </div>
       <div className="main-page__search-block">
         <Searcher onClick={triggerQuery} />
-        <MapBlock clinicData={data} />
+        <MapBlock clinicData={data} handleCardClick={handleCardClick} />
       </div>
       {selectedCard ? (
         <Popup isOpen={isOpen}>

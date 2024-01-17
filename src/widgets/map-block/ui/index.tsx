@@ -5,17 +5,17 @@ import { Maps, ToggleButton, DropDownInput } from '~/shared/ui';
 import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 import { LocationIcon } from '~/shared/assets';
 import watchUserPosition from '~/entities/user/lib/watchUserPosition';
-import { IClinicListData, ICoord } from '~/shared/lib/types/interfaces';
+import { IClinicListData, ICoord, IOrganization } from '~/shared/lib/types/interfaces';
 import { useGetTownsQuery, useLazyGetTownsDataByIdQuery } from '~/shared/api/rtkqueryApi';
 import { createToast } from '~/shared/lib';
 
 interface IMapBlock {
   clinicData: IClinicListData | undefined;
+  handleCardClick: (data: IOrganization) => void;
 }
 
-// @TODO: как устаканится формат с бэка, проверить логику. Возможно оптимизировать менеджмент
-// @TODO категорически не нравится текущая реализация
-export default function MapBlock({ clinicData }: IMapBlock) {
+// @TODO переписать логику под ожидаемую: смещение фокуса, метка геолокации. Возможно вынести её в кастомный хук
+export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
   const dispatch = useAppDispatch();
   const coord = useAppSelector(userSelect);
   const [stateCoord, setStateCoord] = useState<ICoord>(coord);
@@ -27,24 +27,28 @@ export default function MapBlock({ clinicData }: IMapBlock) {
   const [triggerQuery, queryResult] = useLazyGetTownsDataByIdQuery();
   const { data: townData, isLoading: townIsLoading, isError: townIsError } = queryResult;
 
+  // крючок получения геолоки пользователя
   useEffect(() => {
     if (geo) {
       watchUserPosition((data: ICoord) => dispatch(setCoord(data)));
     }
   }, [geo, dispatch]);
 
+  // крючок обработки ошибки списка городов
   useEffect(() => {
     if (isError || townIsError) {
       createToast('error', 'Не удалось получить данные городов');
     }
   }, [isError, townIsError]);
 
+  //  крючок выбора города
   useEffect(() => {
     if (data) {
       setTownIndex(data.findIndex((el) => el.name === town));
     }
   }, [data, setTownIndex, town]);
 
+  // крючок отображения фокуса и местоположения
   useEffect(() => {
     if (geo && coord.latitude && coord.longitude) {
       setStateCoord(coord);
@@ -54,6 +58,7 @@ export default function MapBlock({ clinicData }: IMapBlock) {
     }
   }, [coord, district, geo, townData]);
 
+  // крючок запроса за данными конкретного города
   useEffect(() => {
     if (townIndex !== null && data) {
       const ar = data[townIndex]?.relative_addr.match(/\d+/) || [];
@@ -73,7 +78,7 @@ export default function MapBlock({ clinicData }: IMapBlock) {
   return (
     <div className="map">
       <div className="map__location">
-        <LocationIcon size={30} />
+        <LocationIcon />
         <p className="map__location-text">{town}</p>
       </div>
 
@@ -92,7 +97,12 @@ export default function MapBlock({ clinicData }: IMapBlock) {
       </div>
 
       <div className="map__container">
-        <Maps longitude={stateCoord?.longitude} latitude={stateCoord?.latitude} clinicData={clinicData} />
+        <Maps
+          longitude={stateCoord?.longitude}
+          latitude={stateCoord?.latitude}
+          clinicData={clinicData}
+          handleCardClick={handleCardClick}
+        />
       </div>
     </div>
   );
