@@ -5,49 +5,52 @@ interface IClinicCard {
   clinic: IOrganization;
 }
 
-// TODO: написать парсер для business_hours в формат макета - поле с графиком работы
 export function ClinicCard({ clinic }: IClinicCard) {
-  let timetablePeriod = 'Не указан';
-  const dayoff = 'Выходной';
+  const date = new Date();
+  let today = date.getDay();
+  // Date обрабатывает Вс как 0, поэтому, когда наш текущий день Вс задаем ему индекс 7, чтобы в бд не менять
+  today === 0 ? (today = 7) : (today = date.getDay());
 
   const weekdaysHours = () => {
-    let fromHours = '',
-      toHours = '',
-      hours = '',
-      fridayHours = '',
-      saturdayHours = '',
-      sundayHours = '';
+    let fromHours, toHours, dayFromDB: number, day: string, hours: string;
+    const weekdays = clinic.business_hours.map((weekday) => {
+      dayFromDB = weekday.day;
 
-    for (const weekdays of clinic.business_hours) {
-      fromHours = weekdays.from_hour.slice(0, -3);
-      toHours = weekdays.to_hour.slice(0, -3);
+      fromHours = weekday.from_hour.slice(0, -3);
+      toHours = weekday.to_hour.slice(0, -3);
+      hours = `${fromHours}-${toHours}`;
+      hours === '00:00-00:00' && (hours = 'Круглосуточно');
+      // или может так лучше выглядит:
+      // hours === '00:00-00:00' && (hours = '24 часа в сутки');
 
-      if (weekdays.day < 6) {
-        hours = `${fromHours}-${toHours}`;
-        timetablePeriod = `Пн-Пт: ${hours}\n Сб-Вс: ${dayoff}`;
+      switch (dayFromDB) {
+        case 1:
+          day = 'Пн';
+          break;
+        case 2:
+          day = 'Вт';
+          break;
+        case 3:
+          day = 'Ср';
+          break;
+        case 4:
+          day = 'Чт';
+          break;
+        case 5:
+          day = 'Пт';
+          break;
+        case 6:
+          day = 'Сб';
+          break;
+        case 7:
+          day = 'Вс';
+          break;
       }
 
-      if (weekdays.day === 5) {
-        fridayHours = `${fromHours}-${toHours}`;
-        fridayHours === hours
-          ? (timetablePeriod = `Пн-Пт: ${hours}\n Сб-Вс: ${dayoff}`)
-          : (timetablePeriod = `Пн-Чт: ${hours}\n Пт: ${fridayHours}\n Сб-Вс: ${dayoff}`);
-      }
+      return `${day}: ${hours}`;
+    });
 
-      if (weekdays.day === 6) {
-        saturdayHours = `${fromHours}-${toHours}`;
-        timetablePeriod = `Пн-Пт: ${hours}\n Сб: ${saturdayHours}\n Вс: ${dayoff}`;
-      }
-
-      if (weekdays.day === 7) {
-        sundayHours = `${fromHours}-${toHours}`;
-        sundayHours === saturdayHours
-          ? (timetablePeriod = `Пн-Пт: ${hours}\n Сб-Вс: ${saturdayHours}`)
-          : (timetablePeriod = `Пн-Пт: ${hours}\n Сб: ${saturdayHours}\n Вс: ${sundayHours}`);
-      }
-    }
-
-    return timetablePeriod;
+    return weekdays;
   };
 
   return (
@@ -55,7 +58,13 @@ export function ClinicCard({ clinic }: IClinicCard) {
       <h3 className="clinic-card__name">{clinic.short_name}</h3>
       <div className="clinic-card__timetable">
         <p className="clinic-card__timetable-title">График работы:</p>
-        <p className="clinic-card__timetable-period">{`${weekdaysHours()}`} </p>
+        <ul className="clinic-card__timetable-period">
+          {weekdaysHours().map((day, index) => (
+            <li key={index} style={{ color: index + 1 === today ? '#695feb' : '#3b405d' }}>
+              {day}
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="clinic-card__phone">
         <p className="clinic-card__phone-title">Телефон: </p>

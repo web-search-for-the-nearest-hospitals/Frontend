@@ -7,10 +7,11 @@ import { adverts } from '~/shared/api/constants';
 export default function AdvertList() {
   return (
     <div className="advert-list">
-      {adverts.map((advert) => (
-        <AdvertCard key={advert.id} advert={advert} />
-      ))}
-      <span className="advert-list__margin-bottom"></span>
+      <div className="advert-list__container">
+        {adverts.map((advert) => (
+          <AdvertCard key={advert.id} advert={advert} />
+        ))}
+      </div>
     </div>
   );
 }

@@ -1,15 +1,13 @@
 .advert-list {
   display: flex;
   flex-direction: column;
-  padding: 30px;
-  max-height: 930px;
-
-  &__margin-bottom {
-    min-height: 30px;
-  }
 
   &::-webkit-scrollbar {
     display: none;
+  }
+
+  &__container {
+    padding: 30px;
   }
 
   @media screen and (width <= 1140px) {
