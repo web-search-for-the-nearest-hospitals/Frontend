@@ -41,7 +41,7 @@ export default function MainPage() {
         <Searcher setSearch={setSearch} />
         <MapBlock clinicData={data} />
       </div>
-      <Popup isOpen={isOpen}>
+      <Popup isOpen={isOpen} isClose={() => setIsOpen(false)}>
         <FullCardClinic isClose={() => setIsOpen(false)} />
       </Popup>
     </div>
