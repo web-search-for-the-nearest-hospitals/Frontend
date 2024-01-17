@@ -3,6 +3,7 @@ import { IOrganization } from '~/shared/lib/types/interfaces';
 
 interface IClinicCard {
   clinic: IOrganization;
+  isOpenCard: (newVal: boolean) => void;
 }
 
 export function ClinicCard({ clinic }: IClinicCard) {
@@ -53,8 +54,10 @@ export function ClinicCard({ clinic }: IClinicCard) {
     return weekdays;
   };
 
+export function ClinicCard({ clinic, isOpenCard }: IClinicCard) {
+
   return (
-    <div className="clinic-card" onClick={() => alert('Представьте, что я Попап! Большой и информативный!')}>
+    <div className="clinic-card" onClick={() => isOpenCard(true)}>
       <h3 className="clinic-card__name">{clinic.short_name}</h3>
       <div className="clinic-card__timetable">
         <p className="clinic-card__timetable-title">График работы:</p>
