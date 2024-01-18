@@ -1,0 +1,66 @@
+@import '~/shared/lib/index';
+
+.form-clinic {
+  max-width: 920px;
+  background-color: #f9f9f9;
+  margin: 0 auto;
+  border-radius: 10px;
+
+  &__container {
+    display: flex;
+    flex-direction: column;
+    width: 540px;
+    text-align: center;
+    margin: 0 auto;
+    padding: 43px 0 97px;
+  }
+  &__title {
+    color: #3b405d;
+    @include font-h2;
+    margin: 0 0 40px;
+  }
+  &__progress-scale {
+    margin: 0 0 80px;
+    display: flex;
+    justify-content: space-between;
+  }
+  &__progress-element {
+    @include font-small;
+
+    width: 22%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+  }
+  &__progress-element-circle {
+    width: 38px;
+    height: 38px;
+    background-color: #c4bfbf;
+    color: white;
+    border-radius: 50%;
+    line-height: 260%;
+    z-index: 10;
+  }
+
+  &__progress-element-line {
+    width: 200px;
+    height: 1px;
+    background-color: #c4bfbf;
+    position: absolute;
+    top: 25%;
+    left: 60px;
+  }
+
+  &__progress-element-text {
+    color: #c4bfbf;
+  }
+}
+.active-circle-and-line {
+  background-color: #695feb;
+}
+
+.active-text {
+  color: #3b405d;
+}
