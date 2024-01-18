@@ -5,9 +5,10 @@ import { IClinicListData } from '~/shared/lib/types/interfaces';
 interface IClinicList {
   data: IClinicListData;
   isLoading: boolean;
+  isOpenCard: (newVal: boolean) => void;
 }
 
-export default function ClinicList({ data }: IClinicList) {
+export default function ClinicList({ data, isOpenCard }: IClinicList) {
   return (
     <div className="clinic-list">
       <div className="clinic-list__container">

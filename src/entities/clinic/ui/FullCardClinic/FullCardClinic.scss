@@ -1,0 +1,166 @@
+@import '~/shared/lib/index';
+
+.clinic-popup {
+  padding: 80px 80px 99px;
+  display: grid;
+  grid-template-columns: 414px 350px;
+  gap: 0 141px;
+  background-color: $color-base-background;
+  border-radius: 10px;
+  position: relative;
+  align-items: flex-end;
+
+  @media screen and (width <= 1100px) {
+    grid-template-columns: 414px;
+  }
+
+  @media screen and (width <= 625px) {
+    grid-template-columns: 255px;
+    background-color: $color-card-background;
+    margin: 15px;
+    padding: 30px 20px;
+  }
+
+  &__name {
+    grid-column: 1;
+    @include font-h1;
+    line-height: 29.26px;
+
+    @media screen and (width <= 625px) {
+      @include font-h3;
+      line-height: 19.5px;
+    }
+  }
+
+  &__about {
+    grid-column: 1;
+    margin-top: 20px;
+    @include font-usual;
+    line-height: 19.5px;
+
+    @media screen and (width <= 625px) {
+      @include font-small;
+      line-height: 17.07px;
+    }
+  }
+
+  &__timetable {
+    grid-column: 2;
+    margin-top: 24px;
+    display: flex;
+    gap: 0 5px;
+    align-self: flex-start;
+    @include font-usual;
+
+    @media screen and (width <= 1100px) {
+      grid-column: 1;
+      grid-row: 5;
+      gap: 0 3px;
+    }
+
+    @media screen and (width <= 625px) {
+      margin-top: 20px;
+      @include font-small;
+    }
+
+    &-title {
+      @include font-h3;
+
+      @media screen and (width <= 625px) {
+        font-size: 14px;
+      }
+    }
+
+    &-period {
+      max-width: 160px;
+      line-height: 19.5px;
+
+      @media screen and (width <= 625px) {
+        max-width: 134px;
+      }
+    }
+  }
+
+  &__phone {
+    grid-column: 1;
+    grid-row: 3;
+    margin-top: 60px;
+    display: flex;
+    gap: 0 5px;
+    align-self: flex-start;
+    @include font-usual;
+
+    @media screen and (width <= 625px) {
+      margin-top: 30px;
+      @include font-small;
+    }
+
+    &-title {
+      @include font-h3;
+
+      @media screen and (width <= 625px) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__site {
+    grid-column: 1;
+    margin-top: 40px;
+    display: flex;
+    gap: 0 5px;
+    align-self: flex-start;
+    @include font-usual;
+
+    @media screen and (width <= 1100px) {
+      grid-column: 1;
+    }
+
+    @media screen and (width <= 625px) {
+      margin-top: 20px;
+      @include font-small;
+    }
+
+    &-title {
+      @include font-h3;
+
+      @media screen and (width <= 625px) {
+        font-size: 14px;
+      }
+    }
+
+    &-link {
+      color: $active-button;
+    }
+  }
+
+  &__address {
+    grid-column: 2;
+    align-self: flex-start;
+    @include font-usual;
+
+    @media screen and (width <= 1100px) {
+      margin: 20px 0 36px;
+      grid-column: 1;
+      grid-row: 6;
+    }
+
+    @media screen and (width <= 625px) {
+      @include font-small;
+    }
+
+    &-title {
+      margin-right: 5px;
+      @include font-h3;
+
+      @media screen and (width <= 625px) {
+        font-size: 14px;
+        margin-right: 3px;
+      }
+    }
+
+    &-text {
+      line-height: 19.5px;
+    }
+  }
+}
