@@ -1,12 +1,13 @@
-import { DropDownInput, Input } from '~/shared/ui';
 import styles from './index.module.scss';
-import { useDispatch } from 'react-redux';
-import { useForm, SubmitHandler, Controller } from 'react-hook-form';
-import Button from '~/shared/ui/Button/Button';
-import { setFormData } from '~/entities/appointment/model/appointmentSlice';
 import { useState } from 'react';
+import { useForm, SubmitHandler, Controller } from 'react-hook-form';
 
-interface IFormData {
+import { setFormData } from '~/entities/appointment/model/appointmentSlice';
+import { DropDownInput, Input } from '~/shared/ui';
+import Button from '~/shared/ui/Button/Button';
+import { useAppDispatch } from '~/shared/lib/hooks/reduxHooks';
+
+export interface IFormAppointmentData {
   name: string;
   phoneNumber: string;
   email: string;
@@ -20,7 +21,7 @@ export default function FormAppointment() {
     control,
     setValue,
     formState: { errors, isValid },
-  } = useForm<IFormData>({
+  } = useForm<IFormAppointmentData>({
     mode: 'onBlur',
     defaultValues: {
       doctorSpecialty: '',
@@ -29,10 +30,9 @@ export default function FormAppointment() {
 
   const doctors = ['терапевт', 'хирург', 'стоматолог'];
   const [doctorSpecialty, setDoctorSpecialty] = useState(doctors[0]!);
+  const dispatch = useAppDispatch();
 
-  const dispatch = useDispatch();
-
-  const onSubmit: SubmitHandler<IFormData> = (data) => {
+  const onSubmit: SubmitHandler<IFormAppointmentData> = (data) => {
     dispatch(setFormData(data));
     console.log(data);
   };
@@ -68,9 +68,8 @@ export default function FormAppointment() {
       </div>
 
       <div
-        className={`${styles['form-appointment__wrapper']} ${
-          errors.appointmentDate ? styles['form-appointment__wrapper_error'] : ''
-        }`}
+        className={`${styles['form-appointment__wrapper']} ${errors.appointmentDate ? styles['form-appointment__wrapper_error'] : ''
+          }`}
       >
         <label htmlFor="appointmentDate" className={styles['form-appointment__label']}>
           Дата записи
@@ -96,9 +95,8 @@ export default function FormAppointment() {
       </div>
 
       <div
-        className={`${styles['form-appointment__wrapper']} ${
-          errors.name ? styles['form-appointment__wrapper_error'] : ''
-        }`}
+        className={`${styles['form-appointment__wrapper']} ${errors.name ? styles['form-appointment__wrapper_error'] : ''
+          }`}
       >
         <label htmlFor="name" className={styles['form-appointment__label']}>
           ФИО
@@ -121,9 +119,8 @@ export default function FormAppointment() {
       </div>
 
       <div
-        className={`${styles['form-appointment__wrapper']} ${
-          errors.phoneNumber ? styles['form-appointment__wrapper_error'] : ''
-        }`}
+        className={`${styles['form-appointment__wrapper']} ${errors.phoneNumber ? styles['form-appointment__wrapper_error'] : ''
+          }`}
       >
         <label htmlFor="phoneNumber" className={styles['form-appointment__label']}>
           Номер телефона
@@ -153,9 +150,8 @@ export default function FormAppointment() {
       </div>
 
       <div
-        className={`${styles['form-appointment__wrapper']} ${
-          errors.email ? styles['form-appointment__wrapper_error'] : ''
-        }`}
+        className={`${styles['form-appointment__wrapper']} ${errors.email ? styles['form-appointment__wrapper_error'] : ''
+          }`}
       >
         <label htmlFor="email" className={styles['form-appointment__label']}>
           Почта

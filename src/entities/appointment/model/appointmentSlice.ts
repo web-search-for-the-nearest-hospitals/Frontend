@@ -1,31 +1,14 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { IFormAppointmentData } from '~/widgets/form-appointment/ui';
 
-interface AppointmentState {
-  formData: {
-    name: string;
-    phoneNumber: string;
-    email: string;
-    doctorSpecialty: string;
-    appointmentDate: string;
-  };
-}
-
-const initialState: AppointmentState = {
-  formData: {
-    name: '',
-    phoneNumber: '',
-    email: '',
-    doctorSpecialty: '',
-    appointmentDate: '',
-  },
-};
+const initialState = {} as IFormAppointmentData;
 
 const appointmentSlice = createSlice({
   name: 'appointment',
   initialState,
   reducers: {
-    setFormData: (state, action: PayloadAction<Partial<AppointmentState['formData']>>) => {
-      state.formData = { ...state.formData, ...action.payload };
+    setFormData: (_, action: PayloadAction<IFormAppointmentData>) => {
+      return action.payload;
     },
   },
 });

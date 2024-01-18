@@ -10,7 +10,6 @@ export const store = configureStore({
   reducer: {
     user: userReducer,
     appointment: appointmentReducer,
-
     [rtkqueryApi.reducerPath]: rtkqueryApi.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rtkqueryApi.middleware),

@@ -1,42 +1,50 @@
 import './index.scss';
+import { useEffect, useState } from 'react';
 
 import Searcher from '~/widgets/searcher-block';
-
 import MapBlock from '~/widgets/map-block';
-import { ClinicList } from '~/entities/clinic';
+
+import { ClinicList, FullCardClinic } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
-import { useState } from 'react';
-import { Button } from '~/shared/ui';
-import { useNavigate } from 'react-router-dom';
+
+import { Popup } from '~/shared/ui/index';
+import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
+import { createToast } from '~/shared/lib';
+import { IOrganization } from '~/shared/lib/types/interfaces';
 
 export default function MainPage() {
-  const [isSearch, setSearch] = useState(true);
-  const navigate = useNavigate();
+  const [triggerQuery, queryResult] = useLazyGetOrganizationsQuery();
+  const { data, isLoading, isError } = queryResult;
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<null | IOrganization>(null);
 
-  const redirectToAppointment = () => {
-    navigate('/clinic-searcher/appointment');
-  };
+  function handleCardClick(data: IOrganization) {
+    setIsOpen(true);
+    setSelectedCard(data);
+  }
+
+  useEffect(() => {
+    if (isError) {
+      createToast('error', 'Не удалось получить список поликлиник');
+    }
+  }, [isError]);
 
   return (
-    <>
-      <div className="main-page">
-        <div className="main-page__card-list">
-          <button
-            className="main-page__btn"
-            onClick={() => {
-              setSearch(!isSearch);
-            }}
-          >
-            {isSearch ? 'Показать рекламу' : 'Показать клиники'}
-          </button>
-          {isSearch ? <ClinicList /> : <AdvertList />}
-        </div>
-        <div className="main-page__search-block">
-          <Searcher />
-          <MapBlock />
-        </div>
+    <div className="main-page">
+      <div className="main-page__card-list">
+        {!isLoading && data && data.results.length === 0 ? <div>Ничего не найдено</div> : null}
+        {!data ? <AdvertList /> : <ClinicList data={data} handleCardClick={handleCardClick} />}
+        {isLoading ? <div>Данные загружаются</div> : null}
       </div>
-      <Button type="button" size="l" title="Переход на форму записи к врачу" onClick={redirectToAppointment} />
-    </>
+      <div className="main-page__search-block">
+        <Searcher onClick={triggerQuery} />
+        <MapBlock clinicData={data} handleCardClick={handleCardClick} />
+      </div>
+      {selectedCard ? (
+        <Popup isOpen={isOpen}>
+          <FullCardClinic isClose={() => setIsOpen(false)} clinic={selectedCard} />
+        </Popup>
+      ) : null}
+    </div>
   );
 }
