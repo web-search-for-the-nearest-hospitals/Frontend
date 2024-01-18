@@ -4,17 +4,15 @@ import { getTimetable } from '../../lib/getTimetable';
 
 interface IClinicCard {
   clinic: IOrganization;
-  isOpenCard: (newVal: boolean) => void;
+  handleCardClick: (data: IOrganization) => void;
 }
 
-export function ClinicCard({ clinic }: IClinicCard) {
+export function ClinicCard({ clinic, handleCardClick }: IClinicCard) {
   const date = new Date();
   const today = date.getDay() || 7;
 
-export function ClinicCard({ clinic, isOpenCard }: IClinicCard) {
-
   return (
-    <div className="clinic-card" onClick={() => isOpenCard(true)}>
+    <div className="clinic-card" onClick={() => handleCardClick(clinic)}>
       <h3 className="clinic-card__name">{clinic.short_name}</h3>
       <div className="clinic-card__timetable">
         <p className="clinic-card__timetable-title">График работы:</p>

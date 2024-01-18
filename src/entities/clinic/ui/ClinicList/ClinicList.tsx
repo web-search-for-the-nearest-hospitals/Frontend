@@ -1,14 +1,13 @@
 import './ClinicList.scss';
 import { ClinicCard } from '../ClinicCard/ClinicCard';
-import { IClinicListData } from '~/shared/lib/types/interfaces';
+import { IClinicListData, IOrganization } from '~/shared/lib/types/interfaces';
 
 interface IClinicList {
   data: IClinicListData;
-  isLoading: boolean;
-  isOpenCard: (newVal: boolean) => void;
+  handleCardClick: (data: IOrganization) => void;
 }
 
-export default function ClinicList({ data, isOpenCard }: IClinicList) {
+export default function ClinicList({ data, handleCardClick }: IClinicList) {
   return (
     <div className="clinic-list">
       <div className="clinic-list__container">

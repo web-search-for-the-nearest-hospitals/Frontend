@@ -65,8 +65,8 @@ export interface IGetOrganizations extends Partial<ICoordinates> {
   specialty?: string;
   town?: string;
   district?: string;
-  is_gov?: string;
-  is_full_time?: string;
+  is_gov?: boolean;
+  is_full_time?: boolean;
   search?: string; // сокращенное наим. организации
   page?: number; // пагинация?
 }
