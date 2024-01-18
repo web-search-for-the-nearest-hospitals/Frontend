@@ -4,7 +4,7 @@ import watchUserPosition from '~/entities/user/lib/watchUserPosition';
 import { setCoord, userSelect } from '~/entities/user';
 
 import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
-import { createToast } from '~/shared/lib';
+import createToast from '~/shared/lib/toast/createToast';
 import { ICoord } from '~/shared/lib/types/interfaces';
 import { useGetTownsQuery, useLazyGetTownsDataByIdQuery } from '~/shared/api/rtkqueryApi';
 

@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { createToast } from '~/shared/lib';
+import createToast from '~/shared/lib/toast/createToast';
 
 interface IUseDropDownInputProps {
   values: readonly string[];

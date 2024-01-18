@@ -2,7 +2,7 @@ import './index.scss';
 import { useEffect, useState } from 'react';
 
 import { useGetSpecialtiesQuery } from '~/shared/api/rtkqueryApi';
-import { createToast } from '~/shared/lib';
+import createToast from '~/shared/lib/toast/createToast';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
 import { Button, Checkbox, DropDownInput } from '~/shared/ui/index';
 

@@ -7,7 +7,7 @@ import { ClinicList, FullCardClinic } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
 import { Popup } from '~/shared/ui/index';
 import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
-import { createToast } from '~/shared/lib';
+import createToast from '~/shared/lib/toast/createToast';
 import { IOrganization } from '~/shared/lib/types/interfaces';
 
 // @TODO: вынести на обсуждение все эти кейсы: как показывать, что модуль загружается, как показывать, что данных нет
