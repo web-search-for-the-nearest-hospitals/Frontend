@@ -1,19 +1,22 @@
 import './index.scss';
 import { useEffect, useState } from 'react';
+
 import { useGetSpecialtiesQuery } from '~/shared/api/rtkqueryApi';
 import { createToast } from '~/shared/lib';
-
+import { IGetOrganizations } from '~/shared/lib/types/interfaces';
 import { Button, Checkbox, DropDownInput } from '~/shared/ui/index';
 
 interface ISearcher {
-  setSearch: (newVal: boolean) => void;
+  onClick: (data: IGetOrganizations) => void;
 }
 
-export default function Searcher({ setSearch }: ISearcher) {
+export default function Searcher({ onClick }: ISearcher) {
   const [specialty, setSpeciality] = useState<string | null>(null);
   const [isWorkAllDay, setIsWorkAllDay] = useState(false);
   const [isGovernment, setIsGovernment] = useState(false);
   const { data, isLoading, isError } = useGetSpecialtiesQuery(null);
+
+  const getCodeOfSpecialty = (name: string) => data!.find((el) => el.skill === name)!.code;
 
   useEffect(() => {
     if (isError) {
@@ -33,9 +36,20 @@ export default function Searcher({ setSearch }: ISearcher) {
           placeholder="Врач, специальность"
           state={specialty}
           setState={setSpeciality}
-          contentEditable
+          isContentEditable
         />
-        <Button type="submit" size="s" title="Найти" onClick={() => setSearch(true)} />
+        <Button
+          type="submit"
+          size="s"
+          title="Найти"
+          onClick={() =>
+            onClick({
+              specialty: specialty ? getCodeOfSpecialty(specialty) : '',
+              is_gov: isGovernment,
+              is_full_time: isWorkAllDay,
+            })
+          }
+        />
       </div>
       <div className="search-clinic__group">
         <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />

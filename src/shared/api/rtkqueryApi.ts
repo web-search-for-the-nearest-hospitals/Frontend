@@ -4,7 +4,7 @@ import { IClinicListData, IGetOrganizations, ISpecialty, ITown, ITowns } from '.
 export const rtkqueryApi = createApi({
   reducerPath: 'rtkqueryApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'http://45.86.181.61/api/',
+    baseUrl: import.meta.env.VITE_BACK_URL + 'api/',
   }),
   endpoints: (builder) => ({
     getSpecialties: builder.query<ISpecialty[], null>({
@@ -17,7 +17,12 @@ export const rtkqueryApi = createApi({
       query: (i) => `towns/${i}`,
     }),
     getOrganizations: builder.query<IClinicListData, IGetOrganizations>({
-      query: () => 'organizations/',
+      query: (filters: Record<string, string>) =>
+        'organizations/?' +
+        Object.keys(filters)
+          .filter((key) => filters[key])
+          .map((key) => `${key}=${filters[key]}`)
+          .join('&'),
     }),
   }),
 });
