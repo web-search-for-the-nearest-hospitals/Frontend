@@ -1,54 +1,52 @@
 import './index.scss';
-import { useEffect, useState } from 'react';
 
-import { districtCoord } from '../lib/consts';
-import { setCoord, userSelect } from '~/entities/user';
+import { useState } from 'react';
+import useMapBlock from '../lib/useMapBlock';
 
 import { Maps, ToggleButton, DropDownInput } from '~/shared/ui';
-import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 import { LocationIcon } from '~/shared/assets';
-import watchUserPosition from '~/entities/user/lib/watchUserPosition';
-import { ICoord } from '~/shared/lib/types/interfaces';
+import { IClinicListData, IOrganization } from '~/shared/lib/types/interfaces';
 
-export default function MapBlock() {
-  const dispatch = useAppDispatch();
-  const coord = useAppSelector(userSelect);
-  const [stateCoord, setStateCoord] = useState<ICoord>(coord);
-  const [district, setDistrict] = useState(Object.keys(districtCoord)[0]!);
-  const [geo, setGeo] = useState(false);
+interface IMapBlock {
+  clinicData: IClinicListData | undefined;
+  handleCardClick: (data: IOrganization) => void;
+}
 
-  useEffect(() => {
-    if (geo) {
-      watchUserPosition((data: ICoord) => dispatch(setCoord(data)));
-    }
-  }, [geo, dispatch]);
+// @TODO Возможно вынести крючки в кастомный хук
+export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
+  const [district, setDistrict] = useState('Районы');
+  const [isSearchUser, setIsSearchUser] = useState(false);
+  const [townName] = useState('Калуга');
 
-  useEffect(() => {
-    if (geo && coord.latitude && coord.longitude) {
-      setStateCoord(coord);
-    } else if (district) {
-      setStateCoord(districtCoord[district]!);
-    }
-  }, [coord, district, geo]);
+  const { userCoord, focusCoord, returnText, townData } = useMapBlock({ district, isSearchUser, townName });
+
+  if (returnText || !townData) {
+    return <p className="search-clinic">{returnText || 'Что-то загружается'}</p>;
+  }
+
   return (
     <div className="map">
       <div className="map__location">
         <LocationIcon />
-        <p className="map__location-text">Калуга</p>
+        <p className="map__location-text">{townName}</p>
       </div>
 
       <div className="map__group">
         <div className="map__input-container">
-          <DropDownInput values={Object.keys(districtCoord)} state={district} setState={setDistrict} />
+          <DropDownInput
+            values={townData!.districts.map((el) => el.name) || []}
+            state={district}
+            setState={setDistrict}
+          />
         </div>
         <div className="map__group-switch">
-          <ToggleButton setState={setGeo} state={geo} />
+          <ToggleButton setState={setIsSearchUser} state={isSearchUser} />
           <p className="map__group-switch-text">Геолокация</p>
         </div>
       </div>
 
       <div className="map__container">
-        <Maps longitude={stateCoord?.longitude} latitude={stateCoord?.latitude} />
+        <Maps userCoord={userCoord} focusCoord={focusCoord} clinicData={clinicData} handleCardClick={handleCardClick} />
       </div>
     </div>
   );

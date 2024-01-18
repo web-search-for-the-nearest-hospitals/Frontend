@@ -1,9 +1,19 @@
 import styles from './index.module.scss';
-import { ICoord } from '~/shared/lib/types/interfaces';
+import { IClinicListData, ICoord, IOrganization } from '~/shared/lib/types/interfaces';
 import { YMaps, Map, Placemark, RouteButton, SearchControl } from '@pbe/react-yandex-maps';
 
-export default function Maps({ latitude, longitude }: ICoord) {
-  return latitude && longitude && Map ? (
+interface IMaps {
+  userCoord: ICoord;
+  focusCoord: ICoord;
+  clinicData: IClinicListData | undefined;
+  handleCardClick: (data: IOrganization) => void;
+}
+
+export default function Maps({ userCoord, focusCoord, clinicData, handleCardClick }: IMaps) {
+  const { latitude, longitude } = userCoord;
+  const { latitude: focuse_lat, longitude: focus_long } = focusCoord;
+
+  return latitude && focuse_lat && focus_long && longitude && Map ? (
     <section className={styles['map']}>
       <YMaps
         query={{
@@ -17,7 +27,7 @@ export default function Maps({ latitude, longitude }: ICoord) {
           width={'100%'}
           height={'100%'}
           state={{
-            center: [latitude, longitude],
+            center: [focuse_lat, focus_long],
             zoom: 12,
             controls: ['zoomControl', 'fullscreenControl'],
           }}
@@ -27,9 +37,23 @@ export default function Maps({ latitude, longitude }: ICoord) {
             defaultGeometry={[latitude, longitude]}
             geometry={[latitude, longitude]}
             properties={{
-              balloonContentBody: 'За вами выехали.',
+              balloonContentBody: 'Центр мироздания. Возможно это вы.',
+            }}
+            options={{
+              iconLayout: 'default#image',
+              iconImageHref: '/src/shared/assets/icons/location.svg',
             }}
           />
+
+          {clinicData?.results.map((el) => (
+            <Placemark
+              key={`${el.latitude}${el.longitude}`}
+              defaultGeometry={[el.latitude, el.longitude]}
+              geometry={[el.latitude, el.longitude]}
+              onClick={() => handleCardClick(el)}
+            />
+          ))}
+
           <SearchControl
             options={{
               float: 'right',

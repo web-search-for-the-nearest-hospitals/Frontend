@@ -1,6 +1,9 @@
-export default function LocationIcon() {
+interface ILocationIcon {
+  size?: number;
+}
+export default function LocationIcon({ size = 30 }: ILocationIcon) {
   return (
-    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <svg width={size} height={size} viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
       <path
         d="M24.6431 10.7143C24.6431 16.05 15.0003 28.9286 15.0003 28.9286C15.0003 28.9286 5.35742 16.05 5.35742 10.7143C5.35742 8.15685 6.37336 5.70416 8.18175 3.89577C9.99014 2.08738 12.4428 1.07144 15.0003 1.07144C17.5577 1.07144 20.0104 2.08738 21.8188 3.89577C23.6272 5.70416 24.6431 8.15685 24.6431 10.7143Z"
         stroke="#695FEB"
