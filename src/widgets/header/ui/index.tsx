@@ -10,7 +10,7 @@ function Header() {
     <>
       <Layout>
         <header className="header">
-          <NavLink to="/">
+          <NavLink to="/clinic-searcher/main">
             <p className="header__logo">поиск клиник</p>
           </NavLink>
           <div className="header__location">
