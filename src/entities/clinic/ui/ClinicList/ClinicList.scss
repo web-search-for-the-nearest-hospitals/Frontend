@@ -1,0 +1,48 @@
+.clinic-list {
+  display: flex;
+  flex-direction: column;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media screen and (width <= 1140px) {
+    padding-inline: 30px;
+    width: 100%;
+    max-width: 730px;
+  }
+
+  @media screen and (width <= 684px) {
+    overflow: auto;
+    padding-inline: 0;
+    flex-wrap: nowrap;
+  }
+
+  @media screen and (width <= 500px) {
+    overflow: visible;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  &__container {
+    padding: 30px;
+
+    @media screen and (width <= 1140px) {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      padding: 0 0 30px;
+    }
+
+    @media screen and (width <= 684px) {
+      gap: 20px;
+      flex-wrap: nowrap;
+    }
+
+    @media screen and (width <= 500px) {
+      flex-direction: column;
+      gap: 0;
+    }
+  }
+}

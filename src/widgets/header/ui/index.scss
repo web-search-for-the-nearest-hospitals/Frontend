@@ -1,0 +1,44 @@
+// Нужны, чтобы в зависимости от движка по разному отрисовывать logo.
+/* stylelint-disable property-no-vendor-prefix */
+/* stylelint-disable value-no-vendor-prefix */
+
+@import '~/shared/lib/index';
+
+.header {
+  @include flex-container($just: space-between);
+
+  background-color: #fff;
+  padding: 30px 0;
+
+  &__logo {
+    text-align: center;
+    font-family: 'Montserrat Subrayada', sans-serif;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 20px; /* 100% */
+    text-transform: uppercase;
+    color: #4f73e7;
+    background: -o-linear-gradient(transparent, transparent);
+    background: -webkit-linear-gradient(0deg, #4F73E7 0%, #626AE8 48.85%, #8B56E9 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    @media screen and (width <=500px) {
+      font-size: 16px;
+    }
+  }
+
+  &__location {
+    @include flex-container($align: flex-end, $just: flex-start, $gap: 5px);
+    display: none;
+
+    @media screen and (width <=500px) {
+      display: flex;
+    }
+
+    &-text {
+      @include font-small-select;
+    }
+  }
+}

@@ -1,0 +1,54 @@
+@import '~/shared/lib/index';
+
+.submit-button {
+  @include font-h3;
+
+  color: #ffff;
+  background: $gradient;
+  height: 42px;
+  border-radius: 10px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 160px;
+
+  &_size_s {
+    @media screen and (width <= 500px) {
+      min-width: 290px;
+    }
+  }
+
+  &_size_m {
+    min-width: 350px;
+
+    @media screen and (width <= 625px) {
+      min-width: 251px;
+    }
+  }
+
+  &_size_l {
+    min-width: 350px;
+
+    @media screen and (width <= 625px) {
+      min-width: 290px;
+    }
+  }
+
+  &:hover {
+    background: $active-button;
+  }
+
+  &:active {
+    background: $pressed-button;
+  }
+
+  &:focus-visible {
+    outline: 2px solid #000;
+  }
+
+  &:disabled {
+    cursor: default;
+    background: $color-not-active;
+  }
+}

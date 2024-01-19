@@ -1,0 +1,80 @@
+@import '~/shared/lib/styles/variables';
+@import '~/shared/lib/styles/mixins-font';
+
+.clinic-card {
+  width: 100%;
+  max-width: 264px;
+  border-radius: 10px;
+  background-color: $color-base-background;
+  margin-block: 15px;
+  padding: 30px 14px 30px 16px;
+  text-align: left;
+  color: $text-color;
+  cursor: pointer;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &__name {
+    margin: 0;
+
+    @include font-h3;
+    line-height: 140%;
+  }
+
+  @media screen and (width <= 1140px) {
+    background-color: $color-card-background;
+    max-width: 260px;
+    padding: 30px 15px;
+    margin-block: 7.5px;
+    &:first-of-type {
+      margin-top: 7.5px;
+    }
+    &:last-of-type {
+      margin-bottom: 7.5px;
+    }
+  }
+
+  &__timetable {
+    display: flex;
+    padding: 32px 0;
+    gap: 8px;
+
+    @include font-small;
+
+    &-title {
+      min-width: 120px;
+
+      @include font-small-select;
+    }
+
+    &-period {
+      min-width: 140px;
+      color: $active-button;
+    }
+  }
+
+  &__phone {
+    display: flex;
+    gap: 8px;
+
+    @include font-small-select;
+  }
+
+  &__address {
+    display: flex;
+    padding: 32px 0 0;
+    gap: 8px;
+
+    @include font-small;
+
+    &-title {
+      @include font-small-select;
+    }
+  }
+}

@@ -1,0 +1,59 @@
+@import '~/shared/lib/index';
+
+.map {
+  width: 100%;
+
+  &__location {
+    @include flex-container($align: flex-end, $just: flex-start, $gap: 5px);
+
+    margin-bottom: 20px;
+
+    @media screen and (width <=500px) {
+      display: none;
+    }
+
+    &-text {
+      @include font-h2;
+    }
+  }
+
+  &__group {
+    @include flex-container($just: space-between);
+
+    margin-bottom: 30px;
+
+    @media screen and (width <= 500px) {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 30px;
+    }
+
+    &-switch {
+      @include flex-container;
+
+      &-text {
+        @include font-usual;
+      }
+    }
+  }
+
+  &__container {
+    min-height: 280px;
+    height: 600px;
+
+    @media screen and (width < 1140px) {
+      height: auto;
+      aspect-ratio: 1 / 1;
+    }
+  }
+
+  &__input-container {
+    max-width: 255px;
+    width: 100%;
+
+    @media screen and (width <= 500px) {
+      min-width: 290px;
+    }
+  }
+}

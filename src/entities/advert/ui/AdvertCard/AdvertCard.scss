@@ -1,0 +1,23 @@
+.advert-card {
+  width: 290px;
+  border-radius: 10px;
+  margin-block: 15px;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
+
+  &__image {
+    border-radius: 10px;
+    object-fit: cover;
+  }
+
+  @media screen and (width <= 1140px) {
+    margin-block: 15px;
+    min-height: 372px;
+  }
+}

@@ -1,0 +1,52 @@
+@import '~/shared/lib/styles/variables';
+
+.main-page {
+  display: flex;
+  gap: 30px;
+  width: 1110px;
+  margin: 0 auto;
+  padding-bottom: 30px;
+  height: 876px;
+
+  @media screen and (width <= 1140px) {
+    flex-direction: column;
+    gap: 40px;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__search-block {
+    width: 730px;
+
+    @media screen and (width <= 767px) {
+      max-width: 100%;
+    }
+  }
+
+  &__card-list {
+    display: flex;
+    width: 350px;
+    background-color: $color-card-background;
+    height: 100%;
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    @media screen and (width <= 1140px) {
+      width: 100%;
+      max-width: 730px;
+      overflow-y: visible;
+      background-color: $color-base-background;
+      order: 1;
+    }
+
+    @media screen and (width <= 500px) {
+      width: 290px;
+      flex-direction: column;
+      background-color: $color-base-background;
+      order: 1;
+    }
+  }
+}

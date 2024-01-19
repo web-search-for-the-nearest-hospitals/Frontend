@@ -1,0 +1,43 @@
+@import '~/shared/lib/index';
+
+$checkbox-size: 20px;
+$width: $checkbox-size;
+$height: $checkbox-size;
+
+.checkbox {
+  @include flex-container;
+
+  &__title{
+    @include font-usual;
+    color: $text-color;
+  }
+
+  &__container{
+    position: relative;
+  }
+
+  &__input {
+    display: none;
+  }
+
+  &__visible {
+    width: $width;
+    height: $height;
+
+    border-radius: 2px;
+    border: 2px solid $active-button;
+    box-sizing: border-box;
+
+    cursor: pointer;
+  }
+}
+
+.checkbox__input:checked ~ .checkbox__visible{
+  background-image: url("icon-checked.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.checkbox__input:focus-visible ~ .checkbox__visible{
+  outline: 2px solid #000;
+}

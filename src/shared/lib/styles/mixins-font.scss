@@ -1,0 +1,35 @@
+@mixin font-h1() {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+@mixin font-h2() {
+  font-size: 20px;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 140%;
+}
+
+@mixin font-h3() {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+@mixin font-usual() {
+  font-size: 16px;
+  font-weight: 400;
+  font-style: normal;
+  line-height: 103%;
+}
+
+@mixin font-small {
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 121%;
+}
+
+@mixin font-small-select {
+  @include font-small;
+
+  font-weight: 500;
+}

@@ -1,0 +1,16 @@
+.advert-list {
+  display: flex;
+  flex-direction: column;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &__container {
+    padding: 30px;
+  }
+
+  @media screen and (width <= 1140px) {
+    display: none;
+  }
+}
