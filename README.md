@@ -1,5 +1,7 @@
 # ПоисКлиник 🚑 Web search for the nearest hospitals
 
+[![Frontend web_search_for_the_nearest_hospitals Workflow](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/deploy_dev.yml/badge.svg?branch=develop)](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/deploy_dev.yml)
+
 Description will be here soon.
 
 See on [GitHub Pages](https://web-search-for-the-nearest-hospitals.github.io/Frontend/).
