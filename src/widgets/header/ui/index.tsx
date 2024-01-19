@@ -8,16 +8,16 @@ function Header() {
   const [town] = useState('Калуга');
   return (
     <>
+      <header className="header">
+        <NavLink to="/clinic-searcher/main">
+          <p className="header__logo">поиск клиник</p>
+        </NavLink>
+        <div className="header__location">
+          <LocationIcon size={20} />
+          <p className="header__location-text">{town}</p>
+        </div>
+      </header>
       <Layout>
-        <header className="header">
-          <NavLink to="/">
-            <p className="header__logo">поиск клиник</p>
-          </NavLink>
-          <div className="header__location">
-            <LocationIcon size={20} />
-            <p className="header__location-text">{town}</p>
-          </div>
-        </header>
         <Outlet />
       </Layout>
     </>

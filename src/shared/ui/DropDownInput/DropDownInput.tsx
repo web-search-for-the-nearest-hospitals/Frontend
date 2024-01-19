@@ -1,12 +1,13 @@
 import styles from './_DropDownInput.module.scss';
 import cn from 'classnames';
 import useDropDownInput from './_useDropDownInput';
+import { useRef } from 'react';
 interface IDropDownInput {
   values: readonly string[];
   state: string | null;
   setState: ((newVal: string | null) => void) | ((newVal: string) => void);
   placeholder?: string;
-  contentEditable?: boolean;
+  isContentEditable?: boolean;
 }
 
 export default function DropDownInput({
@@ -14,26 +15,20 @@ export default function DropDownInput({
   state,
   setState,
   placeholder = 'Выберите значение',
-  contentEditable = false,
+  isContentEditable = false,
 }: IDropDownInput) {
+  const listKey = useRef(Math.random().toString());
+  const listRef = useRef<HTMLUListElement | null>(null);
+  const inputRef = useRef<HTMLDivElement | null>(null);
+
   const {
-    handleOptionClick,
-    onChangeInput,
-    onKeyInput,
-    onKeyOption,
-    handleBlur,
-    handleFocus,
-    listKey,
-    isFocused,
-    isOpen,
-    inputRef,
-    listRef,
-    visibleList,
+    // eslint-disable-next-line prettier/prettier
+    handleOptionClick, onChangeInput, onKeyInput, onKeyOption, handleBlur, handleFocus,
+    // eslint-disable-next-line prettier/prettier
+    isFocused, isOpen, visibleList
   } = useDropDownInput({
-    values,
-    styles,
-    setState,
-    contentEditable,
+    // eslint-disable-next-line prettier/prettier
+    values, styles, setState, isContentEditable, listRef, inputRef,
   });
 
   return (
@@ -47,8 +42,8 @@ export default function DropDownInput({
         onKeyDown={onKeyInput}
         tabIndex={0}
         role="input"
-        contentEditable={contentEditable}
-        suppressContentEditableWarning={contentEditable}
+        contentEditable={isContentEditable}
+        suppressContentEditableWarning={isContentEditable}
         onInput={onChangeInput}
         onFocus={handleFocus}
         onBlur={handleBlur}

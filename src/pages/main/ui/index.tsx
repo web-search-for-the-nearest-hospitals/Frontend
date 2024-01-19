@@ -1,5 +1,5 @@
 import './index.scss';
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import Searcher from '~/widgets/searcher-block';
 import MapBlock from '~/widgets/map-block';
@@ -8,21 +8,21 @@ import { ClinicList, FullCardClinic } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
 import { Popup } from '~/shared/ui/index';
 import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
-import { IGetOrganizations } from '~/shared/lib/types/interfaces';
-import { createToast } from '~/shared/lib';
+import createToast from '~/shared/lib/toast/createToast';
+import { IOrganization } from '~/shared/lib/types/interfaces';
 
+// @TODO: вынести на обсуждение все эти кейсы: как показывать, что модуль загружается, как показывать, что данных нет
 export default function MainPage() {
-  const [isSearch, setSearch] = useState(false);
   const [triggerQuery, queryResult] = useLazyGetOrganizationsQuery();
   const { data, isLoading, isError } = queryResult;
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenTooltip, setIsOpenTooltip] = useState(true);
+  const [selectedCard, setSelectedCard] = useState<null | IOrganization>(null);
 
-  useEffect(() => {
-    if (isSearch) {
-      triggerQuery(null as unknown as IGetOrganizations);
-    }
-  }, [triggerQuery, isSearch]);
+  function handleCardClick(data: IOrganization) {
+    setIsOpen(true);
+    setSelectedCard(data);
+  }
 
   useEffect(() => {
     if (isError) {
@@ -33,21 +33,24 @@ export default function MainPage() {
   return (
     <div className="main-page">
       <div className="main-page__card-list">
-        {isSearch && !isLoading && data ? (
-          <ClinicList isLoading={isLoading} data={data} isOpenCard={setIsOpen} />
-        ) : null}
-        {!isSearch ? <AdvertList /> : null}
-        {isSearch && isLoading && !data ? <div>Данные загружаются</div> : null}
+        {!isLoading && data && data.results.length === 0 ? <div>Ничего не найдено</div> : null}
+        {!data ? <AdvertList /> : <ClinicList data={data} handleCardClick={handleCardClick} />}
+        {isLoading ? <div>Данные загружаются</div> : null}
       </div>
       <div className="main-page__search-block">
-        <Searcher setSearch={setSearch} />
-        <MapBlock clinicData={data} />
+        <Searcher onClick={triggerQuery} />
+        <MapBlock clinicData={data} handleCardClick={handleCardClick} />
       </div>
-      <Popup isOpen={isOpen}>
-        <FullCardClinic isClose={() => setIsOpen(false)} />
-      </Popup>
-      <Popup isOpen={isOpenTooltip}>
-        <Tooltip isClose={() => setIsOpenTooltip(false)} />
+      {selectedCard ? (
+        <Popup isOpen={isOpen} closePopup={() => setIsOpen(false)}>
+          <FullCardClinic isClose={() => setIsOpen(false)} clinic={selectedCard} />
+        </Popup>
+      ) : null}
+      <Popup isOpen={isOpenTooltip} closePopup={() => setIsOpenTooltip(false)}>
+        <Tooltip
+          isClose={() => setIsOpenTooltip(false)}
+          text={'Ваша запись на рассмотрении. Администратор свяжется с вами для уточнения записи.'}
+        />
       </Popup>
     </div>
   );

@@ -1,19 +1,28 @@
 import './ClinicCard.scss';
 import { IOrganization } from '~/shared/lib/types/interfaces';
+import { getTimetable } from '../../lib/getTimetable';
 
 interface IClinicCard {
   clinic: IOrganization;
-  isOpenCard: (newVal: boolean) => void;
+  handleCardClick: (data: IOrganization) => void;
 }
 
-// TODO: написать парсер для business_hours в формат макета - поле с графиком работы
-export function ClinicCard({ clinic, isOpenCard }: IClinicCard) {
+export function ClinicCard({ clinic, handleCardClick }: IClinicCard) {
+  const date = new Date();
+  const today = date.getDay() || 7;
+
   return (
-    <div className="clinic-card" onClick={() => isOpenCard(true)}>
+    <div className="clinic-card" onClick={() => handleCardClick(clinic)}>
       <h3 className="clinic-card__name">{clinic.short_name}</h3>
       <div className="clinic-card__timetable">
         <p className="clinic-card__timetable-title">График работы:</p>
-        <p className="clinic-card__timetable-period">{'Пн-Пт: 8:00–17:00 Сб-Вс: Выходной'} </p>
+        <ul className="clinic-card__timetable-period">
+          {getTimetable(clinic).map((day, index) => (
+            <li key={index} style={{ color: index + 1 === today ? '#695feb' : '#3b405d' }}>
+              {day}
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="clinic-card__phone">
         <p className="clinic-card__phone-title">Телефон: </p>
