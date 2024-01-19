@@ -15,7 +15,7 @@ interface ICoordinates {
   longitude: number;
 }
 
-interface IBusinessHours {
+export interface IBusinessHours {
   day: number;
   from_hour: string;
   to_hour: string;
