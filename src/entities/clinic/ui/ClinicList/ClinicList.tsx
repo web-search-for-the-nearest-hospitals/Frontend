@@ -12,7 +12,7 @@ export default function ClinicList({ data, handleCardClick }: IClinicList) {
     <div className="clinic-list">
       <div className="clinic-list__container">
         {data.results.map((clinic) => (
-          <ClinicCard key={`${clinic.latitude}${clinic.longitude}`} clinic={clinic} />
+          <ClinicCard key={`${clinic.latitude}${clinic.longitude}`} clinic={clinic} handleCardClick={handleCardClick} />
         ))}
       </div>
     </div>
