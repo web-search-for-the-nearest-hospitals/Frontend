@@ -1,6 +1,7 @@
 import './FullCardClinic.scss';
 import { Button, CloseButton } from '~/shared/ui/index';
 import { IOrganization } from '~/shared/lib/types/interfaces';
+import { NavLink } from 'react-router-dom';
 
 interface IFullCard {
   isClose: () => void;
@@ -36,7 +37,9 @@ export function FullCardClinic({ isClose, clinic }: IFullCard) {
           {clinic.site}
         </a>
       </div>
-      <Button title="Записаться" size="m" type="submit" />
+      <NavLink to="/clinic-searcher/appointment">
+        <Button title="Записаться" size="m" type="submit" />
+      </NavLink>
     </div>
   );
 }
