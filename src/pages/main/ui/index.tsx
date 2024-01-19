@@ -40,7 +40,7 @@ export default function MainPage() {
         <MapBlock clinicData={data} handleCardClick={handleCardClick} />
       </div>
       {selectedCard ? (
-        <Popup isOpen={isOpen}>
+        <Popup isOpen={isOpen} closePopup={() => setIsOpen(false)}>
           <FullCardClinic isClose={() => setIsOpen(false)} clinic={selectedCard} />
         </Popup>
       ) : null}
