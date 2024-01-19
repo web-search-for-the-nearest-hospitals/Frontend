@@ -2,22 +2,24 @@
 
 .form-clinic {
   max-width: 920px;
-  background-color: #f9f9f9;
+  background-color: $color-card-background;
   margin: 0 auto;
   border-radius: 10px;
+
 
   &__container {
     display: flex;
     flex-direction: column;
-    width: 540px;
+    max-width: 540px;
     text-align: center;
     margin: 0 auto;
     padding: 43px 0 97px;
   }
   &__title {
-    color: #3b405d;
+    color: $text-color;
     @include font-h2;
     margin: 0 0 40px;
+
   }
   &__progress-scale {
     margin: 0 0 80px;
@@ -33,34 +35,43 @@
     align-items: center;
     gap: 6px;
     position: relative;
+
+    @media screen and (width <= 530px) {
+      font-size: 12px;
+      width: 25%;
+    }
+
   }
   &__progress-element-circle {
     width: 38px;
     height: 38px;
-    background-color: #c4bfbf;
-    color: white;
+    background-color: $color-not-active;
+    color: $color-base-background;
     border-radius: 50%;
     line-height: 260%;
     z-index: 10;
   }
 
   &__progress-element-line {
-    width: 200px;
+    width: 170%;
     height: 1px;
-    background-color: #c4bfbf;
+    background-color: $color-not-active;
     position: absolute;
     top: 25%;
-    left: 60px;
+    left: 50px;
+    @media screen and (width <= 530px) {
+      width: 150%;
+    }
   }
 
   &__progress-element-text {
-    color: #c4bfbf;
+    color: $color-not-active;
   }
 }
-.active-circle-and-line {
-  background-color: #695feb;
+.form-clinic__progress-element-line_active, .form-clinic__progress-element-circle_active {
+  background-color: $active-button;
 }
 
-.active-text {
-  color: #3b405d;
+.form-clinic__progress-element-text_active {
+  color: $text-color;
 }
