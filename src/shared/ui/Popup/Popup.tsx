@@ -7,14 +7,14 @@ const cx = classNames.bind(styles);
 interface IPopup {
   children: ReactNode;
   isOpen: boolean;
-  isClose: () => void;
+  closePopup: () => void;
 }
 
-export default function Popup({ children, isOpen, isClose }: IPopup) {
+export default function Popup({ children, isOpen, closePopup }: IPopup) {
   useEffect(() => {
     const closeByESC = (e: KeyboardEvent) => {
       if (e.key === 'Escape') {
-        isClose();
+        closePopup();
       }
     };
     if (isOpen) {
@@ -23,12 +23,12 @@ export default function Popup({ children, isOpen, isClose }: IPopup) {
     return () => {
       document.removeEventListener('keydown', closeByESC);
     };
-  }, [isClose, isOpen]);
+  }, [closePopup, isOpen]);
 
   return (
     <div
       className={cx('popup', isOpen ? 'popup_opened' : '')}
-      onClick={(e) => e.currentTarget === e.target && isClose()}
+      onClick={(e) => e.currentTarget === e.target && closePopup()}
     >
       {children}
     </div>
