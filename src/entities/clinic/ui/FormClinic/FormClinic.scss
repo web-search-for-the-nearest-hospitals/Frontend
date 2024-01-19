@@ -6,7 +6,6 @@
   margin: 0 auto;
   border-radius: 10px;
 
-
   &__container {
     display: flex;
     flex-direction: column;
@@ -19,7 +18,6 @@
     color: $text-color;
     @include font-h2;
     margin: 0 0 40px;
-
   }
   &__progress-scale {
     margin: 0 0 80px;
@@ -28,7 +26,6 @@
   }
   &__progress-element {
     @include font-small;
-
     width: 22%;
     display: flex;
     flex-direction: column;
@@ -41,34 +38,41 @@
       width: 25%;
     }
 
-  }
-  &__progress-element-circle {
-    width: 38px;
-    height: 38px;
-    background-color: $color-not-active;
-    color: $color-base-background;
-    border-radius: 50%;
-    line-height: 260%;
-    z-index: 10;
-  }
+    @media screen and (width <= 410px) {
+      font-size: 9px;
+    }
 
-  &__progress-element-line {
-    width: 170%;
-    height: 1px;
-    background-color: $color-not-active;
-    position: absolute;
-    top: 25%;
-    left: 50px;
-    @media screen and (width <= 530px) {
-      width: 150%;
+    &-circle {
+      width: 38px;
+      height: 38px;
+      background-color: $color-not-active;
+      color: $color-base-background;
+      border-radius: 50%;
+      line-height: 260%;
+      z-index: 10;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    &-line {
+      width: 170%;
+      height: 1px;
+      background-color: $color-not-active;
+      position: absolute;
+      top: 19px;
+      left: 50px;
+      @media screen and (width <= 530px) {
+        width: 150%;
+      }
+    }
+
+    &-text {
+      color: $color-not-active;
     }
   }
-
-  &__progress-element-text {
-    color: $color-not-active;
-  }
 }
-.form-clinic__progress-element-line_active, .form-clinic__progress-element-circle_active {
+.form-clinic__progress-element-line_active,
+.form-clinic__progress-element-circle_active {
   background-color: $active-button;
 }
 
