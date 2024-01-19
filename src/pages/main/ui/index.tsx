@@ -9,9 +9,10 @@ import { AdvertList } from '~/entities/advert';
 
 import { Popup } from '~/shared/ui/index';
 import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
-import { createToast } from '~/shared/lib';
+import createToast from '~/shared/lib/toast/createToast';
 import { IOrganization } from '~/shared/lib/types/interfaces';
 
+// @TODO: вынести на обсуждение все эти кейсы: как показывать, что модуль загружается, как показывать, что данных нет
 export default function MainPage() {
   const [triggerQuery, queryResult] = useLazyGetOrganizationsQuery();
   const { data, isLoading, isError } = queryResult;
@@ -41,7 +42,7 @@ export default function MainPage() {
         <MapBlock clinicData={data} handleCardClick={handleCardClick} />
       </div>
       {selectedCard ? (
-        <Popup isOpen={isOpen}>
+        <Popup isOpen={isOpen} closePopup={() => setIsOpen(false)}>
           <FullCardClinic isClose={() => setIsOpen(false)} clinic={selectedCard} />
         </Popup>
       ) : null}

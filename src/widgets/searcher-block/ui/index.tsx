@@ -2,7 +2,7 @@ import './index.scss';
 import { useEffect, useState } from 'react';
 
 import { useGetSpecialtiesQuery } from '~/shared/api/rtkqueryApi';
-import { createToast } from '~/shared/lib';
+import createToast from '~/shared/lib/toast/createToast';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
 import { Button, Checkbox, DropDownInput } from '~/shared/ui/index';
 
@@ -52,12 +52,8 @@ export default function Searcher({ onClick }: ISearcher) {
         />
       </div>
       <div className="search-clinic__group">
-        <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay}>
-          Круглосуточные
-        </Checkbox>
-        <Checkbox state={isGovernment} setState={setIsGovernment}>
-          Государственные
-        </Checkbox>
+        <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />
+        <Checkbox state={isGovernment} setState={setIsGovernment} title="Государственные" />
       </div>
     </div>
   );

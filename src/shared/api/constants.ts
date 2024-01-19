@@ -1,12 +1,13 @@
 import invitro from '../assets/images/advert-1.jpg';
 import roche from '../assets/images/advert-2.jpg';
+import invitro2 from '../assets/images/advert-3.jpg';
 
 export const adverts = [
   { id: 1, name: 'Invitro', img: invitro },
   { id: 2, name: 'LA Roche-Posay', img: roche },
-  { id: 3, name: 'Invitro', img: invitro },
+  { id: 3, name: 'Invitro2', img: invitro2 },
   { id: 4, name: 'LA Roche-Posay', img: roche },
-  { id: 5, name: 'Invitro', img: invitro },
+  { id: 5, name: 'Invitro2', img: invitro2 },
 ];
 
 export const clinics = [

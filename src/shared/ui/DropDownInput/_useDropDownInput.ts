@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { createToast } from '~/shared/lib';
+import createToast from '~/shared/lib/toast/createToast';
 
 interface IUseDropDownInputProps {
   values: readonly string[];
@@ -22,7 +22,6 @@ export default function useDropDownInput({
   const findClosest = (e: React.FocusEvent) => e.relatedTarget?.closest(`.${styles['drop-down-input__list']}`);
   const checkKey = (el: Element | null) => el?.getAttribute('data-key') !== listRef.current?.getAttribute('data-key');
   const handleFocus = () => setIsFocused(true);
-
   const toFocusOption = useCallback(
     () => (listRef.current?.children[focusIndex] as HTMLElement)?.focus(),
     [focusIndex, listRef],

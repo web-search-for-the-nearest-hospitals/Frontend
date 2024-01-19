@@ -10,9 +10,11 @@ interface IClinicList {
 export default function ClinicList({ data, handleCardClick }: IClinicList) {
   return (
     <div className="clinic-list">
-      {data.results.map((clinic) => (
-        <ClinicCard key={`${clinic.latitude}${clinic.longitude}`} clinic={clinic} handleCardClick={handleCardClick} />
-      ))}
+      <div className="clinic-list__container">
+        {data.results.map((clinic) => (
+          <ClinicCard key={`${clinic.latitude}${clinic.longitude}`} clinic={clinic} handleCardClick={handleCardClick} />
+        ))}
+      </div>
     </div>
   );
 }
