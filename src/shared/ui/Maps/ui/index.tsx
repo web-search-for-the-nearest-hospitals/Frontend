@@ -17,7 +17,7 @@ export default function Maps({ userCoord, focusCoord, clinicData, handleCardClic
     <section className={styles['map']}>
       <YMaps
         query={{
-          apikey: import.meta.env.VITE_YAMAP_API_KEY,
+          apikey: import.meta.env.VITE_YAMAP_API_KEY || process.env['VITE_YAMAP_API_KEY'],
           lang: 'ru_RU',
           ns: 'use-load-option',
           load: 'Map,Placemark,control.ZoomControl,control.FullscreenControl,geoObject.addon.balloon',

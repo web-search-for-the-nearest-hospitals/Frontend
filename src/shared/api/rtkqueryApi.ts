@@ -1,10 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import { IClinicListData, IGetOrganizations, ISpecialty, ITown, ITowns } from '../lib/types/interfaces';
-
 export const rtkqueryApi = createApi({
   reducerPath: 'rtkqueryApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BACK_URL + 'api/',
+    baseUrl: (import.meta.env.VITE_BACK_URL || process.env['VITE_BACK_URL']) + 'api/',
   }),
   endpoints: (builder) => ({
     getSpecialties: builder.query<ISpecialty[], null>({

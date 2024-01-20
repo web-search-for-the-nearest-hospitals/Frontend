@@ -1,4 +1,4 @@
-const BACK_URL = import.meta.env.VITE_BACK_URL;
+const BACK_URL = import.meta.env.VITE_BACK_URL || process.env['VITE_BACK_URL'];
 import { ICoord, IOrganization } from '../lib/types/interfaces';
 
 async function checkRequest(res: Response) {
