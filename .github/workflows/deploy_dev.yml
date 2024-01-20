@@ -11,7 +11,7 @@ on:
 jobs:
   build_and_push_to_docker_hub:
       name: Push docker image to docker hub
-      if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
+#      if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
       runs-on: ubuntu-latest
       steps:
         - name: Check out the repo
