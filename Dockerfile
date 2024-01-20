@@ -8,11 +8,11 @@ RUN --mount=type=secret,id=VITE_NODE_ENV \
    echo $VITE_NODE_ENV \
    echo $VITE_YAMAP_API_KEY \
    echo $VITE_BACK_URL \
-   touch .env \
-   echo VITE_NODE_ENV=$VITE_NODE_ENV >> .env \
-   echo VITE_YAMAP_API_KEY=$VITE_YAMAP_API_KEY >> .env \
-   echo VITE_BACK_URL=$VITE_BACK_URL >> .env \
-   cat .env
+   touch .env
+#   echo VITE_NODE_ENV=$VITE_NODE_ENV >> .env \
+#   echo VITE_YAMAP_API_KEY=$VITE_YAMAP_API_KEY >> .env \
+#   echo VITE_BACK_URL=$VITE_BACK_URL >> .env \
+#   cat .env
 #RUN --mount=type=secret,id=VITE_BACK_URL \
 #   export VITE_BACK_URL=$(cat /run/secrets/VITE_BACK_URL) && \
 #   echo $VITE_BACK_URL
