@@ -10,7 +10,7 @@ FROM node:lts-bookworm-slim as build
 #   echo VITE_BACK_URL
 RUN --mount=type=secret,id=github_token \
    export github_token=$(cat /run/secrets/github_token) && \
-   echo github_token
+   echo $github_token
 WORKDIR /app
 COPY package*.json .
 RUN npm i
