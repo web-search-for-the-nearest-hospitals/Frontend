@@ -10,7 +10,7 @@ FROM node:lts-bookworm-slim as build
 #   echo VITE_BACK_URL
 RUN --mount=type=secret,id=VITE_BACK_URL \
    export VITE_BACK_URL=$(cat /run/secrets/VITE_BACK_URL) && \
-   echo VITE_BACK_URL
+   echo $VITE_BACK_URL
 WORKDIR /app
 COPY package*.json .
 RUN npm i
