@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import Searcher from '~/widgets/searcher-block';
 import MapBlock from '~/widgets/map-block';
-import { Tooltip } from '~/widgets/form/ui';
+import { InfoСontainer } from '~/widgets/notification-container/index';
 import { ClinicList, FullCardClinic } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
 import { Popup } from '~/shared/ui/index';
@@ -16,7 +16,7 @@ export default function MainPage() {
   const [triggerQuery, queryResult] = useLazyGetOrganizationsQuery();
   const { data, isLoading, isError } = queryResult;
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpenTooltip, setIsOpenTooltip] = useState(true);
+  const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(true);
   const [selectedCard, setSelectedCard] = useState<null | IOrganization>(null);
 
   function handleCardClick(data: IOrganization) {
@@ -46,9 +46,9 @@ export default function MainPage() {
           <FullCardClinic isClose={() => setIsOpen(false)} clinic={selectedCard} />
         </Popup>
       ) : null}
-      <Popup isOpen={isOpenTooltip} closePopup={() => setIsOpenTooltip(false)}>
-        <Tooltip
-          isClose={() => setIsOpenTooltip(false)}
+      <Popup isOpen={isOpenInfoСontainer} closePopup={() => setIsOpenInfoСontainer(false)}>
+        <InfoСontainer
+          isClose={() => setIsOpenInfoСontainer(false)}
           text={'Ваша запись на рассмотрении. Администратор свяжется с вами для уточнения записи.'}
         />
       </Popup>

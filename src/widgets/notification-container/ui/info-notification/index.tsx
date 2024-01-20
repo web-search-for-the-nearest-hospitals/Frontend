@@ -1,21 +1,21 @@
-import './Tooltip.scss';
+import './index.scss';
 import { Button, CloseButton } from '~/shared/ui/index';
 
 import { NavLink } from 'react-router-dom';
 
-interface ITooltip {
+interface IInfoСontainer {
   isClose: () => void;
   text: string;
 }
 
-export function Tooltip({ isClose, text }: ITooltip) {
+export function InfoСontainer({ isClose, text }: IInfoСontainer) {
   function navigateToMain() {
     isClose();
   }
   return (
-    <div className="tooltip">
+    <div className="info-container">
       <CloseButton type="button" onClick={isClose} size={'s'} />
-      <p className="tooltip__text">{text}</p>
+      <p className="info-container__text">{text}</p>
       <NavLink to="/clinic-searcher/main">
         <Button title="На главную" size="s" type="submit" onClick={navigateToMain} />
       </NavLink>
