@@ -1,11 +1,12 @@
 @import '~/shared/lib/index';
 
-.main {
-  margin: 0 auto;
-  padding: 0;
-  max-width: $max-width;
+// UPD: перенесены в #root. Теперь назначение Layout - оборачивать в main
+// .main {
+//   margin: 0 auto;
+//   padding: 0;
+//   max-width: $max-width;
 
-  @media screen and (max-width: 1140px) {
-    padding-inline: 15px;
-  }
-}
+//   @media screen and (width <= 1140px) {
+//     padding-inline: 15px;
+//   }
+// }
