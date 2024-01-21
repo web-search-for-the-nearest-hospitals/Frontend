@@ -1,7 +1,7 @@
 # ПоисКлиник 🚑 Web search for the nearest hospitals
 
 [![Frontend web_search_for_the_nearest_hospitals Workflow](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/deploy_dev.yml/badge.svg?branch=develop)](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/deploy_dev.yml)
-[![Frontend test current branch](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/tests.yaml/badge.svg?branch=default)](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/tests.yaml)
+[![Frontend test current branch](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/tests.yaml/badge.svg)](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/tests.yaml)
 
 
 Задача проекта: предоставить возможность пользователям искать ближайшие к ним медицинские центры и тут же проложить маршрут при необходимости. Пользователь имеет ряд фильтров для удоства, интерактивную карту и возможность записи на приём в выбранную клинику. Клиника в свою очередь имеет возможность получать заявки по записи на приём и регистрации собственного местоположения на карте.
