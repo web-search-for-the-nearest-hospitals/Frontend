@@ -28,7 +28,9 @@ export function FullCardClinic({ isClose, clinic }: IFullCard) {
       </div>
       <div className="clinic-popup__phone">
         <p className="clinic-popup__phone-title">Телефон: </p>
-        <p className="clinic-popup__phone-number">{clinic.phone}</p>
+        <a className="clinic-popup__phone-number" href={`tel:${clinic.phone}`}>
+          {clinic.phone}
+        </a>
       </div>
       <div className="clinic-popup__site">
         <p className="clinic-popup__site-title">Сайт: </p>
