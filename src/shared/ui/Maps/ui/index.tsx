@@ -5,13 +5,17 @@ import { YMaps, Map, Placemark, RouteButton, SearchControl } from '@pbe/react-ya
 interface IMaps {
   userCoord: ICoord;
   focusCoord: ICoord;
-  clinicData: IClinicListData | undefined;
+  clinicData: IClinicListData['results'];
   handleCardClick: (data: IOrganization) => void;
+  filterDistrict: string;
 }
 
-export default function Maps({ userCoord, focusCoord, clinicData, handleCardClick }: IMaps) {
+export default function Maps({ userCoord, focusCoord, clinicData, handleCardClick, filterDistrict }: IMaps) {
   const { latitude, longitude } = userCoord;
   const { latitude: focuse_lat, longitude: focus_long } = focusCoord;
+
+  const getVisibleData = () =>
+    filterDistrict ? [...clinicData].filter((el) => el.district === filterDistrict) : clinicData;
 
   return latitude && focuse_lat && focus_long && longitude && Map ? (
     <section className={styles['map']}>
@@ -28,7 +32,7 @@ export default function Maps({ userCoord, focusCoord, clinicData, handleCardClic
           height={'100%'}
           state={{
             center: [focuse_lat, focus_long],
-            zoom: 12,
+            zoom: filterDistrict ? 12 : 11,
             controls: ['zoomControl', 'fullscreenControl'],
           }}
           modules={['control.ZoomControl', 'control.FullscreenControl']}
@@ -41,16 +45,20 @@ export default function Maps({ userCoord, focusCoord, clinicData, handleCardClic
             }}
             options={{
               iconLayout: 'default#image',
-              iconImageHref: '/src/shared/assets/icons/location.svg',
+              iconImageHref: '/src/shared/assets/images/location.png',
+              iconImageSize: [25, 35],
             }}
           />
 
-          {clinicData?.results.map((el) => (
+          {getVisibleData().map((el) => (
             <Placemark
               key={`${el.latitude}${el.longitude}`}
               defaultGeometry={[el.latitude, el.longitude]}
               geometry={[el.latitude, el.longitude]}
               onClick={() => handleCardClick(el)}
+              defaultProperties={{
+                iconCaption: el.factual_address.slice(0, -11), //срезать г. Калуга
+              }}
             />
           ))}
 

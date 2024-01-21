@@ -1,4 +1,4 @@
-FROM node:latest as build
+FROM node:lts-bookworm-slim as build
 WORKDIR /app
 COPY package*.json .
 RUN npm install
