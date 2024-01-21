@@ -8,6 +8,15 @@ interface IFullCard {
 }
 
 export function FullCardClinic({ isClose, clinic }: IFullCard) {
+  function getDevice() {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isPhone = /mobile|iphone|ipad|ipod|android|blackberry|mini|windows\sce|palm/i.test(userAgent);
+    if (isPhone) {
+      return true;
+    } else {
+      return false;
+    }
+  }
   return (
     <div className="clinic-popup">
       <CloseButton type="button" onClick={isClose} />
@@ -28,9 +37,13 @@ export function FullCardClinic({ isClose, clinic }: IFullCard) {
       </div>
       <div className="clinic-popup__phone">
         <p className="clinic-popup__phone-title">Телефон: </p>
-        <a className="clinic-popup__phone-number" href={`tel:${clinic.phone}`}>
-          {clinic.phone}
-        </a>
+        {getDevice() ? (
+          <a className="clinic-popup__phone-number clinic-popup__phone-number_active" href={`tel:${clinic.phone}`}>
+            {clinic.phone}
+          </a>
+        ) : (
+          <p className="clinic-popup__phone-number">{clinic.phone}</p>
+        )}
       </div>
       <div className="clinic-popup__site">
         <p className="clinic-popup__site-title">Сайт: </p>
