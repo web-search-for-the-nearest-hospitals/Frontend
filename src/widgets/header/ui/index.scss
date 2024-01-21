@@ -41,4 +41,17 @@
       @include font-small-select;
     }
   }
+  &__icon-button{
+    display: none;
+
+    @media screen and (width <=500px) {
+      display: block;
+      margin-left: 16px;
+      margin-right: 16px;
+    }
+  }
+  &__container{
+    display: flex;
+    align-items: center;
+  }
 }

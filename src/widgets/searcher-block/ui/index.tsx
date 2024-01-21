@@ -2,8 +2,10 @@ import './index.scss';
 import { useEffect, useState } from 'react';
 
 import { useGetSpecialtiesQuery } from '~/shared/api/rtkqueryApi';
+import UserIcon from '~/shared/assets/icons/UserIcon';
 import createToast from '~/shared/lib/toast/createToast';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
+import IconBtn from '~/shared/ui/IconBtn/IconBtn';
 import { Button, Checkbox, DropDownInput } from '~/shared/ui/index';
 
 interface ISearcher {
@@ -50,6 +52,15 @@ export default function Searcher({ onClick }: ISearcher) {
             })
           }
         />
+        <div className="search-clinic__icon-button">
+          <IconBtn
+            onClick={function (): void {
+              console.log('IconBtn works!');
+            }}
+          >
+            <UserIcon width={33} height={35} />
+          </IconBtn>
+        </div>
       </div>
       <div className="search-clinic__group">
         <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />
