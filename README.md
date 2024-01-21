@@ -10,13 +10,6 @@
 
 ### Technology stack:
 
-- **Language:** JavaScript, TypeScript
-- **Framework:** React
-- **Build:** Vite
-- **Stylesheet:** Storybook, Sass
-- **Lint:** ESLint, Prettier
-- **Git hooks:** Husky
-
 <p align="center">
   <img src="https://img.shields.io/badge/SASS-100000?style=for-the-badge&logo=SASS&logoColor=white" title="sass"/>
   <img src="https://img.shields.io/badge/React_Hook_Form-100000?style=for-the-badge&logo=reacthookform" alt="React Hook Form" title="React Hook Form">
@@ -35,10 +28,6 @@
 </p>
 
 ## Getting Started
-
-Here the instruction how you may set up your project locally.
-
-### Installation
 
 1. Установить node.js и npm (например, с опорой на эту [инструкцию](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-installer-to-install-nodejs-and-npm))
 2. Клонировать репозиторий (проверьте актуальность ссылки)

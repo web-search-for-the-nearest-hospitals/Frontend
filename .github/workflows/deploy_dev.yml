@@ -1,9 +1,9 @@
 name: Frontend web_search_for_the_nearest_hospitals Workflow
 
 on:
- pull_request:
-   branches: [ develop ]
-   types: [ closed ]
+  pull_request:
+    branches: [develop]
+    types: [closed]
   workflow_dispatch:
 
 jobs:
