@@ -15,6 +15,7 @@ export default function Searcher({ onClick }: ISearcher) {
   const [isWorkAllDay, setIsWorkAllDay] = useState(false);
   const [isGovernment, setIsGovernment] = useState(false);
   const { data, isLoading, isError } = useGetSpecialtiesQuery(null);
+  const [firstLoading, setFirstLoading] = useState(false);
 
   const getCodeOfSpecialty = (name: string) => data!.find((el) => el.skill === name)!.code;
 
@@ -22,12 +23,20 @@ export default function Searcher({ onClick }: ISearcher) {
     if (isError) {
       createToast('error', 'Не удалось получить список специальностей');
     }
+    setFirstLoading(false);
   }, [isError]);
 
   if (isLoading || !data) {
     return <p className="search-clinic">Загружаю список специальностей</p>;
   }
-
+  const handleClick = () => {
+    onClick({
+      specialty: specialty ? getCodeOfSpecialty(specialty) : '',
+      is_gov: isGovernment,
+      is_full_time: isWorkAllDay,
+    });
+    setFirstLoading(true);
+  };
   return (
     <div className="search-clinic">
       <div className="search-clinic__container">
@@ -38,22 +47,23 @@ export default function Searcher({ onClick }: ISearcher) {
           setState={setSpeciality}
           isContentEditable
         />
-        <Button
-          type="submit"
-          size="s"
-          title="Найти"
-          onClick={() =>
-            onClick({
-              specialty: specialty ? getCodeOfSpecialty(specialty) : '',
-              is_gov: isGovernment,
-              is_full_time: isWorkAllDay,
-            })
-          }
-        />
+        <Button type="submit" size="s" title="Найти" onClick={handleClick} />
       </div>
       <div className="search-clinic__group">
-        <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />
-        <Checkbox state={isGovernment} setState={setIsGovernment} title="Государственные" />
+        <Checkbox
+          state={isWorkAllDay}
+          setState={setIsWorkAllDay}
+          title="Круглосуточные"
+          handleCheckbox={handleClick}
+          firstLoading={firstLoading}
+        />
+        <Checkbox
+          state={isGovernment}
+          setState={setIsGovernment}
+          title="Государственные"
+          handleCheckbox={handleClick}
+          firstLoading={firstLoading}
+        />
       </div>
     </div>
   );
