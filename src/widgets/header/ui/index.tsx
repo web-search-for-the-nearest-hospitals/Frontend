@@ -12,9 +12,6 @@ function Header() {
         <NavLink to="/clinic-searcher/main">
           <p className="header__logo">поиск клиник</p>
         </NavLink>
-        <NavLink to="/clinic-searcher/sign-up">
-          <p>Регистрация</p>
-        </NavLink>
         <div className="header__location">
           <LocationIcon size={20} />
           <p className="header__location-text">{town}</p>
