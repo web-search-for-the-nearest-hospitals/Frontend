@@ -1,0 +1,7 @@
+@import '~/shared/lib';
+
+.form-appointment{
+  @include flex-container($dir: column, $gap: 36px);
+  max-width: 350px;
+  margin: auto;
+}

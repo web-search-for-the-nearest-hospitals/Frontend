@@ -1,8 +1,9 @@
 import './index.scss';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
-import { useGetSpecialtiesQuery } from '~/shared/api/rtkqueryApi';
-import createToast from '~/shared/lib/toast/createToast';
+import { specialtySelect } from '~/entities/clinic';
+
+import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
 import { Button, Checkbox, DropDownInput } from '~/shared/ui/index';
 
@@ -11,28 +12,18 @@ interface ISearcher {
 }
 
 export default function Searcher({ onClick }: ISearcher) {
+  const specialties = useAppSelector(specialtySelect);
   const [specialty, setSpeciality] = useState<string | null>(null);
   const [isWorkAllDay, setIsWorkAllDay] = useState(false);
   const [isGovernment, setIsGovernment] = useState(false);
-  const { data, isLoading, isError } = useGetSpecialtiesQuery(null);
 
-  const getCodeOfSpecialty = (name: string) => data!.find((el) => el.skill === name)!.code;
-
-  useEffect(() => {
-    if (isError) {
-      createToast('error', 'Не удалось получить список специальностей');
-    }
-  }, [isError]);
-
-  if (isLoading || !data) {
-    return <p className="search-clinic">Загружаю список специальностей</p>;
-  }
+  const getCodeOfSpecialty = (name: string) => specialties.find((el) => el.skill === name)!.code;
 
   return (
     <div className="search-clinic">
       <div className="search-clinic__container">
         <DropDownInput
-          values={data.map((obj) => obj.skill)}
+          values={specialties.map((obj) => obj.skill)}
           placeholder="Врач, специальность"
           state={specialty}
           setState={setSpeciality}

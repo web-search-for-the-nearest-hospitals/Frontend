@@ -1,11 +1,24 @@
 import './index.scss';
 import { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
+
+import { useSpecialtiesSlice } from '~/entities/clinic';
+
 import { Layout } from '~/shared/ui';
 import { LocationIcon } from '~/shared/assets';
 
 function Header() {
   const [town] = useState('Калуга');
+  const { isGetSpecialty } = useSpecialtiesSlice();
+
+  const getContent = () => {
+    if (!isGetSpecialty) {
+      return <p className="search-clinic">Загружаю список специальностей</p>;
+    }
+
+    return <Outlet />;
+  };
+
   return (
     <>
       <header className="header">
@@ -17,9 +30,7 @@ function Header() {
           <p className="header__location-text">{town}</p>
         </div>
       </header>
-      <Layout>
-        <Outlet />
-      </Layout>
+      <Layout>{getContent()}</Layout>
     </>
   );
 }

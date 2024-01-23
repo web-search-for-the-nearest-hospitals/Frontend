@@ -1,0 +1,46 @@
+@import '~/shared/lib';
+
+.calendar {
+  border-collapse: separate;
+  border-spacing: 24px 22px;
+  text-align: center;
+
+  &__header-first{
+    @include flex-container($just: space-between);
+    margin-bottom: 27px; // 27 + 22=49
+  }
+
+  &__header-second{
+    margin-bottom: 4px; // 4 + 22
+  }
+
+  &__header-text{
+    @include font-h2;
+    font-weight: 500;
+    color: $text-color;
+
+    min-width: 30px;
+    box-sizing: border-box;
+  }
+
+  &__cell-text{
+    @include font-h2;
+    color: #515BA1;
+    font-weight: 500;
+
+    cursor: pointer;
+    border: 1px solid transparent;
+
+    &_selected {
+      color: $active-button;
+      border-radius: 2px;
+      border: 1px solid $active-button;
+    }
+  }
+
+  &__nav-btn{
+    &:disabled{
+      color: grey;
+    }
+  }
+}
