@@ -139,6 +139,8 @@
 
     &-link {
       color: $active-button;
+      overflow-wrap: break-word;
+      width: 80%;
     }
   }
 

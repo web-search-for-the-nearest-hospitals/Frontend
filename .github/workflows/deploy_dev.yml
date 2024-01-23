@@ -27,6 +27,10 @@ jobs:
             context: .
             push: true
             tags: ${{ secrets.DOCKER_USERNAME }}/frontend:latest
+            secrets: |
+              "VITE_YAMAP_API_KEY=${{ secrets.VITE_YAMAP_API_KEY }}"
+              "VITE_BACK_URL=${{ secrets.VITE_BACK_URL }}"
+              "VITE_NODE_ENV=${{ secrets.VITE_NODE_ENV }}"
 
   deploy:
       if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
