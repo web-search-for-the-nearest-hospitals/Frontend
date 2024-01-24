@@ -16,7 +16,7 @@ export function InfoСontainer({ isClose, text }: IInfoСontainer) {
     <div className="info-container">
       <CloseButton type="button" onClick={isClose} size={'s'} />
       <p className="info-container__text">{text}</p>
-      <NavLink to="/clinic-searcher/main">
+      <NavLink to="/clinic-searcher/main" style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
         <Button title="На главную" size="s" type="submit" onClick={navigateToMain} />
       </NavLink>
     </div>

@@ -15,7 +15,9 @@
 
   &_size_s {
     @media screen and (width <= 500px) {
-      min-width: 100%;
+      @include font-small;
+      font-weight: 600;
+      width: 100%;
     }
   }
 

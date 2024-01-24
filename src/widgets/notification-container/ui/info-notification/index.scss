@@ -16,17 +16,19 @@
   }
 
   &__text {
+    @include font-usual;
+
     max-width: 509px;
     min-height: 64px;
     margin-bottom: 20px;
-    @include font-usual;
     line-height: 19.5px;
     text-align: center;
 
     @media screen and (width <= 625px) {
       @include font-small;
+
       line-height: 17.07px;
-      margin-bottom: 24px;
+      margin-bottom: 0;
     }
   }
 }

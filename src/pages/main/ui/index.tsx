@@ -49,7 +49,7 @@ export default function MainPage() {
       <Popup isOpen={isOpenInfoСontainer} closePopup={() => setIsOpenInfoСontainer(false)}>
         <InfoСontainer
           isClose={() => setIsOpenInfoСontainer(false)}
-          text={'Ваша запись на рассмотрении. Администратор свяжется с вами для уточнения записи.'}
+          text={'Ваша запись на прием успешно подтверждена!'}
         />
       </Popup>
     </div>
