@@ -41,11 +41,9 @@ export default function MainPage() {
         <Searcher onClick={triggerQuery} />
         <MapBlock clinicData={data} handleCardClick={handleCardClick} />
       </div>
-      {selectedCard ? (
-        <Popup isOpen={isOpen} closePopup={() => setIsOpen(false)}>
-          <FullCardClinic isClose={() => setIsOpen(false)} clinic={selectedCard} />
-        </Popup>
-      ) : null}
+      <Popup isOpen={isOpen} closePopup={() => setIsOpen(false)}>
+        {selectedCard ? <FullCardClinic isClose={() => setIsOpen(false)} clinic={selectedCard} /> : null}
+      </Popup>
       <Popup isOpen={isOpenInfoСontainer} closePopup={() => setIsOpenInfoСontainer(false)}>
         <InfoСontainer
           isClose={() => setIsOpenInfoСontainer(false)}
