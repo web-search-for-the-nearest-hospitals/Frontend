@@ -5,6 +5,7 @@ import { Layout } from '~/shared/ui';
 import { LocationIcon } from '~/shared/assets';
 import UserIcon from '~/shared/assets/icons/UserIcon';
 import IconBtn from '~/shared/ui/IconBtn/IconBtn';
+import createToast from '~/shared/lib/toast/createToast';
 
 function Header() {
   const [town] = useState('Калуга');
@@ -22,10 +23,10 @@ function Header() {
           <div className="header__icon-button">
             <IconBtn
               onClick={function (): void {
-                console.log('IconBtn works!');
+                createToast('info', 'I work!');
               }}
             >
-              <UserIcon width={18} height={20} />
+              <UserIcon width={18.86} height={20} />
             </IconBtn>
           </div>
         </div>

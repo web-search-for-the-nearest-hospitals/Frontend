@@ -30,7 +30,7 @@ export default function Popup({ children, isOpen, closePopup }: IPopup) {
       className={cx('popup', isOpen ? 'popup_opened' : '')}
       onClick={(e) => e.currentTarget === e.target && closePopup()}
     >
-      {children}
+      <div className={cx('popup__container')}>{children}</div>
     </div>
   );
 }

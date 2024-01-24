@@ -2,11 +2,10 @@ import './index.scss';
 import { useEffect, useState } from 'react';
 
 import { useGetSpecialtiesQuery } from '~/shared/api/rtkqueryApi';
-import UserIcon from '~/shared/assets/icons/UserIcon';
+import { UserIcon } from '~/shared/assets/index';
 import createToast from '~/shared/lib/toast/createToast';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
-import IconBtn from '~/shared/ui/IconBtn/IconBtn';
-import { Button, Checkbox, DropDownInput } from '~/shared/ui/index';
+import { Button, Checkbox, DropDownInput, IconBtn } from '~/shared/ui/index';
 
 interface ISearcher {
   onClick: (data: IGetOrganizations) => void;
@@ -55,7 +54,7 @@ export default function Searcher({ onClick }: ISearcher) {
         <div className="search-clinic__icon-button">
           <IconBtn
             onClick={function (): void {
-              console.log('IconBtn works!');
+              createToast('info', 'I work!');
             }}
           >
             <UserIcon width={33} height={35} />

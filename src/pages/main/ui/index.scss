@@ -49,4 +49,19 @@
       order: 1;
     }
   }
+  &__close-btn {
+    width: 27px;
+    height: 27px;
+    position: absolute;
+    right: 30px;
+    top: 30px;
+    display: flex;
+
+    @media screen and (width <= 625px) {
+      width: 11px;
+      height: 11px;
+      right: 29px;
+      top: 29px;
+    }
+  }
 }

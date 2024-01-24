@@ -1,23 +1,14 @@
 import './FullCardClinic.scss';
 import { Button } from '~/shared/ui/index';
 import { IOrganization } from '~/shared/lib/types/interfaces';
-import IconBtn from '~/shared/ui/IconBtn/IconBtn';
-import BtnCloseIcon from '~/shared/assets/icons/BtnCloseIcon';
 
 interface IFullCard {
-  isClose: () => void;
   clinic: IOrganization;
 }
 
-export function FullCardClinic({ isClose, clinic }: IFullCard) {
+export function FullCardClinic({ clinic }: IFullCard) {
   return (
     <div className="clinic-popup">
-      <div className="clinic-popup__close-btn">
-        <IconBtn onClick={isClose}>
-          <BtnCloseIcon />
-        </IconBtn>
-      </div>
-
       <h3 className="clinic-popup__name">{clinic.short_name}</h3>
       <p className="clinic-popup__about">{clinic.about}</p>
       <div className="clinic-popup__timetable">
