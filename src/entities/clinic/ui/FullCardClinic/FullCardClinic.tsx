@@ -1,6 +1,8 @@
 import './FullCardClinic.scss';
-import { Button, CloseButton, TimetableList } from '~/shared/ui/index';
+
+import { Button, CloseButton } from '~/shared/ui/index';
 import { IOrganization } from '~/shared/lib/types/interfaces';
+import TimetableList from '../_TimetableList';
 
 interface IFullCard {
   isClose: () => void;
@@ -16,7 +18,6 @@ export function FullCardClinic({ isClose, clinic }: IFullCard) {
       <div className="clinic-popup__timetable">
         <p className="clinic-popup__timetable-title">График работы:</p>
         {TimetableList(clinic, 'popup')}
-        {/* <p className="clinic-popup__timetable-period"></p> */}
       </div>
       <div className="clinic-popup__address">
         <p className="clinic-popup__address-text">

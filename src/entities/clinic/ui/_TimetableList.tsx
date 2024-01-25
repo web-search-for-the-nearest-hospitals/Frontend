@@ -1,5 +1,5 @@
 import { IOrganization } from '~/shared/lib/types/interfaces';
-import { getTimetable } from '~/shared/lib/timetable/getTimetable';
+import { getTimetable } from '../lib/getTimetable';
 
 export default function TimetableList(clinic: IOrganization, name: string) {
   const date = new Date();

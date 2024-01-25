@@ -6,6 +6,5 @@ import DropDownInput from './DropDownInput/DropDownInput';
 import Layout from './Layout/Layout';
 import Popup from './Popup/Popup';
 import Maps from './Maps';
-import TimetableList from './TimetableList/TimetableList';
 
-export { Button, ToggleButton, CloseButton, Checkbox, Layout, Maps, DropDownInput, Popup, TimetableList };
+export { Button, ToggleButton, CloseButton, Checkbox, Layout, Maps, DropDownInput, Popup };

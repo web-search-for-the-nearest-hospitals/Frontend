@@ -1,6 +1,7 @@
 import './ClinicCard.scss';
+
 import { IOrganization } from '~/shared/lib/types/interfaces';
-import { TimetableList } from '~/shared/ui';
+import TimetableList from '../_TimetableList';
 
 interface IClinicCard {
   clinic: IOrganization;
