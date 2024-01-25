@@ -16,6 +16,7 @@ export function FullCardClinic({ clinic }: IFullCard) {
   const date = new Date();
   const today = date.getDay() || 7;
   const getIsPhone = () => window.screen.width < 625;
+
   return (
     <div className="clinic-popup">
       <h3 className="clinic-popup__name">{clinic.short_name}</h3>
