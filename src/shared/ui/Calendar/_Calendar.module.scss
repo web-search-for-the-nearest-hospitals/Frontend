@@ -1,17 +1,19 @@
 @import '~/shared/lib';
 
 .calendar {
-  border-collapse: separate;
-  border-spacing: 24px 22px;
+  // border-collapse: separate;
+  // border-spacing: 24px 22px;
+  // display: grid;
+  // gap: 22px;
   text-align: center;
 
   &__header-first{
     @include flex-container($just: space-between);
-    margin-bottom: 27px; // 27 + 22=49
+    margin-bottom: 46px; // по макету - 3, т.к. погрешность на table
   }
 
   &__header-second{
-    margin-bottom: 4px; // 4 + 22
+    margin-bottom: 12px; // value + padding cell + 1px от border
   }
 
   &__header-text{
@@ -21,26 +23,62 @@
 
     min-width: 30px;
     box-sizing: border-box;
+
+    &:nth-of-type(1){
+      text-align: left;
+    }
+
+    &:last-of-type{
+      text-align: right;
+    }
+
+    &:only-of-type{
+      text-align: center;
+    }
+  }
+
+  &__cell{
+    padding: 10px 10.48px;
+
+    &:first-of-type{
+      padding-left: 0;
+    }
+
+    &:last-of-type{
+      padding-right: 0;
+    }
   }
 
   &__cell-text{
     @include font-h2;
+
+    min-width: 30px;
+    box-sizing: border-box;
+
     color: #515BA1;
     font-weight: 500;
 
     cursor: pointer;
     border: 1px solid transparent;
+    transition: border-color .2s ease;
 
     &_selected {
       color: $active-button;
       border-radius: 2px;
       border: 1px solid $active-button;
     }
+
+    &_prev{
+      cursor: default;
+      color: $color-not-active;
+      pointer-events: none;
+    }
   }
 
   &__nav-btn{
     &:disabled{
-      color: grey;
+      color: $color-not-active;
+
     }
   }
 }

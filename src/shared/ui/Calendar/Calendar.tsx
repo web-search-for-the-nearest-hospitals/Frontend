@@ -1,7 +1,8 @@
-import cn from 'classnames';
 import styles from './_Calendar.module.scss';
+import cn from 'classnames';
+import { useEffect, useState } from 'react';
+
 import { daysOfWeek } from './_consts';
-import { useState } from 'react';
 import {
   checkEqualDay,
   getCurRangeString,
@@ -9,16 +10,24 @@ import {
   getFirst,
   getLast,
   getMondayDate,
+  getToday,
   getWeekDates,
+  isPrevDate,
   toIDate,
 } from './_lib';
+import { IDate } from './_types';
+
+interface ICalendar {
+  setDate: (newVal: string) => void;
+}
 
 // @TODO есть лишние срабатывания функций. Например getWeekDates при смене selectedCell
-export default function Calendar() {
+export default function Calendar({ setDate }: ICalendar) {
   const [numWeeks] = useState<2>(2);
+  const [today] = useState(getToday());
   const [firstDay] = useState(getMondayDate());
   const [curRange, setCurRange] = useState(getWeekDates({ firstDay, numWeeks }));
-  const [selectedCell, setSelectedCell] = useState(getFirst(curRange));
+  const [selectedCell, setSelectedCell] = useState<IDate>(today);
 
   const handleBtnClick = (e: React.MouseEvent<HTMLButtonElement>, isNext: boolean) => {
     e.preventDefault();
@@ -28,11 +37,16 @@ export default function Calendar() {
     setCurRange(getWeekDates({ firstDay: data, numWeeks }));
   };
 
+  useEffect(() => {
+    const { year, month, day } = selectedCell;
+    setDate(`${year}-${month + 1}-${day}`);
+  }, [selectedCell, setDate]);
+
   return (
     <table className={styles['calendar']}>
       <thead className="calendar__header">
         <tr>
-          <th colSpan={7} className={cn(styles['calendar__'])}>
+          <th colSpan={7} style={{ padding: 0 }}>
             <div className={styles['calendar__header-first']}>
               {/* @TODO: заменить на iconbutton, когда он будет */}
               <button
@@ -47,10 +61,10 @@ export default function Calendar() {
             </div>
           </th>
         </tr>
-        <tr className="calendar__header-second">
+        <tr>
           {daysOfWeek.map((day, i) => (
-            <th key={i} className={styles['calendar__header-text']}>
-              {day}
+            <th key={i} className={cn(styles['calendar__header-text'])}>
+              <p className={cn(styles['calendar__header-second'])}>{day}</p>
             </th>
           ))}
         </tr>
@@ -59,15 +73,17 @@ export default function Calendar() {
         {curRange.map((ar, i) => (
           <tr key={i}>
             {ar.map((el, k) => (
-              <td
-                key={k}
-                className={cn(
-                  styles['calendar__cell-text'],
-                  checkEqualDay(selectedCell, el) ? styles['calendar__cell-text_selected'] : '',
-                )}
-                onClick={() => setSelectedCell(el)}
-              >
-                {el.day}
+              <td key={k} className={cn(styles['calendar__cell'])}>
+                <p
+                  className={cn(
+                    styles['calendar__cell-text'],
+                    checkEqualDay(selectedCell, el) ? styles['calendar__cell-text_selected'] : '',
+                    isPrevDate(el, today) ? styles['calendar__cell-text_prev'] : '',
+                  )}
+                  onClick={() => setSelectedCell(el)}
+                >
+                  {el.day}
+                </p>
               </td>
             ))}
           </tr>

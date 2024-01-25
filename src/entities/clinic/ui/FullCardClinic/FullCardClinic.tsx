@@ -45,7 +45,8 @@ export function FullCardClinic({ isClose, clinic }: IFullCard) {
           {clinic.site}
         </a>
       </div>
-      <NavLink to={'../appointment'}>
+      {/* format relative_addr: /api/organizations/id */}
+      <NavLink to={`../appointment/${clinic.relative_addr.replace('/api/organizations/', '')}`}>
         <Button title="Записаться" size="m" type="submit" />
       </NavLink>
     </div>
