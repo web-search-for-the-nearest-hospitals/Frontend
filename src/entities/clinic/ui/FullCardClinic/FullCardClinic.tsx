@@ -8,14 +8,7 @@ interface IFullCard {
 }
 
 export function FullCardClinic({ isClose, clinic }: IFullCard) {
-  function getIsPhone() {
-    const width = window.screen.width;
-    if (width < 625) {
-      return true;
-    } else {
-      return false;
-    }
-  }
+  const getIsPhone = () => window.screen.width < 625;
   return (
     <div className="clinic-popup">
       <CloseButton type="button" onClick={isClose} />
