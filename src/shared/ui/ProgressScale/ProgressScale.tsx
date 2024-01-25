@@ -2,19 +2,17 @@ import styles from './ProgressScale.module.scss';
 import cn from 'classnames';
 
 interface IProgressScale {
-  active: number;
+  activeStage: number;
 }
 
-function ProgressScale({ active }: IProgressScale) {
-  console.log(styles);
-
+function ProgressScale({ activeStage }: IProgressScale) {
   return (
     <div className={styles['progress-scale']}>
       <div className={styles['progress-scale__element']}>
         <div
           className={cn(
             styles['progress-scale__element-circle'],
-            active > 0 ? styles['progress-scale__element-circle_active'] : '',
+            activeStage > 0 ? styles['progress-scale__element-circle_active'] : '',
           )}
         >
           1
@@ -22,13 +20,13 @@ function ProgressScale({ active }: IProgressScale) {
         <div
           className={cn(
             styles['progress-scale__element-line'],
-            active > 0 ? styles['progress-scale__element-line_active'] : '',
+            activeStage > 0 ? styles['progress-scale__element-line_active'] : '',
           )}
         ></div>
         <p
           className={cn(
             styles['progress-scale__text-circle'],
-            active > 0 ? styles['progress-scale__element-text_active'] : '',
+            activeStage > 0 ? styles['progress-scale__element-text_active'] : '',
           )}
         >
           Информация о клинике
@@ -38,7 +36,7 @@ function ProgressScale({ active }: IProgressScale) {
         <div
           className={cn(
             styles['progress-scale__element-circle'],
-            active > 1 ? styles['progress-scale__element-circle_active'] : '',
+            activeStage > 1 ? styles['progress-scale__element-circle_active'] : '',
           )}
         >
           2
@@ -46,13 +44,13 @@ function ProgressScale({ active }: IProgressScale) {
         <div
           className={cn(
             styles['progress-scale__element-line'],
-            active > 1 ? styles['progress-scale__element-line_active'] : '',
+            activeStage > 1 ? styles['progress-scale__element-line_active'] : '',
           )}
         ></div>
         <p
           className={cn(
             styles['progress-scale__text-circle'],
-            active > 1 ? styles['progress-scale__element-text_active'] : '',
+            activeStage > 1 ? styles['progress-scale__element-text_active'] : '',
           )}
         >
           Информация о специалистах
@@ -62,7 +60,7 @@ function ProgressScale({ active }: IProgressScale) {
         <div
           className={cn(
             styles['progress-scale__element-circle'],
-            active > 2 ? styles['progress-scale__element-circle_active'] : '',
+            activeStage > 2 ? styles['progress-scale__element-circle_active'] : '',
           )}
         >
           3
@@ -70,7 +68,7 @@ function ProgressScale({ active }: IProgressScale) {
         <p
           className={cn(
             styles['progress-scale__text-circle'],
-            active > 2 ? styles['progress-scale__element-text_active'] : '',
+            activeStage > 2 ? styles['progress-scale__element-text_active'] : '',
           )}
         >
           Авторизация
