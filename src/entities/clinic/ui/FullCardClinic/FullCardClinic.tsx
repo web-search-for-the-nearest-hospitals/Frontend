@@ -15,6 +15,7 @@ export function FullCardClinic({ clinic }: IFullCard) {
   const [clinicId] = useState(clinic.relative_addr.replace('/api/organizations/', ''));
   const date = new Date();
   const today = date.getDay() || 7;
+  const getIsPhone = () => window.screen.width < 625;
 
   return (
     <div className="clinic-popup">
@@ -38,7 +39,13 @@ export function FullCardClinic({ clinic }: IFullCard) {
       </div>
       <div className="clinic-popup__phone">
         <p className="clinic-popup__phone-title">Телефон: </p>
-        <p className="clinic-popup__phone-number">{clinic.phone}</p>
+        <a
+          href={`tel:${clinic.phone}`}
+          className={`clinic-popup__phone-number, ${getIsPhone() ? 'clinic-popup__phone-number_active' : ''}`}
+          style={{ pointerEvents: getIsPhone() ? 'auto' : 'none' }}
+        >
+          {clinic.phone}
+        </a>
       </div>
       <div className="clinic-popup__site">
         <p className="clinic-popup__site-title">Сайт: </p>
