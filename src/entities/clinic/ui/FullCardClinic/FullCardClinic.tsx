@@ -1,25 +1,34 @@
 import './FullCardClinic.scss';
-import { Button, CloseButton } from '~/shared/ui/index';
+import { NavLink, useParams } from 'react-router-dom';
+
+import { Button } from '~/shared/ui/index';
 import { IOrganization } from '~/shared/lib/types/interfaces';
+import { getTimetable } from '../../lib/getTimetable';
+import { useState } from 'react';
 
 interface IFullCard {
-  isClose: () => void;
   clinic: IOrganization;
 }
 
-export function FullCardClinic({ isClose, clinic }: IFullCard) {
+export function FullCardClinic({ clinic }: IFullCard) {
+  const { specialtyId } = useParams();
+  const [clinicId] = useState(clinic.relative_addr.replace('/api/organizations/', ''));
+  const date = new Date();
+  const today = date.getDay() || 7;
   const getIsPhone = () => window.screen.width < 625;
   return (
     <div className="clinic-popup">
-      <CloseButton type="button" onClick={isClose} />
       <h3 className="clinic-popup__name">{clinic.short_name}</h3>
       <p className="clinic-popup__about">{clinic.about}</p>
       <div className="clinic-popup__timetable">
         <p className="clinic-popup__timetable-title">График работы:</p>
-
-        {/* TODO@: заменить, когда появится функция парсер */}
-        <p className="clinic-popup__timetable-period">{'Пн-Пт: 8:00–17:00 Сб-Вс: Выходной'}</p>
-        {/* <p className="clinic-popup__timetable-period">{clinic.timetable}</p> */}
+        <ul className="clinic-card__timetable-period">
+          {getTimetable(clinic).map((day, index) => (
+            <li key={index} style={{ color: index + 1 === today ? '#695feb' : '#3b405d' }}>
+              {day}
+            </li>
+          ))}
+        </ul>
       </div>
       <div className="clinic-popup__address">
         <p className="clinic-popup__address-text">
@@ -43,7 +52,10 @@ export function FullCardClinic({ isClose, clinic }: IFullCard) {
           {clinic.site}
         </a>
       </div>
-      <Button title="Записаться" size="m" type="submit" />
+      {/* format relative_addr: /api/organizations/id/ - на конце слеш */}
+      <NavLink to={`../appointment/${clinicId}${specialtyId}`}>
+        <Button title="Записаться" size="m" type="submit" />
+      </NavLink>
     </div>
   );
 }

@@ -1,5 +1,14 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IClinicListData, IGetOrganizations, ISpecialty, ITown, ITowns } from '../lib/types/interfaces';
+import {
+  IClinicListData,
+  ICoupon,
+  IGetCoupon,
+  IGetOrganizations,
+  ISpecialty,
+  ITown,
+  ITowns,
+} from '../lib/types/interfaces';
+import { addQueryParams } from '../lib/addQueryParams';
 
 export const rtkqueryApi = createApi({
   reducerPath: 'rtkqueryApi',
@@ -16,16 +25,19 @@ export const rtkqueryApi = createApi({
     getTownsDataById: builder.query<ITown, string>({
       query: (i) => `towns/${i}`,
     }),
+    getCouponsOnDay: builder.query<ICoupon[], IGetCoupon>({
+      query: ({ id, ...filters }) => `organizations/${id}/free-tickets/?` + addQueryParams(filters),
+    }),
     getOrganizations: builder.query<IClinicListData, IGetOrganizations>({
-      query: (filters: Record<string, string>) =>
-        'organizations/?' +
-        Object.keys(filters)
-          .filter((key) => filters[key])
-          .map((key) => `${key}=${filters[key]}`)
-          .join('&'),
+      query: (filters: Record<string, string>) => 'organizations/?' + addQueryParams(filters),
     }),
   }),
 });
 
-export const { useGetSpecialtiesQuery, useGetTownsQuery, useLazyGetOrganizationsQuery, useLazyGetTownsDataByIdQuery } =
-  rtkqueryApi;
+export const {
+  useGetSpecialtiesQuery,
+  useGetTownsQuery,
+  useLazyGetOrganizationsQuery,
+  useLazyGetTownsDataByIdQuery,
+  useLazyGetCouponsOnDayQuery,
+} = rtkqueryApi;

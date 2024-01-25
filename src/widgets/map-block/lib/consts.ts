@@ -1,0 +1,1 @@
+export const districtDefault = 'Районы';
