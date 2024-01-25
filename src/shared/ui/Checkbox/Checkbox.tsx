@@ -1,22 +1,12 @@
-import { useEffect } from 'react';
 import styles from './Checkbox.module.scss';
 
 interface ICheckbox {
   state: boolean;
   setState: (nevVal: boolean) => void;
   title: string;
-  handleCheckbox: () => void;
-  firstLoading: boolean;
 }
 
-export default function Checkbox({ state, setState, title, handleCheckbox, firstLoading }: ICheckbox) {
-  useEffect(() => {
-    if (firstLoading) {
-      handleCheckbox();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [firstLoading, state]);
-
+export default function Checkbox({ state, setState, title }: ICheckbox) {
   function changeCheckbox() {
     setState(!state);
   }

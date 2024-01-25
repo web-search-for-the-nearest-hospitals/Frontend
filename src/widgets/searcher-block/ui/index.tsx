@@ -19,16 +19,6 @@ export default function Searcher({ onClick }: ISearcher) {
 
   const getCodeOfSpecialty = (name: string) => data!.find((el) => el.skill === name)!.code;
 
-  useEffect(() => {
-    if (isError) {
-      createToast('error', 'Не удалось получить список специальностей');
-    }
-    setFirstLoading(false);
-  }, [isError]);
-
-  if (isLoading || !data) {
-    return <p className="search-clinic">Загружаю список специальностей</p>;
-  }
   const handleClick = () => {
     onClick({
       specialty: specialty ? getCodeOfSpecialty(specialty) : '',
@@ -37,6 +27,23 @@ export default function Searcher({ onClick }: ISearcher) {
     });
     setFirstLoading(true);
   };
+  useEffect(() => {
+    if (isError) {
+      createToast('error', 'Не удалось получить список специальностей');
+    }
+    setFirstLoading(false);
+  }, [isError]);
+  useEffect(() => {
+    if (firstLoading) {
+      handleClick();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [firstLoading, isGovernment, isWorkAllDay]);
+
+  if (isLoading || !data) {
+    return <p className="search-clinic">Загружаю список специальностей</p>;
+  }
+
   return (
     <div className="search-clinic">
       <div className="search-clinic__container">
@@ -50,20 +57,8 @@ export default function Searcher({ onClick }: ISearcher) {
         <Button type="submit" size="s" title="Найти" onClick={handleClick} />
       </div>
       <div className="search-clinic__group">
-        <Checkbox
-          state={isWorkAllDay}
-          setState={setIsWorkAllDay}
-          title="Круглосуточные"
-          handleCheckbox={handleClick}
-          firstLoading={firstLoading}
-        />
-        <Checkbox
-          state={isGovernment}
-          setState={setIsGovernment}
-          title="Государственные"
-          handleCheckbox={handleClick}
-          firstLoading={firstLoading}
-        />
+        <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />
+        <Checkbox state={isGovernment} setState={setIsGovernment} title="Государственные" />
       </div>
     </div>
   );
