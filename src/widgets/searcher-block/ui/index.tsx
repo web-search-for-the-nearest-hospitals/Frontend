@@ -52,6 +52,8 @@ export default function Searcher({ onClick }: ISearcher) {
           }
         />
         <div className="search-clinic__icon-button">
+          {/* На странице присутствуют две кнопки IconBtn(UserIcon),
+           при внесении изменений в эту кнопку - изменить вторую /widgets/header/ui/index.tsx */}
           <IconBtn
             onClick={function (): void {
               createToast('info', 'I work!');

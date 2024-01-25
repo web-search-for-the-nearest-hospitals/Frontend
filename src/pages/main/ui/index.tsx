@@ -5,11 +5,10 @@ import Searcher from '~/widgets/searcher-block';
 import MapBlock from '~/widgets/map-block';
 import { ClinicList, FullCardClinic } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
-import { IconBtn, Popup } from '~/shared/ui/index';
+import { Popup } from '~/shared/ui/index';
 import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
 import createToast from '~/shared/lib/toast/createToast';
 import { IOrganization } from '~/shared/lib/types/interfaces';
-import { BtnCloseIcon } from '~/shared/assets';
 
 // @TODO: вынести на обсуждение все эти кейсы: как показывать, что модуль загружается, как показывать, что данных нет
 export default function MainPage() {
@@ -42,11 +41,6 @@ export default function MainPage() {
       </div>
       <Popup isOpen={isOpen} closePopup={() => setIsOpen(false)}>
         {selectedCard ? <FullCardClinic clinic={selectedCard} /> : null}
-        <div className="main-page__close-btn">
-          <IconBtn onClick={() => setIsOpen(false)}>
-            <BtnCloseIcon />
-          </IconBtn>
-        </div>
       </Popup>
     </div>
   );
