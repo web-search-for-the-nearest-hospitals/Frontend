@@ -1,17 +1,16 @@
 import './FullCardClinic.scss';
 import { NavLink, useParams } from 'react-router-dom';
 
-import { Button, CloseButton } from '~/shared/ui/index';
+import { Button } from '~/shared/ui/index';
 import { IOrganization } from '~/shared/lib/types/interfaces';
 import { getTimetable } from '../../lib/getTimetable';
 import { useState } from 'react';
 
 interface IFullCard {
-  isClose: () => void;
   clinic: IOrganization;
 }
 
-export function FullCardClinic({ isClose, clinic }: IFullCard) {
+export function FullCardClinic({ clinic }: IFullCard) {
   const { specialtyId } = useParams();
   const [clinicId] = useState(clinic.relative_addr.replace('/api/organizations/', ''));
   const date = new Date();
@@ -19,7 +18,6 @@ export function FullCardClinic({ isClose, clinic }: IFullCard) {
 
   return (
     <div className="clinic-popup">
-      <CloseButton type="button" onClick={isClose} />
       <h3 className="clinic-popup__name">{clinic.short_name}</h3>
       <p className="clinic-popup__about">{clinic.about}</p>
       <div className="clinic-popup__timetable">
