@@ -7,7 +7,7 @@ import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 import { Button, Calendar, DropDownInput } from '~/shared/ui';
 import Coupons from './Coupons';
 
-export default function Appointment() {
+export default function AppointmentForm() {
   const { specialtyId } = useParams();
   const specialties = useAppSelector(specialtySelect);
   const [specialty, setSpecialty] = useState<string | null>(specialties[0]?.skill || null);

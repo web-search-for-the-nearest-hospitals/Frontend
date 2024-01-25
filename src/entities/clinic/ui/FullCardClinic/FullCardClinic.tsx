@@ -14,7 +14,6 @@ interface IFullCard {
 export function FullCardClinic({ isClose, clinic }: IFullCard) {
   const { specialtyId } = useParams();
   const [clinicId] = useState(clinic.relative_addr.replace('/api/organizations/', ''));
-  console.log(clinicId);
   const date = new Date();
   const today = date.getDay() || 7;
 
