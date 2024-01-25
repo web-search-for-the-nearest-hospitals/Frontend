@@ -31,4 +31,9 @@
       margin-bottom: 0;
     }
   }
+  &__link{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
 }
