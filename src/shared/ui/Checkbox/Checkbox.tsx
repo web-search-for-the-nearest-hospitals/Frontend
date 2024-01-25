@@ -14,6 +14,7 @@ export default function Checkbox({ state, setState, title, handleCheckbox, first
     if (firstLoading) {
       handleCheckbox();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [firstLoading, state]);
 
   function changeCheckbox() {
