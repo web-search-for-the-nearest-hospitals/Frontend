@@ -6,5 +6,6 @@ import DropDownInput from './DropDownInput/DropDownInput';
 import Layout from './Layout/Layout';
 import Popup from './Popup/Popup';
 import Maps from './Maps';
+import ProgressScale from './ProgressScale/ProgressScale';
 
-export { Button, ToggleButton, IconBtn, Checkbox, Layout, Maps, DropDownInput, Popup };
+export { Button, ToggleButton, IconBtn, Checkbox, Layout, Maps, DropDownInput, Popup, ProgressScale };
