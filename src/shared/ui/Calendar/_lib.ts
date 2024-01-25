@@ -64,12 +64,13 @@ export function getToday(isIToday?: true) {
 
 export function getMondayDate() {
   const { year, month, day, dayOfWeek } = getToday(true);
-  const mondayDate = day - dayOfWeek + (dayOfWeek === 0 ? -6 : 1); // вс: -6, пн: -0
+  const mondayDate = getDay({ year, month, day }, -dayOfWeek + (dayOfWeek === 0 ? -6 : 1)); // вс: -6, пн: -0
+  // const mondayDate = day - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
 
   const result = {
-    year: year,
-    month: month,
-    day: mondayDate,
+    year: mondayDate.getFullYear(),
+    month: mondayDate.getMonth(),
+    day: mondayDate.getDate(),
   };
 
   return result as IDate;

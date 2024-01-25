@@ -1,9 +1,10 @@
 import './FullCardClinic.scss';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 import { Button, CloseButton } from '~/shared/ui/index';
 import { IOrganization } from '~/shared/lib/types/interfaces';
 import { getTimetable } from '../../lib/getTimetable';
+import { useState } from 'react';
 
 interface IFullCard {
   isClose: () => void;
@@ -11,6 +12,9 @@ interface IFullCard {
 }
 
 export function FullCardClinic({ isClose, clinic }: IFullCard) {
+  const { specialtyId } = useParams();
+  const [clinicId] = useState(clinic.relative_addr.replace('/api/organizations/', ''));
+  console.log(clinicId);
   const date = new Date();
   const today = date.getDay() || 7;
 
@@ -45,8 +49,8 @@ export function FullCardClinic({ isClose, clinic }: IFullCard) {
           {clinic.site}
         </a>
       </div>
-      {/* format relative_addr: /api/organizations/id */}
-      <NavLink to={`../appointment/${clinic.relative_addr.replace('/api/organizations/', '')}`}>
+      {/* format relative_addr: /api/organizations/id/ - на конце слеш */}
+      <NavLink to={`../appointment/${clinicId}${specialtyId}`}>
         <Button title="Записаться" size="m" type="submit" />
       </NavLink>
     </div>

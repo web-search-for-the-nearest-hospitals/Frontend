@@ -21,7 +21,7 @@
   }
 
   &__group {
-    @include flex-container($just: flex-start, $gap: 118px, $fw: wrap);
+    @include flex-container($just: space-between, $fw: wrap);
 
     @media screen and (width <= 500px) {
       gap: 21px;

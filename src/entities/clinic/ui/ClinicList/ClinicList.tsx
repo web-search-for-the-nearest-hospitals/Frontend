@@ -8,7 +8,6 @@ interface IClinicList {
 }
 
 export default function ClinicList({ data, handleCardClick }: IClinicList) {
-  console.log(data);
   return (
     <div className="clinic-list">
       <div className="clinic-list__container">

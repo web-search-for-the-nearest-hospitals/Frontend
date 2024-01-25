@@ -1,5 +1,6 @@
+import { useNavigate, useParams } from 'react-router-dom';
 import './index.scss';
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { specialtySelect } from '~/entities/clinic';
 
@@ -8,16 +9,58 @@ import { IGetOrganizations } from '~/shared/lib/types/interfaces';
 import { Button, Checkbox, DropDownInput } from '~/shared/ui/index';
 
 interface ISearcher {
-  onClick: (data: IGetOrganizations) => void;
+  onSearch: (data: IGetOrganizations) => void;
+  onReset: () => void;
 }
 
-export default function Searcher({ onClick }: ISearcher) {
+export default function Searcher({ onSearch, onReset }: ISearcher) {
+  const { specialtyId } = useParams();
   const specialties = useAppSelector(specialtySelect);
-  const [specialty, setSpeciality] = useState<string | null>(null);
+  const [specialty, setSpecialty] = useState<string | null>(null);
   const [isWorkAllDay, setIsWorkAllDay] = useState(false);
   const [isGovernment, setIsGovernment] = useState(false);
+  const nav = useNavigate();
 
-  const getCodeOfSpecialty = (name: string) => specialties.find((el) => el.skill === name)!.code;
+  const getCodeOfSpecialty = useCallback(
+    (name: string) => specialties.find((el) => el.skill === name)!.code,
+    [specialties],
+  );
+
+  const handleReset = () => {
+    setIsGovernment(false);
+    setIsWorkAllDay(false);
+    setSpecialty(null);
+    onReset();
+  };
+
+  const updateUrl = useCallback(() => nav(`/clinic-searcher/main/${specialty}`), [nav, specialty]);
+
+  const handleSumbit = useCallback(() => {
+    onSearch({
+      specialty: specialty ? getCodeOfSpecialty(specialty) : '',
+      is_gov: isGovernment,
+      is_full_time: isWorkAllDay,
+    });
+  }, [getCodeOfSpecialty, isGovernment, isWorkAllDay, onSearch, specialty]);
+
+  // дублируется в форме, но выносить дубликат дороже выйдет. В сомнениях.
+  useEffect(() => {
+    if (specialtyId && specialtyId !== 'null') {
+      const val = specialties.find((el) => el.skill.toLowerCase() === specialtyId.toLowerCase())?.skill;
+      setSpecialty(val || null);
+    }
+  }, [specialties, specialtyId]);
+
+  useEffect(() => {
+    updateUrl();
+  }, [updateUrl]);
+
+  useEffect(() => {
+    if (specialty) {
+      handleSumbit();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isGovernment, isWorkAllDay, specialty]);
 
   return (
     <div className="search-clinic">
@@ -26,25 +69,15 @@ export default function Searcher({ onClick }: ISearcher) {
           values={specialties.map((obj) => obj.skill)}
           placeholder="Врач, специальность"
           state={specialty}
-          setState={setSpeciality}
+          setState={setSpecialty}
           isContentEditable
         />
-        <Button
-          type="submit"
-          size="s"
-          title="Найти"
-          onClick={() =>
-            onClick({
-              specialty: specialty ? getCodeOfSpecialty(specialty) : '',
-              is_gov: isGovernment,
-              is_full_time: isWorkAllDay,
-            })
-          }
-        />
+        <Button type="submit" size="s" title="Найти" onClick={handleSumbit} />
       </div>
       <div className="search-clinic__group">
         <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />
         <Checkbox state={isGovernment} setState={setIsGovernment} title="Государственные" />
+        <Button type="submit" size="s" title="Cброс" onClick={handleReset} />
       </div>
     </div>
   );

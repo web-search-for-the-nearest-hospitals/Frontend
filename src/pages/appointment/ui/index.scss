@@ -19,4 +19,10 @@
     margin: auto;
     margin-bottom: 24px; // по макету 38, но накладываются padding от ячеек
   }
+
+  &__button-containter{
+    @include flex-container($just: space-between);
+    width: 100%;
+    margin-top: 40px;
+  }
 }
