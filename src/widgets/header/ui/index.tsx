@@ -1,6 +1,9 @@
 import './index.scss';
 import { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
+
+import { useSpecialtiesSlice } from '~/entities/clinic';
+
 import { Layout } from '~/shared/ui';
 import { LocationIcon } from '~/shared/assets';
 import UserIcon from '~/shared/assets/icons/UserIcon';
@@ -9,6 +12,16 @@ import createToast from '~/shared/lib/toast/createToast';
 
 function Header() {
   const [town] = useState('Калуга');
+  const { isGetSpecialty } = useSpecialtiesSlice();
+
+  const getContent = () => {
+    if (!isGetSpecialty) {
+      return <p className="search-clinic">Загружаю список специальностей</p>;
+    }
+
+    return <Outlet />;
+  };
+
   return (
     <>
       <header className="header">
@@ -33,9 +46,7 @@ function Header() {
           </div>
         </div>
       </header>
-      <Layout>
-        <Outlet />
-      </Layout>
+      <Layout>{getContent()}</Layout>
     </>
   );
 }
