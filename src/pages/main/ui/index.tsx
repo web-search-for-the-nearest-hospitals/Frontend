@@ -45,7 +45,7 @@ export default function MainPage() {
         {isLoading ? <div>Данные загружаются</div> : null}
       </div>
       <div className="main-page__search-block">
-        <Searcher onSearch={triggerQuery} onReset={() => setIsVisibleClinic(false)} />
+        <Searcher onSearch={triggerQuery} />
         <MapBlock clinicData={data} handleCardClick={handleCardClick} />
       </div>
       <Popup isOpen={isOpen} closePopup={() => setIsOpen(false)}>

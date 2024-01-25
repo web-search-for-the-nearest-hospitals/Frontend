@@ -11,10 +11,9 @@ import { Button, Checkbox, DropDownInput, IconBtn } from '~/shared/ui/index';
 
 interface ISearcher {
   onSearch: (data: IGetOrganizations) => void;
-  onReset: () => void;
 }
 
-export default function Searcher({ onSearch, onReset }: ISearcher) {
+export default function Searcher({ onSearch }: ISearcher) {
   const { specialtyId } = useParams();
   const specialties = useAppSelector(specialtySelect);
   const [specialty, setSpecialty] = useState<string | null>(null);
@@ -27,15 +26,7 @@ export default function Searcher({ onSearch, onReset }: ISearcher) {
     [specialties],
   );
 
-  const handleReset = () => {
-    setIsGovernment(false);
-    setIsWorkAllDay(false);
-    setSpecialty(null);
-    onReset();
-  };
-
   const updateUrl = useCallback(() => nav(`/clinic-searcher/main/${specialty}`), [nav, specialty]);
-
   const handleSumbit = useCallback(() => {
     onSearch({
       specialty: specialty ? getCodeOfSpecialty(specialty) : '',
@@ -55,13 +46,6 @@ export default function Searcher({ onSearch, onReset }: ISearcher) {
   useEffect(() => {
     updateUrl();
   }, [updateUrl]);
-
-  useEffect(() => {
-    if (specialty) {
-      handleSumbit();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isGovernment, isWorkAllDay, specialty]);
 
   return (
     <div className="search-clinic">
@@ -89,7 +73,6 @@ export default function Searcher({ onSearch, onReset }: ISearcher) {
       <div className="search-clinic__group">
         <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />
         <Checkbox state={isGovernment} setState={setIsGovernment} title="Государственные" />
-        <Button type="submit" size="s" title="Cброс" onClick={handleReset} />
       </div>
     </div>
   );
