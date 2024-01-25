@@ -3,7 +3,7 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { MainPage } from './main';
 import RegistrationPage from './reg-clinic/ui';
 import Header from '~/widgets/header';
-import AppointmentForm from '../features/search-clinics/appointment-form';
+import AppointmentForm from '../features/appointment-form/ui';
 
 export const Routing = () => {
   return (

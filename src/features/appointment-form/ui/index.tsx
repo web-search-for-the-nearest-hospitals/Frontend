@@ -67,7 +67,7 @@ export default function AppointmentForm() {
             title="Далее"
             type="button"
             size="s"
-            disabled={queryResult.currentData?.length === 0}
+            disabled={queryResult.isError || queryResult.currentData?.length === 0}
             onClick={() => setFormCh(2)}
           />
         ) : null}

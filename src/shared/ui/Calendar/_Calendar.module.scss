@@ -35,6 +35,10 @@
     &:only-of-type{
       text-align: center;
     }
+
+    @media screen and (width <= 500px) {
+      @include font-usual;
+    }
   }
 
   &__cell{
@@ -46,6 +50,10 @@
 
     &:last-of-type{
       padding-right: 0;
+    }
+
+    @media screen and (width <= 500px) {
+      padding: 6px;
     }
   }
 
@@ -61,6 +69,10 @@
     cursor: pointer;
     border: 1px solid transparent;
     transition: border-color .2s ease;
+
+    @media screen and (width <= 500px) {
+      @include font-usual;
+    }
 
     &_selected {
       color: $active-button;
