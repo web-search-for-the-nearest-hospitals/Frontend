@@ -1,0 +1,28 @@
+@import '~/shared/lib';
+
+.form-appointment{
+  @include flex-container($dir: column, $gap: 0);
+  max-width: 350px;
+  margin: auto;
+
+  &__title{
+    @include font-h1;
+    margin-bottom: 40px;
+  }
+
+  &__drop-down-container{
+    width: 100%;
+    margin-bottom: 33px; // по макету - 3, визуальное смещение из-за table
+  }
+
+  &__calendar-container{
+    margin: auto;
+    margin-bottom: 24px; // по макету 38, но накладываются padding от ячеек
+  }
+
+  &__button-containter{
+    @include flex-container($just: space-between, $fw: wrap);
+    width: 100%;
+    margin-top: 40px;
+  }
+}

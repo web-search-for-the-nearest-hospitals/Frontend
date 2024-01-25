@@ -70,3 +70,14 @@ export interface IGetOrganizations extends Partial<ICoordinates> {
   search?: string; // сокращенное наим. организации
   page?: number; // пагинация?
 }
+
+export interface ICoupon {
+  id: number;
+  datetime_start: string;
+}
+
+export interface IGetCoupon {
+  id: string;
+  spec_code: string;
+  which_date: string;
+}
