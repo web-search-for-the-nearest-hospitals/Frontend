@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 
 import Searcher from '~/widgets/searcher-block';
 import MapBlock from '~/widgets/map-block';
-import { InfoСontainer } from '~/widgets/notification-container/index';
 import { ClinicList, FullCardClinic } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
 
@@ -17,7 +16,6 @@ export default function MainPage() {
   const [triggerQuery, queryResult] = useLazyGetOrganizationsQuery();
   const { data, isLoading, isError } = queryResult;
   const [isOpen, setIsOpen] = useState(false);
-  const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(true);
   const [selectedCard, setSelectedCard] = useState<null | IOrganization>(null);
   const [isVisibleClinic, setIsVisibleClinic] = useState(false);
 
@@ -50,13 +48,7 @@ export default function MainPage() {
         <MapBlock clinicData={data} handleCardClick={handleCardClick} />
       </div>
       <Popup isOpen={isOpen} closePopup={() => setIsOpen(false)}>
-        {selectedCard ? <FullCardClinic isClose={() => setIsOpen(false)} clinic={selectedCard} /> : null}
-      </Popup>
-      <Popup isOpen={isOpenInfoСontainer} closePopup={() => setIsOpenInfoСontainer(false)}>
-        <InfoСontainer
-          isClose={() => setIsOpenInfoСontainer(false)}
-          text={'Ваша запись на прием успешно подтверждена!'}
-        />
+        {selectedCard ? <FullCardClinic clinic={selectedCard} /> : null}
       </Popup>
     </div>
   );
