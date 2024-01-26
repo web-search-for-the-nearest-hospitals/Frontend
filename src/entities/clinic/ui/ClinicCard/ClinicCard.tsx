@@ -1,7 +1,7 @@
 import './ClinicCard.scss';
 
 import { IOrganization } from '~/shared/lib/types/interfaces';
-import TimetableList from '../_TimetableList';
+import TimetableClinic from '../TimetableClinic/TimetableClinic';
 
 interface IClinicCard {
   clinic: IOrganization;
@@ -14,7 +14,7 @@ export function ClinicCard({ clinic, handleCardClick }: IClinicCard) {
       <h3 className="clinic-card__name">{clinic.short_name}</h3>
       <div className="clinic-card__timetable">
         <p className="clinic-card__timetable-title">График работы:</p>
-        {TimetableList(clinic, 'card')}
+        {TimetableClinic(clinic, 'card')}
       </div>
       <div className="clinic-card__phone">
         <p className="clinic-card__phone-title">Телефон: </p>

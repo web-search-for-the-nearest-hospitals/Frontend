@@ -1,7 +1,7 @@
 import { IOrganization } from '~/shared/lib/types/interfaces';
-import { getTimetable } from '../lib/getTimetable';
+import { getTimetable } from '../../lib/getTimetable';
 
-export default function TimetableList(clinic: IOrganization, name: string) {
+export default function TimetableClinic(clinic: IOrganization, name: string) {
   const date = new Date();
   const today = date.getDay() || 7;
 
