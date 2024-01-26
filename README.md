@@ -1,14 +1,14 @@
-# ПоисКлиник 🚑 Web search for the nearest hospitals
+# ПоисКлиник 🚑 Веб-приложение по поиску ближайших больниц и частных клиник 
 
-[![Frontend web_search_for_the_nearest_hospitals Workflow](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/deploy_dev.yml/badge.svg?branch=develop)](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/deploy_dev.yml)
+[![Workflow](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/deploy_dev.yml/badge.svg?branch=develop)](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/deploy_dev.yml)
 [![Build and Test](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/tests.yaml/badge.svg?branch=develop)](https://github.com/web-search-for-the-nearest-hospitals/Frontend/actions/workflows/tests.yaml)
 
+## Цель проекта: 
+Упрощение пользовательского пути по поиску клиники и записи к врачу.
 
-Задача проекта: предоставить возможность пользователям искать ближайшие к ним медицинские центры и тут же проложить маршрут при необходимости. Пользователь имеет ряд фильтров для удоства, интерактивную карту и возможность записи на приём в выбранную клинику. Клиника в свою очередь имеет возможность получать заявки по записи на приём и регистрации собственного местоположения на карте.
+Посмотреть приложение можно [здесь](http://poisklinik.acceleratorpracticum.ru/).
 
-[Deploy version](http://poisklinik.acceleratorpracticum.ru/).
-
-### Technology stack:
+## Технологии:
 
 <p align="center">
   <img src="https://img.shields.io/badge/SASS-100000?style=for-the-badge&logo=SASS&logoColor=white" title="sass"/>
@@ -27,7 +27,7 @@
   <img src="https://img.shields.io/badge/Storybook-100000?style=for-the-badge" alt="Storybook" title="Storybook">
 </p>
 
-## Getting Started
+## Как запустить наш проект локально:
 
 1. Установить node.js и npm (например, с опорой на эту [инструкцию](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm#using-a-node-installer-to-install-nodejs-and-npm))
 2. Клонировать репозиторий (проверьте актуальность ссылки)
@@ -42,11 +42,15 @@ $ npm i
 ```sh
 npm run dev
 ```
-5. Откройте [http://localhost:5173/Frontend/](http://localhost:5173/Frontend/) в браузере для просмотра.
+5. Открыть [http://localhost:5173/Frontend/](http://localhost:5173/Frontend/) в браузере для просмотра
 
-### Contact
+## Скриншоты
 
-[Артем Никифоров](https://github.com/Art-Frich) <br>
+Здесь скоро будет демонстрация проекта.
+
+## Команда фронтенд-разработки:
+
+[Артём](https://github.com/Art-Frich) <br>
 [Дарья](https://github.com/DariaBold) <br>
 [Надежда](https://github.com/lomeshyza) <br>
 [Магомед](https://github.com/Magmus05) <br>

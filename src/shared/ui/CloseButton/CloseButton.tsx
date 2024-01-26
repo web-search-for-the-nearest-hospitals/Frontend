@@ -2,7 +2,6 @@ import cn from 'classnames';
 import styles from './CloseButton.module.scss';
 
 interface ICloseButton {
-  onClick?: () => void;
   type: 'button';
   size: 's' | 'm';
 }

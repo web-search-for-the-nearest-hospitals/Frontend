@@ -1,55 +1,83 @@
 import './index.scss';
-import { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useCallback, useEffect, useState } from 'react';
 
-import { useGetSpecialtiesQuery } from '~/shared/api/rtkqueryApi';
+import { specialtySelect } from '~/entities/clinic';
+import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
+import { UserIcon } from '~/shared/assets/index';
 import createToast from '~/shared/lib/toast/createToast';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
-import { Button, Checkbox, DropDownInput } from '~/shared/ui/index';
+import { Button, Checkbox, DropDownInput, IconBtn } from '~/shared/ui/index';
 
 interface ISearcher {
-  onClick: (data: IGetOrganizations) => void;
+  onSearch: (data: IGetOrganizations) => void;
 }
 
-export default function Searcher({ onClick }: ISearcher) {
-  const [specialty, setSpeciality] = useState<string | null>(null);
+export default function Searcher({ onSearch }: ISearcher) {
+  const { specialtyId } = useParams();
+  const specialties = useAppSelector(specialtySelect);
+  const [specialty, setSpecialty] = useState<string | null>(null);
   const [isWorkAllDay, setIsWorkAllDay] = useState(false);
   const [isGovernment, setIsGovernment] = useState(false);
-  const { data, isLoading, isError } = useGetSpecialtiesQuery(null);
+  const [firstLoading, setFirstLoading] = useState(false);
+  const nav = useNavigate();
 
-  const getCodeOfSpecialty = (name: string) => data!.find((el) => el.skill === name)!.code;
+  const getCodeOfSpecialty = useCallback(
+    (name: string) => specialties.find((el) => el.skill === name)!.code,
+    [specialties],
+  );
+
+  const updateUrl = useCallback(() => nav(`/clinic-searcher/main/${specialty}`), [nav, specialty]);
+  const handleSumbit = useCallback(() => {
+    onSearch({
+      specialty: specialty ? getCodeOfSpecialty(specialty) : '',
+      is_gov: isGovernment,
+      is_full_time: isWorkAllDay,
+    });
+    setFirstLoading(true);
+  }, [getCodeOfSpecialty, isGovernment, isWorkAllDay, onSearch, specialty]);
+
+  // дублируется в форме, но выносить дубликат дороже выйдет. В сомнениях.
+  useEffect(() => {
+    if (specialtyId && specialtyId !== 'null') {
+      const val = specialties.find((el) => el.skill.toLowerCase() === specialtyId.toLowerCase())?.skill;
+      setSpecialty(val || null);
+    }
+  }, [specialties, specialtyId]);
 
   useEffect(() => {
-    if (isError) {
-      createToast('error', 'Не удалось получить список специальностей');
+    if (firstLoading) {
+      handleSumbit();
     }
-  }, [isError]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [firstLoading, isGovernment, isWorkAllDay]);
 
-  if (isLoading || !data) {
-    return <p className="search-clinic">Загружаю список специальностей</p>;
-  }
+  useEffect(() => {
+    updateUrl();
+  }, [updateUrl]);
 
   return (
     <div className="search-clinic">
       <div className="search-clinic__container">
         <DropDownInput
-          values={data.map((obj) => obj.skill)}
+          values={specialties.map((obj) => obj.skill)}
           placeholder="Врач, специальность"
           state={specialty}
-          setState={setSpeciality}
+          setState={setSpecialty}
           isContentEditable
         />
-        <Button
-          type="submit"
-          size="s"
-          title="Найти"
-          onClick={() =>
-            onClick({
-              specialty: specialty ? getCodeOfSpecialty(specialty) : '',
-              is_gov: isGovernment,
-              is_full_time: isWorkAllDay,
-            })
-          }
-        />
+        <Button type="submit" size="s" title="Найти" onClick={handleSumbit} />
+        {/* На странице присутствуют две кнопки IconBtn(UserIcon),
+          при внесении изменений в эту кнопку - изменить вторую /widgets/header/ui/index.tsx */}
+        <div className="search-clinic__icon-button">
+          <IconBtn
+            onClick={function (): void {
+              createToast('info', 'I work!');
+            }}
+          >
+            <UserIcon width={33} height={35} />
+          </IconBtn>
+        </div>
       </div>
       <div className="search-clinic__group">
         <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />

@@ -6,6 +6,7 @@ import MapBlock from '~/widgets/map-block';
 import { InfoСontainer } from '~/widgets/notification-container/index';
 import { ClinicList, FullCardClinic } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
+
 import { Popup } from '~/shared/ui/index';
 import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
 import createToast from '~/shared/lib/toast/createToast';
@@ -18,6 +19,7 @@ export default function MainPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(true);
   const [selectedCard, setSelectedCard] = useState<null | IOrganization>(null);
+  const [isVisibleClinic, setIsVisibleClinic] = useState(false);
 
   function handleCardClick(data: IOrganization) {
     setIsOpen(true);
@@ -30,15 +32,21 @@ export default function MainPage() {
     }
   }, [isError]);
 
+  useEffect(() => {
+    if (data) {
+      setIsVisibleClinic(true);
+    }
+  }, [data]);
+
   return (
     <div className="main-page">
       <div className="main-page__card-list">
-        {!isLoading && data && data.results.length === 0 ? <div>Ничего не найдено</div> : null}
-        {!data ? <AdvertList /> : <ClinicList data={data} handleCardClick={handleCardClick} />}
+        {!isLoading && isVisibleClinic && data!.results.length === 0 ? <div>Ничего не найдено</div> : null}
+        {!isVisibleClinic ? <AdvertList /> : <ClinicList data={data!} handleCardClick={handleCardClick} />}
         {isLoading ? <div>Данные загружаются</div> : null}
       </div>
       <div className="main-page__search-block">
-        <Searcher onClick={triggerQuery} />
+        <Searcher onSearch={triggerQuery} />
         <MapBlock clinicData={data} handleCardClick={handleCardClick} />
       </div>
       <Popup isOpen={isOpen} closePopup={() => setIsOpen(false)}>

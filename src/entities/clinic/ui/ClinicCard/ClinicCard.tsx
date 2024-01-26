@@ -9,7 +9,7 @@ interface IClinicCard {
 
 export function ClinicCard({ clinic, handleCardClick }: IClinicCard) {
   const date = new Date();
-  const today = date.getDay() || 7;
+  const today = date.getDay() || 7; // пн = 1, вс = 7
 
   return (
     <div className="clinic-card" onClick={() => handleCardClick(clinic)}>
