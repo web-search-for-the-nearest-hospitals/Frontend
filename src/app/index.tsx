@@ -1,5 +1,5 @@
 import './index.scss';
-import NotificationContainer from '~/widgets/notification-container/ui';
+import NotificationContainer from '~/widgets/notification-container/ui/toast-notification';
 
 import { withProviders } from './providers';
 import { Routing } from '~/pages';

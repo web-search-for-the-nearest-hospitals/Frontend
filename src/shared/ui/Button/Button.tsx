@@ -3,7 +3,7 @@ import cn from 'classnames';
 import styles from './Button.module.scss';
 
 interface IButton {
-  onClick?: () => void;
+  onClick?: (evt: any) => void;
   title?: string;
   type?: 'submit' | 'button';
   size?: 's' | 'm' | 'l';
