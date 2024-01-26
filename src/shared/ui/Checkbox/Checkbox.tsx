@@ -23,7 +23,9 @@ export default function Checkbox({ state, setState, title }: ICheckbox) {
         <input className={styles['checkbox__input']} type="checkbox" checked={state} onChange={changeCheckbox} />
         <div className={styles['checkbox__visible']} onKeyDown={onKey} tabIndex={0} />
       </div>
-      <label className={styles['checkbox__title']}>{title}</label>
+      <label className={styles['checkbox__title']} onClick={changeCheckbox}>
+        {title}
+      </label>
     </label>
   );
 }

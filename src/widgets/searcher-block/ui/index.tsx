@@ -19,6 +19,7 @@ export default function Searcher({ onSearch }: ISearcher) {
   const [specialty, setSpecialty] = useState<string | null>(null);
   const [isWorkAllDay, setIsWorkAllDay] = useState(false);
   const [isGovernment, setIsGovernment] = useState(false);
+  const [firstLoading, setFirstLoading] = useState(false);
   const nav = useNavigate();
 
   const getCodeOfSpecialty = useCallback(
@@ -33,6 +34,7 @@ export default function Searcher({ onSearch }: ISearcher) {
       is_gov: isGovernment,
       is_full_time: isWorkAllDay,
     });
+    setFirstLoading(true);
   }, [getCodeOfSpecialty, isGovernment, isWorkAllDay, onSearch, specialty]);
 
   // дублируется в форме, но выносить дубликат дороже выйдет. В сомнениях.
@@ -42,6 +44,13 @@ export default function Searcher({ onSearch }: ISearcher) {
       setSpecialty(val || null);
     }
   }, [specialties, specialtyId]);
+
+  useEffect(() => {
+    if (firstLoading) {
+      handleSumbit();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [firstLoading, isGovernment, isWorkAllDay]);
 
   useEffect(() => {
     updateUrl();
