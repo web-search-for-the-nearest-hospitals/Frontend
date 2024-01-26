@@ -1,6 +1,6 @@
 import styles from './index.module.scss';
 import { IClinicListData, ICoord, IOrganization } from '~/shared/lib/types/interfaces';
-import { YMaps, Map, Placemark, RouteButton, SearchControl } from '@pbe/react-yandex-maps';
+import { Map, Placemark, RouteButton, SearchControl } from '@pbe/react-yandex-maps';
 
 interface IMaps {
   userCoord: ICoord;
@@ -19,62 +19,53 @@ export default function Maps({ userCoord, focusCoord, clinicData, handleCardClic
 
   return latitude && focuse_lat && focus_long && longitude && Map ? (
     <section className={styles['map']}>
-      <YMaps
-        query={{
-          apikey: import.meta.env.VITE_YAMAP_API_KEY,
-          lang: 'ru_RU',
-          ns: 'use-load-option',
-          load: 'Map,Placemark,control.ZoomControl,control.FullscreenControl,geoObject.addon.balloon',
+      <Map
+        width={'100%'}
+        height={'100%'}
+        state={{
+          center: [focuse_lat, focus_long],
+          zoom: filterDistrict ? 12 : 11,
+          controls: ['zoomControl', 'fullscreenControl'],
         }}
+        modules={['control.ZoomControl', 'control.FullscreenControl']}
       >
-        <Map
-          width={'100%'}
-          height={'100%'}
-          state={{
-            center: [focuse_lat, focus_long],
-            zoom: filterDistrict ? 12 : 11,
-            controls: ['zoomControl', 'fullscreenControl'],
+        <Placemark
+          defaultGeometry={[latitude, longitude]}
+          geometry={[latitude, longitude]}
+          properties={{
+            balloonContentBody: 'Центр мироздания. Возможно это вы.',
           }}
-          modules={['control.ZoomControl', 'control.FullscreenControl']}
-        >
+          options={{
+            iconLayout: 'default#image',
+            iconImageHref: '/src/shared/assets/images/location.png',
+            iconImageSize: [25, 35],
+          }}
+        />
+
+        {getVisibleData().map((el) => (
           <Placemark
-            defaultGeometry={[latitude, longitude]}
-            geometry={[latitude, longitude]}
-            properties={{
-              balloonContentBody: 'Центр мироздания. Возможно это вы.',
-            }}
-            options={{
-              iconLayout: 'default#image',
-              iconImageHref: '/src/shared/assets/images/location.png',
-              iconImageSize: [25, 35],
+            key={`${el.latitude}${el.longitude}`}
+            defaultGeometry={[el.latitude, el.longitude]}
+            geometry={[el.latitude, el.longitude]}
+            onClick={() => handleCardClick(el)}
+            defaultProperties={{
+              iconCaption: el.factual_address.slice(0, -11), //срезать г. Калуга
             }}
           />
+        ))}
 
-          {getVisibleData().map((el) => (
-            <Placemark
-              key={`${el.latitude}${el.longitude}`}
-              defaultGeometry={[el.latitude, el.longitude]}
-              geometry={[el.latitude, el.longitude]}
-              onClick={() => handleCardClick(el)}
-              defaultProperties={{
-                iconCaption: el.factual_address.slice(0, -11), //срезать г. Калуга
-              }}
-            />
-          ))}
-
-          <SearchControl
-            options={{
-              float: 'right',
-              provider: 'yandex#search', // позволяет использовать стики "где поесть"
-              boundedBy: [
-                [latitude - 0.1, longitude - 0.1],
-                [latitude + 0.1, longitude + 0.1],
-              ], // Указывает приоритетный радиус поиска
-            }}
-          />
-          <RouteButton />
-        </Map>
-      </YMaps>
+        <SearchControl
+          options={{
+            float: 'right',
+            provider: 'yandex#search', // позволяет использовать стики "где поесть"
+            boundedBy: [
+              [latitude - 0.1, longitude - 0.1],
+              [latitude + 0.1, longitude + 0.1],
+            ], // Указывает приоритетный радиус поиска
+          }}
+        />
+        <RouteButton />
+      </Map>
     </section>
   ) : (
     <div>Жду координаты или уже пытаюсь загрузить</div>
