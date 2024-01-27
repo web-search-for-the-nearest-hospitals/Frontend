@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
-import { setSpecialty, specialtySelect } from '..';
+// import { setSpecialty, specialtySelect } from '..';
+import { setSpecialty, specialtySelect } from '../model/specialtiesSlice/specialtiesSlise';
 
 import { useGetSpecialtiesQuery } from '~/shared/api/rtkqueryApi';
 import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';

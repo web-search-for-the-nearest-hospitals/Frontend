@@ -1,7 +1,7 @@
 import './index.scss';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { specialtySelect } from '~/entities/clinic';
+import { specialtySelect } from '~/entities/clinic/model/specialtiesSlice/specialtiesSlise';
 import { useLazyGetCouponsOnDayQuery } from '~/shared/api/rtkqueryApi';
 import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 import { Button, Calendar, DropDownInput, Popup } from '~/shared/ui';

@@ -2,7 +2,7 @@ import './index.scss';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 
-import { specialtySelect } from '~/entities/clinic';
+import { specialtySelect } from '~/entities/clinic/model/specialtiesSlice/specialtiesSlise';
 import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 import { UserIcon } from '~/shared/assets/index';
 import createToast from '~/shared/lib/toast/createToast';
