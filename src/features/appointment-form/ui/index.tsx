@@ -1,10 +1,10 @@
 import './index.scss';
 import { useParams } from 'react-router-dom';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, MouseEventHandler } from 'react';
 import { specialtySelect } from '~/entities/clinic';
 import { useLazyGetCouponsOnDayQuery } from '~/shared/api/rtkqueryApi';
 import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
-import { Button, Calendar, DropDownInput } from '~/shared/ui';
+import { Button, Calendar, DropDownInput, InputForm, Checkbox } from '~/shared/ui';
 import Coupons from './Coupons';
 
 export default function AppointmentForm() {
@@ -12,9 +12,16 @@ export default function AppointmentForm() {
   const specialties = useAppSelector(specialtySelect);
   const [specialty, setSpecialty] = useState<string | null>(specialties[0]?.skill || null);
   const [date, setDate] = useState<null | string>(null);
-  const [formCh, setFormCh] = useState<1 | 2>(1);
+  const [formCh, setFormCh] = useState<1 | 2>(2);
   const [triggerQuery, queryResult] = useLazyGetCouponsOnDayQuery();
   const { clinicId } = useParams();
+  const [stateCheckbox, setStateCheckbox] = useState<boolean>(false);
+  const [buttonSubmit, setButtonSubmit] = useState<boolean>(true);
+  const regex = {
+    name: '^[А-Яа-яёa-zA-Z \\-]+$',
+    email: '^\\S+@\\S+\\.\\S+$',
+    // tel: '^\\+7s?[(]{0,1}9[0-9]{2}[)]{0,1}s?d{3}[-]{0,1}d{2}[-]{0,1}d{2}',
+  };
 
   useEffect(() => {
     queryResult.data = undefined;
@@ -36,43 +43,100 @@ export default function AppointmentForm() {
     }
   }, [specialties, specialtyId]);
 
+  const handleCheckboxConsent: MouseEventHandler = (e) => {
+    console.log(e);
+
+    setButtonSubmit(false);
+    // const form = e.currentTarget.closest('form');
+    // console.log(form.checkValidity());
+    // console.log(stateCheckbox);
+    // console.log(form.checkValidity() && stateCheckbox);
+    // if (form.checkValidity() && stateCheckbox) {
+    //   setButtonSubmit(false);
+    // } else setButtonSubmit(true);
+  };
+
   return (
-    <form className="form-appointment">
-      <h3 className="form-appointment__title">Запись на приём</h3>
-      {formCh === 1 ? (
-        <section className="form-appointment__ch1">
-          <div className="form-appointment__drop-down-container">
-            <DropDownInput
-              values={specialties.map((obj) => obj.skill)}
-              placeholder="Врач, специальность"
-              state={specialty}
-              setState={setSpecialty}
-              isContentEditable
-            />
-          </div>
-          <div className="form-appointment__calendar-container">
-            <Calendar setDate={setDate} />
-          </div>
-          {queryResult.isLoading ? <p>Загружаю доступные ячейки записи</p> : null}
-          {queryResult.isError ? <p>Так далеко в будущее мы не заглядываем</p> : null}
-          {queryResult.currentData?.length === 0 && !queryResult.isError ? <p>Похоже талонов нет...</p> : null}
-          {queryResult.currentData?.length ? <Coupons couponsData={queryResult.currentData} /> : null}
-        </section>
+    <div className="appointment-page">
+      {formCh === 2 ? (
+        <button className="appointment-page__button-back" onClick={() => setFormCh(1)}>
+          <span className="appointment-page__arrow-back"> &#8249;</span> Назад
+        </button>
       ) : null}
-      {formCh === 2 ? <section>Здесь 2-я часть формы</section> : null}
-      <div className="form-appointment__button-containter">
-        <Button title="Назад" type="button" size="s" disabled={formCh === 1} onClick={() => setFormCh(1)} />
+      <form className="form-appointment">
+        <h3 className="form-appointment__title">Запись на приём</h3>
         {formCh === 1 ? (
-          <Button
-            title="Далее"
-            type="button"
-            size="s"
-            disabled={queryResult.isError || queryResult.currentData?.length === 0}
-            onClick={() => setFormCh(2)}
-          />
+          <section className="form-appointment__ch1">
+            <div className="form-appointment__drop-down-container">
+              <DropDownInput
+                values={specialties.map((obj) => obj.skill)}
+                placeholder="Врач, специальность"
+                state={specialty}
+                setState={setSpecialty}
+                isContentEditable
+              />
+            </div>
+            <div className="form-appointment__calendar-container">
+              <Calendar setDate={setDate} />
+            </div>
+            {queryResult.isLoading ? <p>Загружаю доступные ячейки записи</p> : null}
+            {queryResult.isError ? <p>Так далеко в будущее мы не заглядываем</p> : null}
+            {queryResult.currentData?.length === 0 && !queryResult.isError ? <p>Похоже талонов нет...</p> : null}
+            {queryResult.currentData?.length ? <Coupons couponsData={queryResult.currentData} /> : null}
+            <div className="form-appointment__button-container">
+              <Button
+                title="Далее"
+                type="button"
+                size="m"
+                disabled={queryResult.isError || queryResult.currentData?.length === 0}
+                onClick={() => setFormCh(2)}
+              />
+            </div>
+          </section>
         ) : null}
-        {formCh === 2 ? <Button title="Отправить" size="s" /> : null}
-      </div>
-    </form>
+
+        {formCh === 2 ? (
+          <section className="form-appointment__ch2">
+            <InputForm
+              type={'text'}
+              name={'name'}
+              title={'ФИО'}
+              placeholder={'Иванов Иван Иванович'}
+              minLength={9}
+              maxLength={50}
+              pattern={regex.name}
+            />
+            <InputForm
+              type={'tel'}
+              name={'tel'}
+              title={'Номер телефона'}
+              placeholder={'+7 900 809 00 50'}
+              // minLength={5}
+              maxLength={16}
+              // pattern={regex.tel}
+            />
+            <InputForm
+              type={'email'}
+              name={'email'}
+              title={'Почта'}
+              placeholder={'poisk.kl@mail.ru'}
+              minLength={5}
+              maxLength={50}
+              pattern={regex.email}
+            />
+            <label className="form-appointment__consent" onClick={handleCheckboxConsent}>
+              <Checkbox state={stateCheckbox} setState={setStateCheckbox} title={''} />
+              <p className="form-appointment__consent-text">
+                Я соглашаюсь с условиями использования сайта и даю согласие на обработку своих персональных данных в
+                соответствии сполитикой обработки персональных данных.
+              </p>
+            </label>
+            <div className="form-appointment__button-container">
+              <Button title="Записаться" size="m" disabled={buttonSubmit} />
+            </div>
+          </section>
+        ) : null}
+      </form>
+    </div>
   );
 }

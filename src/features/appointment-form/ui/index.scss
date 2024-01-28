@@ -1,28 +1,67 @@
 @import '~/shared/lib';
+.appointment-page {
+  max-width: 920px;
+  background-color: $color-card-background;
+  margin: 0 auto;
+  border-radius: 10px;
+  position: relative;
 
-.form-appointment{
+  &__button-back {
+    @include font-usual();
+    position: absolute;
+    top: 30px;
+    left: 30px;
+    color: #9c8f8f;
+  }
+  &__button-back:hover {
+    color: $active-button;
+  }
+  &__arrow-back {
+    font-size: 30px;
+    position: relative;
+    top: 3px;
+  }
+}
+.form-appointment {
   @include flex-container($dir: column, $gap: 0);
   max-width: 350px;
   margin: auto;
 
-  &__title{
+  &__title {
     @include font-h1;
-    margin-bottom: 40px;
+    margin: 30px 0 40px;
+  }
+  &__ch1,
+  &__ch2 {
+    width: 100%;
   }
 
-  &__drop-down-container{
+  &__ch2 {
+    display: flex;
+    flex-direction: column;
+  }
+
+  &__drop-down-container {
     width: 100%;
     margin-bottom: 33px; // по макету - 3, визуальное смещение из-за table
   }
 
-  &__calendar-container{
+  &__calendar-container {
     margin: auto;
     margin-bottom: 24px; // по макету 38, но накладываются padding от ячеек
   }
 
-  &__button-containter{
-    @include flex-container($just: space-between, $fw: wrap);
-    width: 100%;
-    margin-top: 40px;
+  &__button-container {
+    margin: 40px 0 67px 0;
+  }
+  &__consent {
+    display: flex;
+    gap: 12px;
+  }
+  &__consent-text {
+    font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
+    color: $color-not-active;
   }
 }
