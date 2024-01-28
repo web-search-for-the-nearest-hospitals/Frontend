@@ -1,6 +1,6 @@
 import './index.scss';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import useMapBlock from '../lib/useMapBlock';
 import { districtDefault } from '../lib/consts';
 
@@ -20,10 +20,11 @@ export default function MapBlock({ clinicData, handleCardClick, updateData }: IM
   const [townName] = useState('Калуга');
 
   const { userCoord, focusCoord, returnText, townData } = useMapBlock({ district, isSearchUser, townName });
-  const getFilterDistrict = () => (district === districtDefault ? '' : district);
+  const getFilterDistrict = useCallback(() => (district === districtDefault ? '' : district), [district]);
+
   useEffect(() => {
     updateData(getFilterDistrict());
-  }, [updateData, district]);
+  }, [updateData, district, getFilterDistrict]);
 
   if (returnText || !townData) {
     return <p className="search-clinic">{returnText || 'Что-то загружается'}</p>;
