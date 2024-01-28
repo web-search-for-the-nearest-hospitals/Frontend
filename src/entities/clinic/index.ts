@@ -6,4 +6,4 @@ import { FullCardClinic } from './ui/FullCardClinic/FullCardClinic';
 // export { ClinicList, FullCardClinic, setSpecialty, specialtySelect, useSpecialtiesSlice };
 // export { default } from './model/specialtiesSlice/specialtiesSlise';
 export { ClinicList, FullCardClinic };
-export { default } from './model/specialtiesSlice/specialtiesSlise';
+export { default } from './model/specialtiesSlise';

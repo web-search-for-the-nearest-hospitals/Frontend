@@ -5,7 +5,6 @@ import {
   IGetCoupon,
   IGetOrganizations,
   ISpecialty,
-  IDistrict,
   ITown,
   ITowns,
 } from '../lib/types/interfaces';
@@ -17,9 +16,6 @@ export const rtkqueryApi = createApi({
     baseUrl: import.meta.env.VITE_BACK_URL + 'api/',
   }),
   endpoints: (builder) => ({
-    getDistricts: builder.query<IDistrict[], null>({
-      query: (i) => `organizations/${i}`,
-    }),
     getSpecialties: builder.query<ISpecialty[], null>({
       query: () => 'specialties/',
     }),
@@ -39,7 +35,6 @@ export const rtkqueryApi = createApi({
 });
 
 export const {
-  useGetDistrictsQuery,
   useGetSpecialtiesQuery,
   useGetTownsQuery,
   useLazyGetOrganizationsQuery,

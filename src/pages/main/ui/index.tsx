@@ -18,6 +18,11 @@ export default function MainPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState<null | IOrganization>(null);
   const [isVisibleClinic, setIsVisibleClinic] = useState(false);
+  const [districtFilter, setDistrictFilter] = useState<string>('');
+
+  const updateData = (value: string) => {
+    setDistrictFilter(value);
+  };
 
   function handleCardClick(data: IOrganization) {
     setIsOpen(true);
@@ -40,12 +45,16 @@ export default function MainPage() {
     <div className="main-page">
       <div className="main-page__card-list">
         {!isLoading && isVisibleClinic && data!.results.length === 0 ? <div>Ничего не найдено</div> : null}
-        {!isVisibleClinic ? <AdvertList /> : <ClinicList data={data!} handleCardClick={handleCardClick} />}
+        {!isVisibleClinic ? (
+          <AdvertList />
+        ) : (
+          <ClinicList data={data!} districtFilter={districtFilter} handleCardClick={handleCardClick} />
+        )}
         {isLoading ? <div>Данные загружаются</div> : null}
       </div>
       <div className="main-page__search-block">
         <Searcher onSearch={triggerQuery} />
-        <MapBlock clinicData={data} handleCardClick={handleCardClick} />
+        <MapBlock clinicData={data} handleCardClick={handleCardClick} updateData={updateData} />
       </div>
       <Popup isOpen={isOpen} closePopup={() => setIsOpen(false)}>
         {selectedCard ? <FullCardClinic clinic={selectedCard} /> : null}

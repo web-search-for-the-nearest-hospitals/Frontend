@@ -11,19 +11,19 @@ import { IClinicListData, IOrganization } from '~/shared/lib/types/interfaces';
 interface IMapBlock {
   clinicData: IClinicListData | undefined;
   handleCardClick: (data: IOrganization) => void;
+  updateData: (value: string) => void;
 }
 
-export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
+export default function MapBlock({ clinicData, handleCardClick, updateData }: IMapBlock) {
   const [district, setDistrict] = useState(districtDefault);
   const [isSearchUser, setIsSearchUser] = useState(false);
   const [townName] = useState('Калуга');
 
   const { userCoord, focusCoord, returnText, townData } = useMapBlock({ district, isSearchUser, townName });
   const getFilterDistrict = () => (district === districtDefault ? '' : district);
-
   useEffect(() => {
-    setDistrict(districtDefault);
-  }, [clinicData]);
+    updateData(getFilterDistrict());
+  }, [updateData, district]);
 
   if (returnText || !townData) {
     return <p className="search-clinic">{returnText || 'Что-то загружается'}</p>;

@@ -3,15 +3,13 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { rtkqueryApi } from '~/shared/api/rtkqueryApi';
 import userReducer from '~/entities/user';
-import specialtyReducer from '~/entities/clinic/model/specialtiesSlice/specialtiesSlise';
-import districtReducer from '~/entities/clinic/model//districtSlice/districtSlise';
+import specialtyReducer from '~/entities/clinic/model/specialtiesSlise';
 
 export const store = configureStore({
   reducer: {
     [rtkqueryApi.reducerPath]: rtkqueryApi.reducer,
     user: userReducer,
     specialty: specialtyReducer,
-    district: districtReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(rtkqueryApi.middleware),
 });
