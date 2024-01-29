@@ -55,6 +55,14 @@
 
     @include font-usual;
 
+    &-period {
+      cursor: pointer;
+      min-width: 140px;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 4px;
+    }
+
     @media screen and (width <= 1100px) {
       grid-column: 1;
       grid-row: 5;
@@ -107,8 +115,8 @@
         font-size: 14px;
       }
     }
-    &-number_active{
-      color: #695FEB;
+    &-number_active {
+      color: #695feb;
     }
   }
 
