@@ -10,8 +10,10 @@ interface IClinicCard {
 
 export function ClinicCard({ clinic, handleCardClick }: IClinicCard) {
   return (
-    <div className="clinic-card" onClick={() => handleCardClick(clinic)}>
-      <h3 className="clinic-card__name">{clinic.short_name}</h3>
+    <div className="clinic-card">
+      <h3 className="clinic-card__name" onClick={() => handleCardClick(clinic)}>
+        {clinic.short_name}
+      </h3>
       <div className="clinic-card__timetable">
         <p className="clinic-card__timetable-title">График работы:</p>
         {TimetableClinic(clinic, 'card')}
