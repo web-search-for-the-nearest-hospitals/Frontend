@@ -11,7 +11,6 @@ interface IUseDropDownInputProps {
 }
 
 export default function useDropDownInput({
-  // eslint-disable-next-line prettier/prettier
   values,
   styles,
   setState,
@@ -119,14 +118,12 @@ export default function useDropDownInput({
   }, [toFocusOption]);
 
   return {
-    // eslint-disable-next-line prettier/prettier
     handleOptionClick,
     onChangeInput,
     onKeyInput,
     onKeyOption,
     handleBlur,
     handleFocus,
-    // eslint-disable-next-line prettier/prettier
     isFocused,
     isOpen,
     visibleList,
