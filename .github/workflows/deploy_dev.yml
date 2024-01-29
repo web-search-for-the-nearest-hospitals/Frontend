@@ -48,5 +48,7 @@ jobs:
             sudo docker image prune -f
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/frontend
             sudo docker compose -p infra stop
-            sudo docker compose -p infra rm frontend
+            sudo docker compose -p infra rm frontend -f
+            sudo docker compose -p infra rm nginx -f
+            sudo docker volume rm infra_static_front -f
             sudo docker compose -p infra up -d --build
