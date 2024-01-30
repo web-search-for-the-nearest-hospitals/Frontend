@@ -30,6 +30,13 @@ export default function Calendar({ setDate }: ICalendar) {
   const [curRange, setCurRange] = useState(getWeekDates({ firstDay, numWeeks }));
   const [selectedCell, setSelectedCell] = useState<IDate>(today);
 
+  const onKey = (e: React.KeyboardEvent<HTMLElement>, data: IDate) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      setSelectedCell(data);
+    }
+  };
+
   const handleBtnClick = (e: React.MouseEvent<HTMLButtonElement>, isNext: boolean) => {
     e.preventDefault();
     const day = (isNext ? getLast : getFirst)(curRange);
@@ -87,6 +94,8 @@ export default function Calendar({ setDate }: ICalendar) {
                     isPrevDate(el, today) ? styles['calendar__cell-text_prev'] : '',
                   )}
                   onClick={() => setSelectedCell(el)}
+                  tabIndex={0}
+                  onKeyDown={(e) => onKey(e, el)}
                 >
                   {el.day}
                 </p>
