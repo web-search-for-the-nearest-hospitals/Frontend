@@ -19,7 +19,7 @@ export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
   const [townName] = useState('Калуга');
 
   const useMapBlockData = useMapBlock({ district, isSearchUser, townName });
-  const { returnText, townData } = useMapBlockData;
+  const { returnText, curTown } = useMapBlockData;
 
   const getFilterDistrict = () => (district === districtDefault ? '' : district);
 
@@ -27,7 +27,7 @@ export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
     setDistrict(districtDefault);
   }, [clinicData]);
 
-  if (returnText || !townData) {
+  if (returnText || !curTown) {
     return <p className="search-clinic">{returnText || 'Что-то загружается'}</p>;
   }
 
@@ -41,7 +41,7 @@ export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
       <div className="map__group">
         <div className="map__input-container">
           <DropDownInput
-            values={townData!.districts.map((el) => el.name) || []}
+            values={curTown!.districts.map((el) => el.name) || []}
             state={district}
             setState={setDistrict}
           />

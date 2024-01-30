@@ -25,8 +25,8 @@ export default function useMapBlock({ isSearchUser, townName, district }: IUseMa
   const [isDragCoord, setIsDragCoord] = useState(false);
 
   const [triggerQuery, queryResult] = useLazyGetTownsDataByIdQuery();
-  const { data: townData, isLoading: isLoadingTown, isError: townIsError } = queryResult;
-  const { data: townsData, isLoading: isLoadingTowns, isError: isErrorTowns } = useGetTownsQuery(null);
+  const { data: curTown, isLoading: isLoadingCurTown, isError: isErrorCurTown } = queryResult;
+  const { data: towns, isLoading: isLoadingTowns, isError: isErrorTowns } = useGetTownsQuery(null);
 
   // крючок получения геолоки пользователя
   useEffect(() => {
@@ -41,17 +41,17 @@ export default function useMapBlock({ isSearchUser, townName, district }: IUseMa
 
   // крючок обработки ошибки списка городов
   useEffect(() => {
-    if (isErrorTowns || townIsError) {
+    if (isErrorTowns || isErrorCurTown) {
       createToast('error', 'Не удалось получить данные городов');
     }
-  }, [isErrorTowns, townIsError]);
+  }, [isErrorTowns, isErrorCurTown]);
 
   //  крючок выбора города
   useEffect(() => {
-    if (townsData) {
-      setTownIndex(townsData.findIndex((el) => el.name === townName));
+    if (towns) {
+      setTownIndex(towns.findIndex((el) => el.name === townName));
     }
-  }, [townsData, setTownIndex, townName]);
+  }, [towns, setTownIndex, townName]);
 
   // крючок для реагирования на drag метки со стороны пользователя
   useEffect(() => {
@@ -72,44 +72,44 @@ export default function useMapBlock({ isSearchUser, townName, district }: IUseMa
     if ((isSearchUser || isDragCoord) && coord.latitude && coord.longitude) {
       setUserCoord(coord);
       setFocusCoord(coord);
-    } else if (townData) {
-      setUserCoord(townData);
-      setFocusCoord(townData);
+    } else if (curTown) {
+      setUserCoord(curTown);
+      setFocusCoord(curTown);
     }
-  }, [coord, isDragCoord, isSearchUser, townData]);
+  }, [coord, isDragCoord, isSearchUser, curTown]);
 
   // крючок отображения фокуса
   useEffect(() => {
-    if (district && townData) {
-      const newCoord = townData?.districts.find((el) => el.name === district) || townData;
+    if (district && curTown) {
+      const newCoord = curTown?.districts.find((el) => el.name === district) || curTown;
       setFocusCoord(newCoord);
     }
-  }, [district, townData]);
+  }, [district, curTown]);
 
   // крючок запроса за данными конкретного города
   useEffect(() => {
-    if (townIndex !== null && townsData) {
-      const ar = townsData[townIndex]?.relative_addr.match(/\d+/) || [];
+    if (townIndex !== null && towns) {
+      const ar = towns[townIndex]?.relative_addr.match(/\d+/) || [];
       const arg = ar[0] || `${townIndex + 1}`;
       triggerQuery(arg);
     }
-  }, [townsData, townIndex, triggerQuery]);
+  }, [towns, townIndex, triggerQuery]);
 
   // крючок контроля текста для пользователя
   useEffect(() => {
-    if (isLoadingTowns || isLoadingTown || !townData || !townsData) {
+    if (isLoadingTowns || isLoadingCurTown || !curTown || !towns) {
       setReturnText('Загружаю данные городов');
     } else if (townIndex === null) {
       setReturnText('Нет данных');
     } else {
       setReturnText(null);
     }
-  }, [isLoadingTown, isLoadingTowns, townData, townIndex, townsData]);
+  }, [isLoadingCurTown, isLoadingTowns, curTown, townIndex, towns]);
 
   return {
     userCoord,
     focusCoord,
     returnText,
-    townData,
+    curTown,
   };
 }
