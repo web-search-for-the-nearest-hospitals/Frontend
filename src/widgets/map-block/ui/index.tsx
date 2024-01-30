@@ -15,10 +15,12 @@ interface IMapBlock {
 
 export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
   const [district, setDistrict] = useState(districtDefault);
-  const [isSearchUser, setIsSearchUser] = useState(false);
+  const [isSearchUser, setIsSearchUser] = useState(false); // вкл\выкл геолоку юзера
   const [townName] = useState('Калуга');
 
-  const { userCoord, focusCoord, returnText, townData } = useMapBlock({ district, isSearchUser, townName });
+  const useMapBlockData = useMapBlock({ district, isSearchUser, townName });
+  const { returnText, townData } = useMapBlockData;
+
   const getFilterDistrict = () => (district === districtDefault ? '' : district);
 
   useEffect(() => {
@@ -52,8 +54,7 @@ export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
 
       <div className="map__container">
         <Maps
-          userCoord={userCoord}
-          focusCoord={focusCoord}
+          useMapBlockData={useMapBlockData}
           clinicData={clinicData?.results || []}
           handleCardClick={handleCardClick}
           filterDistrict={getFilterDistrict()}

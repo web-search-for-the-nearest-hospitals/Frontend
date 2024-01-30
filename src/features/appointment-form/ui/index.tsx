@@ -9,13 +9,15 @@ import Coupons from './Coupons';
 import { InfoСontainer } from '~/widgets/notification-container';
 
 export default function AppointmentForm() {
-  const { specialtyId } = useParams();
   const specialties = useAppSelector(specialtySelect);
+  const [triggerQuery, queryResult] = useLazyGetCouponsOnDayQuery();
+
+  const { specialtyId } = useParams();
+  const { clinicId } = useParams();
+
   const [specialty, setSpecialty] = useState<string | null>(specialties[0]?.skill || null);
   const [date, setDate] = useState<null | string>(null);
   const [formCh, setFormCh] = useState<1 | 2>(1);
-  const [triggerQuery, queryResult] = useLazyGetCouponsOnDayQuery();
-  const { clinicId } = useParams();
   const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(false);
 
   useEffect(() => {

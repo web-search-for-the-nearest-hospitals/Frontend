@@ -15,12 +15,14 @@ interface ISearcher {
 
 export default function Searcher({ onSearch }: ISearcher) {
   const { specialtyId } = useParams();
+  const nav = useNavigate();
+
   const specialties = useAppSelector(specialtySelect);
+
   const [specialty, setSpecialty] = useState<string | null>(null);
   const [isWorkAllDay, setIsWorkAllDay] = useState(false);
   const [isGovernment, setIsGovernment] = useState(false);
   const [firstLoading, setFirstLoading] = useState(false);
-  const nav = useNavigate();
 
   const getCodeOfSpecialty = useCallback(
     (name: string) => specialties.find((el) => el.skill === name)!.code,

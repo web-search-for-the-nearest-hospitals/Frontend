@@ -22,6 +22,7 @@ export default function useMapBlock({ isSearchUser, townName, district }: IUseMa
   const [focusCoord, setFocusCoord] = useState(coord);
   const [townIndex, setTownIndex] = useState<null | number>(null);
   const [returnText, setReturnText] = useState<null | string>(null);
+  const [isDragCoord, setIsDragCoord] = useState(false);
 
   const [triggerQuery, queryResult] = useLazyGetTownsDataByIdQuery();
   const { data: townData, isLoading: isLoadingTown, isError: townIsError } = queryResult;
@@ -30,6 +31,7 @@ export default function useMapBlock({ isSearchUser, townName, district }: IUseMa
   // крючок получения геолоки пользователя
   useEffect(() => {
     if (isSearchUser) {
+      setIsDragCoord(false);
       watchUserPosition((data: ICoord) => {
         dispatch(setCoord(data));
         setFocusCoord(data);
@@ -51,16 +53,30 @@ export default function useMapBlock({ isSearchUser, townName, district }: IUseMa
     }
   }, [townsData, setTownIndex, townName]);
 
+  // крючок для реагирования на drag метки со стороны пользователя
+  useEffect(() => {
+    setFocusCoord(userCoord);
+  }, [userCoord]);
+
+  // крючок смены стейта drag метки на карет
+  useEffect(() => {
+    // Только когда переключатель навигации выключен, а координаты изменились -> изменить стейт
+    if (!isSearchUser && coord) {
+      setIsDragCoord(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [coord]);
+
   // крючок отображения местоположения
   useEffect(() => {
-    if (isSearchUser && coord.latitude && coord.longitude) {
+    if ((isSearchUser || isDragCoord) && coord.latitude && coord.longitude) {
       setUserCoord(coord);
       setFocusCoord(coord);
     } else if (townData) {
       setUserCoord(townData);
       setFocusCoord(townData);
     }
-  }, [coord, isSearchUser, townData]);
+  }, [coord, isDragCoord, isSearchUser, townData]);
 
   // крючок отображения фокуса
   useEffect(() => {
@@ -79,6 +95,7 @@ export default function useMapBlock({ isSearchUser, townName, district }: IUseMa
     }
   }, [townsData, townIndex, triggerQuery]);
 
+  // крючок контроля текста для пользователя
   useEffect(() => {
     if (isLoadingTowns || isLoadingTown || !townData || !townsData) {
       setReturnText('Загружаю данные городов');
