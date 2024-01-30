@@ -16,6 +16,7 @@ import {
   toIDate,
 } from './_lib';
 import { IDate } from './_types';
+import ArrowIcon from './_input-arrow';
 
 interface ICalendar {
   setDate: (newVal: string) => void;
@@ -48,16 +49,21 @@ export default function Calendar({ setDate }: ICalendar) {
         <tr>
           <th colSpan={7} style={{ padding: 0 }}>
             <div className={styles['calendar__header-first']}>
-              {/* @TODO: заменить на iconbutton, когда он будет */}
               <button
                 className={cn(styles['calendar__nav-btn'])}
                 onClick={(e) => handleBtnClick(e, false)}
                 disabled={checkEqualDay(getFirst(curRange), firstDay)}
               >
-                Назад
+                <ArrowIcon />
               </button>
               <p className={styles['calendar__header-text']}>{getCurRangeString(curRange)}</p>
-              <button onClick={(e) => handleBtnClick(e, true)}>Вперёд</button>
+              <button
+                className={cn(styles['calendar__nav-btn'], styles['calendar__nav-btn_next'])}
+                onClick={(e) => handleBtnClick(e, true)}
+                disabled={false}
+              >
+                <ArrowIcon />
+              </button>
             </div>
           </th>
         </tr>

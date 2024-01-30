@@ -8,7 +8,7 @@
   text-align: center;
 
   &__header-first{
-    @include flex-container($just: space-between);
+    @include flex-container($just: center, $gap: 40px);
     margin-bottom: 46px; // по макету - 3, т.к. погрешность на table
   }
 
@@ -88,9 +88,29 @@
   }
 
   &__nav-btn{
+    @include flex-container;
+
+    padding: 2px; // расширить зону клика
+
+    background-image: url("./_input-arrow.tsx");
+    color: $active-button;
+    transition: opacity .2s ease;
+
+    &:active{
+      color: $pressed-button;
+    }
+
     &:disabled{
       color: $color-not-active;
+      cursor: default;
+    }
 
+    &:focus-visible{
+      outline: 1px solid #000;
+    }
+
+    &_next{
+      rotate: 180deg;
     }
   }
 }
