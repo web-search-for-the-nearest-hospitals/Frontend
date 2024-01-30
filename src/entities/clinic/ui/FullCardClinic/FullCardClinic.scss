@@ -63,6 +63,17 @@
       gap: 4px;
     }
 
+    &-ico {
+      display: block;
+      align-self: flex-start;
+      margin-top: 4px;
+    }
+
+    &-ico_up {
+      transform: rotate(180deg) translateY(50%);
+      margin-top: 8px;
+    }
+
     @media screen and (width <= 1100px) {
       grid-column: 1;
       grid-row: 5;
