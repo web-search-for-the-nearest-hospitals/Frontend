@@ -9,13 +9,20 @@ interface ICoupons {
 
 export default function Coupons({ couponsData }: ICoupons) {
   const [selectedCupon, setSelectedCupon] = useState(couponsData[0]);
+  const [isActiveList, setIsActiveList] = useState(false);
+
   const parseTime = (time: string) =>
     new Date(time).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+
+  const handleBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    setIsActiveList((prev) => !prev);
+  };
 
   return (
     <section className="coupons">
       <h4 className="coupons__title">Свободное время:</h4>
-      <ul className="coupons__list">
+      <ul className={cn('coupons__list', isActiveList && 'coupons__list_active')}>
         {couponsData.map((el, i) => (
           <li
             key={i}
@@ -25,6 +32,10 @@ export default function Coupons({ couponsData }: ICoupons) {
             {parseTime(el.datetime_start)}
           </li>
         ))}
+        <button
+          className={cn('coupons__list-toggle', isActiveList && 'coupons__list-toggle_active')}
+          onClick={handleBtnClick}
+        />
       </ul>
     </section>
   );

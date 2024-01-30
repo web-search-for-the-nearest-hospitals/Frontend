@@ -10,6 +10,36 @@
 
   &__list{
     @include flex-container($fw: wrap, $just: flex-start);
+
+    max-height: 35px;
+    position: relative;
+
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+
+    &_active{
+      max-height: 9999px;
+      transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+    }
+  }
+
+  &__list-toggle{
+    width: 12px;
+    height: 9px;
+
+    position: absolute;
+    top: 8px;
+    right: 0;
+
+    background-image: url('~/shared/assets/icons/arrow.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    transition: rotate .2s ease-in-out;
+
+    &_active{
+      rotate: 180deg;
+    }
   }
 
   &__element{
