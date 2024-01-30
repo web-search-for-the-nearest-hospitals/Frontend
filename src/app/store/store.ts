@@ -3,7 +3,7 @@ import { setupListeners } from '@reduxjs/toolkit/query';
 
 import { rtkqueryApi } from '~/shared/api/rtkqueryApi';
 import userReducer from '~/entities/user';
-import specialtyReducer from '~/entities/clinic/model/specialtiesSlise';
+import specialtyReducer from '~/entities/clinic';
 
 export const store = configureStore({
   reducer: {
