@@ -2,15 +2,14 @@ import styles from './index.module.scss';
 
 import { Map, Placemark, RouteButton, SearchControl } from '@pbe/react-yandex-maps';
 
-import { setCoord } from '~/entities/user';
+import { setCoord, userSelect } from '~/entities/user';
 
 import locationIcon from '~/shared/assets/icons/location.svg';
 import { IClinicListData, ICoord, IOrganization } from '~/shared/lib/types/interfaces';
-import { useAppDispatch } from '~/shared/lib/hooks/reduxHooks';
+import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 
 interface IMaps {
   useMapBlockData: {
-    userCoord: ICoord;
     focusCoord: ICoord;
   };
   clinicData: IClinicListData['results'];
@@ -18,14 +17,10 @@ interface IMaps {
   filterDistrict: string;
 }
 
-export default function Maps({
-  useMapBlockData: { userCoord, focusCoord },
-  clinicData,
-  filterDistrict,
-  handleCardClick,
-}: IMaps) {
+export default function Maps({ useMapBlockData: { focusCoord }, clinicData, filterDistrict, handleCardClick }: IMaps) {
   const dispatch = useAppDispatch();
-  const { latitude, longitude } = userCoord;
+  const coord = useAppSelector(userSelect);
+  const { latitude, longitude } = coord;
   const { latitude: focuse_lat, longitude: focus_long } = focusCoord;
 
   const getVisibleData = () =>
