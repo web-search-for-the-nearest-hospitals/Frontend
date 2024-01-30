@@ -18,11 +18,9 @@ export default function useMapBlock({ isSearchUser, townName, district }: IUseMa
   const dispatch = useAppDispatch();
   const coord = useAppSelector(userSelect);
 
-  const [userCoord, setUserCoord] = useState(coord);
   const [focusCoord, setFocusCoord] = useState(coord);
   const [townIndex, setTownIndex] = useState<null | number>(null);
   const [returnText, setReturnText] = useState<null | string>(null);
-  const [isDragCoord, setIsDragCoord] = useState(false);
 
   const [triggerQuery, queryResult] = useLazyGetTownsDataByIdQuery();
   const { data: curTown, isLoading: isLoadingCurTown, isError: isErrorCurTown } = queryResult;
@@ -31,7 +29,6 @@ export default function useMapBlock({ isSearchUser, townName, district }: IUseMa
   // крючок получения геолоки пользователя
   useEffect(() => {
     if (isSearchUser) {
-      setIsDragCoord(false);
       watchUserPosition((data: ICoord) => {
         dispatch(setCoord(data));
         setFocusCoord(data);
@@ -55,28 +52,22 @@ export default function useMapBlock({ isSearchUser, townName, district }: IUseMa
 
   // крючок для реагирования на drag метки со стороны пользователя
   useEffect(() => {
-    setFocusCoord(userCoord);
-  }, [userCoord]);
-
-  // крючок смены стейта drag метки на карет
-  useEffect(() => {
-    // Только когда переключатель навигации выключен, а координаты изменились -> изменить стейт
-    if (!isSearchUser && coord) {
-      setIsDragCoord(true);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    setFocusCoord(coord);
   }, [coord]);
 
-  // крючок отображения местоположения
+  // крючок установки координат города
   useEffect(() => {
-    if ((isSearchUser || isDragCoord) && coord.latitude && coord.longitude) {
-      setUserCoord(coord);
-      setFocusCoord(coord);
-    } else if (curTown) {
-      setUserCoord(curTown);
-      setFocusCoord(curTown);
+    if (curTown && !isSearchUser) {
+      dispatch(setCoord({ latitude: curTown.latitude, longitude: curTown.longitude }));
     }
-  }, [coord, isDragCoord, isSearchUser, curTown]);
+  }, [curTown, dispatch, isSearchUser]);
+
+  // Крючок установки фокуса по координатам
+  useEffect(() => {
+    if (coord) {
+      setFocusCoord(coord);
+    }
+  }, [coord, setFocusCoord]);
 
   // крючок отображения фокуса
   useEffect(() => {
@@ -107,7 +98,6 @@ export default function useMapBlock({ isSearchUser, townName, district }: IUseMa
   }, [isLoadingCurTown, isLoadingTowns, curTown, townIndex, towns]);
 
   return {
-    userCoord,
     focusCoord,
     returnText,
     curTown,

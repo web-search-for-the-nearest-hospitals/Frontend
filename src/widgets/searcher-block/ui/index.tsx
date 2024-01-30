@@ -8,6 +8,7 @@ import { UserIcon } from '~/shared/assets/index';
 import createToast from '~/shared/lib/toast/createToast';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
 import { Button, Checkbox, DropDownInput, IconBtn } from '~/shared/ui/index';
+import { userSelect } from '~/entities/user';
 
 interface ISearcher {
   onSearch: (data: IGetOrganizations) => void;
@@ -18,6 +19,7 @@ export default function Searcher({ onSearch }: ISearcher) {
   const nav = useNavigate();
 
   const specialties = useAppSelector(specialtySelect);
+  const { latitude, longitude } = useAppSelector(userSelect);
 
   const [specialty, setSpecialty] = useState<string | null>(null);
   const [isWorkAllDay, setIsWorkAllDay] = useState(false);
@@ -35,9 +37,11 @@ export default function Searcher({ onSearch }: ISearcher) {
       specialty: specialty ? getCodeOfSpecialty(specialty) : '',
       is_gov: isGovernment,
       is_full_time: isWorkAllDay,
+      lat: latitude || undefined,
+      long: longitude || undefined,
     });
     setFirstLoading(true);
-  }, [getCodeOfSpecialty, isGovernment, isWorkAllDay, onSearch, specialty]);
+  }, [getCodeOfSpecialty, isGovernment, isWorkAllDay, latitude, longitude, onSearch, specialty]);
 
   // дублируется в форме, но выносить дубликат дороже выйдет. В сомнениях.
   useEffect(() => {
@@ -52,7 +56,7 @@ export default function Searcher({ onSearch }: ISearcher) {
       handleSumbit();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [firstLoading, isGovernment, isWorkAllDay]);
+  }, [firstLoading, isGovernment, isWorkAllDay, latitude, longitude]);
 
   useEffect(() => {
     updateUrl();
