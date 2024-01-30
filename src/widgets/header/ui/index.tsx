@@ -38,7 +38,7 @@ function Header() {
            при внесении изменений здесь - изменить /widgets/searcher-block/ui/index.tsx */}
             <IconBtn
               onClick={function (): void {
-                isUserIconClicked ? setIsUserIconClicked(false) : setIsUserIconClicked(true);
+                setIsUserIconClicked(!isUserIconClicked);
               }}
             >
               <UserIcon width={18.86} height={20} />

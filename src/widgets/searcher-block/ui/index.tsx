@@ -71,7 +71,7 @@ export default function Searcher({ onSearch }: ISearcher) {
         <div className="search-clinic__icon-button">
           <IconBtn
             onClick={function (): void {
-              isUserIconClicked ? setIsUserIconClicked(false) : setIsUserIconClicked(true);
+              setIsUserIconClicked(!isUserIconClicked);
             }}
           >
             <UserIcon width={33} height={35} />
