@@ -1,11 +1,10 @@
 import './index.scss';
-import { useNavigate, useParams } from 'react-router-dom';
+import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 
 import { specialtySelect } from '~/entities/clinic';
 import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 import { UserIcon } from '~/shared/assets/index';
-import createToast from '~/shared/lib/toast/createToast';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
 import { Button, Checkbox, DropDownInput, IconBtn } from '~/shared/ui/index';
 
@@ -20,6 +19,7 @@ export default function Searcher({ onSearch }: ISearcher) {
   const [isWorkAllDay, setIsWorkAllDay] = useState(false);
   const [isGovernment, setIsGovernment] = useState(false);
   const [firstLoading, setFirstLoading] = useState(false);
+  const [isUserIconClicked, setIsUserIconClicked] = useState(false);
   const nav = useNavigate();
 
   const getCodeOfSpecialty = useCallback(
@@ -36,7 +36,6 @@ export default function Searcher({ onSearch }: ISearcher) {
     });
     setFirstLoading(true);
   }, [getCodeOfSpecialty, isGovernment, isWorkAllDay, onSearch, specialty]);
-
   // дублируется в форме, но выносить дубликат дороже выйдет. В сомнениях.
   useEffect(() => {
     if (specialtyId && specialtyId !== 'null') {
@@ -67,12 +66,12 @@ export default function Searcher({ onSearch }: ISearcher) {
           isContentEditable
         />
         <Button type="submit" size="s" title="Найти" onClick={handleSumbit} />
-        {/* На странице присутствуют две кнопки IconBtn(UserIcon),
-          при внесении изменений в эту кнопку - изменить вторую /widgets/header/ui/index.tsx */}
+        {/* На странице присутствуют две кнопки IconBtn(UserIcon)и два открывающихся элемента user-click (ниже),
+          при внесении изменений здесь - изменить /widgets/header/ui/index.tsx */}
         <div className="search-clinic__icon-button">
           <IconBtn
             onClick={function (): void {
-              createToast('info', 'I work!');
+              isUserIconClicked ? setIsUserIconClicked(false) : setIsUserIconClicked(true);
             }}
           >
             <UserIcon width={33} height={35} />
@@ -83,6 +82,18 @@ export default function Searcher({ onSearch }: ISearcher) {
         <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />
         <Checkbox state={isGovernment} setState={setIsGovernment} title="Государственные" />
       </div>
+      {isUserIconClicked ? (
+        <div className="search-clinic__user-click">
+          <NavLink className="search-clinic__user-click-link" to="/clinic-searcher/main">
+            Войти
+          </NavLink>
+          <NavLink className="search-clinic__user-click-link" to="/clinic-searcher/main">
+            Регистрация
+          </NavLink>
+        </div>
+      ) : (
+        ''
+      )}
     </div>
   );
 }

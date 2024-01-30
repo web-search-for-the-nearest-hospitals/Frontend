@@ -8,10 +8,10 @@ import { Layout } from '~/shared/ui';
 import { LocationIcon } from '~/shared/assets';
 import UserIcon from '~/shared/assets/icons/UserIcon';
 import IconBtn from '~/shared/ui/IconBtn/IconBtn';
-import createToast from '~/shared/lib/toast/createToast';
 
 function Header() {
   const [town] = useState('Калуга');
+  const [isUserIconClicked, setIsUserIconClicked] = useState(false);
   const { isGetSpecialty } = useSpecialtiesSlice();
 
   const getContent = () => {
@@ -34,16 +34,28 @@ function Header() {
             <p className="header__location-text">{town}</p>
           </div>
           <div className="header__icon-button">
-            {/* На странице присутствуют две кнопки IconBtn(UserIcon),
-           при внесении изменений в эту кнопку - изменить вторую /widgets/searcher-block/ui/index.tsx */}
+            {/* На странице присутствуют две кнопки IconBtn(UserIcon) и два открывающихся элемента user-click(ниже),
+           при внесении изменений здесь - изменить /widgets/searcher-block/ui/index.tsx */}
             <IconBtn
               onClick={function (): void {
-                createToast('info', 'I work!');
+                isUserIconClicked ? setIsUserIconClicked(false) : setIsUserIconClicked(true);
               }}
             >
               <UserIcon width={18.86} height={20} />
             </IconBtn>
           </div>
+          {isUserIconClicked ? (
+            <div className="header__user-click">
+              <NavLink className="header__user-click-link" to="/clinic-searcher/main">
+                Войти
+              </NavLink>
+              <NavLink className="header__user-click-link" to="/clinic-searcher/main">
+                Регистрация
+              </NavLink>
+            </div>
+          ) : (
+            ''
+          )}
         </div>
       </header>
       <Layout>{getContent()}</Layout>
