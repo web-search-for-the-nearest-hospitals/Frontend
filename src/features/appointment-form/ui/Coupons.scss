@@ -24,16 +24,18 @@
   }
 
   &__list-toggle{
-    width: 12px;
-    height: 9px;
+    // добавил для увеличения зоны клика
+    width: 16px; // по макету + по 2px по бокам
+    height: 14px; // по макету + по 2px по бокам
 
     position: absolute;
     top: 8px;
     right: 0;
 
     background-image: url('~/shared/assets/icons/arrow.svg');
+    background-position: center;
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: 12px 9px; // по макету
 
     transition: rotate .2s ease-in-out;
 

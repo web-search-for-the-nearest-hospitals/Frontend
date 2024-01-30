@@ -41,6 +41,7 @@
       position: absolute;
       top: 19px;
       left: 50px;
+
       @media screen and (width <= 530px) {
         width: 150%;
       }
@@ -51,6 +52,7 @@
     }
   }
 }
+
 .progress-scale__element-line_active,
 .progress-scale__element-circle_active {
   background-color: $active-button;

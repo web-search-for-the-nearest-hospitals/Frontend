@@ -16,7 +16,7 @@ import {
   toIDate,
 } from './_lib';
 import { IDate } from './_types';
-import ArrowIcon from './_input-arrow';
+import ArrowIcon from './_arrowIcon';
 
 interface ICalendar {
   setDate: (newVal: string) => void;

@@ -97,6 +97,7 @@
 
     @media screen and (width <= 625px) {
       margin-top: 30px;
+
       @include font-small;
     }
 
@@ -107,6 +108,7 @@
         font-size: 14px;
       }
     }
+
     &-number_active{
       color: #695FEB;
     }
