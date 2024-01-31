@@ -4,10 +4,8 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { specialtySelect } from '~/entities/clinic';
 import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
-import { UserIcon } from '~/shared/assets/index';
-import createToast from '~/shared/lib/toast/createToast';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
-import { Button, Checkbox, DropDownInput, IconBtn } from '~/shared/ui/index';
+import { Button, Checkbox, DropDownInput, UserIconBtn } from '~/shared/ui/index';
 
 interface ISearcher {
   onSearch: (data: IGetOrganizations) => void;
@@ -36,7 +34,6 @@ export default function Searcher({ onSearch }: ISearcher) {
     });
     setFirstLoading(true);
   }, [getCodeOfSpecialty, isGovernment, isWorkAllDay, onSearch, specialty]);
-
   // дублируется в форме, но выносить дубликат дороже выйдет. В сомнениях.
   useEffect(() => {
     if (specialtyId && specialtyId !== 'null') {
@@ -67,17 +64,7 @@ export default function Searcher({ onSearch }: ISearcher) {
           isContentEditable
         />
         <Button type="submit" size="s" title="Найти" onClick={handleSumbit} />
-        {/* На странице присутствуют две кнопки IconBtn(UserIcon),
-          при внесении изменений в эту кнопку - изменить вторую /widgets/header/ui/index.tsx */}
-        <div className="search-clinic__icon-button">
-          <IconBtn
-            onClick={function (): void {
-              createToast('info', 'I work!');
-            }}
-          >
-            <UserIcon width={33} height={35} />
-          </IconBtn>
-        </div>
+        <UserIconBtn type={'normal'} width={33} height={35} />
       </div>
       <div className="search-clinic__group">
         <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />

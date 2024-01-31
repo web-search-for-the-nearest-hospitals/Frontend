@@ -8,5 +8,18 @@ import Popup from './Popup/Popup';
 import Maps from './Maps';
 import ProgressScale from './ProgressScale/ProgressScale';
 import Calendar from './Calendar/Calendar';
+import UserIconBtn from './UserIconBtn/UserIconBtn';
 
-export { Button, ToggleButton, IconBtn, Checkbox, Layout, Maps, DropDownInput, Popup, ProgressScale, Calendar };
+export {
+  Button,
+  ToggleButton,
+  IconBtn,
+  Checkbox,
+  Layout,
+  Maps,
+  DropDownInput,
+  Popup,
+  ProgressScale,
+  Calendar,
+  UserIconBtn,
+};

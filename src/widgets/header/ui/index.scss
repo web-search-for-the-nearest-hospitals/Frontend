@@ -9,6 +9,7 @@
 
   background-color: #fff;
   padding: 30px 0;
+  position: relative;
 
   &__logo {
     text-align: center;
@@ -20,7 +21,7 @@
     text-transform: uppercase;
     color: #4f73e7;
     background: -o-linear-gradient(transparent, transparent);
-    background: -webkit-linear-gradient(0deg, #4F73E7 0%, #626AE8 48.85%, #8B56E9 100%);
+    background: -webkit-linear-gradient(0deg, #4f73e7 0%, #626ae8 48.85%, #8b56e9 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 
@@ -41,16 +42,7 @@
       @include font-small-select;
     }
   }
-  &__icon-button{
-    display: none;
-
-    @media screen and (width <=500px) {
-      display: block;
-      margin-left: 16px;
-      margin-right: 16px;
-    }
-  }
-  &__container{
+  &__container {
     display: flex;
     align-items: center;
   }

@@ -4,6 +4,7 @@
   width: 100%;
   max-width: 730px;
   margin-bottom: 60px;
+  position: relative;
 
   @media screen and (width <= 500px) {
     margin-bottom: 30px;
@@ -25,23 +26,10 @@
   }
 
   &__group {
-    @include flex-container($just: flex-start, $fw: wrap, $gap:118px);
+    @include flex-container($just: flex-start, $fw: wrap, $gap: 118px);
 
     @media screen and (width <= 500px) {
       gap: 21px;
-    }
-  }
-
-  &__icon-button{
-    margin-left: 16px;
-    margin-right: 16px;
-
-    @media screen and (width <= 768px) {
-      margin-left: 0;
-    }
-
-    @media screen and (width <= 500px) {
-      display: none;
     }
   }
 }
