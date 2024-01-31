@@ -1,12 +1,11 @@
 import './index.scss';
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 
 import { specialtySelect } from '~/entities/clinic';
 import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
-import { UserIcon } from '~/shared/assets/index';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
-import { Button, Checkbox, DropDownInput, IconBtn } from '~/shared/ui/index';
+import { Button, Checkbox, DropDownInput, UserIconBtn } from '~/shared/ui/index';
 
 interface ISearcher {
   onSearch: (data: IGetOrganizations) => void;
@@ -19,7 +18,6 @@ export default function Searcher({ onSearch }: ISearcher) {
   const [isWorkAllDay, setIsWorkAllDay] = useState(false);
   const [isGovernment, setIsGovernment] = useState(false);
   const [firstLoading, setFirstLoading] = useState(false);
-  const [isUserIconClicked, setIsUserIconClicked] = useState(false);
   const nav = useNavigate();
 
   const getCodeOfSpecialty = useCallback(
@@ -66,34 +64,12 @@ export default function Searcher({ onSearch }: ISearcher) {
           isContentEditable
         />
         <Button type="submit" size="s" title="Найти" onClick={handleSumbit} />
-        {/* На странице присутствуют две кнопки IconBtn(UserIcon)и два открывающихся элемента user-click (ниже),
-          при внесении изменений здесь - изменить /widgets/header/ui/index.tsx */}
-        <div className="search-clinic__icon-button">
-          <IconBtn
-            onClick={function (): void {
-              setIsUserIconClicked(!isUserIconClicked);
-            }}
-          >
-            <UserIcon width={33} height={35} />
-          </IconBtn>
-        </div>
+        <UserIconBtn type={'normal'} width={33} height={35} />
       </div>
       <div className="search-clinic__group">
         <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />
         <Checkbox state={isGovernment} setState={setIsGovernment} title="Государственные" />
       </div>
-      {isUserIconClicked ? (
-        <div className="search-clinic__user-click">
-          <NavLink className="search-clinic__user-click-link" to="/clinic-searcher/main">
-            Войти
-          </NavLink>
-          <NavLink className="search-clinic__user-click-link" to="/clinic-searcher/main">
-            Регистрация
-          </NavLink>
-        </div>
-      ) : (
-        ''
-      )}
     </div>
   );
 }

@@ -32,44 +32,4 @@
       gap: 21px;
     }
   }
-
-  &__icon-button {
-    margin-left: 16px;
-    margin-right: 16px;
-
-    @media screen and (width <= 768px) {
-      margin-left: 0;
-    }
-
-    @media screen and (width <= 500px) {
-      display: none;
-    }
-  }
-  &__user-click {
-    width: 197px;
-    height: 84px;
-    border-radius: 10px;
-    border: 1px solid $color-contour;
-    background: $color-base-background;
-    position: absolute;
-    top: 61px;
-    right: -30px;
-    padding: 10px 30px 20px;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    z-index: 2;
-
-    @media screen and (width <= 825px) {
-      right: 0;
-    }
-    @media screen and (width <= 500px) {
-      display: none;
-    }
-  }
-  &__user-click-link {
-    @include font-small-select;
-    color: $text-color;
-  }
 }
