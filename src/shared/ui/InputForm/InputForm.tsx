@@ -17,7 +17,12 @@ export default function InputForm({ type, name, title, placeholder, minLength, m
   const [error, setError] = useState<string>('');
 
   function handleChangeInput(e: any) {
-    e.target.validationMessage ? setError(e.target.validationMessage) : setError('');
+    e.target.validationMessage
+      ? setTimeout(() => {
+          setError(e.target.validationMessage);
+        }, 1500)
+      : setError('');
+
     setValueInput(e.target.value);
   }
   return (

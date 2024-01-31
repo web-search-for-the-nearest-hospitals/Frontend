@@ -12,7 +12,7 @@ export default function AppointmentForm() {
   const specialties = useAppSelector(specialtySelect);
   const [specialty, setSpecialty] = useState<string | null>(specialties[0]?.skill || null);
   const [date, setDate] = useState<null | string>(null);
-  const [formCh, setFormCh] = useState<1 | 2>(2);
+  const [formCh, setFormCh] = useState<1 | 2>(1);
   const [triggerQuery, queryResult] = useLazyGetCouponsOnDayQuery();
   const { clinicId } = useParams();
   const [stateCheckbox, setStateCheckbox] = useState<boolean>(false);
@@ -20,7 +20,7 @@ export default function AppointmentForm() {
   const regex = {
     name: '^[А-Яа-яёa-zA-Z \\-]+$',
     email: '^\\S+@\\S+\\.\\S+$',
-    // tel: '^\\+7s?[(]{0,1}9[0-9]{2}[)]{0,1}s?d{3}[-]{0,1}d{2}[-]{0,1}d{2}',
+    // tel: '/^+?[(]?[0-9]{3}[)]?[ ]?[0-9]{3}[ ]?[0-9]{2}[ ]?[0-9]{2}$/v',
   };
 
   useEffect(() => {
@@ -44,16 +44,10 @@ export default function AppointmentForm() {
   }, [specialties, specialtyId]);
 
   const handleCheckboxConsent: MouseEventHandler = (e) => {
-    console.log(e);
-
-    setButtonSubmit(false);
-    // const form = e.currentTarget.closest('form');
-    // console.log(form.checkValidity());
-    // console.log(stateCheckbox);
-    // console.log(form.checkValidity() && stateCheckbox);
-    // if (form.checkValidity() && stateCheckbox) {
-    //   setButtonSubmit(false);
-    // } else setButtonSubmit(true);
+    const form = e.currentTarget.closest('form');
+    if (form?.checkValidity() && !stateCheckbox) {
+      setButtonSubmit(false);
+    } else setButtonSubmit(true);
   };
 
   return (
@@ -87,7 +81,7 @@ export default function AppointmentForm() {
               <Button
                 title="Далее"
                 type="button"
-                size="m"
+                size="forForm"
                 disabled={queryResult.isError || queryResult.currentData?.length === 0}
                 onClick={() => setFormCh(2)}
               />
@@ -99,31 +93,42 @@ export default function AppointmentForm() {
           <section className="form-appointment__ch2">
             <InputForm
               type={'text'}
+              name={'surname'}
+              title={'Фамилия'}
+              placeholder={'Иванов'}
+              minLength={2}
+              maxLength={27}
+              pattern={regex.name}
+            />
+            <InputForm
+              type={'text'}
               name={'name'}
-              title={'ФИО'}
-              placeholder={'Иванов Иван Иванович'}
-              minLength={9}
-              maxLength={50}
+              title={'Имя'}
+              placeholder={'Иван'}
+              minLength={2}
+              maxLength={27}
+              pattern={regex.name}
+            />
+
+            <InputForm
+              type={'text'}
+              name={'fatherName'}
+              title={'Отчество'}
+              placeholder={'Иванович'}
+              minLength={2}
+              maxLength={27}
               pattern={regex.name}
             />
             <InputForm
               type={'tel'}
               name={'tel'}
               title={'Номер телефона'}
-              placeholder={'+7 900 809 00 50'}
+              placeholder={'+7 (900) 809 00 50'}
               // minLength={5}
-              maxLength={16}
+              // maxLength={16}
               // pattern={regex.tel}
             />
-            <InputForm
-              type={'email'}
-              name={'email'}
-              title={'Почта'}
-              placeholder={'poisk.kl@mail.ru'}
-              minLength={5}
-              maxLength={50}
-              pattern={regex.email}
-            />
+
             <label className="form-appointment__consent" onClick={handleCheckboxConsent}>
               <Checkbox state={stateCheckbox} setState={setStateCheckbox} title={''} />
               <p className="form-appointment__consent-text">
@@ -132,7 +137,7 @@ export default function AppointmentForm() {
               </p>
             </label>
             <div className="form-appointment__button-container">
-              <Button title="Записаться" size="m" disabled={buttonSubmit} />
+              <Button title="Записаться" size="forForm" disabled={buttonSubmit} />
             </div>
           </section>
         ) : null}
