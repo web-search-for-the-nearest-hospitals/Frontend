@@ -1,22 +1,26 @@
 import './index.scss';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { specialtySelect } from '~/entities/clinic';
-import { useLazyGetCouponsOnDayQuery } from '~/shared/api/rtkqueryApi';
-import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
-import { Button, Calendar, DropDownInput, Popup } from '~/shared/ui';
-import Coupons from './Coupons';
-import { InfoСontainer } from '~/widgets/notification-container';
-import { ICoupon } from '~/shared/lib/types/interfaces';
 
+import Coupons from './Coupons';
+import SpecialtyInput from './SpecialtyInput';
+
+import { InfoСontainer } from '~/widgets/notification-container';
+import { specialtySelect } from '~/entities/clinic';
+
+import { useLazyGetCouponsOnDayQuery } from '~/shared/api/rtkqueryApi';
+import { Button, Calendar, Popup } from '~/shared/ui';
+import { ICoupon } from '~/shared/lib/types/interfaces';
+import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
+
+// TODO@: нужно вынести крючки в хук, но после того, как будет собрана полная форма
 export default function AppointmentForm() {
-  const { specialtyId } = useParams();
-  const { clinicId } = useParams();
   const specialties = useAppSelector(specialtySelect);
+  const { specialtyId, clinicId } = useParams();
   const [triggerQuery, queryResult] = useLazyGetCouponsOnDayQuery();
 
-  const [specialty, setSpecialty] = useState<string | null>(specialties[0]?.skill || null);
-  const [date, setDate] = useState<null | string>(null);
+  const [specialty, setSpecialty] = useState<string | null>(null);
+  const [dateOfAppointment, setDateOfAppointment] = useState<null | string>(null);
   const [formCh, setFormCh] = useState<1 | 2>(1);
   const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(false);
   const [selectedCoupon, setSelectedCoupon] = useState<null | ICoupon>(null);
@@ -37,15 +41,15 @@ export default function AppointmentForm() {
   useEffect(() => {
     queryResult.data = undefined;
     const code = specialties.find((el) => el.skill === specialty)?.code;
-    if (date && code && clinicId) {
+    if (dateOfAppointment && code && clinicId) {
       triggerQuery({
         id: clinicId,
         spec_code: code,
-        which_date: date,
+        which_date: dateOfAppointment,
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [triggerQuery, date, specialty, clinicId, specialties]);
+  }, [triggerQuery, dateOfAppointment, specialty, clinicId, specialties]);
 
   useEffect(() => {
     if (specialtyId && specialtyId !== 'null') {
@@ -66,16 +70,10 @@ export default function AppointmentForm() {
         {formCh === 1 ? (
           <section className="form-appointment__ch1">
             <div className="form-appointment__drop-down-container">
-              <DropDownInput
-                values={specialties.map((obj) => obj.skill)}
-                placeholder="Врач, специальность"
-                state={specialty}
-                setState={setSpecialty}
-                isContentEditable
-              />
+              <SpecialtyInput specialty={specialty} setSpecialty={setSpecialty} />
             </div>
             <div className="form-appointment__calendar-container">
-              <Calendar setDate={setDate} />
+              <Calendar setDate={setDateOfAppointment} />
             </div>
             {queryResult.currentData?.length ? (
               <Coupons

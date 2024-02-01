@@ -1,6 +1,6 @@
 import './Coupons.scss';
 import cn from 'classnames';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { ICoupon } from '~/shared/lib/types/interfaces';
 
 interface ICoupons {
@@ -11,9 +11,11 @@ interface ICoupons {
 
 export default function Coupons({ couponsData, selectedCoupon, setSelectedCoupon }: ICoupons) {
   const [isActiveList, setIsActiveList] = useState(false);
+  const ref = useRef<HTMLUListElement | null>(null);
 
   const parseTime = (time: string) =>
     new Date(time).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
+  const getIsListOverflow = () => (ref.current?.scrollHeight || 0) > (ref.current?.offsetHeight || 0);
 
   const onKey = (e: React.KeyboardEvent<HTMLElement>, data: ICoupon) => {
     if (e.key === 'Enter') {
@@ -30,7 +32,7 @@ export default function Coupons({ couponsData, selectedCoupon, setSelectedCoupon
   return (
     <section className="coupons">
       <h4 className="coupons__title">Свободное время:</h4>
-      <ul className={cn('coupons__list', isActiveList && 'coupons__list_active')}>
+      <ul className={cn('coupons__list', isActiveList && 'coupons__list_active')} ref={ref}>
         {couponsData.map((el, i) => (
           <li
             key={i}
@@ -42,10 +44,12 @@ export default function Coupons({ couponsData, selectedCoupon, setSelectedCoupon
             {parseTime(el.datetime_start)}
           </li>
         ))}
-        <button
-          className={cn('coupons__list-toggle', isActiveList && 'coupons__list-toggle_active')}
-          onClick={handleBtnClick}
-        />
+        {getIsListOverflow() ? (
+          <button
+            className={cn('coupons__list-toggle', isActiveList && 'coupons__list-toggle_active')}
+            onClick={handleBtnClick}
+          />
+        ) : null}
       </ul>
     </section>
   );

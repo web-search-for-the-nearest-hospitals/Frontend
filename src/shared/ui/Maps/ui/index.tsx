@@ -1,12 +1,12 @@
 import styles from './index.module.scss';
-import { IClinicListData, ICoord, IOrganization } from '~/shared/lib/types/interfaces';
+import { IClinicListData, ICoord, IOrganizationFromList } from '~/shared/lib/types/interfaces';
 import { Map, Placemark, RouteButton, SearchControl } from '@pbe/react-yandex-maps';
 
 interface IMaps {
   userCoord: ICoord;
   focusCoord: ICoord;
   clinicData: IClinicListData['results'];
-  handleCardClick: (data: IOrganization) => void;
+  handleCardClick: (data: IOrganizationFromList) => void;
   filterDistrict: string;
 }
 

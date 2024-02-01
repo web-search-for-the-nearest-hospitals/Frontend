@@ -4,6 +4,7 @@ import {
   ICoupon,
   IGetCoupon,
   IGetOrganizations,
+  IOrganizationById,
   ISpecialty,
   ITown,
   ITowns,
@@ -31,6 +32,9 @@ export const rtkqueryApi = createApi({
     getOrganizations: builder.query<IClinicListData, IGetOrganizations>({
       query: (filters: Record<string, string>) => 'organizations/?' + addQueryParams(filters),
     }),
+    getOrganizationById: builder.query<IOrganizationById, string>({
+      query: (id: string) => `organizations/${id}`,
+    }),
   }),
 });
 
@@ -40,4 +44,5 @@ export const {
   useLazyGetOrganizationsQuery,
   useLazyGetTownsDataByIdQuery,
   useLazyGetCouponsOnDayQuery,
+  useGetOrganizationByIdQuery,
 } = rtkqueryApi;

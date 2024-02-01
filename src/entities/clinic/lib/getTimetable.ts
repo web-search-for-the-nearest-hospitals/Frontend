@@ -1,8 +1,8 @@
-import { IOrganization } from '~/shared/lib/types/interfaces';
+import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 
 type day = 1 | 2 | 3 | 4 | 5 | 6 | 7;
 
-export const getTimetable = (clinic: IOrganization) => {
+export const getTimetable = (clinic: IOrganizationFromList) => {
   let fromHours, toHours;
   const weekdays = clinic.business_hours.map((weekday) => {
     fromHours = weekday.from_hour.slice(0, -3);

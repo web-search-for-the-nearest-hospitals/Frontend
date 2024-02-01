@@ -9,17 +9,17 @@ import { AdvertList } from '~/entities/advert';
 import { Popup } from '~/shared/ui/index';
 import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
 import createToast from '~/shared/lib/toast/createToast';
-import { IOrganization } from '~/shared/lib/types/interfaces';
+import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 
 // @TODO: вынести на обсуждение все эти кейсы: как показывать, что модуль загружается, как показывать, что данных нет
 export default function MainPage() {
   const [triggerQuery, queryResult] = useLazyGetOrganizationsQuery();
   const { data, isLoading, isError } = queryResult;
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState<null | IOrganization>(null);
+  const [selectedCard, setSelectedCard] = useState<null | IOrganizationFromList>(null);
   const [isVisibleClinic, setIsVisibleClinic] = useState(false);
 
-  function handleCardClick(data: IOrganization) {
+  function handleCardClick(data: IOrganizationFromList) {
     setIsOpen(true);
     setSelectedCard(data);
   }

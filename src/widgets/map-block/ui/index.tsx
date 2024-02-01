@@ -6,11 +6,11 @@ import { districtDefault } from '../lib/consts';
 
 import { Maps, ToggleButton, DropDownInput } from '~/shared/ui';
 import { LocationIcon } from '~/shared/assets';
-import { IClinicListData, IOrganization } from '~/shared/lib/types/interfaces';
+import { IClinicListData, IOrganizationFromList } from '~/shared/lib/types/interfaces';
 
 interface IMapBlock {
   clinicData: IClinicListData | undefined;
-  handleCardClick: (data: IOrganization) => void;
+  handleCardClick: (data: IOrganizationFromList) => void;
 }
 
 export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
