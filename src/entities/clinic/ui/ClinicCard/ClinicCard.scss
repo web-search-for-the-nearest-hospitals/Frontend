@@ -21,6 +21,7 @@
 
   &__name {
     margin: 0;
+    padding-top: 20px;
     cursor: pointer;
 
     @include font-h3;
@@ -37,6 +38,33 @@
     }
     &:last-of-type {
       margin-bottom: 7.5px;
+    }
+  }
+
+  &__widget-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include font-small-select;
+  }
+
+  &__widget-distance {
+    display: flex;
+    gap: 6px;
+    color: $color-not-active;
+  }
+
+  &__widget-rating {
+    display: flex;
+    position: relative;
+    margin-right: 14px;
+    color: $color-not-active;
+
+    &-ico {
+      position: absolute;
+      top: -13px;
+      right: -13px;
     }
   }
 
@@ -77,6 +105,10 @@
     gap: 8px;
 
     @include font-small-select;
+
+    &-number {
+      color: $active-button;
+    }
   }
 
   &__address {
@@ -89,5 +121,13 @@
     &-title {
       @include font-small-select;
     }
+  }
+
+  &__appoint {
+    display: flex;
+    color: $active-button;
+    padding-top: 20px;
+
+    @include font-small-select;
   }
 }
