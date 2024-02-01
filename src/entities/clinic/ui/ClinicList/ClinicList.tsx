@@ -1,4 +1,5 @@
 import './ClinicList.scss';
+
 import { ClinicCard } from '../ClinicCard/ClinicCard';
 import { IClinicListData, IOrganization } from '~/shared/lib/types/interfaces';
 
