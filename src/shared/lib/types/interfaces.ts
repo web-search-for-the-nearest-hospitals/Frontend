@@ -30,6 +30,9 @@ export interface IOrganization extends ICoordinates {
   phone: string;
   town: string;
   district: string;
+  distance: string;
+  can_appoint: boolean;
+  rating: number;
   is_full_time: boolean;
   business_hours: IBusinessHours[];
 }
