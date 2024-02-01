@@ -25,14 +25,6 @@ export default function AppointmentForm() {
   const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(false);
   const [selectedCoupon, setSelectedCoupon] = useState<null | ICoupon>(null);
 
-  const getTextAboutCoupons = () => {
-    const { isFetching, isError, currentData } = queryResult;
-    if (isFetching) return 'Загружаю доступные ячейки записи';
-    if (isError) return 'Так далеко в будущее мы не заглядываем';
-    if (currentData) return 'Похоже талонов нет...';
-    return 'Если вы видите это сообщение - напишите в поддержку';
-  };
-
   function formSubmit(evt: React.ChangeEvent<HTMLInputElement>) {
     evt.preventDefault();
     setIsOpenInfoСontainer(true);
@@ -58,11 +50,6 @@ export default function AppointmentForm() {
     }
   }, [specialties, specialtyId]);
 
-  useEffect(() => {
-    const coupons = queryResult.currentData;
-    setSelectedCoupon(coupons ? coupons[0]! : null);
-  }, [queryResult, setSelectedCoupon]);
-
   return (
     <>
       <form className="form-appointment">
@@ -75,15 +62,7 @@ export default function AppointmentForm() {
             <div className="form-appointment__calendar-container">
               <Calendar setDate={setDateOfAppointment} />
             </div>
-            {queryResult.currentData?.length ? (
-              <Coupons
-                couponsData={queryResult.currentData}
-                selectedCoupon={selectedCoupon}
-                setSelectedCoupon={setSelectedCoupon}
-              />
-            ) : (
-              <p>{getTextAboutCoupons()}</p>
-            )}
+            <Coupons couponsData={queryResult} selectedCoupon={selectedCoupon} setSelectedCoupon={setSelectedCoupon} />
           </section>
         ) : null}
         {formCh === 2 ? <section>Здесь 2-я часть формы</section> : null}

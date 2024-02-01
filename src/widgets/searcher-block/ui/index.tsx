@@ -53,8 +53,10 @@ export default function Searcher({ onSearch }: ISearcher) {
   }, [firstLoading, isGovernment, isWorkAllDay]);
 
   useEffect(() => {
-    updateUrl();
-  }, [updateUrl]);
+    // не вполне понимаю почему specialty = null вызывает перерисовку всего компонента
+    // кто разберётся - маякните
+    if (specialty) updateUrl();
+  }, [specialty, updateUrl]);
 
   return (
     <div className="search-clinic">
