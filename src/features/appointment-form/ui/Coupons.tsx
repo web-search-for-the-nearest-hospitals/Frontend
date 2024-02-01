@@ -14,6 +14,13 @@ export default function Coupons({ couponsData }: ICoupons) {
   const parseTime = (time: string) =>
     new Date(time).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
 
+  const onKey = (e: React.KeyboardEvent<HTMLElement>, data: ICoupon) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      setSelectedCupon(data);
+    }
+  };
+
   const handleBtnClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
     setIsActiveList((prev) => !prev);
@@ -28,6 +35,8 @@ export default function Coupons({ couponsData }: ICoupons) {
             key={i}
             className={cn('coupons__element', selectedCupon?.id === el.id ? 'coupons__element_selected' : null)}
             onClick={() => setSelectedCupon(el)}
+            onKeyDown={(e) => onKey(e, el)}
+            tabIndex={0}
           >
             {parseTime(el.datetime_start)}
           </li>

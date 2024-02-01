@@ -94,7 +94,7 @@ export default function Calendar({ setDate }: ICalendar) {
                     isPrevDate(el, today) ? styles['calendar__cell-text_prev'] : '',
                   )}
                   onClick={() => setSelectedCell(el)}
-                  tabIndex={0}
+                  tabIndex={isPrevDate(el, today) ? -1 : 0}
                   onKeyDown={(e) => onKey(e, el)}
                 >
                   {el.day}

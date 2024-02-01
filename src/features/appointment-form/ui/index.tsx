@@ -42,6 +42,7 @@ export default function AppointmentForm() {
     evt.preventDefault();
     setIsOpenInfoСontainer(true);
   }
+  
   return (
     <>
       <form className="form-appointment">
