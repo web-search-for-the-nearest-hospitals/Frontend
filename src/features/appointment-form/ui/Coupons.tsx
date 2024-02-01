@@ -4,11 +4,12 @@ import { useState } from 'react';
 import { ICoupon } from '~/shared/lib/types/interfaces';
 
 interface ICoupons {
+  selectedCoupon: ICoupon | null;
   couponsData: ICoupon[];
+  setSelectedCoupon: (val: ICoupon | null) => void;
 }
 
-export default function Coupons({ couponsData }: ICoupons) {
-  const [selectedCupon, setSelectedCupon] = useState(couponsData[0]);
+export default function Coupons({ couponsData, selectedCoupon, setSelectedCoupon }: ICoupons) {
   const [isActiveList, setIsActiveList] = useState(false);
 
   const parseTime = (time: string) =>
@@ -17,7 +18,7 @@ export default function Coupons({ couponsData }: ICoupons) {
   const onKey = (e: React.KeyboardEvent<HTMLElement>, data: ICoupon) => {
     if (e.key === 'Enter') {
       e.preventDefault();
-      setSelectedCupon(data);
+      setSelectedCoupon(data);
     }
   };
 
@@ -33,8 +34,8 @@ export default function Coupons({ couponsData }: ICoupons) {
         {couponsData.map((el, i) => (
           <li
             key={i}
-            className={cn('coupons__element', selectedCupon?.id === el.id ? 'coupons__element_selected' : null)}
-            onClick={() => setSelectedCupon(el)}
+            className={cn('coupons__element', selectedCoupon?.id === el.id ? 'coupons__element_selected' : null)}
+            onClick={() => setSelectedCoupon(el)}
             onKeyDown={(e) => onKey(e, el)}
             tabIndex={0}
           >
