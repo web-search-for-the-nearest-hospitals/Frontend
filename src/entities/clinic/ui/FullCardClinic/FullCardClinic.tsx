@@ -49,9 +49,10 @@ export function FullCardClinic({ clinic }: IFullCard) {
       <NavLink to={`../appointment/${clinicId}/${specialtyId}`}>
         <Button title="Записаться" size="m" type="submit" />
       </NavLink>
-      <NavLink to={`../card/${clinicId}`}>
+      {/* Кнопка для просмотра карточки на отдельной странице */}
+      {/* <NavLink to={`../card/${clinicId}`}>
         <Button title="Показать отдельно" size="m" type="submit" />
-      </NavLink>
+      </NavLink> */}
     </div>
   );
 }
