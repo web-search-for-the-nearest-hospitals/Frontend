@@ -10,6 +10,7 @@ import { Popup } from '~/shared/ui/index';
 import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
 import createToast from '~/shared/lib/toast/createToast';
 import { IOrganization } from '~/shared/lib/types/interfaces';
+import { Preloader } from '~/shared/ui';
 
 // @TODO: вынести на обсуждение все эти кейсы: как показывать, что модуль загружается, как показывать, что данных нет
 export default function MainPage() {
@@ -39,9 +40,13 @@ export default function MainPage() {
   return (
     <div className="main-page">
       <div className="main-page__card-list">
-        {!isLoading && isVisibleClinic && data!.results.length === 0 ? <div>Ничего не найдено</div> : null}
+        {!isLoading && isVisibleClinic && data!.results.length === 0 ? <div> Ничего не найдено</div> : null}
         {!isVisibleClinic ? <AdvertList /> : <ClinicList data={data!} handleCardClick={handleCardClick} />}
-        {isLoading ? <div>Данные загружаются</div> : null}
+        {isLoading ? (
+          <div>
+            <Preloader /> Данные загружаются
+          </div>
+        ) : null}
       </div>
       <div className="main-page__search-block">
         <Searcher onSearch={triggerQuery} />

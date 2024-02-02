@@ -4,7 +4,7 @@ import { Outlet, NavLink } from 'react-router-dom';
 
 import { useSpecialtiesSlice } from '~/entities/clinic';
 
-import { Layout } from '~/shared/ui';
+import { Layout, Preloader } from '~/shared/ui';
 import { LocationIcon } from '~/shared/assets';
 import UserIcon from '~/shared/assets/icons/UserIcon';
 import IconBtn from '~/shared/ui/IconBtn/IconBtn';
@@ -16,7 +16,11 @@ function Header() {
 
   const getContent = () => {
     if (!isGetSpecialty) {
-      return <p className="search-clinic">Загружаю список специальностей</p>;
+      return (
+        <p className="search-clinic">
+          <Preloader /> Загружаю список специальностей
+        </p>
+      );
     }
 
     return <Outlet />;

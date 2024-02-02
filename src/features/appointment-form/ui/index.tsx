@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { specialtySelect } from '~/entities/clinic';
 import { useLazyGetCouponsOnDayQuery } from '~/shared/api/rtkqueryApi';
 import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
-import { Button, Calendar, DropDownInput, Popup } from '~/shared/ui';
+import { Button, Calendar, DropDownInput, Popup, Preloader } from '~/shared/ui';
 import Coupons from './Coupons';
 import { InfoСontainer } from '~/widgets/notification-container';
 
@@ -60,7 +60,12 @@ export default function AppointmentForm() {
             <div className="form-appointment__calendar-container">
               <Calendar setDate={setDate} />
             </div>
-            {queryResult.isLoading ? <p>Загружаю доступные ячейки записи</p> : null}
+            {queryResult.isLoading ? (
+              <>
+                <Preloader />
+                <p>Загружаю доступные ячейки записи</p>
+              </>
+            ) : null}
             {queryResult.isError ? <p>Так далеко в будущее мы не заглядываем</p> : null}
             {queryResult.currentData?.length === 0 && !queryResult.isError ? <p>Похоже талонов нет...</p> : null}
             {queryResult.currentData?.length ? <Coupons couponsData={queryResult.currentData} /> : null}
