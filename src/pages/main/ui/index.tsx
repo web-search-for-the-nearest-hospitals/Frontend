@@ -35,6 +35,7 @@ export default function MainPage() {
   useEffect(() => {
     if (data) {
       setIsVisibleClinic(true);
+      if (data.results.length === 0) createToast('info', 'Кажется, в нашей базе не нашлось подходящих клиник');
     }
   }, [data]);
 
