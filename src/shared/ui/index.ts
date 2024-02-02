@@ -11,4 +11,17 @@ import Calendar from './Calendar/Calendar';
 import InputForm from './InputForm/InputForm';
 import Preloader from './Preloader/Preloader';
 
-export { Button, ToggleButton, IconBtn, Checkbox, Layout, Maps, DropDownInput, Popup, ProgressScale, Calendar, InputForm, Preloader  };
+export {
+  Button,
+  ToggleButton,
+  IconBtn,
+  Checkbox,
+  Layout,
+  Maps,
+  DropDownInput,
+  Popup,
+  ProgressScale,
+  Calendar,
+  InputForm,
+  Preloader,
+};
