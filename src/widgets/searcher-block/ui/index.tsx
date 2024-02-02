@@ -1,5 +1,5 @@
 import './index.scss';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 
 import { specialtySelect } from '~/entities/clinic';
@@ -16,14 +16,13 @@ interface ISearcher {
 
 export default function Searcher({ onSearch }: ISearcher) {
   const { specialtyId } = useParams();
-  const nav = useNavigate();
-
   const specialties = useAppSelector(specialtySelect);
   const { latitude, longitude } = useAppSelector(userSelect);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const [specialty, setSpecialty] = useState<string | null>(null);
-  const [isWorkAllDay, setIsWorkAllDay] = useState(false);
-  const [isGovernment, setIsGovernment] = useState(false);
+  const [specialty, setSpecialty] = useState<string | null>(searchParams.get('specialty') || null);
+  const [isWorkAllDay, setIsWorkAllDay] = useState(searchParams.get('isWorkAllDay') === 'true');
+  const [isGoverment, setIsGoverment] = useState(searchParams.get('isGoverment') === 'true');
   const [firstLoading, setFirstLoading] = useState(false);
 
   const getCodeOfSpecialty = useCallback(
@@ -31,17 +30,16 @@ export default function Searcher({ onSearch }: ISearcher) {
     [specialties],
   );
 
-  const updateUrl = useCallback(() => nav(`/clinic-searcher/main/${specialty}`), [nav, specialty]);
   const handleSumbit = useCallback(() => {
     onSearch({
       specialty: specialty ? getCodeOfSpecialty(specialty) : '',
-      is_gov: isGovernment,
+      is_gov: isGoverment,
       is_full_time: isWorkAllDay,
       lat: latitude || undefined,
       long: longitude || undefined,
     });
     setFirstLoading(true);
-  }, [getCodeOfSpecialty, isGovernment, isWorkAllDay, latitude, longitude, onSearch, specialty]);
+  }, [getCodeOfSpecialty, isGoverment, isWorkAllDay, latitude, longitude, onSearch, specialty]);
 
   // дублируется в форме, но выносить дубликат дороже выйдет. В сомнениях.
   useEffect(() => {
@@ -56,11 +54,11 @@ export default function Searcher({ onSearch }: ISearcher) {
       handleSumbit();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [firstLoading, isGovernment, isWorkAllDay, latitude, longitude]);
+  }, [firstLoading, isGoverment, isWorkAllDay, latitude, longitude]);
 
   useEffect(() => {
-    updateUrl();
-  }, [updateUrl]);
+    setSearchParams((prev) => ({ ...prev, specialty, isGoverment, isWorkAllDay }));
+  }, [isGoverment, isWorkAllDay, setSearchParams, specialty]);
 
   return (
     <div className="search-clinic">
@@ -87,7 +85,7 @@ export default function Searcher({ onSearch }: ISearcher) {
       </div>
       <div className="search-clinic__group">
         <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />
-        <Checkbox state={isGovernment} setState={setIsGovernment} title="Государственные" />
+        <Checkbox state={isGoverment} setState={setIsGoverment} title="Государственные" />
       </div>
     </div>
   );
