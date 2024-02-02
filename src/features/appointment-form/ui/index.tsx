@@ -1,5 +1,5 @@
 import './index.scss';
-import { useState, MouseEventHandler } from 'react';
+import { useState } from 'react';
 
 import FormStage1 from './FormStage1';
 import FormStage2 from './FormStage2';
@@ -11,21 +11,10 @@ export default function AppointmentForm() {
   const [formCh, setFormCh] = useState<1 | 2>(1);
   const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(false);
 
-  // поправить
-  const [stateCheckbox, setStateCheckbox] = useState<boolean>(false);
-  const [buttonSubmit, setButtonSubmit] = useState<boolean>(true);
-
   function formSubmit(evt: React.ChangeEvent<HTMLInputElement>) {
     evt.preventDefault();
     setIsOpenInfoСontainer(true);
   }
-
-  const handleCheckboxConsent: MouseEventHandler = (e) => {
-    const form = e.currentTarget.closest('form');
-    if (form?.checkValidity() && !stateCheckbox) {
-      setButtonSubmit(false);
-    } else setButtonSubmit(true);
-  };
 
   return (
     <>
@@ -35,21 +24,13 @@ export default function AppointmentForm() {
             <span className="appointment-page__arrow-back"> &#8249;</span> Назад
           </button>
         ) : null}
+
         <form className="form-appointment">
           <h3 className="form-appointment__title">Запись на приём</h3>
-          {formCh === 1 ? (
-            <FormStage1 setFormCh={setFormCh} />
-          ) : (
-            <FormStage2
-              handleCheckboxConsent={handleCheckboxConsent}
-              stateCheckbox={stateCheckbox}
-              setStateCheckbox={setStateCheckbox}
-              buttonSubmit={buttonSubmit}
-              formSubmit={formSubmit}
-            />
-          )}
+          {formCh === 1 ? <FormStage1 setFormCh={setFormCh} /> : <FormStage2 formSubmit={formSubmit} />}
         </form>
       </div>
+
       <Popup isOpen={isOpenInfoСontainer} closePopup={() => setIsOpenInfoСontainer(false)}>
         <InfoСontainer
           isClose={() => setIsOpenInfoСontainer(false)}

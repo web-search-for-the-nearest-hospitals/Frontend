@@ -1,31 +1,36 @@
 @import '~/shared/lib/index';
-.inputform {
+
+.input-form {
   @include font-usual;
   margin-bottom: 20px;
+
   &__title {
     color: $text-color;
     margin-bottom: 12px;
   }
+
   &__input {
-    all: unset;
-    height: 41px;
+    min-height: 41px;
     border-radius: 10px;
     padding: 0 20px;
     width: 100%;
     box-sizing: border-box;
     border: 2px solid $color-not-active;
   }
+
   &__input_error {
     border: 1px solid $color-error;
-    background: url(../../assets/icons/Icon-error.png) no-repeat center right 13px;
+    background: url("~/shared/assets/icons/Icon-error.svg") no-repeat center right 13px;
   }
 
   &__input:valid {
     border: 2px solid $active-button;
   }
+
   &__input:focus {
     border: 2px solid $active-button;
   }
+
   &__input::placeholder {
     color: $color-not-active;
   }
@@ -37,6 +42,7 @@
     color: $color-error;
   }
 }
-.inputform:last-child {
+
+.input-form:last-child {
   margin-bottom: 40px;
 }

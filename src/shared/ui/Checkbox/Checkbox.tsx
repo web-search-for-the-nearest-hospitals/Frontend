@@ -1,12 +1,17 @@
+import React from 'react';
 import styles from './Checkbox.module.scss';
 
 interface ICheckbox {
   state: boolean;
   setState: (nevVal: boolean) => void;
-  title: string;
+  title?: string;
+  children?: React.ReactNode;
+  sx?: {
+    gap?: string;
+  };
 }
 
-export default function Checkbox({ state, setState, title }: ICheckbox) {
+export default function Checkbox({ state, setState, title, children, sx }: ICheckbox) {
   function changeCheckbox() {
     setState(!state);
   }
@@ -18,13 +23,14 @@ export default function Checkbox({ state, setState, title }: ICheckbox) {
   }
 
   return (
-    <label className={styles['checkbox']}>
+    <label className={styles['checkbox']} style={sx}>
       <div className={styles['checkbox__container']}>
         <input className={styles['checkbox__input']} type="checkbox" checked={state} onChange={changeCheckbox} />
         <div className={styles['checkbox__visible']} onKeyDown={onKey} tabIndex={0} />
       </div>
       <label className={styles['checkbox__title']} onClick={changeCheckbox}>
         {title}
+        {children}
       </label>
     </label>
   );

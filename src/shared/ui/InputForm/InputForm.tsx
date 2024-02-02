@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import styles from './InputForm.module.scss';
+import { useState } from 'react';
 import cn from 'classnames';
 
 interface IImputForm {
@@ -13,23 +13,18 @@ interface IImputForm {
 }
 
 export default function InputForm({ type, name, title, placeholder, minLength, maxLength, pattern }: IImputForm) {
-  const [valueInput, setValueInput] = useState<string>('');
-  const [error, setError] = useState<string>('');
+  const [valueInput, setValueInput] = useState('');
+  const [error, setError] = useState('');
 
   function handleChangeInput(e: any) {
-    e.target.validationMessage
-      ? setTimeout(() => {
-          setError(e.target.validationMessage);
-        }, 1500)
-      : setError('');
-
+    setError(e.target.validationMessage ? e.target.validationMessage : '');
     setValueInput(e.target.value);
   }
   return (
-    <label className={styles['inputform']}>
-      <p className={styles['inputform__title']}>{title}</p>
+    <label className={styles['input-form']}>
+      <p className={styles['input-form__title']}>{title}</p>
       <input
-        className={cn(styles['inputform__input'], error ? styles['inputform__input_error'] : '')}
+        className={cn(styles['input-form__input'], error ? styles['input-form__input_error'] : '')}
         type={type}
         name={name}
         minLength={minLength}
@@ -41,7 +36,7 @@ export default function InputForm({ type, name, title, placeholder, minLength, m
         id={name}
         pattern={pattern}
       />
-      <span className={styles['inputform__span-error']}>{error}</span>
+      <span className={styles['input-form__span-error']}>{error}</span>
     </label>
   );
 }

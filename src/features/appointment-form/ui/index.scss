@@ -1,33 +1,40 @@
 @import '~/shared/lib';
+
 .appointment-page {
   max-width: 920px;
   background-color: $color-card-background;
   margin: 0 auto;
   border-radius: 10px;
   position: relative;
+
   @media screen and (width <= 500px) {
     background-color: white;
   }
+
   &__button-back {
-    @include font-usual();
+    @include font-usual;
     position: absolute;
     top: 30px;
     left: 30px;
     color: #9c8f8f;
+
     @media screen and (width <= 500px) {
       top: 5px;
       left: 0;
     }
   }
+
   &__button-back:hover {
     color: $active-button;
   }
+
   &__arrow-back {
     font-size: 30px;
     position: relative;
     top: 3px;
   }
 }
+
 .form-appointment {
   @include flex-container($dir: column, $gap: 0);
   max-width: 350px;
@@ -36,11 +43,13 @@
   &__title {
     @include font-h1;
     margin: 30px 0 40px;
+
     @media screen and (width <= 500px) {
       @include font-h3;
       margin: 50px 0 40px;
     }
   }
+
   &__ch1,
   &__ch2 {
     width: 100%;
@@ -62,12 +71,14 @@
   }
 
   &__button-container {
-    margin: 40px 0 67px 0;
+    margin: 40px 0 67px;
   }
+
   &__consent {
     display: flex;
     gap: 12px;
   }
+
   &__consent-text {
     font-size: 12px;
     font-weight: 400;
