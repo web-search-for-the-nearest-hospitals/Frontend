@@ -1,16 +1,15 @@
 import styles from './index.module.scss';
-import { IClinicListData, ICoord, IOrganization } from '~/shared/lib/types/interfaces';
+import { IClinicListData, ICoord } from '~/shared/lib/types/interfaces';
 import { Map, Placemark, RouteButton, SearchControl } from '@pbe/react-yandex-maps';
 
 interface IMaps {
   userCoord: ICoord;
   focusCoord: ICoord;
   clinicData: IClinicListData['results'];
-  handleCardClick: (data: IOrganization) => void;
   filterDistrict: string;
 }
 
-export default function Maps({ userCoord, focusCoord, clinicData, handleCardClick, filterDistrict }: IMaps) {
+export default function Maps({ userCoord, focusCoord, clinicData, filterDistrict }: IMaps) {
   const { latitude, longitude } = userCoord;
   const { latitude: focuse_lat, longitude: focus_long } = focusCoord;
 
@@ -47,7 +46,6 @@ export default function Maps({ userCoord, focusCoord, clinicData, handleCardClic
             key={`${el.latitude}${el.longitude}`}
             defaultGeometry={[el.latitude, el.longitude]}
             geometry={[el.latitude, el.longitude]}
-            onClick={() => handleCardClick(el)}
             defaultProperties={{
               iconCaption: el.factual_address.slice(0, -11), //срезать г. Калуга
             }}

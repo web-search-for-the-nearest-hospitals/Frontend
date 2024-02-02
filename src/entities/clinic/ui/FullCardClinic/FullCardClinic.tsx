@@ -4,19 +4,17 @@ import { NavLink, useParams } from 'react-router-dom';
 import { Button } from '~/shared/ui/index';
 import { IOrganization } from '~/shared/lib/types/interfaces';
 import TimetableClinic from '../TimetableClinic/TimetableClinic';
-import { useState } from 'react';
 
 interface IFullCard {
   clinic: IOrganization;
 }
 
 export function FullCardClinic({ clinic }: IFullCard) {
-  const { specialtyId } = useParams();
-  const [clinicId] = useState(clinic?.relative_addr?.replace('/api/organizations/', ''));
+  const { specialtyId, clinicId } = useParams();
   const getIsPhone = () => window.screen.width < 625;
 
   return (
-    <div className={`clinic-popup ${clinicId === undefined ? 'clinic-popup__card' : ''}`}>
+    <div className={`clinic-popup clinic-popup__card`}>
       <h3 className="clinic-popup__name">{clinic.short_name}</h3>
       <p className="clinic-popup__about">{clinic.about}</p>
       <div className="clinic-popup__timetable">
@@ -49,10 +47,6 @@ export function FullCardClinic({ clinic }: IFullCard) {
       <NavLink to={`../appointment/${clinicId}/${specialtyId}`}>
         <Button title="Записаться" size="m" type="submit" />
       </NavLink>
-      {/* Кнопка для просмотра карточки на отдельной странице */}
-      {/* <NavLink to={`../card/${clinicId}`}>
-        <Button title="Показать отдельно" size="m" type="submit" />
-      </NavLink> */}
     </div>
   );
 }

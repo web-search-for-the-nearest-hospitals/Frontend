@@ -1,5 +1,5 @@
-import { useParams } from 'react-router-dom';
 import './index.scss';
+import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { FullCardClinic } from '~/entities/clinic';
@@ -8,19 +8,19 @@ import { IOrganization } from '~/shared/lib/types/interfaces';
 
 export default function ClinicPage() {
   const { clinicId } = useParams();
-  const [triggerQuery2, queryResult2] = useLazyGetOrganizationByIdQuery();
+  const [triggerQuery, queryResult] = useLazyGetOrganizationByIdQuery();
   const [organizationsById, setOrganizationsById] = useState<IOrganization>();
 
   useEffect(() => {
-    triggerQuery2(`${clinicId}`);
-  }, [clinicId, triggerQuery2]);
+    triggerQuery(`${clinicId}`);
+  }, [clinicId, triggerQuery]);
 
   useEffect(() => {
-    if (queryResult2) {
-      setOrganizationsById(queryResult2.currentData);
+    if (queryResult) {
+      setOrganizationsById(queryResult.currentData);
       console.log(organizationsById);
     }
-  }, [organizationsById, queryResult2]);
+  }, [organizationsById, queryResult]);
 
   return <div>{organizationsById ? <FullCardClinic clinic={organizationsById} /> : null}</div>;
 }
