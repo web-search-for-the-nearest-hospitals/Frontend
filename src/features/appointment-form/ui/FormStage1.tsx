@@ -12,9 +12,10 @@ import { ICoupon } from '~/shared/lib/types/interfaces';
 
 interface IFormStage1 {
   setFormCh: (val: 1 | 2) => void;
+  setTimeId: (val: string) => void;
 }
 
-export default function FormStage1({ setFormCh }: IFormStage1) {
+export default function FormStage1({ setFormCh, setTimeId }: IFormStage1) {
   const { clinicId } = useParams();
   const specialties = useAppSelector(specialtySelect);
 
@@ -37,6 +38,12 @@ export default function FormStage1({ setFormCh }: IFormStage1) {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [triggerQuery, dateOfAppointment, specialty, clinicId, specialties]);
+
+  useEffect(() => {
+    if (selectedCoupon) {
+      setTimeId(selectedCoupon.id.toString());
+    }
+  }, [selectedCoupon, setTimeId]);
 
   return (
     <section className="form-appointment__ch1">

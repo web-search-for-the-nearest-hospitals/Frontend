@@ -10,15 +10,26 @@ interface IImputForm {
   minLength?: number;
   maxLength?: number;
   pattern?: string;
+  state: string;
+  setState: (val: string) => void;
 }
 
-export default function InputForm({ type, name, title, placeholder, minLength, maxLength, pattern }: IImputForm) {
-  const [valueInput, setValueInput] = useState('');
+export default function InputForm({
+  type,
+  name,
+  title,
+  placeholder,
+  minLength,
+  maxLength,
+  pattern,
+  state,
+  setState,
+}: IImputForm) {
   const [error, setError] = useState('');
 
   function handleChangeInput(e: any) {
     setError(e.target.validationMessage ? e.target.validationMessage : '');
-    setValueInput(e.target.value);
+    setState(e.target.value);
   }
   return (
     <label className={styles['input-form']}>
@@ -30,7 +41,7 @@ export default function InputForm({ type, name, title, placeholder, minLength, m
         minLength={minLength}
         maxLength={maxLength}
         placeholder={placeholder}
-        value={valueInput || ''}
+        value={state || ''}
         onChange={(e) => handleChangeInput(e)}
         required
         id={name}

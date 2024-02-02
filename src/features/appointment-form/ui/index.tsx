@@ -1,21 +1,32 @@
 import './index.scss';
-import { useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import FormStage1 from './FormStage1';
 import FormStage2 from './FormStage2';
 
 import { InfoСontainer } from '~/widgets/notification-container';
 import { Popup } from '~/shared/ui';
+import { useLazyAppointmentUserQuery } from '~/shared/api/rtkqueryApi';
+import createToast from '~/shared/lib/toast/createToast';
 
 export default function AppointmentForm() {
-  const ref = useRef<null | HTMLFormElement>(null);
+  const [triggerQuery, { isError, isFetching, data }] = useLazyAppointmentUserQuery();
   const [formCh, setFormCh] = useState<1 | 2>(1);
   const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(false);
+  const [fio, setFio] = useState('');
+  const [phone, setPhone] = useState('');
+  const [timeId, setTimeId] = useState('');
 
   function formSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    setIsOpenInfoСontainer(true);
+    triggerQuery({ fio, id: timeId, phone });
   }
+
+  useEffect(() => {
+    if (isError) createToast('error', 'Не удалось записать вас на приём');
+    if (isFetching) createToast('info', 'Подождите пожалуйста');
+    if (data) setIsOpenInfoСontainer(true);
+  }, [data, isError, isFetching]);
 
   return (
     <>
@@ -28,9 +39,13 @@ export default function AppointmentForm() {
 
         {/* браузерная валидация работает стабильнее кастомной на текущем этапе */}
         {/* логику формы нужно продумать, чтобы корректно и без багов заменить кастомом */}
-        <form className="form-appointment" ref={ref} onSubmit={formSubmit}>
+        <form className="form-appointment" onSubmit={formSubmit}>
           <h3 className="form-appointment__title">Запись на приём</h3>
-          {formCh === 1 ? <FormStage1 setFormCh={setFormCh} /> : <FormStage2 />}
+          {formCh === 1 ? (
+            <FormStage1 setFormCh={setFormCh} setTimeId={setTimeId} />
+          ) : (
+            <FormStage2 setPhone={setPhone} setFio={setFio} />
+          )}
         </form>
       </div>
 
