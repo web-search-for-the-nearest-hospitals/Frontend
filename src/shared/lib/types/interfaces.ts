@@ -98,3 +98,13 @@ export interface IGetCoupon {
   spec_code: string;
   which_date: string;
 }
+
+export interface IResponseAppointmentUser {
+  detail: string;
+}
+
+export interface IAppointmentUserData {
+  fio: string;
+  phone: string;
+  id: string;
+}

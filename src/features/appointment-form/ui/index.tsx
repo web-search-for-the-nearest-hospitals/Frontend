@@ -1,95 +1,54 @@
 import './index.scss';
-import { useParams, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-import Coupons from './Coupons';
-import SpecialtyInput from './SpecialtyInput';
+import FormStage1 from './FormStage1';
+import FormStage2 from './FormStage2';
 
 import { InfoСontainer } from '~/widgets/notification-container';
-import { specialtySelect } from '~/entities/clinic';
+import { Popup } from '~/shared/ui';
+import { useLazyAppointmentUserQuery } from '~/shared/api/rtkqueryApi';
+import createToast from '~/shared/lib/toast/createToast';
 
-import { useLazyGetCouponsOnDayQuery } from '~/shared/api/rtkqueryApi';
-import { Button, Calendar, Popup } from '~/shared/ui';
-import { ICoupon } from '~/shared/lib/types/interfaces';
-import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
-
-// TODO@: нужно вынести крючки в хук, но после того, как будет собрана полная форма
 export default function AppointmentForm() {
-  const { clinicId } = useParams();
-  const specialties = useAppSelector(specialtySelect);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const [triggerQuery, queryResult] = useLazyGetCouponsOnDayQuery();
-
-  const [specialtyId] = useState(searchParams.get('specialty'));
-  const [specialty, setSpecialty] = useState<string | null>(null);
-  const [dateOfAppointment, setDateOfAppointment] = useState<null | string>(null);
-
+  const [triggerQuery, { isError, isFetching, data }] = useLazyAppointmentUserQuery();
   const [formCh, setFormCh] = useState<1 | 2>(1);
   const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(false);
-  const [selectedCoupon, setSelectedCoupon] = useState<null | ICoupon>(null);
+  const [fio, setFio] = useState('');
+  const [phone, setPhone] = useState('');
+  const [timeId, setTimeId] = useState('');
 
-  function formSubmit(evt: React.ChangeEvent<HTMLInputElement>) {
+  function formSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
-    setIsOpenInfoСontainer(true);
+    triggerQuery({ fio, id: timeId, phone });
   }
 
-  // Крючок получения талонов
   useEffect(() => {
-    queryResult.data = undefined;
-    const code = specialties.find((el) => el.skill === specialty)?.code;
-    if (dateOfAppointment && code && clinicId) {
-      triggerQuery({
-        id: clinicId,
-        spec_code: code,
-        which_date: dateOfAppointment,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [triggerQuery, dateOfAppointment, specialty, clinicId, specialties]);
-
-  // крючок установки начального стейта для DropDownInput
-  useEffect(() => {
-    if (specialtyId && specialtyId !== 'null') {
-      const val = specialties.find((el) => el.skill.toLowerCase() === specialtyId.toLowerCase())?.skill;
-      setSpecialty(val || specialties[0]?.skill || null);
-    }
-  }, [specialties, specialtyId]);
-
-  // крючок смены queryParams
-  useEffect(() => {
-    if (specialty) setSearchParams({ specialty });
-  }, [specialty, setSearchParams]);
+    if (isError) createToast('error', 'Не удалось записать вас на приём');
+    if (isFetching) createToast('info', 'Подождите пожалуйста');
+    if (data) setIsOpenInfoСontainer(true);
+  }, [data, isError, isFetching]);
 
   return (
     <>
-      <form className="form-appointment">
-        <h3 className="form-appointment__title">Запись на приём</h3>
-        {formCh === 1 ? (
-          <section className="form-appointment__ch1">
-            <div className="form-appointment__drop-down-container">
-              <SpecialtyInput specialty={specialty} setSpecialty={setSpecialty} />
-            </div>
-            <div className="form-appointment__calendar-container">
-              <Calendar setDate={setDateOfAppointment} />
-            </div>
-            <Coupons couponsData={queryResult} selectedCoupon={selectedCoupon} setSelectedCoupon={setSelectedCoupon} />
-          </section>
+      <div className="appointment-page">
+        {formCh === 2 ? (
+          <button className="appointment-page__button-back" onClick={() => setFormCh(1)}>
+            <span className="appointment-page__arrow-back"> &#8249;</span> Назад
+          </button>
         ) : null}
-        {formCh === 2 ? <section>Здесь 2-я часть формы</section> : null}
-        <div className="form-appointment__button-containter">
-          <Button title="Назад" type="button" size="s" disabled={formCh === 1} onClick={() => setFormCh(1)} />
+
+        {/* браузерная валидация работает стабильнее кастомной на текущем этапе */}
+        {/* логику формы нужно продумать, чтобы корректно и без багов заменить кастомом */}
+        <form className="form-appointment" onSubmit={formSubmit}>
+          <h3 className="form-appointment__title">Запись на приём</h3>
           {formCh === 1 ? (
-            <Button title="Далее" type="button" size="s" disabled={!selectedCoupon} onClick={() => setFormCh(2)} />
-          ) : null}
-          {formCh === 2 ? (
-            <Button
-              title="Отправить"
-              size="s"
-              onClick={(evt: React.ChangeEvent<HTMLInputElement>) => formSubmit(evt)}
-            />
-          ) : null}
-        </div>
-      </form>
+            <FormStage1 setFormCh={setFormCh} setTimeId={setTimeId} />
+          ) : (
+            <FormStage2 setPhone={setPhone} setFio={setFio} />
+          )}
+        </form>
+      </div>
+
       <Popup isOpen={isOpenInfoСontainer} closePopup={() => setIsOpenInfoСontainer(false)}>
         <InfoСontainer
           isClose={() => setIsOpenInfoСontainer(false)}

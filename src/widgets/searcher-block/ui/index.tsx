@@ -1,5 +1,5 @@
 import './index.scss';
-import { useParams, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 
 import { specialtySelect } from '~/entities/clinic';
@@ -15,12 +15,12 @@ interface ISearcher {
 }
 
 export default function Searcher({ onSearch }: ISearcher) {
-  const { specialtyId } = useParams();
   const specialties = useAppSelector(specialtySelect);
   const { latitude, longitude } = useAppSelector(userSelect);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const [specialty, setSpecialty] = useState<string | null>(searchParams.get('specialty') || null);
+  const [specialtyId] = useState(searchParams.get('specialty'));
+  const [specialty, setSpecialty] = useState<string | null>(null);
   const [isWorkAllDay, setIsWorkAllDay] = useState(searchParams.get('isWorkAllDay') === 'true');
   const [isGoverment, setIsGoverment] = useState(searchParams.get('isGoverment') === 'true');
   const [firstLoading, setFirstLoading] = useState(false);
@@ -41,7 +41,6 @@ export default function Searcher({ onSearch }: ISearcher) {
     setFirstLoading(true);
   }, [getCodeOfSpecialty, isGoverment, isWorkAllDay, latitude, longitude, onSearch, specialty]);
 
-  // дублируется в форме, но выносить дубликат дороже выйдет. В сомнениях.
   useEffect(() => {
     if (specialtyId && specialtyId !== 'null') {
       const val = specialties.find((el) => el.skill.toLowerCase() === specialtyId.toLowerCase())?.skill;
