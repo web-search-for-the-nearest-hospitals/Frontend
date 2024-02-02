@@ -9,7 +9,7 @@ on:
 jobs:
   build_and_push_to_docker_hub:
       name: Push docker image to docker hub
-      if: github.event.pull_request.merged == true
+      if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
       runs-on: ubuntu-latest
       steps:
         - name: Check out the repo
@@ -27,8 +27,13 @@ jobs:
             context: .
             push: true
             tags: ${{ secrets.DOCKER_USERNAME }}/frontend:latest
+            secrets: |
+              "VITE_YAMAP_API_KEY=${{ secrets.VITE_YAMAP_API_KEY }}"
+              "VITE_BACK_URL=${{ secrets.VITE_BACK_URL }}"
+              "VITE_NODE_ENV=${{ secrets.VITE_NODE_ENV }}"
+
   deploy:
-      if: github.event.pull_request.merged == true
+      if: github.event.pull_request.merged == true || github.event_name == 'workflow_dispatch'
       runs-on: ubuntu-latest
       needs: build_and_push_to_docker_hub
       steps:
@@ -43,5 +48,7 @@ jobs:
             sudo docker image prune -f
             sudo docker pull ${{ secrets.DOCKER_USERNAME }}/frontend
             sudo docker compose -p infra stop
-            sudo docker compose -p infra rm frontend
+            sudo docker compose -p infra rm frontend -f
+            sudo docker compose -p infra rm nginx -f
+            sudo docker volume rm infra_static_front -f
             sudo docker compose -p infra up -d --build

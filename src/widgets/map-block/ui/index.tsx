@@ -1,7 +1,8 @@
 import './index.scss';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import useMapBlock from '../lib/useMapBlock';
+import { districtDefault } from '../lib/consts';
 
 import { Maps, ToggleButton, DropDownInput } from '~/shared/ui';
 import { LocationIcon } from '~/shared/assets';
@@ -12,13 +13,17 @@ interface IMapBlock {
   handleCardClick: (data: IOrganization) => void;
 }
 
-// @TODO Возможно вынести крючки в кастомный хук
 export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
-  const [district, setDistrict] = useState('Районы');
+  const [district, setDistrict] = useState(districtDefault);
   const [isSearchUser, setIsSearchUser] = useState(false);
   const [townName] = useState('Калуга');
 
   const { userCoord, focusCoord, returnText, townData } = useMapBlock({ district, isSearchUser, townName });
+  const getFilterDistrict = () => (district === districtDefault ? '' : district);
+
+  useEffect(() => {
+    setDistrict(districtDefault);
+  }, [clinicData]);
 
   if (returnText || !townData) {
     return <p className="search-clinic">{returnText || 'Что-то загружается'}</p>;
@@ -46,7 +51,13 @@ export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
       </div>
 
       <div className="map__container">
-        <Maps userCoord={userCoord} focusCoord={focusCoord} clinicData={clinicData} handleCardClick={handleCardClick} />
+        <Maps
+          userCoord={userCoord}
+          focusCoord={focusCoord}
+          clinicData={clinicData?.results || []}
+          handleCardClick={handleCardClick}
+          filterDistrict={getFilterDistrict()}
+        />
       </div>
     </div>
   );

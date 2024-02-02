@@ -1,0 +1,61 @@
+@import '~/shared/lib/index';
+
+.progress-scale {
+  margin: 0 0 80px;
+  display: flex;
+  justify-content: space-between;
+
+  &__element {
+    @include font-small;
+    width: 22%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    position: relative;
+
+    @media screen and (width <= 530px) {
+      font-size: 12px;
+      width: 25%;
+    }
+
+    @media screen and (width <= 410px) {
+      font-size: 9px;
+    }
+
+    &-circle {
+      width: 38px;
+      height: 38px;
+      background-color: $color-not-active;
+      color: $color-base-background;
+      border-radius: 50%;
+      line-height: 280%;
+      z-index: 10;
+      font-size: 14px;
+    }
+
+    &-line {
+      width: 170%;
+      height: 1px;
+      background-color: $color-not-active;
+      position: absolute;
+      top: 19px;
+      left: 50px;
+      @media screen and (width <= 530px) {
+        width: 150%;
+      }
+    }
+
+    &-text {
+      color: $color-not-active;
+    }
+  }
+}
+.progress-scale__element-line_active,
+.progress-scale__element-circle_active {
+  background-color: $active-button;
+}
+
+.progress-scale__element-text_active {
+  color: $text-color;
+}

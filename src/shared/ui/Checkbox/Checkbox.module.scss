@@ -10,6 +10,7 @@ $height: $checkbox-size;
   &__title{
     @include font-usual;
     color: $text-color;
+    cursor: pointer;
   }
 
   &__container{
