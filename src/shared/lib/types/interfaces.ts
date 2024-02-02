@@ -21,7 +21,17 @@ export interface IBusinessHours {
   to_hour: string;
 }
 
-export interface IOrganization extends ICoordinates {
+interface IOrganization {
+  short_name: string;
+  factual_address: string;
+  site: string;
+  about: string | null;
+  phone: string;
+  is_full_time: boolean;
+  business_hours: IBusinessHours[];
+}
+
+export interface IOrganizationFromList extends ICoordinates, IOrganization {
   relative_addr: string;
   short_name: string;
   factual_address: string;
@@ -34,11 +44,16 @@ export interface IOrganization extends ICoordinates {
   business_hours: IBusinessHours[];
 }
 
+export interface IOrganizationById extends IOrganization {
+  rating: 0 | 1 | 2 | 3 | 4 | 5 | null;
+  specialties: ISpecialty[];
+}
+
 export interface IClinicListData {
   count: number;
   next: string;
   previous: string;
-  results: IOrganization[];
+  results: IOrganizationFromList[];
 }
 
 export interface ISpecialty {

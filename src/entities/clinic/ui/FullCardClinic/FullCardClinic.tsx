@@ -2,12 +2,12 @@ import './FullCardClinic.scss';
 import { NavLink, useSearchParams } from 'react-router-dom';
 
 import { Button } from '~/shared/ui/index';
-import { IOrganization } from '~/shared/lib/types/interfaces';
+import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 import TimetableClinic from '../TimetableClinic/TimetableClinic';
 import { useState } from 'react';
 
 interface IFullCard {
-  clinic: IOrganization;
+  clinic: IOrganizationFromList;
 }
 
 export function FullCardClinic({ clinic }: IFullCard) {

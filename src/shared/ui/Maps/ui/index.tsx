@@ -1,17 +1,16 @@
 import styles from './index.module.scss';
-
 import { Map, Placemark, RouteButton, SearchControl } from '@pbe/react-yandex-maps';
 
 import { setCoord, userSelect } from '~/entities/user';
 
 import locationIcon from '~/shared/assets/icons/location.svg';
-import { IClinicListData, ICoord, IOrganization } from '~/shared/lib/types/interfaces';
 import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
+import { IClinicListData, ICoord, IOrganizationFromList } from '~/shared/lib/types/interfaces';
 
 interface IMaps {
   focusCoord: ICoord;
   clinicData: IClinicListData['results'];
-  handleCardClick: (data: IOrganization) => void;
+  handleCardClick: (data: IOrganizationFromList) => void;
   filterDistrict: string;
 }
 

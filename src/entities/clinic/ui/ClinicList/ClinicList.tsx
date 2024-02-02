@@ -1,12 +1,12 @@
 import './ClinicList.scss';
 
 import { ClinicCard } from '../ClinicCard/ClinicCard';
-import { IClinicListData, IOrganization } from '~/shared/lib/types/interfaces';
+import { IClinicListData, IOrganizationFromList } from '~/shared/lib/types/interfaces';
 import { districtDefault } from '~/widgets/map-block';
 
 interface IClinicList {
   data: IClinicListData;
-  handleCardClick: (data: IOrganization) => void;
+  handleCardClick: (data: IOrganizationFromList) => void;
   district: string;
 }
 

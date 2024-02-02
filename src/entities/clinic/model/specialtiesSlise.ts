@@ -7,12 +7,12 @@ export const specialtySlice = createSlice({
   name: 'specialties',
   initialState,
   reducers: {
-    setSpecialty: (_, action: PayloadAction<ISpecialty[]>) => {
+    setSpecialties: (_, action: PayloadAction<ISpecialty[]>) => {
       return action.payload;
     },
   },
 });
 
-export const { setSpecialty } = specialtySlice.actions;
+export const { setSpecialties } = specialtySlice.actions;
 export const specialtySelect = (state: RootState) => state.specialty;
 export default specialtySlice.reducer;

@@ -2,26 +2,27 @@ import './index.scss';
 import { useEffect, useState } from 'react';
 
 import Searcher from '~/widgets/searcher-block';
+import { districtDefault } from '~/widgets/map-block';
 import MapBlock from '~/widgets/map-block';
+
 import { ClinicList, FullCardClinic } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
 
 import { Popup } from '~/shared/ui/index';
 import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
 import createToast from '~/shared/lib/toast/createToast';
-import { IOrganization } from '~/shared/lib/types/interfaces';
-import { districtDefault } from '~/widgets/map-block';
+import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 
 // @TODO: вынести на обсуждение все эти кейсы: как показывать, что модуль загружается, как показывать, что данных нет
 export default function MainPage() {
   const [triggerQuery, queryResult] = useLazyGetOrganizationsQuery();
   const { data, isLoading, isError } = queryResult;
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedCard, setSelectedCard] = useState<null | IOrganization>(null);
+  const [selectedCard, setSelectedCard] = useState<null | IOrganizationFromList>(null);
   const [isVisibleClinic, setIsVisibleClinic] = useState(false);
   const [district, setDistrict] = useState(districtDefault);
 
-  function handleCardClick(data: IOrganization) {
+  function handleCardClick(data: IOrganizationFromList) {
     setIsOpen(true);
     setSelectedCard(data);
   }
