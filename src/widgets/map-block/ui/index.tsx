@@ -11,10 +11,11 @@ import { IClinicListData, IOrganization } from '~/shared/lib/types/interfaces';
 interface IMapBlock {
   clinicData: IClinicListData | undefined;
   handleCardClick: (data: IOrganization) => void;
+  district: string;
+  setDistrict: (val: string) => void;
 }
 
-export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
-  const [district, setDistrict] = useState(districtDefault);
+export default function MapBlock({ clinicData, handleCardClick, district, setDistrict }: IMapBlock) {
   const [isSearchUser, setIsSearchUser] = useState(false);
   const [townName] = useState('Калуга');
 
@@ -23,7 +24,7 @@ export default function MapBlock({ clinicData, handleCardClick }: IMapBlock) {
 
   useEffect(() => {
     setDistrict(districtDefault);
-  }, [clinicData]);
+  }, [clinicData, setDistrict]);
 
   if (returnText || !townData) {
     return <p className="search-clinic">{returnText || 'Что-то загружается'}</p>;
