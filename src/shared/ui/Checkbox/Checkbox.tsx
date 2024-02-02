@@ -10,9 +10,10 @@ interface ICheckbox {
   sx?: {
     gap?: string;
   };
+  handleChange?: (e: any) => void;
 }
 
-export default function Checkbox({ state, setState, title, children, sx, required = false }: ICheckbox) {
+export default function Checkbox({ state, setState, title, children, sx, required = false, handleChange }: ICheckbox) {
   function changeCheckbox() {
     setState(!state);
   }
@@ -24,7 +25,7 @@ export default function Checkbox({ state, setState, title, children, sx, require
   }
 
   return (
-    <label className={styles['checkbox']} style={sx}>
+    <label className={styles['checkbox']} style={sx} onClick={handleChange}>
       <div className={styles['checkbox__container']}>
         <input
           className={styles['checkbox__input']}
@@ -35,7 +36,7 @@ export default function Checkbox({ state, setState, title, children, sx, require
         />
         <div className={styles['checkbox__visible']} onKeyDown={onKey} tabIndex={0} />
       </div>
-      <label className={styles['checkbox__title']} onClick={changeCheckbox}>
+      <label className={styles['checkbox__title']}>
         {title}
         {children}
       </label>

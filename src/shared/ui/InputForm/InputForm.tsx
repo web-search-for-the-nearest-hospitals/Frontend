@@ -1,5 +1,5 @@
+import { useMemo } from 'react';
 import styles from './InputForm.module.scss';
-import { useState } from 'react';
 import cn from 'classnames';
 
 interface IImputForm {
@@ -10,8 +10,9 @@ interface IImputForm {
   minLength?: number;
   maxLength?: number;
   pattern?: string;
-  state: string;
-  setState: (val: string) => void;
+  handleChange: (e: any) => void;
+  value: string;
+  error: string;
 }
 
 export default function InputForm({
@@ -22,15 +23,14 @@ export default function InputForm({
   minLength,
   maxLength,
   pattern,
-  state,
-  setState,
+  handleChange,
+  value,
+  error,
 }: IImputForm) {
-  const [error, setError] = useState('');
+  useMemo(() => {
+    value;
+  }, [value]);
 
-  function handleChangeInput(e: any) {
-    setError(e.target.validationMessage ? e.target.validationMessage : '');
-    setState(e.target.value);
-  }
   return (
     <label className={styles['input-form']}>
       <p className={styles['input-form__title']}>{title}</p>
@@ -41,8 +41,8 @@ export default function InputForm({
         minLength={minLength}
         maxLength={maxLength}
         placeholder={placeholder}
-        value={state || ''}
-        onChange={(e) => handleChangeInput(e)}
+        value={value || ''}
+        onChange={(e) => handleChange(e)}
         required
         id={name}
         pattern={pattern}
