@@ -10,6 +10,7 @@ import { Popup } from '~/shared/ui/index';
 import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
 import createToast from '~/shared/lib/toast/createToast';
 import { IOrganization } from '~/shared/lib/types/interfaces';
+import { districtDefault } from '~/widgets/map-block';
 
 // @TODO: вынести на обсуждение все эти кейсы: как показывать, что модуль загружается, как показывать, что данных нет
 export default function MainPage() {
@@ -18,6 +19,7 @@ export default function MainPage() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState<null | IOrganization>(null);
   const [isVisibleClinic, setIsVisibleClinic] = useState(false);
+  const [district, setDistrict] = useState(districtDefault);
 
   function handleCardClick(data: IOrganization) {
     setIsOpen(true);
@@ -33,6 +35,7 @@ export default function MainPage() {
   useEffect(() => {
     if (data) {
       setIsVisibleClinic(true);
+      if (data.results.length === 0) createToast('info', 'Кажется, в нашей базе не нашлось подходящих клиник');
     }
   }, [data]);
 
@@ -40,12 +43,16 @@ export default function MainPage() {
     <div className="main-page">
       <div className="main-page__card-list">
         {!isLoading && isVisibleClinic && data!.results.length === 0 ? <div>Ничего не найдено</div> : null}
-        {!isVisibleClinic ? <AdvertList /> : <ClinicList data={data!} handleCardClick={handleCardClick} />}
+        {!isVisibleClinic ? (
+          <AdvertList />
+        ) : (
+          <ClinicList data={data!} handleCardClick={handleCardClick} district={district} />
+        )}
         {isLoading ? <div>Данные загружаются</div> : null}
       </div>
       <div className="main-page__search-block">
         <Searcher onSearch={triggerQuery} />
-        <MapBlock clinicData={data} handleCardClick={handleCardClick} />
+        <MapBlock clinicData={data} handleCardClick={handleCardClick} district={district} setDistrict={setDistrict} />
       </div>
       <Popup isOpen={isOpen} closePopup={() => setIsOpen(false)}>
         {selectedCard ? <FullCardClinic clinic={selectedCard} /> : null}
