@@ -1,5 +1,5 @@
 import './index.scss';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import FormStage1 from './FormStage1';
 import FormStage2 from './FormStage2';
@@ -8,10 +8,11 @@ import { InfoСontainer } from '~/widgets/notification-container';
 import { Popup } from '~/shared/ui';
 
 export default function AppointmentForm() {
+  const ref = useRef<null | HTMLFormElement>(null);
   const [formCh, setFormCh] = useState<1 | 2>(1);
   const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(false);
 
-  function formSubmit(evt: React.ChangeEvent<HTMLInputElement>) {
+  function formSubmit(evt: React.FormEvent<HTMLFormElement>) {
     evt.preventDefault();
     setIsOpenInfoСontainer(true);
   }
@@ -25,9 +26,11 @@ export default function AppointmentForm() {
           </button>
         ) : null}
 
-        <form className="form-appointment">
+        {/* браузерная валидация работает стабильнее кастомной на текущем этапе */}
+        {/* логику формы нужно продумать, чтобы корректно и без багов заменить кастомом */}
+        <form className="form-appointment" ref={ref} onSubmit={formSubmit}>
           <h3 className="form-appointment__title">Запись на приём</h3>
-          {formCh === 1 ? <FormStage1 setFormCh={setFormCh} /> : <FormStage2 formSubmit={formSubmit} />}
+          {formCh === 1 ? <FormStage1 setFormCh={setFormCh} /> : <FormStage2 />}
         </form>
       </div>
 
