@@ -1,17 +1,17 @@
 import './FullCardClinic.scss';
-import { NavLink, useParams } from 'react-router-dom';
+import { NavLink, useSearchParams } from 'react-router-dom';
 
 import { Button } from '~/shared/ui/index';
-import { IOrganization } from '~/shared/lib/types/interfaces';
+import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 import TimetableClinic from '../TimetableClinic/TimetableClinic';
 import { useState } from 'react';
 
 interface IFullCard {
-  clinic: IOrganization;
+  clinic: IOrganizationFromList;
 }
 
 export function FullCardClinic({ clinic }: IFullCard) {
-  const { specialtyId } = useParams();
+  const [searchParams] = useSearchParams();
   const [clinicId] = useState(clinic.relative_addr.replace('/api/organizations/', ''));
   const getIsPhone = () => window.screen.width < 625;
 
@@ -46,7 +46,7 @@ export function FullCardClinic({ clinic }: IFullCard) {
         </a>
       </div>
       {/* format relative_addr: /api/organizations/id/ - на конце слеш */}
-      <NavLink to={`../appointment/${clinicId}${specialtyId}`}>
+      <NavLink to={`../appointment/${clinicId}?specialty=${searchParams.get('specialty')}`}>
         <Button title="Записаться" size="m" type="submit" />
       </NavLink>
     </div>
