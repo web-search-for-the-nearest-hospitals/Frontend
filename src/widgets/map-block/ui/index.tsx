@@ -24,6 +24,7 @@ export default function MapBlock({ clinicData, handleCardClick, district, setDis
 
   const getFilterDistrict = () => (district === districtDefault ? '' : district);
 
+  // крючок сброса стейта района
   useEffect(() => {
     setDistrict(districtDefault);
   }, [clinicData, setDistrict]);
