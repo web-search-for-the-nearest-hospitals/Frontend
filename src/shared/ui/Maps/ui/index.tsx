@@ -9,15 +9,13 @@ import { IClinicListData, ICoord, IOrganization } from '~/shared/lib/types/inter
 import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 
 interface IMaps {
-  useMapBlockData: {
-    focusCoord: ICoord;
-  };
+  focusCoord: ICoord;
   clinicData: IClinicListData['results'];
   handleCardClick: (data: IOrganization) => void;
   filterDistrict: string;
 }
 
-export default function Maps({ useMapBlockData: { focusCoord }, clinicData, filterDistrict, handleCardClick }: IMaps) {
+export default function Maps({ focusCoord, clinicData, filterDistrict, handleCardClick }: IMaps) {
   const dispatch = useAppDispatch();
   const coord = useAppSelector(userSelect);
   const { latitude, longitude } = coord;
@@ -50,7 +48,6 @@ export default function Maps({ useMapBlockData: { focusCoord }, clinicData, filt
             geometry={[el.latitude, el.longitude]}
             onClick={() => handleCardClick(el)}
             defaultProperties={{
-              // iconCaption: el.factual_address.slice(0, -11), //срезать г. Калуга
               iconCaption: el.short_name,
             }}
           />

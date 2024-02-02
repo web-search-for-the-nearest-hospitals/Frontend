@@ -20,7 +20,7 @@ export default function MapBlock({ clinicData, handleCardClick, district, setDis
   const [townName] = useState('Калуга');
 
   const useMapBlockData = useMapBlock({ district, isSearchUser, townName });
-  const { returnText, curTown } = useMapBlockData;
+  const { returnText, curTown, focusCoord } = useMapBlockData;
 
   const getFilterDistrict = () => (district === districtDefault ? '' : district);
 
@@ -56,7 +56,7 @@ export default function MapBlock({ clinicData, handleCardClick, district, setDis
 
       <div className="map__container">
         <Maps
-          useMapBlockData={useMapBlockData}
+          focusCoord={focusCoord}
           clinicData={clinicData?.results || []}
           handleCardClick={handleCardClick}
           filterDistrict={getFilterDistrict()}
