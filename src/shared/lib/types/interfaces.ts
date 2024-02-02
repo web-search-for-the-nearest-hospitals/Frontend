@@ -76,7 +76,7 @@ export interface IDistrict extends ICoordinates {
   name: string;
 }
 
-export interface IGetOrganizations extends Partial<ICoordinates> {
+export interface IGetOrganizations {
   specialty?: string;
   town?: string;
   district?: string;
@@ -84,6 +84,8 @@ export interface IGetOrganizations extends Partial<ICoordinates> {
   is_full_time?: boolean;
   search?: string; // сокращенное наим. организации
   page?: number; // пагинация?
+  lat?: number;
+  long?: number;
 }
 
 export interface ICoupon {

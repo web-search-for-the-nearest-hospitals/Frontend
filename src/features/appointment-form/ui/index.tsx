@@ -1,5 +1,5 @@
 import './index.scss';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import Coupons from './Coupons';
@@ -15,12 +15,15 @@ import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 
 // TODO@: нужно вынести крючки в хук, но после того, как будет собрана полная форма
 export default function AppointmentForm() {
+  const { clinicId } = useParams();
   const specialties = useAppSelector(specialtySelect);
-  const { specialtyId, clinicId } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const [triggerQuery, queryResult] = useLazyGetCouponsOnDayQuery();
 
+  const [specialtyId] = useState(searchParams.get('specialty'));
   const [specialty, setSpecialty] = useState<string | null>(null);
   const [dateOfAppointment, setDateOfAppointment] = useState<null | string>(null);
+
   const [formCh, setFormCh] = useState<1 | 2>(1);
   const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(false);
   const [selectedCoupon, setSelectedCoupon] = useState<null | ICoupon>(null);
@@ -30,6 +33,7 @@ export default function AppointmentForm() {
     setIsOpenInfoСontainer(true);
   }
 
+  // Крючок получения талонов
   useEffect(() => {
     queryResult.data = undefined;
     const code = specialties.find((el) => el.skill === specialty)?.code;
@@ -43,12 +47,18 @@ export default function AppointmentForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [triggerQuery, dateOfAppointment, specialty, clinicId, specialties]);
 
+  // крючок установки начального стейта для DropDownInput
   useEffect(() => {
     if (specialtyId && specialtyId !== 'null') {
       const val = specialties.find((el) => el.skill.toLowerCase() === specialtyId.toLowerCase())?.skill;
-      setSpecialty(val || null);
+      setSpecialty(val || specialties[0]?.skill || null);
     }
   }, [specialties, specialtyId]);
+
+  // крючок смены queryParams
+  useEffect(() => {
+    if (specialty) setSearchParams({ specialty });
+  }, [specialty, setSearchParams]);
 
   return (
     <>
