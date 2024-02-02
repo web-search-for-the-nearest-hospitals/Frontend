@@ -9,6 +9,7 @@ import Maps from './Maps';
 import ProgressScale from './ProgressScale/ProgressScale';
 import Calendar from './Calendar/Calendar';
 import InputForm from './InputForm/InputForm';
+import Preloader from './Preloader/Preloader';
 
 export {
   Button,
@@ -22,4 +23,5 @@ export {
   ProgressScale,
   Calendar,
   InputForm,
+  Preloader,
 };
