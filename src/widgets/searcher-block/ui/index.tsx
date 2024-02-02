@@ -8,6 +8,7 @@ import { UserIcon } from '~/shared/assets/index';
 import createToast from '~/shared/lib/toast/createToast';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
 import { Button, Checkbox, DropDownInput, IconBtn } from '~/shared/ui/index';
+import { userSelect } from '~/entities/user';
 
 interface ISearcher {
   onSearch: (data: IGetOrganizations) => void;
@@ -15,8 +16,9 @@ interface ISearcher {
 
 export default function Searcher({ onSearch }: ISearcher) {
   const { specialtyId } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
   const specialties = useAppSelector(specialtySelect);
+  const { latitude, longitude } = useAppSelector(userSelect);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [specialty, setSpecialty] = useState<string | null>(searchParams.get('specialty') || null);
   const [isWorkAllDay, setIsWorkAllDay] = useState(searchParams.get('isWorkAllDay') === 'true');
@@ -33,9 +35,11 @@ export default function Searcher({ onSearch }: ISearcher) {
       specialty: specialty ? getCodeOfSpecialty(specialty) : '',
       is_gov: isGoverment,
       is_full_time: isWorkAllDay,
+      lat: latitude || undefined,
+      long: longitude || undefined,
     });
     setFirstLoading(true);
-  }, [getCodeOfSpecialty, isGoverment, isWorkAllDay, onSearch, specialty]);
+  }, [getCodeOfSpecialty, isGoverment, isWorkAllDay, latitude, longitude, onSearch, specialty]);
 
   // дублируется в форме, но выносить дубликат дороже выйдет. В сомнениях.
   useEffect(() => {
@@ -50,7 +54,7 @@ export default function Searcher({ onSearch }: ISearcher) {
       handleSumbit();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [firstLoading, isGoverment, isWorkAllDay]);
+  }, [firstLoading, isGoverment, isWorkAllDay, latitude, longitude]);
 
   useEffect(() => {
     setSearchParams((prev) => ({ ...prev, specialty, isGoverment, isWorkAllDay }));

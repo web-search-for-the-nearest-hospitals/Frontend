@@ -16,17 +16,20 @@ interface IMapBlock {
 }
 
 export default function MapBlock({ clinicData, handleCardClick, district, setDistrict }: IMapBlock) {
-  const [isSearchUser, setIsSearchUser] = useState(false);
+  const [isSearchUser, setIsSearchUser] = useState(false); // вкл\выкл геолоку юзера
   const [townName] = useState('Калуга');
 
-  const { userCoord, focusCoord, returnText, townData } = useMapBlock({ district, isSearchUser, townName });
+  const useMapBlockData = useMapBlock({ district, isSearchUser, townName });
+  const { returnText, curTown, focusCoord } = useMapBlockData;
+
   const getFilterDistrict = () => (district === districtDefault ? '' : district);
 
+  // крючок сброса стейта района
   useEffect(() => {
     setDistrict(districtDefault);
   }, [clinicData, setDistrict]);
 
-  if (returnText || !townData) {
+  if (returnText || !curTown) {
     return <p className="search-clinic">{returnText || 'Что-то загружается'}</p>;
   }
 
@@ -40,7 +43,7 @@ export default function MapBlock({ clinicData, handleCardClick, district, setDis
       <div className="map__group">
         <div className="map__input-container">
           <DropDownInput
-            values={townData!.districts.map((el) => el.name) || []}
+            values={curTown!.districts.map((el) => el.name) || []}
             state={district}
             setState={setDistrict}
           />
@@ -53,7 +56,6 @@ export default function MapBlock({ clinicData, handleCardClick, district, setDis
 
       <div className="map__container">
         <Maps
-          userCoord={userCoord}
           focusCoord={focusCoord}
           clinicData={clinicData?.results || []}
           handleCardClick={handleCardClick}
