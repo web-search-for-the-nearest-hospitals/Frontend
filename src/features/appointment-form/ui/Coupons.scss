@@ -1,0 +1,76 @@
+@import '~/shared/lib';
+
+.coupons{
+  width: 100%;
+
+  &__title{
+    @include font-h3;
+    margin-bottom: 16px;
+  }
+
+  &__list{
+    @include flex-container($fw: wrap, $just: flex-start);
+
+    max-height: 35px;
+    padding-top: 4px; // суммируется с margin-bottom у title
+    position: relative;
+
+    overflow: hidden;
+    transition: max-height 0.3s cubic-bezier(0, 1, 0, 1);
+
+    &_active{
+      max-height: 9999px;
+      transition: max-height 0.3s cubic-bezier(1, 0, 1, 0);
+    }
+  }
+
+  &__list-toggle{
+    // добавил для увеличения зоны клика
+    width: 16px; // по макету + по 2px по бокам
+    height: 14px; // по макету + по 2px по бокам
+
+    position: absolute;
+    top: 8px;
+    right: 0;
+
+    background-image: url('~/shared/assets/icons/arrow.svg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 12px 9px; // по макету
+
+    transition: rotate .2s ease-in-out;
+
+    &:focus-visible{
+      outline: 1px #000 solid;
+      outline-offset: -1px;
+    }
+
+    &_active{
+      rotate: 180deg;
+    }
+  }
+
+  &__element{
+    display: block;
+    min-width: 72px;
+    padding: 6px 0;
+
+    border-radius: 10px;
+    border: 1px solid $color-not-active;
+    box-sizing: border-box;
+
+    text-align: center;
+    cursor: pointer;
+
+    transition: border-color .2s ease;
+
+    &:focus-visible{
+      outline: 2px #000 solid;
+      outline-offset: -4px;
+    }
+
+    &_selected{
+      border:1px solid $active-button;
+    }
+  }
+}

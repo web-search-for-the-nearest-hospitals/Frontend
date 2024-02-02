@@ -1,5 +1,5 @@
 const BACK_URL = import.meta.env.VITE_BACK_URL;
-import { ICoord, IOrganization } from '../lib/types/interfaces';
+import { ICoord, IOrganizationFromList } from '../lib/types/interfaces';
 
 async function checkRequest(res: Response) {
   if (res.ok) {
@@ -51,12 +51,12 @@ export const getOrganizationInfo = (org_id: string) => {
 };
 
 // регистрация новой организации, функция принимает объект параметров организации organization
-export const registerOrganization = (organization: IOrganization) => {
+export const registerOrganization = (organization: IOrganizationFromList) => {
   return api(`/organizations/`, organization, 'POST');
 };
 
 // редактирование профиля организации, функция принимает id и объект параметров организации organization
-export const editOrganization = (org_id: string, organization: IOrganization) => {
+export const editOrganization = (org_id: string, organization: IOrganizationFromList) => {
   api(`/organizations/${org_id}`, organization, 'PATCH');
 };
 

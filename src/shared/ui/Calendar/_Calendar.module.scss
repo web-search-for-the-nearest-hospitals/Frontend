@@ -1,16 +1,15 @@
 @import '~/shared/lib';
 
 .calendar {
-  // border-collapse: separate;
-  // border-spacing: 24px 22px;
-  // display: grid;
-  // gap: 22px;
   text-align: center;
   margin: 0 auto;
 
-  &__header-first {
-    @include flex-container($just: space-between, $gap: 0);
+
+  &__header-first{
+    @include flex-container($just: center, $gap: 40px);
+
     margin-bottom: 46px; // по макету - 3, т.к. погрешность на table
+
     @media screen and (width <= 350px) {
       font-size: 14px;
     }
@@ -43,6 +42,7 @@
     @media screen and (width <= 500px) {
       @include font-usual;
     }
+
     @media screen and (width <= 350px) {
       font-size: 14px;
     }
@@ -62,6 +62,7 @@
     @media screen and (width <= 500px) {
       padding: 6px;
     }
+
     @media screen and (width <= 350px) {
       padding: 3px;
     }
@@ -80,6 +81,10 @@
     border: 1px solid transparent;
     transition: border-color 0.2s ease;
 
+    &:focus-visible{
+      outline-offset: -2px
+    }
+
     @media screen and (width <= 500px) {
       @include font-usual;
     }
@@ -97,9 +102,31 @@
     }
   }
 
-  &__nav-btn {
-    &:disabled {
+
+  &__nav-btn{
+    @include flex-container;
+
+    padding: 2px; // расширить зону клика
+
+    background-image: url("./_arrowIcon.tsx");
+    color: $active-button;
+    transition: opacity .2s ease;
+
+    &:active{
+      color: $pressed-button;
+    }
+
+    &:disabled{
       color: $color-not-active;
+      cursor: default;
+    }
+
+    &:focus-visible{
+      outline: 2px solid #000;
+    }
+
+    &_next{
+      rotate: 180deg;
     }
   }
 }
