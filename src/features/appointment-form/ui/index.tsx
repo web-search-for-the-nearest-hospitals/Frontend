@@ -1,5 +1,5 @@
 import './index.scss';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { specialtySelect } from '~/entities/clinic';
 import { useLazyGetCouponsOnDayQuery } from '~/shared/api/rtkqueryApi';
@@ -9,15 +9,17 @@ import Coupons from './Coupons';
 import { InfoСontainer } from '~/widgets/notification-container';
 
 export default function AppointmentForm() {
-  const { specialtyId } = useParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const specialties = useAppSelector(specialtySelect);
-  const [specialty, setSpecialty] = useState<string | null>(specialties[0]?.skill || null);
+  const [specialtyId] = useState(searchParams.get('specialty'));
+  const [specialty, setSpecialty] = useState<string | null>(null);
   const [date, setDate] = useState<null | string>(null);
   const [formCh, setFormCh] = useState<1 | 2>(1);
   const [triggerQuery, queryResult] = useLazyGetCouponsOnDayQuery();
   const { clinicId } = useParams();
   const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(false);
 
+  // Крючок получения талонов
   useEffect(() => {
     queryResult.data = undefined;
     const code = specialties.find((el) => el.skill === specialty)?.code;
@@ -31,12 +33,18 @@ export default function AppointmentForm() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [triggerQuery, date, specialty, clinicId, specialties]);
 
+  // крючок установки начального стейта для DropDownInput
   useEffect(() => {
     if (specialtyId && specialtyId !== 'null') {
       const val = specialties.find((el) => el.skill.toLowerCase() === specialtyId.toLowerCase())?.skill;
-      setSpecialty(val || null);
+      setSpecialty(val || specialties[0]?.skill || null);
     }
   }, [specialties, specialtyId]);
+
+  // крючок смены queryParams
+  useEffect(() => {
+    if (specialty) setSearchParams({ specialty });
+  }, [specialty, setSearchParams]);
 
   function formSubmit(evt: React.ChangeEvent<HTMLInputElement>) {
     evt.preventDefault();
