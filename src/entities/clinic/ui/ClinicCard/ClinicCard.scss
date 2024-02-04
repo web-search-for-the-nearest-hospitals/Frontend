@@ -86,17 +86,29 @@
       display: flex;
       flex-wrap: nowrap;
       gap: 4px;
+      color: #695feb;
+    }
+
+    &-list {
+      height: 18px;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+
+      &_open {
+        height: 120px;
+      }
     }
 
     &-ico {
       display: block;
       align-self: flex-start;
       margin-top: 4px;
-    }
+      transition: all 0.2s ease-in-out;
 
-    &-ico_up {
-      transform: rotate(180deg) translateY(50%);
-      margin-top: 8px;
+      &_up {
+        transform: rotate(180deg) translateY(50%);
+        margin-top: 8px;
+      }
     }
   }
 

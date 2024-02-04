@@ -58,20 +58,38 @@
     &-period {
       cursor: pointer;
       min-width: 140px;
+      max-width: 160px;
       display: flex;
       flex-wrap: nowrap;
       gap: 4px;
+      line-height: 19.5px;
+      color: #695feb;
+
+      @media screen and (width <= 625px) {
+        max-width: 134px;
+      }
+    }
+
+    &-list {
+      height: 16px;
+      overflow: hidden;
+      transition: all 0.4s ease-in-out;
+
+      &_open {
+        height: 140px;
+      }
     }
 
     &-ico {
       display: block;
       align-self: flex-start;
-      margin-top: 4px;
-    }
+      margin-top: 5px;
+      transition: all 0.2s ease-in-out;
 
-    &-ico_up {
-      transform: rotate(180deg) translateY(50%);
-      margin-top: 8px;
+      &_up {
+        transform: rotate(180deg) translateY(50%);
+        margin-top: 9px;
+      }
     }
 
     @media screen and (width <= 1100px) {
@@ -91,15 +109,6 @@
 
       @media screen and (width <= 625px) {
         font-size: 14px;
-      }
-    }
-
-    &-period {
-      max-width: 160px;
-      line-height: 19.5px;
-
-      @media screen and (width <= 625px) {
-        max-width: 134px;
       }
     }
   }
