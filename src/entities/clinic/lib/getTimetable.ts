@@ -1,6 +1,6 @@
-import { IOrganization } from '~/shared/lib/types/interfaces';
+import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 
-export const getTimetable = (clinic: IOrganization) => {
+export const getTimetable = (clinic: IOrganizationFromList) => {
   let fromHours, toHours, hours;
 
   const res = [];

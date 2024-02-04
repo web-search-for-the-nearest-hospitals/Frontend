@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
-// import { setSpecialty, specialtySelect } from '..';
-import { setSpecialty, specialtySelect } from '../model/specialtiesSlise';
+import { setSpecialties, specialtySelect } from '..';
 
 import { useGetSpecialtiesQuery } from '~/shared/api/rtkqueryApi';
 import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
@@ -14,7 +13,7 @@ export default function useSpecialtiesSlice() {
 
   useEffect(() => {
     if (data) {
-      dispatch(setSpecialty(data));
+      dispatch(setSpecialties(data));
     }
   }, [data, dispatch]);
 

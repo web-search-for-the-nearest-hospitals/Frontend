@@ -1,5 +1,5 @@
 import './index.scss';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 
 import { specialtySelect } from '~/entities/clinic/model/specialtiesSlise';
@@ -8,36 +8,39 @@ import { UserIcon } from '~/shared/assets/index';
 import createToast from '~/shared/lib/toast/createToast';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
 import { Button, Checkbox, DropDownInput, IconBtn } from '~/shared/ui/index';
+import { userSelect } from '~/entities/user';
 
 interface ISearcher {
   onSearch: (data: IGetOrganizations) => void;
 }
 
 export default function Searcher({ onSearch }: ISearcher) {
-  const { specialtyId } = useParams();
   const specialties = useAppSelector(specialtySelect);
+  const { latitude, longitude } = useAppSelector(userSelect);
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const [specialtyId] = useState(searchParams.get('specialty'));
   const [specialty, setSpecialty] = useState<string | null>(null);
-  const [isWorkAllDay, setIsWorkAllDay] = useState(false);
-  const [isGovernment, setIsGovernment] = useState(false);
+  const [isWorkAllDay, setIsWorkAllDay] = useState(searchParams.get('isWorkAllDay') === 'true');
+  const [isGoverment, setIsGoverment] = useState(searchParams.get('isGoverment') === 'true');
   const [firstLoading, setFirstLoading] = useState(false);
-  const nav = useNavigate();
 
   const getCodeOfSpecialty = useCallback(
     (name: string) => specialties.find((el) => el.skill === name)!.code,
     [specialties],
   );
 
-  const updateUrl = useCallback(() => nav(`/clinic-searcher/main/${specialty}`), [nav, specialty]);
   const handleSumbit = useCallback(() => {
     onSearch({
       specialty: specialty ? getCodeOfSpecialty(specialty) : '',
-      is_gov: isGovernment,
+      is_gov: isGoverment,
       is_full_time: isWorkAllDay,
+      lat: latitude || undefined,
+      long: longitude || undefined,
     });
     setFirstLoading(true);
-  }, [getCodeOfSpecialty, isGovernment, isWorkAllDay, onSearch, specialty]);
+  }, [getCodeOfSpecialty, isGoverment, isWorkAllDay, latitude, longitude, onSearch, specialty]);
 
-  // дублируется в форме, но выносить дубликат дороже выйдет. В сомнениях.
   useEffect(() => {
     if (specialtyId && specialtyId !== 'null') {
       const val = specialties.find((el) => el.skill.toLowerCase() === specialtyId.toLowerCase())?.skill;
@@ -50,11 +53,11 @@ export default function Searcher({ onSearch }: ISearcher) {
       handleSumbit();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [firstLoading, isGovernment, isWorkAllDay]);
+  }, [firstLoading, isGoverment, isWorkAllDay, latitude, longitude]);
 
   useEffect(() => {
-    updateUrl();
-  }, [updateUrl]);
+    setSearchParams((prev) => ({ ...prev, specialty, isGoverment, isWorkAllDay }));
+  }, [isGoverment, isWorkAllDay, setSearchParams, specialty]);
 
   return (
     <div className="search-clinic">
@@ -81,7 +84,7 @@ export default function Searcher({ onSearch }: ISearcher) {
       </div>
       <div className="search-clinic__group">
         <Checkbox state={isWorkAllDay} setState={setIsWorkAllDay} title="Круглосуточные" />
-        <Checkbox state={isGovernment} setState={setIsGovernment} title="Государственные" />
+        <Checkbox state={isGoverment} setState={setIsGoverment} title="Государственные" />
       </div>
     </div>
   );

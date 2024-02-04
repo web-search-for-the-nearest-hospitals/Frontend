@@ -4,10 +4,10 @@ import ico from '~/shared/assets/icons/timetable-arrow-up.svg';
 
 import { useState } from 'react';
 
-import { IOrganization } from '~/shared/lib/types/interfaces';
+import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 import { getTimetable } from '../../lib/getTimetable';
 
-export default function TimetableClinic(clinic: IOrganization, name: string) {
+export default function TimetableClinic(clinic: IOrganizationFromList, name: string) {
   const date = new Date();
   const today = date.getDay() || 7;
 

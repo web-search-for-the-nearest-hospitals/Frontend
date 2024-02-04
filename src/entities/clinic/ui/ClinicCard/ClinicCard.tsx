@@ -2,12 +2,12 @@ import './ClinicCard.scss';
 import distanceIco from '~/shared/assets/icons/distance.svg';
 import ratingIco from '~/shared/assets/icons/rating.svg';
 
-import { IOrganization } from '~/shared/lib/types/interfaces';
+import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 import TimetableClinic from '../TimetableClinic/TimetableClinic';
 
 interface IClinicCard {
-  clinic: IOrganization;
-  handleCardClick: (data: IOrganization) => void;
+  clinic: IOrganizationFromList;
+  handleCardClick: (data: IOrganizationFromList) => void;
 }
 
 export function ClinicCard({ clinic, handleCardClick }: IClinicCard) {

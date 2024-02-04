@@ -1,22 +1,25 @@
 @import '~/shared/lib';
 
 .calendar {
-  // border-collapse: separate;
-  // border-spacing: 24px 22px;
-  // display: grid;
-  // gap: 22px;
   text-align: center;
+  margin: 0 auto;
+
 
   &__header-first{
-    @include flex-container($just: space-between);
+    @include flex-container($just: center, $gap: 40px);
+
     margin-bottom: 46px; // по макету - 3, т.к. погрешность на table
+
+    @media screen and (width <= 350px) {
+      font-size: 14px;
+    }
   }
 
-  &__header-second{
+  &__header-second {
     margin-bottom: 12px; // value + padding cell + 1px от border
   }
 
-  &__header-text{
+  &__header-text {
     @include font-h2;
     font-weight: 500;
     color: $text-color;
@@ -24,51 +27,63 @@
     min-width: 30px;
     box-sizing: border-box;
 
-    &:nth-of-type(1){
+    &:nth-of-type(1) {
       text-align: left;
     }
 
-    &:last-of-type{
+    &:last-of-type {
       text-align: right;
     }
 
-    &:only-of-type{
+    &:only-of-type {
       text-align: center;
     }
 
     @media screen and (width <= 500px) {
       @include font-usual;
     }
+
+    @media screen and (width <= 350px) {
+      font-size: 14px;
+    }
   }
 
-  &__cell{
+  &__cell {
     padding: 10px 10.48px;
 
-    &:first-of-type{
+    &:first-of-type {
       padding-left: 0;
     }
 
-    &:last-of-type{
+    &:last-of-type {
       padding-right: 0;
     }
 
     @media screen and (width <= 500px) {
       padding: 6px;
     }
+
+    @media screen and (width <= 350px) {
+      padding: 3px;
+    }
   }
 
-  &__cell-text{
+  &__cell-text {
     @include font-h2;
 
     min-width: 30px;
     box-sizing: border-box;
 
-    color: #515BA1;
+    color: #515ba1;
     font-weight: 500;
 
     cursor: pointer;
     border: 1px solid transparent;
-    transition: border-color .2s ease;
+    transition: border-color 0.2s ease;
+
+    &:focus-visible{
+      outline-offset: -2px
+    }
 
     @media screen and (width <= 500px) {
       @include font-usual;
@@ -80,17 +95,38 @@
       border: 1px solid $active-button;
     }
 
-    &_prev{
+    &_prev {
       cursor: default;
       color: $color-not-active;
       pointer-events: none;
     }
   }
 
+
   &__nav-btn{
+    @include flex-container;
+
+    padding: 2px; // расширить зону клика
+
+    background-image: url("./_arrowIcon.tsx");
+    color: $active-button;
+    transition: opacity .2s ease;
+
+    &:active{
+      color: $pressed-button;
+    }
+
     &:disabled{
       color: $color-not-active;
+      cursor: default;
+    }
 
+    &:focus-visible{
+      outline: 2px solid #000;
+    }
+
+    &_next{
+      rotate: 180deg;
     }
   }
 }
