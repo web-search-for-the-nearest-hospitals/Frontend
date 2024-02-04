@@ -1,21 +1,32 @@
 import styles from './index.module.scss';
-import { IClinicListData, ICoord, IOrganization } from '~/shared/lib/types/interfaces';
 import { Map, Placemark, RouteButton, SearchControl } from '@pbe/react-yandex-maps';
 
+import { setCoord, userSelect } from '~/entities/user';
+
+import locationIcon from '~/shared/assets/icons/location.svg';
+import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
+import { IClinicListData, ICoord, IOrganizationFromList } from '~/shared/lib/types/interfaces';
+
 interface IMaps {
-  userCoord: ICoord;
   focusCoord: ICoord;
   clinicData: IClinicListData['results'];
-  handleCardClick: (data: IOrganization) => void;
+  handleCardClick: (data: IOrganizationFromList) => void;
   filterDistrict: string;
 }
 
-export default function Maps({ userCoord, focusCoord, clinicData, handleCardClick, filterDistrict }: IMaps) {
-  const { latitude, longitude } = userCoord;
+export default function Maps({ focusCoord, clinicData, filterDistrict, handleCardClick }: IMaps) {
+  const dispatch = useAppDispatch();
+  const coord = useAppSelector(userSelect);
+  const { latitude, longitude } = coord;
   const { latitude: focuse_lat, longitude: focus_long } = focusCoord;
 
   const getVisibleData = () =>
     filterDistrict ? [...clinicData].filter((el) => el.district === filterDistrict) : clinicData;
+
+  const handleDragEnd = (e: ymaps.Event) => {
+    const [lat, long] = e.get('target').geometry.getCoordinates();
+    dispatch(setCoord({ latitude: lat, longitude: long }));
+  };
 
   return latitude && focuse_lat && focus_long && longitude && Map ? (
     <section className={styles['map']}>
@@ -29,19 +40,6 @@ export default function Maps({ userCoord, focusCoord, clinicData, handleCardClic
         }}
         modules={['control.ZoomControl', 'control.FullscreenControl']}
       >
-        <Placemark
-          defaultGeometry={[latitude, longitude]}
-          geometry={[latitude, longitude]}
-          properties={{
-            balloonContentBody: 'Центр мироздания. Возможно это вы.',
-          }}
-          options={{
-            iconLayout: 'default#image',
-            iconImageHref: '/src/shared/assets/images/location.png',
-            iconImageSize: [25, 35],
-          }}
-        />
-
         {getVisibleData().map((el) => (
           <Placemark
             key={`${el.latitude}${el.longitude}`}
@@ -49,11 +47,22 @@ export default function Maps({ userCoord, focusCoord, clinicData, handleCardClic
             geometry={[el.latitude, el.longitude]}
             onClick={() => handleCardClick(el)}
             defaultProperties={{
-              iconCaption: el.factual_address.slice(0, -11), //срезать г. Калуга
+              iconCaption: el.short_name,
             }}
           />
         ))}
-
+        <Placemark
+          defaultGeometry={[latitude, longitude]}
+          geometry={[latitude, longitude]}
+          options={{
+            iconLayout: 'default#image',
+            iconImageHref: locationIcon,
+            iconImageSize: [25, 35],
+            draggable: true,
+            zIndex: 1000, // чтоб наверняка
+          }}
+          onDragEnd={handleDragEnd}
+        />
         <SearchControl
           options={{
             float: 'right',
