@@ -41,6 +41,7 @@
       @include font-small-select;
     }
   }
+
   &__icon-button{
     display: none;
 
@@ -50,6 +51,7 @@
       margin-right: 16px;
     }
   }
+
   &__container{
     display: flex;
     align-items: center;

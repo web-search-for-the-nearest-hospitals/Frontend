@@ -36,6 +36,9 @@
       min-width: 290px;
     }
   }
+  &_size_forForm {
+    width: 100%;
+  }
 
   &:hover {
     background: $active-button;

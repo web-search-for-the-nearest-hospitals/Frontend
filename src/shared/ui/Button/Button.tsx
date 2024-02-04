@@ -6,7 +6,7 @@ interface IButton {
   onClick?: (evt: any) => void;
   title?: string;
   type?: 'submit' | 'button';
-  size?: 's' | 'm' | 'l';
+  size?: 's' | 'm' | 'l' | 'forForm';
   disabled?: boolean;
 }
 
