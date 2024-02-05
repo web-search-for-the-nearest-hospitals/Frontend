@@ -1,13 +1,15 @@
 import { Route, Routes, Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
 
-import { MainPage } from './main';
 import RegistrationPage from './reg-clinic/ui';
-import Header from '~/widgets/header';
-import AppointmentForm from '../features/appointment-form/ui';
+import { MainPage } from './main';
 import SignIn from './signin/ui';
 import SignUp from './signup/ui';
-import { useEffect } from 'react';
+import ClinicPage from './clinic/clinic';
+
+import Header from '~/widgets/header';
 import createToast from '~/shared/lib/toast/createToast';
+import AppointmentForm from '../features/appointment-form/ui';
 
 export const Routing = () => {
   // @TODO заменить нормальной проверкой токена
@@ -29,6 +31,7 @@ export const Routing = () => {
         <Route path="appointment/:clinicId/" element={<AppointmentForm />} />
         <Route path="signin" element={<SignIn />} />
         <Route path="signup" element={<SignUp />} />
+        <Route path="card/:clinicId/" element={<ClinicPage />} />
       </Route>
       <Route path="*" element={<Navigate to={'/clinic-searcher/main/'} />} />
     </Routes>

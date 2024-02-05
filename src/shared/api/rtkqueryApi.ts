@@ -83,4 +83,5 @@ export const {
   useLazyAppointmentUserQuery,
   useLazyCreateUserQuery,
   useLazyAuthUserQuery,
+  useLazyGetOrganizationByIdQuery,
 } = rtkqueryApi;
