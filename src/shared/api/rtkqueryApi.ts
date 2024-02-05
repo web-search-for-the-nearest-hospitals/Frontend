@@ -61,4 +61,5 @@ export const {
   useLazyGetTownsDataByIdQuery,
   useLazyGetCouponsOnDayQuery,
   useLazyAppointmentUserQuery,
+  useLazyGetOrganizationByIdQuery,
 } = rtkqueryApi;

@@ -2,16 +2,20 @@ import './ClinicCard.scss';
 
 import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 import TimetableClinic from '../TimetableClinic/TimetableClinic';
+import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
 
 interface IClinicCard {
   clinic: IOrganizationFromList;
-  handleCardClick: (data: IOrganizationFromList) => void;
 }
 
-export function ClinicCard({ clinic, handleCardClick }: IClinicCard) {
+export function ClinicCard({ clinic }: IClinicCard) {
+  const [clinicId] = useState(clinic?.relative_addr?.replace('/api/organizations/', ''));
   return (
-    <div className="clinic-card" onClick={() => handleCardClick(clinic)}>
-      <h3 className="clinic-card__name">{clinic.short_name}</h3>
+    <div className="clinic-card">
+      <NavLink className="clinic" to={`../card/${clinicId}`}>
+        <h3 className="clinic-card__name">{clinic.short_name}</h3>
+      </NavLink>
       <div className="clinic-card__timetable">
         <p className="clinic-card__timetable-title">График работы:</p>
         {TimetableClinic(clinic, 'card')}

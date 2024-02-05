@@ -6,16 +6,15 @@ import { districtDefault } from '../lib/consts';
 
 import { Maps, ToggleButton, DropDownInput } from '~/shared/ui';
 import { LocationIcon } from '~/shared/assets';
-import { IClinicListData, IOrganizationFromList } from '~/shared/lib/types/interfaces';
+import { IClinicListData } from '~/shared/lib/types/interfaces';
 
 interface IMapBlock {
   clinicData: IClinicListData | undefined;
-  handleCardClick: (data: IOrganizationFromList) => void;
   district: string;
   setDistrict: (val: string) => void;
 }
 
-export default function MapBlock({ clinicData, handleCardClick, district, setDistrict }: IMapBlock) {
+export default function MapBlock({ clinicData, district, setDistrict }: IMapBlock) {
   const [isSearchUser, setIsSearchUser] = useState(false); // вкл\выкл геолоку юзера
   const [townName] = useState('Калуга');
 
@@ -55,12 +54,7 @@ export default function MapBlock({ clinicData, handleCardClick, district, setDis
       </div>
 
       <div className="map__container">
-        <Maps
-          focusCoord={focusCoord}
-          clinicData={clinicData?.results || []}
-          handleCardClick={handleCardClick}
-          filterDistrict={getFilterDistrict()}
-        />
+        <Maps focusCoord={focusCoord} clinicData={clinicData?.results || []} filterDistrict={getFilterDistrict()} />
       </div>
     </div>
   );

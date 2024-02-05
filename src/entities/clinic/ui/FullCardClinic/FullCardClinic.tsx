@@ -1,10 +1,9 @@
 import './FullCardClinic.scss';
-import { NavLink, useSearchParams } from 'react-router-dom';
+import { NavLink, useParams, useSearchParams } from 'react-router-dom';
 
 import { Button } from '~/shared/ui/index';
 import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 import TimetableClinic from '../TimetableClinic/TimetableClinic';
-import { useState } from 'react';
 
 interface IFullCard {
   clinic: IOrganizationFromList;
@@ -12,11 +11,11 @@ interface IFullCard {
 
 export function FullCardClinic({ clinic }: IFullCard) {
   const [searchParams] = useSearchParams();
-  const [clinicId] = useState(clinic.relative_addr.replace('/api/organizations/', ''));
+  const { clinicId } = useParams();
   const getIsPhone = () => window.screen.width < 625;
 
   return (
-    <div className="clinic-popup">
+    <div className={'clinic-popup'}>
       <h3 className="clinic-popup__name">{clinic.short_name}</h3>
       <p className="clinic-popup__about">{clinic.about}</p>
       <div className="clinic-popup__timetable">

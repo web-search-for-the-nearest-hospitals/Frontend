@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styles from './index.module.scss';
 import { Map, Placemark, RouteButton, SearchControl } from '@pbe/react-yandex-maps';
 
@@ -5,16 +6,16 @@ import { setCoord, userSelect } from '~/entities/user';
 
 import locationIcon from '~/shared/assets/icons/location.svg';
 import { useAppDispatch, useAppSelector } from '~/shared/lib/hooks/reduxHooks';
-import { IClinicListData, ICoord, IOrganizationFromList } from '~/shared/lib/types/interfaces';
+import { IClinicListData, ICoord } from '~/shared/lib/types/interfaces';
 
 interface IMaps {
   focusCoord: ICoord;
   clinicData: IClinicListData['results'];
-  handleCardClick: (data: IOrganizationFromList) => void;
   filterDistrict: string;
 }
 
-export default function Maps({ focusCoord, clinicData, filterDistrict, handleCardClick }: IMaps) {
+export default function Maps({ focusCoord, clinicData, filterDistrict }: IMaps) {
+  const nav = useNavigate();
   const dispatch = useAppDispatch();
   const coord = useAppSelector(userSelect);
   const { latitude, longitude } = coord;
@@ -45,7 +46,7 @@ export default function Maps({ focusCoord, clinicData, filterDistrict, handleCar
             key={`${el.latitude}${el.longitude}`}
             defaultGeometry={[el.latitude, el.longitude]}
             geometry={[el.latitude, el.longitude]}
-            onClick={() => handleCardClick(el)}
+            onClick={() => nav(`/clinic-searcher/card/${el?.relative_addr?.replace('/api/organizations/', '')}`)}
             defaultProperties={{
               iconCaption: el.short_name,
             }}
