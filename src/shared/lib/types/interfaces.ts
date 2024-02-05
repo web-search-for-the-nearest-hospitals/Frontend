@@ -21,7 +21,7 @@ export interface IBusinessHours {
   to_hour: string;
 }
 
-export interface IOrganization {
+interface IOrganization {
   short_name: string;
   factual_address: string;
   site: string;

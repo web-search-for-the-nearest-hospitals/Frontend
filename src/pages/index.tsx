@@ -12,8 +12,8 @@ export const Routing = () => {
       <Route path="/clinic-searcher" element={<Header />}>
         <Route path="main/" element={<MainPage />} />
         <Route path="sign-up" element={<RegistrationPage />} />
-        <Route path="card/:clinicId/" element={<ClinicPage />} />
         <Route path="appointment/:clinicId/" element={<AppointmentForm />} />
+        <Route path="card/:clinicId/" element={<ClinicPage />} />
       </Route>
       <Route path="*" element={<Navigate to={'/clinic-searcher/main/'} />} />
     </Routes>

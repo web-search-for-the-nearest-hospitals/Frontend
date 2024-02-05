@@ -10,8 +10,8 @@ interface IFullCard {
 }
 
 export function FullCardClinic({ clinic }: IFullCard) {
-  const { clinicId } = useParams();
   const [searchParams] = useSearchParams();
+  const { clinicId } = useParams();
   const getIsPhone = () => window.screen.width < 625;
 
   return (

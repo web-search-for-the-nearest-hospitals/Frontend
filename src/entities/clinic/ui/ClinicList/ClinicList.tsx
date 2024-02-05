@@ -1,7 +1,6 @@
 import './ClinicList.scss';
 
 import { ClinicCard } from '../ClinicCard/ClinicCard';
-
 import { IClinicListData } from '~/shared/lib/types/interfaces';
 import { districtDefault } from '~/widgets/map-block';
 
