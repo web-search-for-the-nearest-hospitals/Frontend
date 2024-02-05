@@ -5,7 +5,6 @@
   display: grid;
   grid-template-columns: 414px 350px;
   gap: 0 141px;
-  background-color: $color-base-background;
   border-radius: 10px;
   position: relative;
   align-items: flex-end;
@@ -16,14 +15,10 @@
 
   @media screen and (width <= 625px) {
     grid-template-columns: 255px;
-    background-color: $color-card-background;
     margin: 15px;
     padding: 30px 20px;
   }
 
-  &__card {
-    background-color: #F9F9F9;
-  }
   &__name {
     grid-column: 1;
     margin-bottom: 30px;

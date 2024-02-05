@@ -1,5 +1,5 @@
 import './index.scss';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
 import { FullCardClinic } from '~/entities/clinic';
@@ -8,6 +8,7 @@ import { IOrganizationById, IOrganizationFromList } from '~/shared/lib/types/int
 
 export default function ClinicPage() {
   const { clinicId } = useParams();
+  const nav = useNavigate();
   const [triggerQuery, queryResult] = useLazyGetOrganizationByIdQuery();
   const [organizationsById, setOrganizationsById] = useState<IOrganizationById>();
 
@@ -23,7 +24,10 @@ export default function ClinicPage() {
 
   return (
     // @TODO Надо подумать над организацией типов
-    <div>
+    <div className="clinic-page">
+      <button className="clinic-page__button-nav" onClick={() => nav(-1)}>
+        <span className="clinic-page__arrow-back"> &#8249;</span> Назад
+      </button>
       {organizationsById ? <FullCardClinic clinic={organizationsById as unknown as IOrganizationFromList} /> : null}
     </div>
   );

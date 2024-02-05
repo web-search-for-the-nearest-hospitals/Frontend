@@ -15,7 +15,7 @@ export function FullCardClinic({ clinic }: IFullCard) {
   const getIsPhone = () => window.screen.width < 625;
 
   return (
-    <div className={`clinic-popup clinic-popup__card`}>
+    <div className={'clinic-popup'}>
       <h3 className="clinic-popup__name">{clinic.short_name}</h3>
       <p className="clinic-popup__about">{clinic.about}</p>
       <div className="clinic-popup__timetable">
