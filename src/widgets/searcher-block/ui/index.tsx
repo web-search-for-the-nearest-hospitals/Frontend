@@ -1,11 +1,10 @@
 import './index.scss';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
 
 import { specialtySelect } from '~/entities/clinic';
 import { useAppSelector } from '~/shared/lib/hooks/reduxHooks';
 import { UserIcon } from '~/shared/assets/index';
-import createToast from '~/shared/lib/toast/createToast';
 import { IGetOrganizations } from '~/shared/lib/types/interfaces';
 import { Button, Checkbox, DropDownInput, IconBtn } from '~/shared/ui/index';
 import { userSelect } from '~/entities/user';
@@ -15,6 +14,7 @@ interface ISearcher {
 }
 
 export default function Searcher({ onSearch }: ISearcher) {
+  const nav = useNavigate();
   const specialties = useAppSelector(specialtySelect);
   const { latitude, longitude } = useAppSelector(userSelect);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -73,11 +73,7 @@ export default function Searcher({ onSearch }: ISearcher) {
         {/* На странице присутствуют две кнопки IconBtn(UserIcon),
           при внесении изменений в эту кнопку - изменить вторую /widgets/header/ui/index.tsx */}
         <div className="search-clinic__icon-button">
-          <IconBtn
-            onClick={function (): void {
-              createToast('info', 'I work!');
-            }}
-          >
+          <IconBtn onClick={() => nav('/clinic-searcher/signin')}>
             <UserIcon width={33} height={35} />
           </IconBtn>
         </div>

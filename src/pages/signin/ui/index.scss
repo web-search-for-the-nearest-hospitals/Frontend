@@ -1,0 +1,42 @@
+@import '~/shared/lib';
+
+.signin-form{
+  max-width: 350px;
+  width: 100%;
+  margin: auto;
+
+  &__title{
+    @include font-h1;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+
+  &__input-container{
+    @include flex-container($dir: column, $align: stretch, $gap: 0);
+    margin-bottom: 10px;
+  }
+
+  &__err{
+    @include font-usual;
+    color: #FF699C;
+    text-align: center;
+    margin-bottom: 10px;
+  }
+
+  &__btn-submit-container{
+    margin-bottom: 10px;
+  }
+
+  &__to-signup{
+    @include font-small;
+
+    display: block;
+    margin: auto;
+    color: $active-button;
+    transition: opacity .2s ease;
+
+    &:hover{
+      opacity: .8;
+    }
+  }
+}
