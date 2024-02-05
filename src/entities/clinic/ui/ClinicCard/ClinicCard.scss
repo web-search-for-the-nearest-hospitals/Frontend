@@ -10,10 +10,18 @@
   padding: 30px 14px 30px 16px;
   text-align: left;
   color: $text-color;
-  cursor: pointer;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  &:last-of-type {
+    margin-bottom: 0;
+  }
 
   &__name {
     margin: 0;
+    cursor: pointer;
 
     @include font-h3;
     line-height: 140%;

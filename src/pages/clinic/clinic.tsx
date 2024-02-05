@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 
 import { FullCardClinic } from '~/entities/clinic';
 import { useLazyGetOrganizationByIdQuery } from '~/shared/api/rtkqueryApi';
-import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
+import { IOrganizationById, IOrganizationFromList } from '~/shared/lib/types/interfaces';
 
 export default function ClinicPage() {
   const { clinicId } = useParams();
   const [triggerQuery, queryResult] = useLazyGetOrganizationByIdQuery();
-  const [organizationsById, setOrganizationsById] = useState<IOrganizationFromList | unknown>();
+  const [organizationsById, setOrganizationsById] = useState<IOrganizationById>();
 
   useEffect(() => {
     triggerQuery(`${clinicId}`);
@@ -21,5 +21,10 @@ export default function ClinicPage() {
     }
   }, [organizationsById, queryResult]);
 
-  return <div>{organizationsById ? <FullCardClinic clinic={organizationsById as IOrganizationFromList} /> : null}</div>;
+  return (
+    // @TODO Надо подумать над организацией типов
+    <div>
+      {organizationsById ? <FullCardClinic clinic={organizationsById as unknown as IOrganizationFromList} /> : null}
+    </div>
+  );
 }
