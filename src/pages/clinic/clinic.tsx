@@ -4,12 +4,12 @@ import { useEffect, useState } from 'react';
 
 import { FullCardClinic } from '~/entities/clinic';
 import { useLazyGetOrganizationByIdQuery } from '~/shared/api/rtkqueryApi';
-import { IOrganization } from '~/shared/lib/types/interfaces';
+import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 
 export default function ClinicPage() {
   const { clinicId } = useParams();
   const [triggerQuery, queryResult] = useLazyGetOrganizationByIdQuery();
-  const [organizationsById, setOrganizationsById] = useState<IOrganization>();
+  const [organizationsById, setOrganizationsById] = useState<IOrganizationFromList | unknown>();
 
   useEffect(() => {
     triggerQuery(`${clinicId}`);
@@ -18,9 +18,8 @@ export default function ClinicPage() {
   useEffect(() => {
     if (queryResult) {
       setOrganizationsById(queryResult.currentData);
-      console.log(organizationsById);
     }
   }, [organizationsById, queryResult]);
 
-  return <div>{organizationsById ? <FullCardClinic clinic={organizationsById} /> : null}</div>;
+  return <div>{organizationsById ? <FullCardClinic clinic={organizationsById as IOrganizationFromList} /> : null}</div>;
 }

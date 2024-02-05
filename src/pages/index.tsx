@@ -10,12 +10,12 @@ export const Routing = () => {
   return (
     <Routes>
       <Route path="/clinic-searcher" element={<Header />}>
-        <Route path="main/:specialtyId/" element={<MainPage />} />
+        <Route path="main/" element={<MainPage />} />
         <Route path="sign-up" element={<RegistrationPage />} />
-        <Route path="appointment/:clinicId/:specialtyId/" element={<AppointmentForm />} />
         <Route path="card/:clinicId/" element={<ClinicPage />} />
+        <Route path="appointment/:clinicId/" element={<AppointmentForm />} />
       </Route>
-      <Route path="*" element={<Navigate to={'/clinic-searcher/main/null'} />} />
+      <Route path="*" element={<Navigate to={'/clinic-searcher/main/'} />} />
     </Routes>
   );
 };

@@ -2,7 +2,9 @@ import './index.scss';
 import { useEffect, useState } from 'react';
 
 import Searcher from '~/widgets/searcher-block';
+import { districtDefault } from '~/widgets/map-block';
 import MapBlock from '~/widgets/map-block';
+
 import { ClinicList } from '~/entities/clinic';
 import { AdvertList } from '~/entities/advert';
 
@@ -14,6 +16,7 @@ export default function MainPage() {
   const [triggerQuery, queryResult] = useLazyGetOrganizationsQuery();
   const { data, isLoading, isError } = queryResult;
   const [isVisibleClinic, setIsVisibleClinic] = useState(false);
+  const [district, setDistrict] = useState(districtDefault);
 
   useEffect(() => {
     if (isError) {
@@ -24,6 +27,7 @@ export default function MainPage() {
   useEffect(() => {
     if (data) {
       setIsVisibleClinic(true);
+      if (data.results.length === 0) createToast('info', 'Кажется, в нашей базе не нашлось подходящих клиник');
     }
   }, [data]);
 
@@ -31,12 +35,12 @@ export default function MainPage() {
     <div className="main-page">
       <div className="main-page__card-list">
         {!isLoading && isVisibleClinic && data!.results.length === 0 ? <div>Ничего не найдено</div> : null}
-        {!isVisibleClinic ? <AdvertList /> : <ClinicList data={data!} />}
+        {!isVisibleClinic ? <AdvertList /> : <ClinicList data={data!} district={district} />}
         {isLoading ? <div>Данные загружаются</div> : null}
       </div>
       <div className="main-page__search-block">
         <Searcher onSearch={triggerQuery} />
-        <MapBlock clinicData={data} />
+        <MapBlock clinicData={data} district={district} setDistrict={setDistrict} />
       </div>
     </div>
   );

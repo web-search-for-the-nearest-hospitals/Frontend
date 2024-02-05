@@ -10,21 +10,25 @@ import { IClinicListData } from '~/shared/lib/types/interfaces';
 
 interface IMapBlock {
   clinicData: IClinicListData | undefined;
+  district: string;
+  setDistrict: (val: string) => void;
 }
 
-export default function MapBlock({ clinicData }: IMapBlock) {
-  const [district, setDistrict] = useState(districtDefault);
-  const [isSearchUser, setIsSearchUser] = useState(false);
+export default function MapBlock({ clinicData, district, setDistrict }: IMapBlock) {
+  const [isSearchUser, setIsSearchUser] = useState(false); // вкл\выкл геолоку юзера
   const [townName] = useState('Калуга');
 
-  const { userCoord, focusCoord, returnText, townData } = useMapBlock({ district, isSearchUser, townName });
+  const useMapBlockData = useMapBlock({ district, isSearchUser, townName });
+  const { returnText, curTown, focusCoord } = useMapBlockData;
+
   const getFilterDistrict = () => (district === districtDefault ? '' : district);
 
+  // крючок сброса стейта района
   useEffect(() => {
     setDistrict(districtDefault);
-  }, [clinicData]);
+  }, [clinicData, setDistrict]);
 
-  if (returnText || !townData) {
+  if (returnText || !curTown) {
     return <p className="search-clinic">{returnText || 'Что-то загружается'}</p>;
   }
 
@@ -38,7 +42,7 @@ export default function MapBlock({ clinicData }: IMapBlock) {
       <div className="map__group">
         <div className="map__input-container">
           <DropDownInput
-            values={townData!.districts.map((el) => el.name) || []}
+            values={curTown!.districts.map((el) => el.name) || []}
             state={district}
             setState={setDistrict}
           />
@@ -50,12 +54,7 @@ export default function MapBlock({ clinicData }: IMapBlock) {
       </div>
 
       <div className="map__container">
-        <Maps
-          userCoord={userCoord}
-          focusCoord={focusCoord}
-          clinicData={clinicData?.results || []}
-          filterDistrict={getFilterDistrict()}
-        />
+        <Maps focusCoord={focusCoord} clinicData={clinicData?.results || []} filterDistrict={getFilterDistrict()} />
       </div>
     </div>
   );

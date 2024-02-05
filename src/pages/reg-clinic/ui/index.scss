@@ -14,8 +14,10 @@
     margin: 0 auto;
     padding: 40px 0 100px;
   }
+
   &__title {
     color: $text-color;
+
     @include font-h2;
     margin: 0 0 40px;
   }

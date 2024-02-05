@@ -16,6 +16,7 @@ import {
   toIDate,
 } from './_lib';
 import { IDate } from './_types';
+import ArrowIcon from './_arrowIcon';
 
 interface ICalendar {
   setDate: (newVal: string) => void;
@@ -28,6 +29,13 @@ export default function Calendar({ setDate }: ICalendar) {
   const [firstDay] = useState(getMondayDate());
   const [curRange, setCurRange] = useState(getWeekDates({ firstDay, numWeeks }));
   const [selectedCell, setSelectedCell] = useState<IDate>(today);
+
+  const onKey = (e: React.KeyboardEvent<HTMLElement>, data: IDate) => {
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      setSelectedCell(data);
+    }
+  };
 
   const handleBtnClick = (e: React.MouseEvent<HTMLButtonElement>, isNext: boolean) => {
     e.preventDefault();
@@ -48,16 +56,21 @@ export default function Calendar({ setDate }: ICalendar) {
         <tr>
           <th colSpan={7} style={{ padding: 0 }}>
             <div className={styles['calendar__header-first']}>
-              {/* @TODO: заменить на iconbutton, когда он будет */}
               <button
                 className={cn(styles['calendar__nav-btn'])}
                 onClick={(e) => handleBtnClick(e, false)}
                 disabled={checkEqualDay(getFirst(curRange), firstDay)}
               >
-                Назад
+                <ArrowIcon />
               </button>
               <p className={styles['calendar__header-text']}>{getCurRangeString(curRange)}</p>
-              <button onClick={(e) => handleBtnClick(e, true)}>Вперёд</button>
+              <button
+                className={cn(styles['calendar__nav-btn'], styles['calendar__nav-btn_next'])}
+                onClick={(e) => handleBtnClick(e, true)}
+                disabled={false}
+              >
+                <ArrowIcon />
+              </button>
             </div>
           </th>
         </tr>
@@ -81,6 +94,8 @@ export default function Calendar({ setDate }: ICalendar) {
                     isPrevDate(el, today) ? styles['calendar__cell-text_prev'] : '',
                   )}
                   onClick={() => setSelectedCell(el)}
+                  tabIndex={isPrevDate(el, today) ? -1 : 0}
+                  onKeyDown={(e) => onKey(e, el)}
                 >
                   {el.day}
                 </p>

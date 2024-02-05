@@ -1,13 +1,15 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import {
+  IAppointmentUserData,
   IClinicListData,
   ICoupon,
   IGetCoupon,
   IGetOrganizations,
+  IOrganizationById,
+  IResponseAppointmentUser,
   ISpecialty,
   ITown,
   ITowns,
-  IOrganization,
 } from '../lib/types/interfaces';
 import { addQueryParams } from '../lib/addQueryParams';
 
@@ -32,8 +34,21 @@ export const rtkqueryApi = createApi({
     getOrganizations: builder.query<IClinicListData, IGetOrganizations>({
       query: (filters: Record<string, string>) => 'organizations/?' + addQueryParams(filters),
     }),
-    getOrganizationById: builder.query<IOrganization, string>({
-      query: (id: string) => `organizations/${id}`,
+    getOrganizationById: builder.query<IOrganizationById, string>({
+      query: (id) => `organizations/${id}`,
+    }),
+    appointmentUser: builder.query<IResponseAppointmentUser, IAppointmentUserData>({
+      query: (data) => ({
+        url: 'appointments/' + data.id,
+        method: 'PUT',
+        headers: {
+          Authorizations: 'kill me',
+        },
+        body: {
+          fio: data.fio,
+          phot: data.phone,
+        },
+      }),
     }),
   }),
 });
@@ -41,8 +56,10 @@ export const rtkqueryApi = createApi({
 export const {
   useGetSpecialtiesQuery,
   useGetTownsQuery,
+  useGetOrganizationByIdQuery,
   useLazyGetOrganizationsQuery,
   useLazyGetTownsDataByIdQuery,
   useLazyGetCouponsOnDayQuery,
   useLazyGetOrganizationByIdQuery,
+  useLazyAppointmentUserQuery,
 } = rtkqueryApi;
