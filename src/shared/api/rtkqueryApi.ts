@@ -46,7 +46,7 @@ export const rtkqueryApi = createApi({
         },
         body: {
           fio: data.fio,
-          phot: data.phone,
+          phone: data.phone,
         },
       }),
     }),
