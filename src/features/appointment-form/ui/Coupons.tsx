@@ -19,7 +19,8 @@ export default function Coupons({ couponsData, selectedCoupon, setSelectedCoupon
 
   const parseTime = (time: string) =>
     new Date(time).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-  const getIsListOverflow = () => (ref.current?.scrollHeight || 0) > (ref.current?.offsetHeight || 0);
+  //через console.log выяснено значение в 36 для scrollHeight, когда нет переполнения
+  const getIsListOverflow = () => (ref.current?.scrollHeight || 0) > 36;
 
   const onKey = (e: React.KeyboardEvent<HTMLElement>, data: ICoupon) => {
     if (e.key === 'Enter') {
