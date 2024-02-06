@@ -4,10 +4,10 @@ import ico from '~/shared/assets/icons/timetable-arrow-up.svg';
 
 import { useState } from 'react';
 
-import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
+import { IOrganizationById, IOrganizationFromList } from '~/shared/lib/types/interfaces';
 import { getTimetable } from '../../lib/getTimetable';
 
-export default function TimetableClinic(clinic: IOrganizationFromList, name: string) {
+export default function TimetableClinic(clinic: IOrganizationFromList | IOrganizationById, name: string) {
   const today = new Date().getDay() || 7;
   const [isFullTimetable, setFullTimetable] = useState(false);
   const handleFullTimetable = () => setFullTimetable((val) => !val);
