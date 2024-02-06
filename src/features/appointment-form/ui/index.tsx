@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AppointmentForm() {
   const nav = useNavigate();
-  const [triggerQuery, { isError, isFetching, data }] = useLazyAppointmentUserQuery();
+  const [triggerQuery, { isError, isFetching, isSuccess }] = useLazyAppointmentUserQuery();
   const [formCh, setFormCh] = useState<1 | 2>(1);
   const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(false);
   const [fio, setFio] = useState('');
@@ -27,8 +27,8 @@ export default function AppointmentForm() {
   useEffect(() => {
     if (isError) createToast('error', 'Не удалось записать вас на приём');
     if (isFetching) createToast('info', 'Подождите пожалуйста');
-    if (data) setIsOpenInfoСontainer(true);
-  }, [data, isError, isFetching]);
+    if (isSuccess) setIsOpenInfoСontainer(true);
+  }, [isSuccess, isError, isFetching]);
 
   // @TODO роут нужно сделать защищённым, а не эти костыли лепить, хотя работает же....
   useEffect(() => {
@@ -66,7 +66,7 @@ export default function AppointmentForm() {
 
       <Popup isOpen={isOpenInfoСontainer} closePopup={() => setIsOpenInfoСontainer(false)}>
         <InfoСontainer
-          isClose={() => setIsOpenInfoСontainer(false)}
+          closePopup={() => setIsOpenInfoСontainer(false)}
           text={'Ваша запись на прием успешно подтверждена!'}
         />
       </Popup>
