@@ -70,6 +70,26 @@ export const rtkqueryApi = createApi({
         },
       }),
     }),
+    createUser: builder.query<any, any>({
+      query: (data) => ({
+        url: 'auth/signup/',
+        method: 'POST',
+        body: {
+          email: data.email,
+          password: data.password,
+        },
+      }),
+    }),
+    authUser: builder.query<any, any>({
+      query: (data) => ({
+        url: 'login/',
+        method: 'POST',
+        body: {
+          email: data.email,
+          password: data.password,
+        },
+      }),
+    }),
   }),
 });
 
