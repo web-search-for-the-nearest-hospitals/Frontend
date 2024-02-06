@@ -42,7 +42,7 @@ export const rtkqueryApi = createApi({
         url: 'appointments/' + data.id,
         method: 'PUT',
         headers: {
-          Authorizations: 'Bearer ' + localStorage.getItem('clinic-searcher-access'),
+          Authorization: 'Bearer ' + localStorage.getItem('clinic-searcher-access'),
         },
         body: {
           fio: data.fio,
