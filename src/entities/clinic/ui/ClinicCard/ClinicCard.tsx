@@ -4,13 +4,15 @@ import ratingIco from '~/shared/assets/icons/rating.svg';
 
 import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 import TimetableClinic from '../TimetableClinic/TimetableClinic';
+import { NavLink } from 'react-router-dom';
+import { useState } from 'react';
 
 interface IClinicCard {
   clinic: IOrganizationFromList;
-  handleCardClick: (data: IOrganizationFromList) => void;
 }
 
-export function ClinicCard({ clinic, handleCardClick }: IClinicCard) {
+export function ClinicCard({ clinic }: IClinicCard) {
+  const [clinicId] = useState(clinic?.relative_addr?.replace('/api/organizations/', ''));
   return (
     <div className="clinic-card">
       <div className="clinic-card__widget-block">
@@ -23,9 +25,9 @@ export function ClinicCard({ clinic, handleCardClick }: IClinicCard) {
           <img src={ratingIco} alt="rating icon" className="clinic-card__widget-rating-ico" />
         </div>
       </div>
-      <h3 className="clinic-card__name" onClick={() => handleCardClick(clinic)}>
-        {clinic.short_name}
-      </h3>
+      <NavLink className="clinic" to={`../card/${clinicId}`}>
+        <h3 className="clinic-card__name">{clinic.short_name}</h3>
+      </NavLink>
       <div className="clinic-card__timetable">
         <p className="clinic-card__timetable-title">График работы:</p>
         {TimetableClinic(clinic, 'card')}
