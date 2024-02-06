@@ -24,10 +24,11 @@ export default function FormStage1({ setFormCh, setTimeId }: IFormStage1) {
   const [dateOfAppointment, setDateOfAppointment] = useState<null | string>(null);
 
   const [triggerQuery, queryResult] = useLazyGetCouponsOnDayQuery();
+  const { isError, currentData, isFetching } = queryResult;
 
   // Крючок получения талонов
   useEffect(() => {
-    queryResult.data = undefined;
+    queryResult.data = undefined; // @TODO возможно так нельзя
     const code = specialties.find((el) => el.skill === specialty)?.code;
     if (dateOfAppointment && code && clinicId) {
       triggerQuery({
@@ -59,7 +60,7 @@ export default function FormStage1({ setFormCh, setTimeId }: IFormStage1) {
           title="Далее"
           type="button"
           size="forForm"
-          disabled={queryResult.isError || queryResult.currentData?.length === 0}
+          disabled={isError || currentData?.length === 0 || isFetching}
           onClick={() => setFormCh(2)}
         />
       </div>
