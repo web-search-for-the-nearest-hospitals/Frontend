@@ -1,8 +1,9 @@
 import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 
-export const getTimetable = (clinic: IOrganizationFromList) => {
+export const getTimetable = (clinic: IOrganizationFromList, isFullTime: boolean, todayIndex: number) => {
   let fromHours, toHours, hours;
 
+  const getHour = (field: string) => field.slice(0, -3);
   const res = [];
   const days: { [key: number]: string } = {
     1: 'Пн:',
@@ -14,14 +15,31 @@ export const getTimetable = (clinic: IOrganizationFromList) => {
     7: 'Вс:',
   };
 
-  for (let i = 0; i < 7; i++) {
-    if (clinic.business_hours[i]?.day !== undefined) {
-      fromHours = clinic.business_hours[i]!.from_hour.slice(0, -3);
-      toHours = clinic.business_hours[i]!.to_hour.slice(0, -3);
-      hours = fromHours === toHours ? '24ч' : `${fromHours}-${toHours}`;
-      res.push(`${days[i + 1]} ${hours}`);
+  /**
+   * @param i индекс массива от 0 до 6, где 6 - воскресенье
+   */
+  const getWorkHoursForDay = (i: number) => {
+    fromHours = getHour(clinic.business_hours[i]!.from_hour);
+    toHours = getHour(clinic.business_hours[i]!.to_hour);
+    hours = fromHours === toHours ? '24ч' : `${fromHours}-${toHours}`;
+    return isFullTime ? hours : toHours;
+  };
+
+  const getTimetableOnDay = (i: number) => {
+    const isExist = clinic.business_hours[i - 1]?.day !== undefined; // индексация от 0 до 6
+    const aboutDay = !isFullTime && isExist ? 'работает до: ' : days[i];
+    const workHours = isExist ? getWorkHoursForDay(i - 1) : 'выходной';
+    return `${aboutDay} ${workHours}`;
+  };
+
+  for (let i = 1; i < 8; i++) {
+    const isToday = i === todayIndex;
+    const dayData = { text: getTimetableOnDay(i), isToday };
+
+    if (!isFullTime && isToday) {
+      return [dayData];
     } else {
-      res.push(`${days[i + 1]} Выходной`);
+      res.push(dayData);
     }
   }
 

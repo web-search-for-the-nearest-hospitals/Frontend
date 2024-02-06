@@ -70,13 +70,14 @@
       }
     }
 
+    // @TODO не отрабатывает
     &-list {
-      height: 16px;
+      max-height: 16px;
       overflow: hidden;
       transition: all 0.4s ease-in-out;
 
       &_open {
-        height: 140px;
+        max-height: 140px;
       }
     }
 
