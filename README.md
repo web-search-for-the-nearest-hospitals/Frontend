@@ -12,7 +12,6 @@
 
 <p align="center">
   <img src="https://img.shields.io/badge/SASS-100000?style=for-the-badge&logo=SASS&logoColor=white" title="sass"/>
-  <img src="https://img.shields.io/badge/React_Hook_Form-100000?style=for-the-badge&logo=reacthookform" alt="React Hook Form" title="React Hook Form">
   <img src="https://img.shields.io/badge/Redux_Toolkit_Query-100000?style=for-the-badge&logo=redux" alt="Redux Toolkit Query" title="Redux Toolkit Query">
   <img src="https://img.shields.io/badge/Docker-100000?style=for-the-badge&logo=docker&logoColor=white" alt="Docker" title="Docker">
   <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" title="GitHub">
@@ -24,7 +23,6 @@
   <img src="https://img.shields.io/badge/React-100000?style=for-the-badge" alt="React" title="React">
   <img src="https://img.shields.io/badge/Eslint-100000?style=for-the-badge" alt="Eslint" title="Eslint">
   <img src="https://img.shields.io/badge/Prettier-100000?style=for-the-badge" alt="Prettier" title="Prettier">
-  <img src="https://img.shields.io/badge/Storybook-100000?style=for-the-badge" alt="Storybook" title="Storybook">
 </p>
 
 ## Как запустить наш проект локально:
