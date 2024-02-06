@@ -56,7 +56,7 @@
     &-period {
       cursor: pointer;
       min-width: 140px;
-      max-width: 160px;
+      max-width: 170px;
       display: flex;
       flex-wrap: nowrap;
       gap: 4px;
@@ -68,9 +68,8 @@
       }
     }
 
-    // @TODO не отрабатывает
     &-list {
-      max-height: 16px;
+      max-height: 20px;
       overflow: hidden;
       transition: all 0.4s ease-in-out;
 
