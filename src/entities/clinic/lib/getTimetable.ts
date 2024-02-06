@@ -1,32 +1,47 @@
 import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
 
-type day = 1 | 2 | 3 | 4 | 5 | 6 | 7;
+export const getTimetable = (clinic: IOrganizationFromList, isFullTime: boolean, todayIndex: number) => {
+  let fromHours, toHours, hours;
 
-export const getTimetable = (clinic: IOrganizationFromList) => {
-  let fromHours, toHours;
-  const weekdays = clinic.business_hours.map((weekday) => {
-    fromHours = weekday.from_hour.slice(0, -3);
-    toHours = weekday.to_hour.slice(0, -3);
+  const getHour = (field: string) => field.slice(0, -3);
+  const res = [];
+  const days: { [key: number]: string } = {
+    1: 'Пн:',
+    2: 'Вт:',
+    3: 'Ср:',
+    4: 'Чт:',
+    5: 'Пт:',
+    6: 'Сб:',
+    7: 'Вс:',
+  };
 
-    const hours = fromHours === toHours ? '24ч' : `${fromHours}-${toHours}`;
+  /**
+   * @param i индекс массива от 0 до 6, где 6 - воскресенье
+   */
+  const getWorkHoursForDay = (i: number) => {
+    fromHours = getHour(clinic.business_hours[i]!.from_hour);
+    toHours = getHour(clinic.business_hours[i]!.to_hour);
+    hours = fromHours === toHours ? '24ч' : `${fromHours}-${toHours}`;
+    return isFullTime ? hours : toHours;
+  };
 
-    switch (weekday.day as day) {
-      case 1:
-        return `Пн: ${hours}`;
-      case 2:
-        return `Вт: ${hours}`;
-      case 3:
-        return `Ср: ${hours}`;
-      case 4:
-        return `Чт: ${hours}`;
-      case 5:
-        return `Пт: ${hours}`;
-      case 6:
-        return `Сб: ${hours}`;
-      case 7:
-        return `Вс: ${hours}`;
+  const getTimetableOnDay = (i: number) => {
+    const isExist = clinic.business_hours[i - 1]?.day !== undefined; // индексация от 0 до 6
+    const aboutDay = !isFullTime && isExist ? 'работает до: ' : days[i];
+    const workHours = isExist ? getWorkHoursForDay(i - 1) : 'выходной';
+    return `${aboutDay} ${workHours}`;
+  };
+
+  for (let i = 1; i < 8; i++) {
+    const isToday = i === todayIndex;
+    const dayData = { text: getTimetableOnDay(i), isToday };
+
+    if (!isFullTime && isToday) {
+      return [dayData];
+    } else {
+      res.push(dayData);
     }
-  });
+  }
 
-  return weekdays;
+  return res;
 };
