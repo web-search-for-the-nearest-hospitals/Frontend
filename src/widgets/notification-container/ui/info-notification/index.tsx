@@ -1,20 +1,21 @@
 import './index.scss';
 import { Button } from '~/shared/ui/index';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 interface IInfoСontainer {
-  isClose: () => void;
+  closePopup: () => void;
   text: string;
 }
 
-export function InfoСontainer({ isClose, text }: IInfoСontainer) {
+export function InfoСontainer({ closePopup, text }: IInfoСontainer) {
+  const nav = useNavigate();
   function navigateToMain() {
-    isClose();
+    closePopup();
+    nav('/clinic-searcher/main/');
   }
   return (
     <div className="info-container">
-      {/* <CloseButton type="button" onClick={isClose} size={'s'} /> */}
       <p className="info-container__text">{text}</p>
       <NavLink to="/clinic-searcher/main" className="info-container__link">
         <Button title="На главную" size="s" type="submit" onClick={navigateToMain} />
