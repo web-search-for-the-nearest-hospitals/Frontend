@@ -2,8 +2,7 @@ import './index.scss';
 import { useState } from 'react';
 import { Outlet, NavLink } from 'react-router-dom';
 
-// import { useSpecialtiesSlice } from '~/entities/clinic';
-import useSpecialtiesSlice from '~/entities/clinic/lib/useSpecialtiesSlice';
+import { useSpecialtiesSlice } from '~/entities/clinic';
 
 import { Layout } from '~/shared/ui';
 import { LocationIcon } from '~/shared/assets';
