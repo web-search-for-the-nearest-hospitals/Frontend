@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AppointmentForm() {
   const nav = useNavigate();
-  const [triggerQuery, { isError, isFetching, isSuccess }] = useLazyAppointmentUserQuery();
+  const [triggerQuery, { isError, isFetching, isSuccess, error }] = useLazyAppointmentUserQuery();
   const [formCh, setFormCh] = useState<1 | 2>(1);
   const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(false);
   const [fio, setFio] = useState('');
@@ -25,9 +25,14 @@ export default function AppointmentForm() {
   }
 
   useEffect(() => {
-    if (isError) createToast('error', 'Не удалось записать вас на приём');
+    if (isError)
+      createToast(
+        'error',
+        'Не удалось записать вас на приём: ' + (error as { data: { detail: string } })?.data?.detail,
+      );
     if (isFetching) createToast('info', 'Подождите пожалуйста');
     if (isSuccess) setIsOpenInfoСontainer(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSuccess, isError, isFetching]);
 
   // @TODO роут нужно сделать защищённым, а не эти костыли лепить, хотя работает же....
