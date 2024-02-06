@@ -26,6 +26,12 @@
 
     @include font-h3;
     line-height: 140%;
+
+    transition: opacity .2s ease;
+
+    &:hover{
+      opacity: .8;
+    }
   }
 
   @media screen and (width <= 1140px) {

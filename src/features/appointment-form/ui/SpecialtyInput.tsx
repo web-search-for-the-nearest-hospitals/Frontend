@@ -21,13 +21,16 @@ export default function SpecialtyInput({ specialty, setSpecialty }: ISpecialtyIn
 
   useEffect(() => {
     if (isError) createToast('error', 'Не удалось получить данные о клинике');
-    if (data?.specialties.length) createToast('success', 'Данные о специальностях в клинике получены');
+    if (data?.specialties.length) {
+      createToast('success', 'Данные о специальностях в клинике получены');
+      setSpecialty(data.specialties[0]!.skill);
+    }
     if (data?.specialties.length === 0)
       createToast(
         'info',
         'Не удалось получить специальности врачей в данной клинике. Будут отражены все специальности',
       );
-  }, [data, isError]);
+  }, [data, isError, setSpecialty]);
 
   // крючок установки начального стейта для DropDownInput
   useEffect(() => {
