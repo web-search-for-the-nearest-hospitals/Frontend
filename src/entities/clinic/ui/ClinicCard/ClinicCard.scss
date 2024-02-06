@@ -3,7 +3,7 @@
 
 .clinic-card {
   width: 100%;
-  max-width: 264px;
+  max-width: 270px;
   border-radius: 10px;
   background-color: $color-base-background;
   margin-block: 15px;
@@ -21,6 +21,7 @@
 
   &__name {
     margin: 0;
+    padding-top: 20px;
     cursor: pointer;
 
     @include font-h3;
@@ -29,8 +30,8 @@
 
   @media screen and (width <= 1140px) {
     background-color: $color-card-background;
-    max-width: 260px;
-    padding: 30px 15px;
+    max-width: 266px;
+    padding: 30px 12px;
     margin-block: 7.5px;
 
     &:first-of-type {
@@ -42,10 +43,36 @@
     }
   }
 
+  &__widget-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    @include font-small-select;
+  }
+
+  &__widget-distance {
+    display: flex;
+    gap: 6px;
+    color: $color-not-active;
+  }
+
+  &__widget-rating {
+    display: flex;
+    position: relative;
+    margin-right: 14px;
+    color: $color-not-active;
+
+    &-ico {
+      position: absolute;
+      top: -13px;
+      right: -13px;
+    }
+  }
+
   &__timetable {
     display: flex;
     padding: 32px 0;
-    gap: 8px;
 
     @include font-small;
 
@@ -56,7 +83,34 @@
     }
 
     &-period {
+      cursor: pointer;
       min-width: 140px;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 4px;
+      color: #695feb;
+    }
+
+    &-list {
+      height: 18px;
+      overflow: hidden;
+      transition: all 0.3s ease-in-out;
+
+      &_open {
+        height: auto;
+      }
+    }
+
+    &-ico {
+      display: block;
+      align-self: flex-start;
+      margin-top: 4px;
+      transition: all 0.2s ease-in-out;
+
+      &_up {
+        transform: rotate(180deg) translateY(50%);
+        margin-top: 8px;
+      }
     }
   }
 
@@ -65,6 +119,10 @@
     gap: 8px;
 
     @include font-small-select;
+
+    &-number {
+      color: $active-button;
+    }
   }
 
   &__address {
@@ -77,5 +135,13 @@
     &-title {
       @include font-small-select;
     }
+  }
+
+  &__appoint {
+    display: flex;
+    color: $active-button;
+    padding-top: 20px;
+
+    @include font-small-select;
   }
 }

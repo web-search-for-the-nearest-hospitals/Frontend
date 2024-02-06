@@ -1,0 +1,12 @@
+<svg width="9" height="7" viewBox="0 0 9 7" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="interface-arrows-button-down-arrow-down-keyboard">
+<path id="Vector" d="M0.878906 2.08496L4.30534 5.41621C4.33035 5.44212 4.36055 5.46277 4.39409 5.47688C4.42763 5.491 4.46379 5.49828 4.50034 5.49828C4.53688 5.49828 4.57304 5.491 4.60658 5.47688C4.64012 5.46277 4.67032 5.44212 4.69534 5.41621L8.12176 2.08496" stroke="url(#paint0_linear_3212_23839)" stroke-width="1.125" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_3212_23839" x1="0.878906" y1="3.79162" x2="8.12176" y2="3.79162" gradientUnits="userSpaceOnUse">
+<stop stop-color="#4F73E7"/>
+<stop offset="0.488542" stop-color="#626AE8"/>
+<stop offset="1" stop-color="#8B56E9"/>
+</linearGradient>
+</defs>
+</svg>

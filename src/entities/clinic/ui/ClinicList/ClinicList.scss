@@ -25,7 +25,8 @@
   }
 
   &__container {
-    padding: 30px;
+    padding-block: 30px;
+    padding-inline: 24px;
 
     @media screen and (width <= 1140px) {
       display: flex;

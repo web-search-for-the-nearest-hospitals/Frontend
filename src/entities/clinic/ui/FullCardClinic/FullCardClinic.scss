@@ -53,6 +53,43 @@
 
     @include font-usual;
 
+    &-period {
+      cursor: pointer;
+      min-width: 140px;
+      max-width: 170px;
+      display: flex;
+      flex-wrap: nowrap;
+      gap: 4px;
+      line-height: 19.5px;
+      color: #695feb;
+
+      @media screen and (width <= 625px) {
+        max-width: 134px;
+      }
+    }
+
+    &-list {
+      max-height: 20px;
+      overflow: hidden;
+      transition: all 0.4s ease-in-out;
+
+      &_open {
+        max-height: 140px;
+      }
+    }
+
+    &-ico {
+      display: block;
+      align-self: flex-start;
+      margin-top: 5px;
+      transition: all 0.2s ease-in-out;
+
+      &_up {
+        transform: rotate(180deg) translateY(50%);
+        margin-top: 9px;
+      }
+    }
+
     @media screen and (width <= 1100px) {
       margin-top: 30px;
       grid-column: 1;
@@ -70,16 +107,6 @@
 
       @media screen and (width <= 625px) {
         font-size: 14px;
-      }
-    }
-
-    &-period {
-      max-width: 160px;
-      line-height: 19.5px;
-      margin-bottom: 40px;
-
-      @media screen and (width <= 625px) {
-        max-width: 134px;
       }
     }
   }
