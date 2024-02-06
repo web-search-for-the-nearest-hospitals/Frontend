@@ -13,7 +13,7 @@ export default function ClinicList({ data, district }: IClinicList) {
   return (
     <div className="clinic-list">
       <div className="clinic-list__container">
-        {data.results
+        {[...data.results]
           .filter((clinic) => (district === districtDefault ? true : clinic.district === district))
           .map((clinic) => (
             <ClinicCard key={`${clinic.latitude}${clinic.longitude}`} clinic={clinic} />

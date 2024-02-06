@@ -42,11 +42,31 @@ export const rtkqueryApi = createApi({
         url: 'appointments/' + data.id,
         method: 'PUT',
         headers: {
-          Authorizations: 'kill me',
+          Authorizations: 'Bearer ' + localStorage.getItem('clinic-searcher-access'),
         },
         body: {
           fio: data.fio,
           phot: data.phone,
+        },
+      }),
+    }),
+    createUser: builder.query<any, any>({
+      query: (data) => ({
+        url: 'auth/signup/',
+        method: 'POST',
+        body: {
+          email: data.email,
+          password: data.password,
+        },
+      }),
+    }),
+    authUser: builder.query<any, any>({
+      query: (data) => ({
+        url: 'login/',
+        method: 'POST',
+        body: {
+          email: data.email,
+          password: data.password,
         },
       }),
     }),
@@ -61,5 +81,7 @@ export const {
   useLazyGetTownsDataByIdQuery,
   useLazyGetCouponsOnDayQuery,
   useLazyAppointmentUserQuery,
+  useLazyCreateUserQuery,
+  useLazyAuthUserQuery,
   useLazyGetOrganizationByIdQuery,
 } = rtkqueryApi;

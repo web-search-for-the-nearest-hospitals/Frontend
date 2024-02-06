@@ -8,8 +8,10 @@ import { InfoСontainer } from '~/widgets/notification-container';
 import { Popup } from '~/shared/ui';
 import { useLazyAppointmentUserQuery } from '~/shared/api/rtkqueryApi';
 import createToast from '~/shared/lib/toast/createToast';
+import { useNavigate } from 'react-router-dom';
 
 export default function AppointmentForm() {
+  const nav = useNavigate();
   const [triggerQuery, { isError, isFetching, data }] = useLazyAppointmentUserQuery();
   const [formCh, setFormCh] = useState<1 | 2>(1);
   const [isOpenInfoСontainer, setIsOpenInfoСontainer] = useState(false);
@@ -27,6 +29,19 @@ export default function AppointmentForm() {
     if (isFetching) createToast('info', 'Подождите пожалуйста');
     if (data) setIsOpenInfoСontainer(true);
   }, [data, isError, isFetching]);
+
+  // @TODO роут нужно сделать защищённым, а не эти костыли лепить, хотя работает же....
+  useEffect(() => {
+    if (localStorage.getItem('clinic-searcher-access')) {
+      createToast(
+        'info',
+        'Если с момента последнего входа прошло более суток - войдите пожалуйста снова, иначе не получится записаться на приём',
+      );
+    } else {
+      createToast('info', 'Вы не авторизованы, вы не сможете записаться на приём без авторизации');
+      nav('/clinic-searcher/signin');
+    }
+  });
 
   return (
     <>

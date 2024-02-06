@@ -2,11 +2,11 @@ import './FullCardClinic.scss';
 import { NavLink, useParams, useSearchParams } from 'react-router-dom';
 
 import { Button } from '~/shared/ui/index';
-import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
+import { IOrganizationById } from '~/shared/lib/types/interfaces';
 import TimetableClinic from '../TimetableClinic/TimetableClinic';
 
 interface IFullCard {
-  clinic: IOrganizationFromList;
+  clinic: IOrganizationById;
 }
 
 export function FullCardClinic({ clinic }: IFullCard) {
@@ -46,7 +46,12 @@ export function FullCardClinic({ clinic }: IFullCard) {
       </div>
       {/* format relative_addr: /api/organizations/id/ - на конце слеш */}
       <NavLink to={`../appointment/${clinicId}?specialty=${searchParams.get('specialty')}`}>
-        <Button title="Записаться" size="m" type="submit" />
+        <Button
+          title={clinic.specialties.length ? 'Записаться' : 'Клиника не интегрирована для записи'}
+          size="m"
+          type="submit"
+          disabled={!clinic.specialties.length}
+        />
       </NavLink>
     </div>
   );

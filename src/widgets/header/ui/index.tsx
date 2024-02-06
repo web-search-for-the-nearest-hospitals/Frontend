@@ -1,6 +1,6 @@
 import './index.scss';
 import { useState } from 'react';
-import { Outlet, NavLink } from 'react-router-dom';
+import { Outlet, NavLink, useNavigate } from 'react-router-dom';
 
 import { useSpecialtiesSlice } from '~/entities/clinic';
 
@@ -8,11 +8,11 @@ import { Layout } from '~/shared/ui';
 import { LocationIcon } from '~/shared/assets';
 import UserIcon from '~/shared/assets/icons/UserIcon';
 import IconBtn from '~/shared/ui/IconBtn/IconBtn';
-import createToast from '~/shared/lib/toast/createToast';
 
 function Header() {
   const [town] = useState('Калуга');
   const { isGetSpecialty } = useSpecialtiesSlice();
+  const nav = useNavigate();
 
   const getContent = () => {
     if (!isGetSpecialty) {
@@ -36,11 +36,7 @@ function Header() {
           <div className="header__icon-button">
             {/* На странице присутствуют две кнопки IconBtn(UserIcon),
            при внесении изменений в эту кнопку - изменить вторую /widgets/searcher-block/ui/index.tsx */}
-            <IconBtn
-              onClick={function (): void {
-                createToast('info', 'I work!');
-              }}
-            >
+            <IconBtn onClick={() => nav('/clinic-searcher/signin')}>
               <UserIcon width={18.86} height={20} />
             </IconBtn>
           </div>

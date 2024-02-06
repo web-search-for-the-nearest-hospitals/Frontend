@@ -1,6 +1,10 @@
-import { IOrganizationFromList } from '~/shared/lib/types/interfaces';
+import { IOrganizationById, IOrganizationFromList } from '~/shared/lib/types/interfaces';
 
-export const getTimetable = (clinic: IOrganizationFromList, isFullTime: boolean, todayIndex: number) => {
+export const getTimetable = (
+  clinic: IOrganizationFromList | IOrganizationById,
+  isFullTime: boolean,
+  todayIndex: number,
+) => {
   let fromHours, toHours, hours;
 
   const getHour = (field: string) => field.slice(0, -3);
