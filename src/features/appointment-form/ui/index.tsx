@@ -64,7 +64,7 @@ export default function AppointmentForm() {
           {formCh === 1 ? (
             <FormStage1 setFormCh={setFormCh} setTimeId={setTimeId} />
           ) : (
-            <FormStage2 setPhone={setPhone} setFio={setFio} />
+            <FormStage2 setFio={setFio} setPhone={setPhone} />
           )}
         </form>
       </div>
