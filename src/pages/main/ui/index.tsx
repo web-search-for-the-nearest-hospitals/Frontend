@@ -1,4 +1,5 @@
 import './index.scss';
+import NotFoundIco from '~/shared/assets/icons/not-found-ico.svg';
 import { useEffect, useState } from 'react';
 
 import Searcher from '~/widgets/searcher-block';
@@ -6,7 +7,8 @@ import { districtDefault } from '~/widgets/map-block';
 import MapBlock from '~/widgets/map-block';
 
 import { ClinicList } from '~/entities/clinic';
-import { AdvertList } from '~/entities/advert';
+// Убрать, если отказываемся от рекламы
+// import { AdvertList } from '~/entities/advert';
 
 import { useLazyGetOrganizationsQuery } from '~/shared/api/rtkqueryApi';
 import createToast from '~/shared/lib/toast/createToast';
@@ -34,8 +36,13 @@ export default function MainPage() {
   return (
     <div className="main-page">
       <div className="main-page__card-list">
-        {!isLoading && isVisibleClinic && data!.results.length === 0 ? <div>Ничего не найдено</div> : null}
-        {!isVisibleClinic ? <AdvertList /> : <ClinicList data={data!} district={district} />}
+        {!isLoading && isVisibleClinic && data!.results.length === 0 ? (
+          <div className="main-page__not-found">
+            <img src={NotFoundIco} alt="Не найдено" className="main-page__not-found-ico" />
+            <p className="main-page__not-found-text">Не найдено</p>
+          </div>
+        ) : null}
+        {isVisibleClinic && <ClinicList data={data!} district={district} />}
         {isLoading ? <div>Данные загружаются</div> : null}
       </div>
       <div className="main-page__search-block">
