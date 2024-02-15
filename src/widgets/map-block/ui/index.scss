@@ -40,7 +40,7 @@
 
   &__container {
     min-height: 280px;
-    height: 600px;
+    height: calc(100vh - 386px);
 
     @media screen and (width < 1140px) {
       height: auto;

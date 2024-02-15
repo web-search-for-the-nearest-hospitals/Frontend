@@ -1,12 +1,14 @@
 @import '~/shared/lib/styles/variables';
+@import '~/shared/lib/styles/mixins-font';
 
 .main-page {
   display: flex;
   gap: 30px;
   width: 1110px;
   margin: 0 auto;
+  min-height: 556px;
+  max-height: calc(100vh - 110px);
   padding-bottom: 30px;
-  height: 876px;
 
   @media screen and (width <= 1140px) {
     flex-direction: column;
@@ -27,8 +29,10 @@
     display: flex;
     width: 350px;
     background-color: $color-card-background;
-    height: 100%;
+    min-height: 556px;
+    max-height: calc(100vh - 110px);
     overflow-y: auto;
+    border-radius: 10px;
 
     &::-webkit-scrollbar {
       display: none;
@@ -47,6 +51,26 @@
       flex-direction: column;
       background-color: $color-base-background;
       order: 1;
+    }
+  }
+
+  &__not-found {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    min-width: 350px;
+
+    &-ico {
+      width: 125px;
+      height: 100px;
+      margin-bottom: 30px;
+    }
+
+    &-text {
+      color: #8488a5;
+
+      @include font-usual;
     }
   }
 }

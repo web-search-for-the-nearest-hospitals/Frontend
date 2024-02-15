@@ -25,7 +25,7 @@ export const getTimetable = (
   const getWorkHoursForDay = (i: number) => {
     fromHours = getHour(clinic.business_hours[i]!.from_hour);
     toHours = getHour(clinic.business_hours[i]!.to_hour);
-    hours = fromHours === toHours ? '24ч' : `${fromHours}-${toHours}`;
+    hours = clinic.is_full_time ? '24ч' : `${fromHours}-${toHours}`;
     return isFullTime ? hours : toHours;
   };
 
