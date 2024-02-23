@@ -1,18 +1,9 @@
 @import '~/shared/lib';
 
 .clinic-page{
-  &__button-nav {
-    @include font-usual;
-    color: #9c8f8f;
+  margin-top: 10px;
 
-    &:hover {
-      color: $active-button;
-    }
-  }
-
-  &__arrow-back {
-    font-size: 30px;
-    position: relative;
-    top: 3px;
+  @media screen and (width <= 700px) {
+    margin-top: 0px;
   }
 }
